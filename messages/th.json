@@ -1,0 +1,52 @@
+{
+  "navbar-menu": {
+    "menu1": {
+      "title": "หน้าแรก",
+      "link": "#"
+    },
+    "menu2": {
+      "title": "เกี่ยวกับเรา",
+      "link": "#"
+    },
+    "menu3": {
+      "title": "ผู้สนับสนุน",
+      "link": "#"
+    },
+    "menu4": {
+      "title": "ติดต่อเรา",
+      "link": "#"
+    },
+    "menu5": {
+      "title": "เข้าสู่ระบบ",
+      "link": "#"
+    }
+  },
+  "button-register-text": "ลงทะเบียนเรียนฟรี",
+  "banner-text": {
+    "banner1": "ขอเชิญเรียนออนไลน์ หลักสูตร",
+    "banner2": "เรียนรู้สู้ โควิด19",
+    "banner3": "เรียนฟรี!! รับเกียรติบัตรฟรี!!"
+  },
+  "about-us-card-text": {
+    "card1": {
+      "image": "/image/image-card-1.png",
+      "title": "สารผู้บริหาร อสต. ออนไลน์",
+      "link": "#"
+    },
+    "card2": {
+      "image": "/image/image-card-1.png",
+      "title": "อสต. ออนไลน์ คืออะไร?",
+      "link": "#"
+    },
+    "card3": {
+      "image": "/image/image-card-1.png",
+      "title": "คู่มือการใช้งาน อสต. ออนไลน์",
+      "link": "#"
+    },
+    "card4": {
+      "image": "/image/image-card-1.png",
+      "title": "เพิ่มแบบประเมิน website",
+      "link": "#"
+    }
+  }
+}

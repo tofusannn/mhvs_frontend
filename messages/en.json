@@ -1,0 +1,52 @@
+{
+  "navbar-menu": {
+    "menu1": {
+      "title": "",
+      "link": ""
+    },
+    "menu2": {
+      "title": "",
+      "link": ""
+    },
+    "menu3": {
+      "title": "",
+      "link": ""
+    },
+    "menu4": {
+      "title": "",
+      "link": ""
+    },
+    "menu5": {
+      "title": "",
+      "link": ""
+    }
+  },
+  "button-register-text": "",
+  "banner-text": {
+    "banner1": "",
+    "banner2": "",
+    "banner3": ""
+  },
+  "about-us-card-text": {
+    "card1": {
+      "image": "",
+      "title": "",
+      "link": ""
+    },
+    "card2": {
+      "image": "",
+      "title": "",
+      "link": ""
+    },
+    "card3": {
+      "image": "",
+      "title": "",
+      "link": ""
+    },
+    "card4": {
+      "image": "",
+      "title": "",
+      "link": ""
+    }
+  }
+}
