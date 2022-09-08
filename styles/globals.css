@@ -14,3 +14,7 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.MuiContainer-root {
+  max-width: 1366px !important;
+}
