@@ -147,7 +147,7 @@ const Sponsor = ({ locale }) => {
     const count = Object.keys(message["sponsor-list"]).length;
     for (let i = 0; i < count; i++) {
       rows.push(
-        <Grid item xs={2}>
+        <Grid key={i} item xs={2}>
           <img width={"100%"} src={t(`sponsor-list.sponsor${i + 1}`)}></img>
         </Grid>
       );
@@ -186,7 +186,7 @@ const CountUser = ({ locale }) => {
     const count = Object.keys(message["count-user-text"]).length;
     for (let i = 0; i < count; i++) {
       rows.push(
-        <Grid keys={i} item xs={4}>
+        <Grid key={i} item xs={4}>
           <Card className={classes.count_user_card}>
             <CardContent>
               <Grid container>

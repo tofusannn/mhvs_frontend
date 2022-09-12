@@ -35,22 +35,24 @@ const Footer = (props) => {
           </Grid>
           <Grid container alignItems={"start"} justifyContent={"space-between"}>
             <Grid item xs={3}>
+              <Typography fontWeight={700} fontSize={16} color="white">
+                {t("footer-text.footer1.title")}
+              </Typography>
               <Typography fontSize={16} color="white">
-                <Typography fontWeight={700}>
-                  {t("footer-text.footer1.title")}
-                </Typography>
                 {t("footer-text.footer1.des")}
               </Typography>
             </Grid>
             <Grid item xs={2}>
+              <Typography fontWeight={700} fontSize={16} color="white">
+                {t("footer-text.footer2.title")}
+              </Typography>
               <Typography fontSize={16} color="white">
-                <Typography fontWeight={700}>{t("footer-text.footer2.title")}</Typography>
                 {t("footer-text.footer2.des")}
               </Typography>
             </Grid>
             <Grid item xs={4}>
               <Typography mb={1} fontWeight={700} fontSize={16} color="white">
-              {t("footer-text.footer3.title")}
+                {t("footer-text.footer3.title")}
               </Typography>
               <TextField
                 className={classes.input_subscribe}
