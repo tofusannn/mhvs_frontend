@@ -7,6 +7,7 @@ import Head from "next/head";
 import NavBar from "../components/NavBar";
 import "../styles/globals.css";
 import { CssBaseline } from "@mui/material";
+import Footer from "../components/Footer";
 
 const messages = {
   th,
@@ -27,6 +28,7 @@ function MyApp({ Component, pageProps }) {
         <CssBaseline></CssBaseline>
         <NavBar locale={locale}></NavBar>
         <Component {...pageProps} />
+        <Footer></Footer>
       </NextIntlProvider>
     </Fragment>
   );
