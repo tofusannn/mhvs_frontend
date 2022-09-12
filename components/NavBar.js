@@ -1,6 +1,7 @@
 import { NotificationsOutlined } from "@mui/icons-material";
 import {
   AppBar,
+  Avatar,
   Button,
   Container,
   Divider,
@@ -48,14 +49,10 @@ const NavBar = (props) => {
   }
 
   return (
-    <AppBar sx={{ backgroundColor: "#0076FF" }} position="static">
-      <Container>
-        <Toolbar disableGutters>
-          <Grid
-            container
-            alignItems={"center"}
-            justifyContent={"space-between"}
-          >
+    <AppBar sx={{ backgroundColor: "#0076FF", height: 90 }} position="static">
+      <Container sx={{ height: "100%" }}>
+        <Toolbar sx={{ height: "100%" }} disableGutters>
+          <Grid container alignSelf={"center"} justifyContent={"space-between"}>
             <Grid item xs={3}>
               <img src="/icon/logo.svg"></img>
             </Grid>
@@ -68,15 +65,18 @@ const NavBar = (props) => {
             >
               {loopMenuBar()}
               {mock_token ? (
-                <Grid item container xs={3}>
+                <Grid item container xs={3} alignItems={"center"} justifyContent={"space-between"}>
                   <Divider
+                    sx={{ opacity: 0.16, height: 44 }}
                     orientation="vertical"
                     color="white"
-                    flexItem
                   ></Divider>
                   <IconButton>
-                    <NotificationsOutlined></NotificationsOutlined>
+                    <NotificationsOutlined
+                      sx={{ width: 36, height: 36, color: "#ffffff" }}
+                    ></NotificationsOutlined>
                   </IconButton>
+                  <Avatar sx={{ width: 36, height: 36 }}>P</Avatar>
                 </Grid>
               ) : (
                 <Grid item>
