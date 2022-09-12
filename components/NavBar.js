@@ -14,11 +14,10 @@ import {
 import { makeStyles } from "@mui/styles";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
-import { Fragment } from "react";
 import en from "../messages/en.json";
 import th from "../messages/th.json";
 
-const mock_token = "pppppppp";
+const mock_token = "";
 
 const NavBar = (props) => {
   const { locale } = props;
@@ -33,7 +32,7 @@ const NavBar = (props) => {
     for (let i = 1; i <= count; i++) {
       if (mock_token && i === 5) return rows;
       rows.push(
-        <Grid key={i} item xs={2}>
+        <Grid key={i} item>
           <Link sx={{ color: "#ffffff" }} href={t(`navbar-menu.menu${i}.link`)}>
             {t(`navbar-menu.menu${i}.title`)}
           </Link>
@@ -57,11 +56,13 @@ const NavBar = (props) => {
               <img src="/icon/logo.svg"></img>
             </Grid>
             <Grid
-              xs={5}
               item
+              xs={9}
               container
+              columnSpacing={10}
               alignItems={"center"}
-              justifyContent={"space-between"}
+              textAlign={"center"}
+              justifyContent={"end"}
             >
               {loopMenuBar()}
               {mock_token ? (
@@ -79,7 +80,7 @@ const NavBar = (props) => {
                   <Avatar sx={{ width: 36, height: 36 }}>P</Avatar>
                 </Grid>
               ) : (
-                <Grid item>
+                <Grid item xs={3}>
                   <Button
                     className={classes.buttonRegister}
                     variant="outlined"
