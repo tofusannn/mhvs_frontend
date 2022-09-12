@@ -22,31 +22,75 @@
     }
   },
   "button-register-text": "ลงทะเบียนเรียนฟรี",
+  "footer-text": {
+    "footer1": {
+      "title": "ศูนย์การเรียนรู้ อสต ผ่านระบบออนไลน์",
+      "des": "420/6 ถนน ราชวิถี ราชเทวี กรุงเทพมหานคร ประเทศไทย"
+    },
+    "footer2": {
+      "title": "ติดต่อ",
+      "des": "โทร: 0888888888 ngamphol.soo@mahidol.edu"
+    },
+    "footer3": {
+      "title": "ติดตามข่าวสาร",
+      "des": ""
+    }
+  },
   "banner-text": {
     "banner1": "ขอเชิญเรียนออนไลน์ หลักสูตร",
     "banner2": "เรียนรู้สู้ โควิด19",
     "banner3": "เรียนฟรี!! รับเกียรติบัตรฟรี!!"
   },
+  "about-us-text": {
+    "about-us1": "Learning Platform",
+    "about-us2": "อสต. ออนไลน์",
+    "about-us3": "เพื่อพัฒนาความรู้ อสต. ให้สามารถนำไปปรับใช้ และช่วยเหลือคนในชุมชน"
+  },
   "about-us-card-text": {
     "card1": {
-      "image": "/image/image-card-1.png",
+      "image": "/image/who.png",
       "title": "สารผู้บริหาร อสต. ออนไลน์",
       "link": "#"
     },
     "card2": {
-      "image": "/image/image-card-1.png",
+      "image": "/image/learning.png",
       "title": "อสต. ออนไลน์ คืออะไร?",
       "link": "#"
     },
     "card3": {
-      "image": "/image/image-card-1.png",
+      "image": "/image/homework.png",
       "title": "คู่มือการใช้งาน อสต. ออนไลน์",
       "link": "#"
     },
     "card4": {
-      "image": "/image/image-card-1.png",
+      "image": "/image/check_list.png",
       "title": "เพิ่มแบบประเมิน website",
       "link": "#"
+    }
+  },
+  "sponsor-list": {
+    "sponsor1": "/image/google.png",
+    "sponsor2": "/image/master_card.png",
+    "sponsor3": "/image/premier.png",
+    "sponsor4": "/image/kor_yur_sor.png",
+    "sponsor5": "/image/apple.png",
+    "sponsor6": "/image/coca_cola.png"
+  },
+  "count-user-text": {
+    "count-user1": {
+      "icon": "/icon/viewer.svg",
+      "title": "ผู้เข้าชมเว็บไซต์",
+      "count": "168 คน"
+    },
+    "count-user2": {
+      "icon": "/icon/group_user.svg",
+      "title": "ผู้เข้าอบรม",
+      "count": "128 คน"
+    },
+    "count-user3": {
+      "icon": "/icon/congratulation_user.svg",
+      "title": "ผู้ผ่านการอบรม",
+      "count": "99 คน"
     }
   }
 }

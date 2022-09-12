@@ -22,10 +22,29 @@
     }
   },
   "button-register-text": "",
+  "footer-text": {
+    "footer1": {
+      "title": "",
+      "des": ""
+    },
+    "footer2": {
+      "title": "",
+      "des": ""
+    },
+    "footer3": {
+      "title": "",
+      "des": ""
+    }
+  },
   "banner-text": {
     "banner1": "",
     "banner2": "",
     "banner3": ""
+  },
+  "about-us-text": {
+    "about-us1": "",
+    "about-us2": "",
+    "about-us3": ""
   },
   "about-us-card-text": {
     "card1": {
@@ -47,6 +66,31 @@
       "image": "",
       "title": "",
       "link": ""
+    }
+  },
+  "sponsor-list": {
+    "sponsor1": "",
+    "sponsor2": "",
+    "sponsor3": "",
+    "sponsor4": "",
+    "sponsor5": "",
+    "sponsor6": ""
+  },
+  "count-user-text": {
+    "count-user1": {
+      "icon": "",
+      "title": "",
+      "count": ""
+    },
+    "count-user2": {
+      "icon": "",
+      "title": "",
+      "count": ""
+    },
+    "count-user3": {
+      "icon": "",
+      "title": "",
+      "count": ""
     }
   }
 }
