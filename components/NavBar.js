@@ -7,8 +7,8 @@ import {
   Divider,
   Grid,
   IconButton,
-  Link,
   Toolbar,
+  Link,
   Typography,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
@@ -24,6 +24,10 @@ const NavBar = (props) => {
   const router = useRouter();
   const classes = useStyles();
   const t = useTranslations();
+
+  function handleClickRegister() {
+    router.push('/auth')
+  }
 
   function loopMenuBar() {
     const rows = [];
@@ -86,6 +90,7 @@ const NavBar = (props) => {
                     variant="outlined"
                     fullWidth
                     size="small"
+                    onClick={handleClickRegister}
                   >
                     {t("button-register-text")}
                   </Button>
