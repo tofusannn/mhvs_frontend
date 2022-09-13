@@ -15,7 +15,12 @@ const messages = {
 };
 
 function MyApp({ Component, pageProps }) {
-  const { locale } = useRouter();
+  const { locale, pathname } = useRouter();
+
+  function checkPage() {
+    if (pathname === "/auth") return false;
+    return true;
+  }
 
   return (
     <Fragment>
@@ -26,9 +31,15 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <NextIntlProvider locale={locale} messages={messages[locale]}>
         <CssBaseline></CssBaseline>
-        <NavBar locale={locale}></NavBar>
-        <Component {...pageProps} />
-        <Footer></Footer>
+        {checkPage() ? (
+          <Fragment>
+            <NavBar locale={locale}></NavBar>
+            <Component {...pageProps} />
+            <Footer></Footer>
+          </Fragment>
+        ) : (
+          <Component {...pageProps} />
+        )}
       </NextIntlProvider>
     </Fragment>
   );
