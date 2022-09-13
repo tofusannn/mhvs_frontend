@@ -4,8 +4,8 @@ import {
   CardActions,
   CardContent,
   CardMedia,
-  Link,
   Typography,
+  Link,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
@@ -20,7 +20,16 @@ const CardMediaAboutUs = (props) => {
         <Typography mb={3} fontWeight={700} fontSize={18}>
           {title}
         </Typography>
-        <Link href="#" sx={{color: "#2DA373", fontWeight: 700, fontSize: 14, textTransform: "uppercase", textDecoration: "none" }}>
+        <Link
+          href="#"
+          sx={{
+            color: "#2DA373",
+            fontWeight: 700,
+            fontSize: 14,
+            textTransform: "uppercase",
+            textDecoration: "none",
+          }}
+        >
           Share
         </Link>
       </CardContent>
