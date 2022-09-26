@@ -92,5 +92,16 @@
       "title": "",
       "count": ""
     }
-  }
+  },
+  "button-login": "",
+  "button-register": "",
+  "button-login-phone": "",
+  "button-login-email": "",
+  "login-email-text": "",
+  "login-password-text": "",
+  "login-phone-text": "",
+  "remember-password": "",
+  "button-login-confirm": "",
+  "forgot-password-text": "",
+  "button-register-confirm": ""
 }

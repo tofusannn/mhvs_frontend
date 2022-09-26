@@ -6,7 +6,11 @@ export default class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
-        <Head></Head>
+        <Head>
+          <link crossOrigin="true" rel="preconnect" href="https://fonts.googleapis.com" />
+          <link crossOrigin="true" rel="preconnect" href="https://fonts.gstatic.com" />
+          <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@100;200;400;500&display=swap" rel="stylesheet" />
+        </Head>
         <body>
           <Main />
           <NextScript />

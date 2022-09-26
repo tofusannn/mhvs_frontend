@@ -162,7 +162,10 @@ const Sponsor = ({ locale }) => {
           <Grid mb={5} container justifyContent={"center"}>
             <Typography fontWeight={700} fontSize={32}>
               ผู้สนับสนุนใจดี{" "}
-              <Link href="#" style={{ color: "#2DA373" }}>
+              <Link
+                href="#"
+                style={{ color: "#2DA373", textDecorationColor: "#2DA373" }}
+              >
                 ดูทั้งหมด
               </Link>
             </Typography>

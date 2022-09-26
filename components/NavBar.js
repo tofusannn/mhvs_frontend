@@ -26,7 +26,7 @@ const NavBar = (props) => {
   const t = useTranslations();
 
   function handleClickRegister() {
-    router.push('/auth')
+    router.push({ pathname: "/auth", query: { action: "register" } });
   }
 
   function loopMenuBar() {
@@ -70,7 +70,13 @@ const NavBar = (props) => {
             >
               {loopMenuBar()}
               {mock_token ? (
-                <Grid item container xs={3} alignItems={"center"} justifyContent={"space-between"}>
+                <Grid
+                  item
+                  container
+                  xs={3}
+                  alignItems={"center"}
+                  justifyContent={"space-between"}
+                >
                   <Divider
                     sx={{ opacity: 0.16, height: 44 }}
                     orientation="vertical"

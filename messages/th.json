@@ -2,7 +2,7 @@
   "navbar-menu": {
     "menu1": {
       "title": "หน้าแรก",
-      "link": "#"
+      "link": "/"
     },
     "menu2": {
       "title": "เกี่ยวกับเรา",
@@ -18,7 +18,7 @@
     },
     "menu5": {
       "title": "เข้าสู่ระบบ",
-      "link": "#"
+      "link": "/auth?action=login&type=phone"
     }
   },
   "button-register-text": "ลงทะเบียนเรียนฟรี",
@@ -92,5 +92,16 @@
       "title": "ผู้ผ่านการอบรม",
       "count": "99 คน"
     }
-  }
+  },
+  "button-login": "เข้าสู่ระบบ",
+  "button-register": "สมัครสมาชิก",
+  "button-login-phone": "หมายเลขโทรศัพท์มือถือ",
+  "button-login-email": "อีเมล",
+  "login-email-text": "อีเมล",
+  "login-password-text": "รหัสผ่าน",
+  "login-phone-text": "หมายเลขโทรศัพท์มือถือ",
+  "remember-password": "จำฉันไว้ในระบบ",
+  "button-login-confirm": "เข้าสู่ระบบ",
+  "forgot-password-text": "ลืมรหัสผ่าน",
+  "button-register-confirm": "สมัครสมาชิก"
 }
