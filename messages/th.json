@@ -103,5 +103,7 @@
   "remember-password": "จำฉันไว้ในระบบ",
   "button-login-confirm": "เข้าสู่ระบบ",
   "forgot-password-text": "ลืมรหัสผ่าน",
-  "button-register-confirm": "สมัครสมาชิก"
+  "button-register-confirm": "สมัครสมาชิก",
+  "button-forgot-confirm": "รีเซ็ตรหัสผ่าน",
+  "button-change-confirm": "ตั้งรหัสผ่านใหม่"
 }

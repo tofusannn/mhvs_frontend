@@ -2,8 +2,15 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: Ekachon, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif !important;
+  font-family: 'Kanit', sans-serif !important;
+}
+
+p {
+  font-family: 'Kanit', sans-serif !important;
+}
+
+button {
+  font-family: 'Kanit', sans-serif !important;
 }
 
 a {
