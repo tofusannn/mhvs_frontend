@@ -165,7 +165,7 @@ const Auth = () => {
       }
       setCheckButtonConfirm(true);
       const data = await auth.login({ phone: loginPhonePayload });
-      // dispatch(login(data));
+      dispatch(login(data));
       setOpenSnackbar(true);
       data.status && push("/");
     }

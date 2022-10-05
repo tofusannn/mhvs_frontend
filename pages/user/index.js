@@ -12,6 +12,7 @@ import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import auth from "../../api/api_auth";
 import Banner from "../../components/common/Banner";
+import ModalSuccess from "../../components/common/ModalSuccess";
 import Lesson from "../../components/user/Lesson";
 import Menu from "../../components/user/Menu";
 import Profile from "../../components/user/Profile";
@@ -26,6 +27,7 @@ const Home = () => {
   const authPayload = useSelector((state) => state.auth);
   const [payload, setPayload] = useState();
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [openModalSuccess, setOpenModalSuccess] = useState(false);
   const [payloadSnackbar, setPayloadSnackbar] = useState({
     msg: "",
     status: false,
@@ -59,7 +61,7 @@ const Home = () => {
         <Container>
           <Grid my={3} container>
             <Grid xs={3} pr={3} item>
-              <Menu></Menu>
+              <Menu payload={authPayload}></Menu>
             </Grid>
             <Grid sx={{ minHeight: "595px" }} xs={9} mt={3} item>
               {query.action === "lesson" ? <Lesson></Lesson> : ""}
@@ -107,6 +109,11 @@ const Home = () => {
           {payloadSnackbar.msg}
         </Alert>
       </Snackbar>
+      <ModalSuccess
+        type={"homework"}
+        openModalSuccess={openModalSuccess}
+        setOpenModalSuccess={setOpenModalSuccess}
+      ></ModalSuccess>
     </Fragment>
   );
 };
