@@ -8,6 +8,9 @@ const nextConfig = {
     defaultLocale: "th",
     localeDetection: false,
   },
+  experimental: {
+    outputStandalone: true,
+  },
 };
 
 module.exports = nextConfig;
