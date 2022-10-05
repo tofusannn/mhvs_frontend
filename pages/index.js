@@ -183,7 +183,7 @@ const Sponsor = ({ locale }) => {
             <Typography fontWeight={500} fontSize={32}>
               ผู้สนับสนุนใจดี{" "}
               <Link
-                href="#"
+                href="/sponsor"
                 style={{ color: "#2DA373", textDecorationColor: "#2DA373" }}
               >
                 ดูทั้งหมด
