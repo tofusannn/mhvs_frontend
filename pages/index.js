@@ -7,7 +7,7 @@ import {
   Link,
   Typography,
 } from "@mui/material";
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { makeStyles } from "@mui/styles";
 import CardMediaAboutUs from "../components/aboutUs/CardMediaAboutUs";
@@ -15,6 +15,7 @@ import en from "../messages/en.json";
 import th from "../messages/th.json";
 import Carousel from "react-material-ui-carousel";
 import { useRouter } from "next/router";
+import Cookies from "js-cookie";
 
 const Home = () => {
   const { locale } = useRouter();
@@ -34,6 +35,21 @@ export default Home;
 const Banner = () => {
   const classes = useStyles();
   const t = useTranslations();
+  const { push } = useRouter();
+  const [token, setToken] = useState();
+  useEffect(() => {
+    const token = Cookies.get("token");
+    setToken(token);
+  }, [token]);
+
+  function changePage() {
+    if (token) {
+      push({ pathname: "/lesson", query: { part: "prologue" } });
+    } else {
+      push({ pathname: "/auth", query: { action: "register" } });
+    }
+  }
+
   return (
     <Grid
       className={classes.banner_main}
@@ -52,8 +68,12 @@ const Banner = () => {
           <Typography mb={1} fontWeight={500} fontSize={48}>
             {t("banner-text.banner3")}
           </Typography>
-          <Button className={classes.buttonRegister} variant="contained">
-            {t("button-register-text")}
+          <Button
+            className={classes.buttonRegister}
+            variant="contained"
+            onClick={() => changePage()}
+          >
+            {token ? "เริ่มต้นเลย" : t("button-register-text")}
           </Button>
         </Container>
       </Grid>

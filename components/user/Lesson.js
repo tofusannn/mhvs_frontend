@@ -36,7 +36,7 @@ const Lesson = () => {
       </Typography>
       <TableContainer
         component={Paper}
-        sx={{ boxShadow: "none", border: "1px solid #D6D6D6" }}
+        sx={{ marginTop: 3, boxShadow: "none", border: "1px solid #D6D6D6" }}
       >
         <Table>
           <TableHead sx={{ background: "#1276FF" }}>

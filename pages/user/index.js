@@ -29,6 +29,7 @@ const Home = () => {
   const [payloadAuth, setPayloadAuth] = useState();
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [openModalSuccess, setOpenModalSuccess] = useState(false);
+  const [changeMenu, setChangeMenu] = useState("");
   const [payloadSnackbar, setPayloadSnackbar] = useState({
     msg: "",
     status: false,
@@ -37,6 +38,8 @@ const Home = () => {
   useEffect(() => {
     setPayloadAuth(authPayload);
   }, [authPayload]);
+
+  useEffect(() => {}, [query]);
 
   async function confirmProfile() {
     const data = await auth.putUser(payload);
@@ -61,12 +64,24 @@ const Home = () => {
 
   return (
     <Fragment>
-      <Banner page={"สมาชิก"}></Banner>
+      <Banner
+        page={"สมาชิก"}
+        subPage={
+          changeMenu.action === "lesson"
+            ? changeMenu.type === "lesson"
+              ? "บทเรียน"
+              : "การบ้าน"
+            : null
+        }
+      ></Banner>
       <Grid>
         <Container>
           <Grid my={3} container>
             <Grid xs={3} pr={3} item>
-              <Menu payload={payloadAuth ? payloadAuth.result : null}></Menu>
+              <Menu
+                payload={payloadAuth ? payloadAuth.result : null}
+                setChangeMenu={setChangeMenu}
+              ></Menu>
             </Grid>
             <Grid sx={{ minHeight: "595px" }} xs={9} mt={3} item>
               {query.action === "lesson" ? <Lesson></Lesson> : ""}
