@@ -6,15 +6,15 @@
     },
     "menu2": {
       "title": "เกี่ยวกับเรา",
-      "link": "#"
+      "link": "/details"
     },
     "menu3": {
       "title": "ผู้สนับสนุน",
-      "link": "#"
+      "link": "/sponsor"
     },
     "menu4": {
       "title": "ติดต่อเรา",
-      "link": "#"
+      "link": "/contact"
     },
     "menu5": {
       "title": "เข้าสู่ระบบ",

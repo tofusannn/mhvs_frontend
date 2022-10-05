@@ -4,16 +4,20 @@ import { makeStyles } from "@mui/styles";
 import { useRouter } from "next/router";
 import { Fragment } from "react";
 
-const Menu = ({ payload }) => {
+const Menu = ({ payload, setChangeMenu }) => {
   const classes = useStyles();
   const { push, query } = useRouter();
 
   function changeMenu(path) {
-    push({ pathname: "/user", query: { action: path } });
+    const newQuery = { action: path };
+    setChangeMenu(newQuery);
+    push({ pathname: "/user", query: newQuery });
   }
 
   function changeSubMenu(path) {
-    push({ pathname: "/user", query: { action: "lesson", type: path } });
+    const newQuery = { action: "lesson", type: path };
+    setChangeMenu(newQuery);
+    push({ pathname: "/user", query: newQuery });
   }
   return (
     <Fragment>
@@ -21,7 +25,7 @@ const Menu = ({ payload }) => {
         ยินดีต้อนรับ!
       </Typography>
       <Typography fontWeight={500} fontSize={28}>
-        คุณ{payload.first_name} {payload.last_name}
+        คุณ{payload && payload.first_name} {payload && payload.last_name}
       </Typography>
       <Divider sx={{ marginY: 3 }}></Divider>
       <Typography

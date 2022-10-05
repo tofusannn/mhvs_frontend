@@ -18,7 +18,7 @@ import Menu from "../../components/user/Menu";
 import Profile from "../../components/user/Profile";
 import { userProfile } from "../../redux/authSlice";
 
-const { Fragment, useState } = require("react");
+const { Fragment, useState, useEffect } = require("react");
 
 const Home = () => {
   const classes = useStyles();
@@ -26,12 +26,20 @@ const Home = () => {
   const dispatch = useDispatch();
   const authPayload = useSelector((state) => state.auth);
   const [payload, setPayload] = useState();
+  const [payloadAuth, setPayloadAuth] = useState();
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [openModalSuccess, setOpenModalSuccess] = useState(false);
+  const [changeMenu, setChangeMenu] = useState("");
   const [payloadSnackbar, setPayloadSnackbar] = useState({
     msg: "",
     status: false,
   });
+
+  useEffect(() => {
+    setPayloadAuth(authPayload);
+  }, [authPayload]);
+
+  useEffect(() => {}, [query]);
 
   async function confirmProfile() {
     const data = await auth.putUser(payload);
@@ -56,12 +64,24 @@ const Home = () => {
 
   return (
     <Fragment>
-      <Banner page={"สมาชิก"}></Banner>
+      <Banner
+        page={"สมาชิก"}
+        subPage={
+          changeMenu.action === "lesson"
+            ? changeMenu.type === "lesson"
+              ? "บทเรียน"
+              : "การบ้าน"
+            : null
+        }
+      ></Banner>
       <Grid>
         <Container>
           <Grid my={3} container>
             <Grid xs={3} pr={3} item>
-              <Menu payload={authPayload}></Menu>
+              <Menu
+                payload={payloadAuth ? payloadAuth.result : null}
+                setChangeMenu={setChangeMenu}
+              ></Menu>
             </Grid>
             <Grid sx={{ minHeight: "595px" }} xs={9} mt={3} item>
               {query.action === "lesson" ? <Lesson></Lesson> : ""}

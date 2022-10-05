@@ -28,6 +28,7 @@ import auth from "../api/api_auth";
 import { useDispatch, useSelector } from "react-redux";
 import { userProfile } from "../redux/authSlice";
 import Cookies from "js-cookie";
+import upload from "../api/api_upload";
 
 const NavBar = (props) => {
   const { locale } = props;
@@ -37,17 +38,22 @@ const NavBar = (props) => {
   const dispatch = useDispatch();
   const authPayload = useSelector((state) => state.auth.result);
   const [token, setToken] = useState();
+  const [imageUser, setImageUser] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
   useEffect(() => {
-    const token = Cookies.get("token");
-    setToken(token);
-    token ? getProfile() : router.push("/");
-  }, []);
+    const tk = Cookies.get("token");
+    setToken(tk ? tk : authPayload ? authPayload.token : null);
+    tk ? getProfile(token) : router.push("/");
+  }, [token]);
 
-  async function getProfile() {
-    const data = await auth.getUser();
+  async function getProfile(token) {
+    const data = await auth.getUser(token);
+    if (data.result.img_id) {
+      const img = await upload.show(data.result.img_id);
+      setImageUser(img.result.path);
+    }
     dispatch(userProfile(data));
   }
 
@@ -84,7 +90,7 @@ const NavBar = (props) => {
     router.push("/", "/", { locale: locale });
   }
   async function logoutUser() {
-    await auth.logout();
+    await auth.logout(token);
     router.reload();
   }
 
@@ -122,15 +128,11 @@ const NavBar = (props) => {
                       }}
                     ></NotificationsOutlined>
                   </IconButton>
-                  <IconButton onClick={handleClick}>
-                    {authPayload && authPayload.img_id ? (
-                      <Avatar
-                        sx={{ width: 36, height: 36 }}
-                        src={authPayload.img_id}
-                      ></Avatar>
-                    ) : (
-                      <Avatar sx={{ width: 36, height: 36 }}></Avatar>
-                    )}
+                  <IconButton sx={{padding: 0, border: "2px solid #ffffff"}} onClick={handleClick}>
+                    <Avatar
+                      sx={{ width: 36, height: 36 }}
+                      src={imageUser}
+                    ></Avatar>
                   </IconButton>
                   <Menu
                     anchorEl={anchorEl}
