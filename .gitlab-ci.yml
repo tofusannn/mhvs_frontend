@@ -14,10 +14,13 @@
   # script:
   #   - ssh $SSH_USER@$VM_IPADDRESS "cd mhvs_frontend && git pull && sudo sh deploy.sh"
 
+stages:
+  - build
+  - deploy
 
-build:
-  image: docker:20.10.16
+build-dockerfile:
   stage: build
+  image: docker:20.10.16
   services:
     - docker:20.10.16-dind
   script:
@@ -25,14 +28,15 @@ build:
     - docker build -t $CI_REGISTRY_IMAGE:latest .
     - docker push $CI_REGISTRY_IMAGE:latest
 
-stage: deploy
-  before_script:
-    - 'command -v ssh-agent >/dev/null || ( apk add --update openssh )' 
-    - eval $(ssh-agent -s)
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
-    - ssh-keyscan $VM_IPADDRESS >> ~/.ssh/known_hosts
-    - chmod 644 ~/.ssh/known_hosts
-  script:
-    - ssh $SSH_USER@$VM_IPADDRESS "sudo sh deploy.sh"
+deploy-server:
+  stage: deploy
+    before_script:
+      - 'command -v ssh-agent >/dev/null || ( apk add --update openssh )' 
+      - eval $(ssh-agent -s)
+      - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+      - mkdir -p ~/.ssh
+      - chmod 700 ~/.ssh
+      - ssh-keyscan $VM_IPADDRESS >> ~/.ssh/known_hosts
+      - chmod 644 ~/.ssh/known_hosts
+    script:
+      - ssh $SSH_USER@$VM_IPADDRESS "sudo sh deploy.sh"
