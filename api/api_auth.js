@@ -6,21 +6,31 @@ const auth = {
   async login(params) {
     const data = await api.post({ path: "/login", headers: params });
     Cookies.set("token", data.result.token);
-    return data
+    return data;
   },
-  async logout() {
-    const data = await api.get({ path: "/logout", headers: { token: token } });
+  async logout(params) {
+    const data = await api.get({
+      path: "/logout",
+      headers: { token: params ? params : token },
+    });
     data.status && Cookies.set("token", "");
     return { msg: data.msg, status: data.status };
   },
   async register(params) {
     return await api.post({ path: "/register", body: params });
   },
-  async getUser() {
-    return await api.get({ path: "/user", headers: { token: token } });
+  async getUser(params) {
+    return await api.get({
+      path: "/user",
+      headers: { token: params ? params : token },
+    });
   },
   async putUser(params) {
-    return await api.put({ path: "/user", headers: { token: token }, body: params });
+    return await api.put({
+      path: "/user",
+      headers: { token: token },
+      body: params,
+    });
   },
 };
 

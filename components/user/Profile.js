@@ -17,6 +17,7 @@ import { makeStyles } from "@mui/styles";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import upload from "../../api/api_upload";
+import auth from "../../api/api_auth";
 
 const profile_payload = {
   username: "",
@@ -68,17 +69,23 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
   const dispatch = useDispatch();
   const authPayload = useSelector((state) => state.auth);
   const [profilePayload, setProfilePayload] = useState(profile_payload);
+  const [imageUser, setImageUser] = useState(null);
   const [checkPhoneTh, setCheckPhoneTh] = useState(false);
-
+  const lengthPY = authPayload.result
+    ? Object.keys(authPayload.result).length
+    : null;
   useEffect(() => {
-    setProfilePayload(
-      authPayload.result ? authPayload.result : profile_payload
-    );
+    setProfilePayload(lengthPY ? authPayload.result : profile_payload);
+    checkImageID(lengthPY ? authPayload.result : profile_payload);
   }, [authPayload]);
 
   useEffect(() => {
     setPayload(profilePayload);
   }, [profilePayload]);
+
+  // useEffect(() => {
+  //   checkImageID(lengthPY ? authPayload.result : profile_payload);
+  // }, [imageUser]);
 
   function changeField(e) {
     const name = e.target.name;
@@ -109,12 +116,21 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
     }
   }
 
+  async function checkImageID(params) {
+    if (params.img_id) {
+      const img = await upload.show(params.img_id);
+      setImageUser(img.result.path);
+    }
+  }
+
   async function uploadImage({ target }) {
     const data = await upload.upload(target.files[0]);
     setProfilePayload((element) => ({ ...element, ["img_id"]: data.id }));
     const img = await upload.show(data.id);
+    auth.putUser({ ...profilePayload, img_id: data.id });
+    setImageUser(img.result.path);
     setOpenSnackbar(true);
-    setPayloadSnackbar({ msg: "success", status: true });
+    setPayloadSnackbar(img);
   }
 
   return (
@@ -149,6 +165,7 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
               }
             >
               <Avatar
+                src={imageUser}
                 sx={{ width: 144, height: 144, background: "#EAF3FF" }}
               ></Avatar>
             </Badge>

@@ -2,8 +2,9 @@ import { NavigateNext } from "@mui/icons-material";
 import { Container, Grid, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useTranslations } from "next-intl";
+import { Fragment } from "react";
 
-const Banner = ({ page }) => {
+const Banner = ({ page, subPage }) => {
   const classes = useStyles();
   const t = useTranslations();
   return (
@@ -17,7 +18,15 @@ const Banner = ({ page }) => {
         <Container>
           <Typography fontSize={16} display={"flex"} alignItems={"center"}>
             หน้าแรก <NavigateNext></NavigateNext>
-            {page}
+            {subPage ? (
+              <Fragment>
+                {page}
+                <NavigateNext></NavigateNext>
+                <span style={{ color: "#2699FB" }}>{subPage}</span>
+              </Fragment>
+            ) : (
+              <span style={{ color: "#2699FB" }}>{page}</span>
+            )}
           </Typography>
         </Container>
       </Grid>
