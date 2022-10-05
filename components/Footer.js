@@ -29,13 +29,13 @@ const Footer = (props) => {
       <div className={classes.footer_main}>
         <Container>
           <Grid mb={5}>
-            <Typography fontWeight={700} fontSize={45} color="white">
+            <Typography fontWeight={500} fontSize={45} color="white">
               MHVS Online
             </Typography>
           </Grid>
           <Grid container alignItems={"start"} justifyContent={"space-between"}>
             <Grid item xs={3}>
-              <Typography fontWeight={700} fontSize={16} color="white">
+              <Typography fontWeight={500} fontSize={16} color="white">
                 {t("footer-text.footer1.title")}
               </Typography>
               <Typography fontSize={16} color="white">
@@ -43,7 +43,7 @@ const Footer = (props) => {
               </Typography>
             </Grid>
             <Grid item xs={2}>
-              <Typography fontWeight={700} fontSize={16} color="white">
+              <Typography fontWeight={500} fontSize={16} color="white">
                 {t("footer-text.footer2.title")}
               </Typography>
               <Typography fontSize={16} color="white">
@@ -51,7 +51,7 @@ const Footer = (props) => {
               </Typography>
             </Grid>
             <Grid item xs={4}>
-              <Typography mb={1} fontWeight={700} fontSize={16} color="white">
+              <Typography mb={1} fontWeight={500} fontSize={16} color="white">
                 {t("footer-text.footer3.title")}
               </Typography>
               <TextField
@@ -72,7 +72,7 @@ const Footer = (props) => {
           <Divider sx={{ marginY: 5 }} color="white"></Divider>
           <Grid container alignItems="center">
             <Grid item xs={6}>
-              <Typography mb={1} fontWeight={700} fontSize={16} color="white">
+              <Typography mb={1} fontWeight={500} fontSize={16} color="white">
                 ©2021 MHVS Online, All Rights Reserved.
               </Typography>
               <Link

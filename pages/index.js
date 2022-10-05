@@ -10,7 +10,7 @@ import {
 import { Fragment } from "react";
 import { useTranslations } from "next-intl";
 import { makeStyles } from "@mui/styles";
-import CardMediaAboutUs from "../components/about_us/CardMediaAboutUs";
+import CardMediaAboutUs from "../components/aboutUs/CardMediaAboutUs";
 import en from "../messages/en.json";
 import th from "../messages/th.json";
 import Carousel from "react-material-ui-carousel";
@@ -43,13 +43,13 @@ const Banner = () => {
     >
       <Grid className={classes.banner_text} item>
         <Container>
-          <Typography mb={1} fontWeight={700} fontSize={32}>
+          <Typography mb={1} fontWeight={500} fontSize={32}>
             {t("banner-text.banner1")}
           </Typography>
-          <Typography mb={1} fontWeight={700} fontSize={72}>
+          <Typography mb={1} fontWeight={500} fontSize={72}>
             {t("banner-text.banner2")}
           </Typography>
-          <Typography mb={1} fontWeight={700} fontSize={48}>
+          <Typography mb={1} fontWeight={500} fontSize={48}>
             {t("banner-text.banner3")}
           </Typography>
           <Button className={classes.buttonRegister} variant="contained">
@@ -109,7 +109,7 @@ const AboutUs = ({ locale }) => {
           <Typography
             mb={1}
             sx={{ color: "#2DA373" }}
-            fontWeight={700}
+            fontWeight={500}
             fontSize={48}
           >
             {t("about-us-text.about-us2")}
@@ -160,7 +160,7 @@ const Sponsor = ({ locale }) => {
       <div className={classes.sponsor_main}>
         <Container>
           <Grid mb={5} container justifyContent={"center"}>
-            <Typography fontWeight={700} fontSize={32}>
+            <Typography fontWeight={500} fontSize={32}>
               ผู้สนับสนุนใจดี{" "}
               <Link
                 href="#"
@@ -204,7 +204,7 @@ const CountUser = ({ locale }) => {
                   <Typography fontSize={24}>
                     {t(`count-user-text.count-user${i + 1}.title`)}
                   </Typography>
-                  <Typography fontWeight={700} fontSize={38}>
+                  <Typography fontWeight={500} fontSize={38}>
                     {t(`count-user-text.count-user${i + 1}.count`)}
                   </Typography>
                 </Grid>
@@ -258,7 +258,7 @@ const useStyles = makeStyles({
     borderRadius: 100,
     borderColor: "#ffffff",
     textTransform: "none",
-    fontWeight: 700,
+    fontWeight: 500,
     fontSize: 18,
     background:
       "transparent linear-gradient(90deg, #3CBB8E 0%, #2DA373 100%) 0% 0% no-repeat padding-box",
