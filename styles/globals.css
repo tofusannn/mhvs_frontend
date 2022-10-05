@@ -1,0 +1,27 @@
+html,
+body, th, td {
+  padding: 0;
+  margin: 0;
+  font-family: 'Kanit', sans-serif !important;
+}
+
+p {
+  font-family: 'Kanit', sans-serif !important;
+}
+
+button {
+  font-family: 'Kanit', sans-serif !important;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.MuiContainer-root {
+  max-width: 1366px !important;
+}
