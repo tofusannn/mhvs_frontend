@@ -21,7 +21,7 @@ const Menu = ({ payload }) => {
         ยินดีต้อนรับ!
       </Typography>
       <Typography fontWeight={500} fontSize={28}>
-        คุณ{payload.first_name} {payload.last_name}
+        คุณ{payload && payload.first_name} {payload && payload.last_name}
       </Typography>
       <Divider sx={{ marginY: 3 }}></Divider>
       <Typography
