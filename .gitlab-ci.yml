@@ -15,18 +15,18 @@
   #   - ssh $SSH_USER@$VM_IPADDRESS "cd mhvs_frontend && git pull && sudo sh deploy.sh"
 
 stages:
-  - build
+  # - build
   - deploy
 
-build-dockerfile:
-  stage: build
-  image: docker:20.10.16
-  services:
-    - docker:20.10.16-dind
-  script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker build -t $CI_REGISTRY_IMAGE:latest .
-    - docker push $CI_REGISTRY_IMAGE:latest
+# build-dockerfile:
+#   stage: build
+#   image: docker:20.10.16
+#   services:
+#     - docker:20.10.16-dind
+#   script:
+#     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+#     - docker build -t $CI_REGISTRY_IMAGE:latest .
+#     - docker push $CI_REGISTRY_IMAGE:latest
 
 deploy-server:
   stage: deploy
@@ -39,4 +39,4 @@ deploy-server:
     - ssh-keyscan $VM_IPADDRESS >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
   script:
-    - ssh $SSH_USER@$VM_IPADDRESS "sudo sh deploy.sh"
+    - ssh $SSH_USER@$VM_IPADDRESS "cd mhvs_frontend && sudo sh deploy.sh"
