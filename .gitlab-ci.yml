@@ -39,4 +39,7 @@ deploy-server:
     - ssh-keyscan $VM_IPADDRESS >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
   script:
-    - ssh $SSH_USER@$VM_IPADDRESS "cd mhvs_frontend && sudo sh deploy.sh"
+    - ssh $SSH_USER@$VM_IPADDRESS "sudo docker stop con_forntend && sudo docker rm con_forntend"
+    - ssh $SSH_USER@$VM_IPADDRESS "sudo docker rmi registry.gitlab.com/sarayut.siriwi/mhvs_frontend"
+    - ssh $SSH_USER@$VM_IPADDRESS "sudo docker pull registry.gitlab.com/sarayut.siriwi/mhvs_frontend"
+    - ssh $SSH_USER@$VM_IPADDRESS "sudo docker run -d --name con_forntend -p 3000:3000 registry.gitlab.com/sarayut.siriwi/mhvs_frontend"
