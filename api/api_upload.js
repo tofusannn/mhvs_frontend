@@ -1,15 +1,27 @@
 import Cookies from "js-cookie";
 import api from "./https_request";
-const token = Cookies.get("token");
 const upload = {
   async upload(params) {
-    return await api.upload({ path: "/file", headers: { token: token }, body: params });
+    const token = Cookies.get("token");
+    return await api.upload({
+      path: "/file",
+      headers: { token: token },
+      body: params,
+    });
   },
   async show(params) {
-    return await api.get({ path: `/file/${params}`, headers: { token: token } });
+    const token = Cookies.get("token");
+    return await api.get({
+      path: `/file/${params}`,
+      headers: { token: token },
+    });
   },
   async download(params) {
-    return await api.get({ path: `/download_file${params}`, headers: { token: token } });
+    const token = Cookies.get("token");
+    return await api.get({
+      path: `/download_file${params}`,
+      headers: { token: token },
+    });
   },
 };
 
