@@ -5,7 +5,7 @@ const token = Cookies.get("token");
 const auth = {
   async login(params) {
     const data = await api.post({ path: "/login", headers: params });
-    Cookies.set("token", data.result.token);
+    data.status && Cookies.set("token", data.result.token);
     return data;
   },
   async logout(params) {
