@@ -45,7 +45,7 @@ const NavBar = (props) => {
   useEffect(() => {
     const tk = Cookies.get("token");
     setToken(tk ? tk : authPayload ? authPayload.token : null);
-    tk ? getProfile(token) : router.push("/");
+    tk ? getProfile(token) : router.pathname === "/user" && router.push("/");
   }, [token]);
 
   async function getProfile(token) {
@@ -128,7 +128,10 @@ const NavBar = (props) => {
                       }}
                     ></NotificationsOutlined>
                   </IconButton>
-                  <IconButton sx={{padding: 0, border: "2px solid #ffffff"}} onClick={handleClick}>
+                  <IconButton
+                    sx={{ padding: 0, border: "2px solid #ffffff" }}
+                    onClick={handleClick}
+                  >
                     <Avatar
                       sx={{ width: 36, height: 36 }}
                       src={imageUser}
