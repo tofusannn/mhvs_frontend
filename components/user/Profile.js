@@ -125,9 +125,12 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
 
   async function uploadImage({ target }) {
     const data = await upload.upload(target.files[0]);
-    setProfilePayload((element) => ({ ...element, ["img_id"]: data.id }));
-    const img = await upload.show(data.id);
-    auth.putUser({ ...profilePayload, img_id: data.id });
+    setProfilePayload((element) => ({
+      ...element,
+      ["img_id"]: data.result.id,
+    }));
+    const img = await upload.show(data.result.id);
+    auth.putUser({ ...profilePayload, img_id: data.result.id });
     setImageUser(img.result.path);
     setOpenSnackbar(true);
     setPayloadSnackbar(img);
