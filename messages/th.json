@@ -80,17 +80,17 @@
     "count-user1": {
       "icon": "/icon/viewer.svg",
       "title": "ผู้เข้าชมเว็บไซต์",
-      "count": "168 คน"
+      "count": "page_count"
     },
     "count-user2": {
       "icon": "/icon/group_user.svg",
       "title": "ผู้เข้าอบรม",
-      "count": "128 คน"
+      "count": "user_train"
     },
     "count-user3": {
       "icon": "/icon/congratulation_user.svg",
       "title": "ผู้ผ่านการอบรม",
-      "count": "99 คน"
+      "count": "user_train_success"
     }
   },
   "button-login": "เข้าสู่ระบบ",

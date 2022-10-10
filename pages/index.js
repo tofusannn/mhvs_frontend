@@ -16,6 +16,7 @@ import th from "../messages/th.json";
 import Carousel from "react-material-ui-carousel";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
+import Count from "../api/api_count";
 
 const Home = () => {
   const { locale } = useRouter();
@@ -202,11 +203,22 @@ const Sponsor = ({ locale }) => {
 const CountUser = ({ locale }) => {
   const classes = useStyles();
   const t = useTranslations();
+  const [pageCount, setPageCount] = useState();
+
+  useEffect(() => {
+    getPageCount();
+  }, []);
+
+  async function getPageCount() {
+    const data = await Count.getCount();
+    setPageCount(data.result);
+  }
 
   function loopCard() {
     const rows = [];
     const message = locale === "th" ? th : en;
     const count = Object.keys(message["count-user-text"]).length;
+
     for (let i = 0; i < count; i++) {
       rows.push(
         <Grid key={i} item xs={4}>
@@ -225,7 +237,7 @@ const CountUser = ({ locale }) => {
                     {t(`count-user-text.count-user${i + 1}.title`)}
                   </Typography>
                   <Typography fontWeight={500} fontSize={38}>
-                    {t(`count-user-text.count-user${i + 1}.count`)}
+                    {pageCount && pageCount[t(`count-user-text.count-user${i + 1}.count`)]}
                   </Typography>
                 </Grid>
               </Grid>
