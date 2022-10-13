@@ -75,7 +75,7 @@ const NavBar = (props) => {
     const message = locale === "th" ? th : en;
     const count = Object.keys(message["navbar-menu"]).length;
     for (let i = 1; i <= count; i++) {
-      if (token && i === 5) return rows;
+      if (token && i === 6) return rows;
       rows.push(
         <Grid key={i} sx={{ paddingLeft: 5 }}>
           <Link sx={{ color: "#ffffff" }} href={t(`navbar-menu.menu${i}.link`)}>

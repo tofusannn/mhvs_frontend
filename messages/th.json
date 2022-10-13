@@ -5,18 +5,22 @@
       "link": "/"
     },
     "menu2": {
+      "title": "บทเรียน",
+      "link": "/lesson?action=list"
+    },
+    "menu3": {
       "title": "เกี่ยวกับเรา",
       "link": "/details"
     },
-    "menu3": {
+    "menu4": {
       "title": "ผู้สนับสนุน",
       "link": "/sponsor"
     },
-    "menu4": {
+    "menu5": {
       "title": "ติดต่อเรา",
       "link": "/contact"
     },
-    "menu5": {
+    "menu6": {
       "title": "เข้าสู่ระบบ",
       "link": "/auth?action=login&type=phone"
     }
