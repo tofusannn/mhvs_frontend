@@ -18,7 +18,7 @@ import { Fragment } from "react";
 const header_lesson = ["บทเรียนของคุณ", "สถานะ", "ใบเกียรติบัตร"];
 const header_homework = ["รายการ", "บทเรียน", "สถานะ", ""];
 const body_lesson = [
-  { title: "aa", status: "จบแล้ว", certificate: true },
+  { title: "aa", status: "เรียนจบแล้ว", certificate: true },
   { title: "bb", status: "กำลังเรียน", certificate: false },
 ];
 const body_homework = [
@@ -89,7 +89,17 @@ const Lesson = () => {
                     <TableCell
                       sx={{ fontWeight: 300, fontSize: 14, color: "#121212" }}
                     >
-                      {e.status}
+                      <Grid container alignItems={"center"}>
+                        {e.certificate ? (
+                          <CheckCircle
+                            sx={{ marginRight: 1, color: "#6ECE5C" }}
+                          ></CheckCircle>
+                        ) : (
+                          ""
+                        )}
+
+                        {e.status}
+                      </Grid>
                     </TableCell>
                     <TableCell
                       sx={{ fontWeight: 300, fontSize: 14, color: "#121212" }}
@@ -144,6 +154,7 @@ const Lesson = () => {
                       sx={{ fontWeight: 300, fontSize: 14, color: "#121212" }}
                     >
                       <Button
+                        disabled={e.homework}
                         className={
                           e.homework
                             ? classes.button_disabled

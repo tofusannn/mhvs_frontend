@@ -1,7 +1,9 @@
 import {
   Logout,
   ManageAccounts,
+  MenuBook,
   NotificationsOutlined,
+  Quiz,
 } from "@mui/icons-material";
 import {
   AppBar,
@@ -145,6 +147,32 @@ const NavBar = (props) => {
                     transformOrigin={{ horizontal: "right", vertical: "top" }}
                     anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
                   >
+                    <MenuItem
+                      onClick={() =>
+                        router.push({
+                          pathname: "/user",
+                          query: { action: "lesson", type: "lesson" },
+                        })
+                      }
+                    >
+                      <ListItemIcon>
+                        <MenuBook></MenuBook>
+                      </ListItemIcon>
+                      <Typography>Lesson</Typography>
+                    </MenuItem>
+                    <MenuItem
+                      onClick={() =>
+                        router.push({
+                          pathname: "/user",
+                          query: { action: "lesson", type: "homework" },
+                        })
+                      }
+                    >
+                      <ListItemIcon>
+                        <Quiz></Quiz>
+                      </ListItemIcon>
+                      <Typography>Homework</Typography>
+                    </MenuItem>
                     <MenuItem
                       onClick={() =>
                         router.push({
