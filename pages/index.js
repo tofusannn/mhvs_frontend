@@ -178,9 +178,11 @@ const Sponsor = ({ locale }) => {
     for (let i = 0; i < count; i++) {
       sponsor &&
         rows.push(
-          <Link href={sponsor[i].link_ref}>
-            <img width={"70%"} src={`${path}${sponsor[i].file_path}`}></img>
-          </Link>
+          <Grid key={i} item xs={2}>
+            <Link href={sponsor[i].link_ref}>
+              <img width={"70%"} src={`${path}${sponsor[i].file_path}`}></img>
+            </Link>
+          </Grid>
         );
     }
     return rows;
