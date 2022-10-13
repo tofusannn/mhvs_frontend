@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@mui/material";
+import { Grid, Link, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Container } from "@mui/system";
 import { useTranslations } from "next-intl";
@@ -25,7 +25,9 @@ const Home = () => {
       sponsor &&
         rows.push(
           <Grid key={i} item xs={2}>
-            <img width={"70%"} src={`${path}${sponsor[i].file_path}`}></img>
+            <Link href={sponsor[i].link_ref}>
+              <img width={"70%"} src={`${path}${sponsor[i].file_path}`}></img>
+            </Link>
           </Grid>
         );
     }

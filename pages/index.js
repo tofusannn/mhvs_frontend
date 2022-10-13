@@ -17,7 +17,7 @@ import Carousel from "react-material-ui-carousel";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import Count from "../api/api_count";
-import sponsorApi from "../api/api_sponsor"
+import sponsorApi from "../api/api_sponsor";
 const path = process.env.NEXT_PUBLIC_BASE_API;
 
 const Home = () => {
@@ -174,13 +174,13 @@ const Sponsor = ({ locale }) => {
   }
   function loopImage() {
     const rows = [];
-    const count = sponsor ? sponsor.length < 7 ? sponsor.length : 7 : 0;
+    const count = sponsor ? (sponsor.length < 7 ? sponsor.length : 7) : 0;
     for (let i = 0; i < count; i++) {
       sponsor &&
         rows.push(
-          <Grid key={i} item xs={2}>
+          <Link href={sponsor[i].link_ref}>
             <img width={"70%"} src={`${path}${sponsor[i].file_path}`}></img>
-          </Grid>
+          </Link>
         );
     }
     return rows;
