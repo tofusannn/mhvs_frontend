@@ -31,6 +31,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { userProfile } from "../redux/authSlice";
 import Cookies from "js-cookie";
 import upload from "../api/api_upload";
+const path = process.env.NEXT_PUBLIC_BASE_API;
 
 const NavBar = (props) => {
   const { locale } = props;
@@ -136,7 +137,7 @@ const NavBar = (props) => {
                   >
                     <Avatar
                       sx={{ width: 36, height: 36 }}
-                      src={imageUser}
+                      src={`${path}${imageUser}`}
                     ></Avatar>
                   </IconButton>
                   <Menu
