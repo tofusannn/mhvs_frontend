@@ -82,7 +82,7 @@ const useStyles = makeStyles({
     width: 184,
     color: "#2DA373",
     borderRadius: 100,
-    textTransform: "none",
+    boxShadow: "none",
     fontWeight: 500,
     fontSize: 18,
     background: "#FFFFFF 0% 0% no-repeat padding-box",
