@@ -169,7 +169,7 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
               }
             >
               <Avatar
-                src={`${path}${imageUser}`}
+                src={imageUser && `${path}${imageUser}`}
                 sx={{ width: 144, height: 144, background: "#EAF3FF" }}
               ></Avatar>
             </Badge>

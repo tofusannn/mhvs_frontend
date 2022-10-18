@@ -137,7 +137,7 @@ const NavBar = (props) => {
                   >
                     <Avatar
                       sx={{ width: 36, height: 36 }}
-                      src={`${path}${imageUser}`}
+                      src={imageUser && `${path}${imageUser}`}
                     ></Avatar>
                   </IconButton>
                   <Menu
