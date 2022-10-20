@@ -1,16 +1,29 @@
+import Cookies from "js-cookie";
 import { useRouter } from "next/router";
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import Banner from "../../components/common/Banner";
+import LessonLearn from "../../components/lesson/LessonLearn";
 import LessonList from "../../components/lesson/LessonList";
 import LessonPreview from "../../components/lesson/LessonPreview";
 
 const Home = () => {
-  const { query } = useRouter();
+  const { query, push } = useRouter();
+
+  useEffect(() => {
+    const tk = Cookies.get("token");
+    !tk && query.action === "learning" && push("/");
+  }, [query]);
+
   return (
     <Fragment>
-      <Banner page={"บทเรียนออนไลน์"} subPage={query.action === "preview" && "เรียนรู้สู้ โควิด19"}></Banner>
+      <Banner
+        page={"บทเรียนออนไลน์"}
+        subPage={query.action != "list" && "เรียนรู้สู้ โควิด19"}
+        hideImage={query.action === "learning"}
+      ></Banner>
       {query.action === "list" && <LessonList></LessonList>}
       {query.action === "preview" && <LessonPreview></LessonPreview>}
+      {query.action === "learning" && <LessonLearn></LessonLearn>}
     </Fragment>
   );
 };
