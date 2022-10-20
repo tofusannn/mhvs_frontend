@@ -13,12 +13,14 @@ import {
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useRouter } from "next/router";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
+import certificate from "../../api/api_certificate";
+import CertificateModal from "./CertificateModal";
 
 const header_lesson = ["บทเรียนของคุณ", "สถานะ", "ใบเกียรติบัตร"];
 const header_homework = ["รายการ", "บทเรียน", "สถานะ", ""];
 const body_lesson = [
-  { title: "aa", status: "จบแล้ว", certificate: true },
+  { title: "aa", status: "เรียนจบแล้ว", certificate: true },
   { title: "bb", status: "กำลังเรียน", certificate: false },
 ];
 const body_homework = [
@@ -29,6 +31,15 @@ const body_homework = [
 const Lesson = () => {
   const classes = useStyles();
   const { query } = useRouter();
+  const [question, setQuestion] = useState();
+  const [openModal, setOpenModal] = useState(false);
+
+  async function getQuestion() {
+    const data = await certificate.getQuestCertificate();
+    setOpenModal(data.status);
+    setQuestion(data.result);
+  }
+
   return (
     <Fragment>
       <Typography fontWeight={500} fontSize={28}>
@@ -89,7 +100,17 @@ const Lesson = () => {
                     <TableCell
                       sx={{ fontWeight: 300, fontSize: 14, color: "#121212" }}
                     >
-                      {e.status}
+                      <Grid container alignItems={"center"}>
+                        {e.certificate ? (
+                          <CheckCircle
+                            sx={{ marginRight: 1, color: "#6ECE5C" }}
+                          ></CheckCircle>
+                        ) : (
+                          ""
+                        )}
+
+                        {e.status}
+                      </Grid>
                     </TableCell>
                     <TableCell
                       sx={{ fontWeight: 300, fontSize: 14, color: "#121212" }}
@@ -99,7 +120,10 @@ const Lesson = () => {
                           ดาวน์โหลด
                         </Button>
                       ) : (
-                        <Button className={classes.button_inactive}>
+                        <Button
+                          className={classes.button_inactive}
+                          onClick={() => getQuestion()}
+                        >
                           ขอรับใบเกียรติบัตร
                         </Button>
                       )}
@@ -144,6 +168,7 @@ const Lesson = () => {
                       sx={{ fontWeight: 300, fontSize: 14, color: "#121212" }}
                     >
                       <Button
+                        disabled={e.homework}
                         className={
                           e.homework
                             ? classes.button_disabled
@@ -158,6 +183,11 @@ const Lesson = () => {
           </TableBody>
         </Table>
       </TableContainer>
+      <CertificateModal
+        question={question}
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+      ></CertificateModal>
     </Fragment>
   );
 };

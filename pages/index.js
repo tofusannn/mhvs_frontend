@@ -16,6 +16,9 @@ import th from "../messages/th.json";
 import Carousel from "react-material-ui-carousel";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
+import Count from "../api/api_count";
+import sponsorApi from "../api/api_sponsor";
+const path = process.env.NEXT_PUBLIC_BASE_API;
 
 const Home = () => {
   const { locale } = useRouter();
@@ -159,18 +162,28 @@ const AboutUs = ({ locale }) => {
 
 const Sponsor = ({ locale }) => {
   const classes = useStyles();
-  const t = useTranslations();
+  const [sponsor, setSponsor] = useState();
 
+  useEffect(() => {
+    getSponsor();
+  }, []);
+
+  async function getSponsor() {
+    const data = await sponsorApi.getSponsor();
+    setSponsor(data.result);
+  }
   function loopImage() {
     const rows = [];
-    const message = locale === "th" ? th : en;
-    const count = Object.keys(message["sponsor-list"]).length;
+    const count = sponsor ? (sponsor.length < 7 ? sponsor.length : 7) : 0;
     for (let i = 0; i < count; i++) {
-      rows.push(
-        <Grid key={i} item xs={2}>
-          <img width={"100%"} src={t(`sponsor-list.sponsor${i + 1}`)}></img>
-        </Grid>
-      );
+      sponsor &&
+        rows.push(
+          <Grid key={i} item xs={2}>
+            <Link href={sponsor[i].link_ref}>
+              <img width={"70%"} src={`${path}${sponsor[i].file_path}`}></img>
+            </Link>
+          </Grid>
+        );
     }
     return rows;
   }
@@ -202,11 +215,22 @@ const Sponsor = ({ locale }) => {
 const CountUser = ({ locale }) => {
   const classes = useStyles();
   const t = useTranslations();
+  const [pageCount, setPageCount] = useState();
+
+  useEffect(() => {
+    getPageCount();
+  }, []);
+
+  async function getPageCount() {
+    const data = await Count.getCount();
+    setPageCount(data.result);
+  }
 
   function loopCard() {
     const rows = [];
     const message = locale === "th" ? th : en;
     const count = Object.keys(message["count-user-text"]).length;
+
     for (let i = 0; i < count; i++) {
       rows.push(
         <Grid key={i} item xs={4}>
@@ -225,7 +249,8 @@ const CountUser = ({ locale }) => {
                     {t(`count-user-text.count-user${i + 1}.title`)}
                   </Typography>
                   <Typography fontWeight={500} fontSize={38}>
-                    {t(`count-user-text.count-user${i + 1}.count`)}
+                    {pageCount &&
+                      pageCount[t(`count-user-text.count-user${i + 1}.count`)]}
                   </Typography>
                 </Grid>
               </Grid>

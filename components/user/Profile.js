@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import upload from "../../api/api_upload";
 import auth from "../../api/api_auth";
+const path = process.env.NEXT_PUBLIC_BASE_API;
 
 const profile_payload = {
   username: "",
@@ -168,7 +169,7 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
               }
             >
               <Avatar
-                src={imageUser}
+                src={imageUser && `${path}${imageUser}`}
                 sx={{ width: 144, height: 144, background: "#EAF3FF" }}
               ></Avatar>
             </Badge>

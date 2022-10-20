@@ -1,27 +1,35 @@
-import { Grid, Typography } from "@mui/material";
+import { Grid, Link, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Container } from "@mui/system";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
-import { Fragment } from "react";
-import en from "../../messages/en.json";
-import th from "../../messages/th.json";
+import { Fragment, useEffect, useState } from "react";
+import sponsorApi from "../../api/api_sponsor";
+const path = process.env.NEXT_PUBLIC_BASE_API;
 
 const Home = () => {
-  const { locale } = useRouter();
-  const classes = useStyles();
-  const t = useTranslations();
+  const [sponsor, setSponsor] = useState();
 
+  useEffect(() => {
+    getSponsor();
+  }, []);
+
+  async function getSponsor() {
+    const data = await sponsorApi.getSponsor();
+    setSponsor(data.result);
+  }
   function loopImage() {
     const rows = [];
-    const message = locale === "th" ? th : en;
-    const count = Object.keys(message["sponsor-list"]).length;
+    const count = sponsor ? sponsor.length : 0;
     for (let i = 0; i < count; i++) {
-      rows.push(
-        <Grid key={i} item xs={2}>
-          <img width={"100%"} src={t(`sponsor-list.sponsor${i + 1}`)}></img>
-        </Grid>
-      );
+      sponsor &&
+        rows.push(
+          <Grid key={i} item xs={2}>
+            <Link href={sponsor[i].link_ref}>
+              <img width={"70%"} src={`${path}${sponsor[i].file_path}`}></img>
+            </Link>
+          </Grid>
+        );
     }
     return rows;
   }
@@ -36,7 +44,7 @@ const Home = () => {
             </Typography>
           </Grid>
           <Grid container spacing={2}>
-            {loopImage()}
+            {sponsor && loopImage()}
           </Grid>
         </Container>
       </Grid>

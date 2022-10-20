@@ -5,18 +5,22 @@
       "link": "/"
     },
     "menu2": {
-      "title": "เกี่ยวกับเรา",
-      "link": "/details"
+      "title": "บทเรียน",
+      "link": "/lesson?action=list"
     },
     "menu3": {
+      "title": "เกี่ยวกับเรา",
+      "link": "/about_us"
+    },
+    "menu4": {
       "title": "ผู้สนับสนุน",
       "link": "/sponsor"
     },
-    "menu4": {
+    "menu5": {
       "title": "ติดต่อเรา",
       "link": "/contact"
     },
-    "menu5": {
+    "menu6": {
       "title": "เข้าสู่ระบบ",
       "link": "/auth?action=login&type=phone"
     }
@@ -80,17 +84,17 @@
     "count-user1": {
       "icon": "/icon/viewer.svg",
       "title": "ผู้เข้าชมเว็บไซต์",
-      "count": "168 คน"
+      "count": "page_count"
     },
     "count-user2": {
       "icon": "/icon/group_user.svg",
       "title": "ผู้เข้าอบรม",
-      "count": "128 คน"
+      "count": "user_train"
     },
     "count-user3": {
       "icon": "/icon/congratulation_user.svg",
       "title": "ผู้ผ่านการอบรม",
-      "count": "99 คน"
+      "count": "user_train_success"
     }
   },
   "button-login": "เข้าสู่ระบบ",

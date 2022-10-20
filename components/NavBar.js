@@ -1,7 +1,9 @@
 import {
   Logout,
   ManageAccounts,
+  MenuBook,
   NotificationsOutlined,
+  Quiz,
 } from "@mui/icons-material";
 import {
   AppBar,
@@ -29,6 +31,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { userProfile } from "../redux/authSlice";
 import Cookies from "js-cookie";
 import upload from "../api/api_upload";
+const path = process.env.NEXT_PUBLIC_BASE_API;
 
 const NavBar = (props) => {
   const { locale } = props;
@@ -73,7 +76,7 @@ const NavBar = (props) => {
     const message = locale === "th" ? th : en;
     const count = Object.keys(message["navbar-menu"]).length;
     for (let i = 1; i <= count; i++) {
-      if (token && i === 5) return rows;
+      if (token && i === 6) return rows;
       rows.push(
         <Grid key={i} sx={{ paddingLeft: 5 }}>
           <Link sx={{ color: "#ffffff" }} href={t(`navbar-menu.menu${i}.link`)}>
@@ -134,7 +137,7 @@ const NavBar = (props) => {
                   >
                     <Avatar
                       sx={{ width: 36, height: 36 }}
-                      src={imageUser}
+                      src={imageUser && `${path}${imageUser}`}
                     ></Avatar>
                   </IconButton>
                   <Menu
@@ -145,6 +148,32 @@ const NavBar = (props) => {
                     transformOrigin={{ horizontal: "right", vertical: "top" }}
                     anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
                   >
+                    <MenuItem
+                      onClick={() =>
+                        router.push({
+                          pathname: "/user",
+                          query: { action: "lesson", type: "lesson" },
+                        })
+                      }
+                    >
+                      <ListItemIcon>
+                        <MenuBook></MenuBook>
+                      </ListItemIcon>
+                      <Typography>Lesson</Typography>
+                    </MenuItem>
+                    <MenuItem
+                      onClick={() =>
+                        router.push({
+                          pathname: "/user",
+                          query: { action: "lesson", type: "homework" },
+                        })
+                      }
+                    >
+                      <ListItemIcon>
+                        <Quiz></Quiz>
+                      </ListItemIcon>
+                      <Typography>Homework</Typography>
+                    </MenuItem>
                     <MenuItem
                       onClick={() =>
                         router.push({
