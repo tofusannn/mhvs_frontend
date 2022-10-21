@@ -36,7 +36,7 @@ const LessonMenu = () => {
       >
         <Quiz sx={{ marginRight: 1 }}></Quiz> Pre-Quiz
       </Button>
-      <Button
+      {/* <Button
         className={
           query.chapter === "2"
             ? classes.button_sub_active
@@ -46,7 +46,7 @@ const LessonMenu = () => {
         fullWidth
       >
         <Quiz sx={{ marginRight: 1 }}></Quiz> Quiz
-      </Button>
+      </Button> */}
     </Fragment>
   );
 };
