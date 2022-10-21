@@ -11,7 +11,9 @@ const Home = () => {
 
   useEffect(() => {
     const tk = Cookies.get("token");
-    !tk && query.action === "learning" && push("/");
+    !tk &&
+      query.action === "learning" &&
+      push({ pathname: "/auth", query: { action: "login", type: "phone" } });
   }, [query]);
 
   return (

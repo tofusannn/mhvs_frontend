@@ -3,6 +3,7 @@ import {
   Card,
   CardContent,
   Container,
+  Dialog,
   Grid,
   Link,
   Typography,
@@ -18,6 +19,7 @@ import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import Count from "../api/api_count";
 import sponsorApi from "../api/api_sponsor";
+import Content from "../api/api_content";
 const path = process.env.NEXT_PUBLIC_BASE_API;
 
 const Home = () => {
@@ -90,15 +92,27 @@ const Banner = () => {
 
 const AboutUs = ({ locale }) => {
   const t = useTranslations();
+  const [content, setContent] = useState();
+  const [openModal, setOpenModal] = useState();
+  const [youtube, setYoutube] = useState();
+
+  useEffect(() => {
+    getContentList();
+  }, []);
+
+  async function getContentList() {
+    const data = await Content.getContent();
+    setContent(data.result);
+  }
 
   function loopCard() {
     const data = [];
     const rows = [];
     const message = locale === "th" ? th : en;
-    const count = Object.keys(message["about-us-card-text"]).length;
+    const count = content ? content.length : 0;
     const sliderItems = count > 3 ? 3 : count;
     for (let i = 1; i <= count; i++) {
-      data.push(message["about-us-card-text"][`card${i}`]);
+      data.push(content[i - 1]);
     }
     for (let i = 0; i < count; i += sliderItems) {
       if (i % sliderItems === 0) {
@@ -108,9 +122,12 @@ const AboutUs = ({ locale }) => {
               return (
                 <Grid key={index} item>
                   <CardMediaAboutUs
-                    image={items.image}
-                    title={items.title}
-                    link={items.link}
+                    image={`${path}${items.file_path}`}
+                    title={items.content_name}
+                    detail={items.content_detail}
+                    link={items.youtube_link}
+                    setOpenModal={setOpenModal}
+                    setYoutube={setYoutube}
                   ></CardMediaAboutUs>
                 </Grid>
               );
@@ -156,6 +173,21 @@ const AboutUs = ({ locale }) => {
           </Carousel>
         </Grid>
       </Grid>
+      <Dialog open={openModal}>
+        <Card>
+          <CardContent>
+            <iframe
+              width="560"
+              height="315"
+              src={youtube}
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </CardContent>
+        </Card>
+      </Dialog>
     </Container>
   );
 };
