@@ -139,6 +139,10 @@ const AboutUs = ({ locale }) => {
     return rows;
   }
 
+  const handleClose = () => {
+    setOpenModal(false);
+  };
+
   return (
     <Container sx={{ marginBottom: 4 }}>
       <Grid container alignItems={"center"} justifyContent={"space-between"}>
@@ -173,12 +177,12 @@ const AboutUs = ({ locale }) => {
           </Carousel>
         </Grid>
       </Grid>
-      <Dialog open={openModal}>
+      <Dialog maxWidth={"xl"} open={openModal} onClose={handleClose}>
         <Card>
           <CardContent>
             <iframe
-              width="560"
-              height="315"
+              height="576"
+              width="1080"
               src={youtube}
               title="YouTube video player"
               frameborder="0"
@@ -235,7 +239,7 @@ const Sponsor = ({ locale }) => {
               </Link>
             </Typography>
           </Grid>
-          <Grid container spacing={2} alignItems={"center"}>
+          <Grid container spacing={2} justifyContent={"center"} alignItems={"center"}>
             {loopImage()}
           </Grid>
         </Container>

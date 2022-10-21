@@ -21,9 +21,9 @@ const CardMediaAboutUs = (props) => {
         <Typography mb={3} fontWeight={500} fontSize={18}>
           {title}
         </Typography>
-        <Typography mb={3} fontSize={16}>
+        {/* <Typography mb={3} fontSize={16}>
           {detail}
-        </Typography>
+        </Typography> */}
         <Button
           sx={{
             color: "#2DA373",
