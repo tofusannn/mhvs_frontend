@@ -36,7 +36,15 @@ const body_lesson = [
 
 const LessonList = () => {
   const classes = useStyles();
-  const { push } = useRouter();
+  const { push, pathname } = useRouter();
+
+  function handleClick() {
+    push({
+      pathname,
+      query: { action: "learning", course: "1", chapter: "1" },
+    });
+  }
+
   return (
     <Fragment>
       <Grid my={6}>
@@ -113,22 +121,23 @@ const LessonList = () => {
                         className={classes.button_details}
                         onClick={() =>
                           push({
-                            pathname: "/lesson",
+                            pathname,
                             query: { action: "preview" },
                           })
                         }
                       >
                         ดูรายละเอียด
                       </Button>
-                      {e.button_confirm ? (
-                        <Button className={classes.button_active}>
-                          ลงทะเบียนเรียน
-                        </Button>
-                      ) : (
-                        <Button disabled className={classes.button_disabled}>
-                          ลงทะเบียนเรียน
-                        </Button>
-                      )}
+                      <Button
+                        className={
+                          e.button_confirm
+                            ? classes.button_active
+                            : classes.button_disabled
+                        }
+                        onClick={handleClick}
+                      >
+                        ลงทะเบียนเรียน
+                      </Button>
                     </TableCell>
                   </TableRow>
                 ))}

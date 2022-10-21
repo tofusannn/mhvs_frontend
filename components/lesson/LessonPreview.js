@@ -1,13 +1,20 @@
-import {
-  CardMembership,
-  VerifiedOutlined,
-} from "@mui/icons-material";
+import { CardMembership, VerifiedOutlined } from "@mui/icons-material";
 import { Button, Container, Divider, Grid, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { useRouter } from "next/router";
 import { Fragment } from "react";
 
 const LessonPreview = () => {
   const classes = useStyles();
+  const { push, pathname } = useRouter();
+
+  function handleClick() {
+    push({
+      pathname,
+      query: { action: "learning", course: "1", chapter: "1" },
+    });
+  }
+
   return (
     <Fragment>
       <Grid>
@@ -25,7 +32,7 @@ const LessonPreview = () => {
               </Typography>
             </Grid>
             <Grid>
-              <Button className={classes.button_confirm}>
+              <Button className={classes.button_confirm} onClick={handleClick}>
                 ลงทะเบียนเรียนฟรี
               </Button>
             </Grid>
@@ -42,7 +49,7 @@ const LessonPreview = () => {
         <Container>
           <Grid
             sx={{
-              height: 750,
+              minHeight: 750,
             }}
             container
           >

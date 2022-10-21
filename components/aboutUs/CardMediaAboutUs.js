@@ -8,9 +8,10 @@ import {
   Link,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { useState } from "react";
 
 const CardMediaAboutUs = (props) => {
-  const { image, title, link } = props;
+  const { image, title, detail, link, setOpenModal, setYoutube } = props;
   const classes = useStyles();
 
   return (
@@ -20,18 +21,23 @@ const CardMediaAboutUs = (props) => {
         <Typography mb={3} fontWeight={500} fontSize={18}>
           {title}
         </Typography>
-        <Link
-          href="#"
+        {/* <Typography mb={3} fontSize={16}>
+          {detail}
+        </Typography> */}
+        <Button
           sx={{
             color: "#2DA373",
             fontWeight: 500,
             fontSize: 14,
-            textTransform: "uppercase",
-            textDecoration: "none",
+            textTransform: "none",
+          }}
+          onClick={() => {
+            setOpenModal(true);
+            setYoutube(link);
           }}
         >
-          Share
-        </Link>
+          ดูเพิ่มเติม
+        </Button>
       </CardContent>
     </Card>
   );
@@ -42,6 +48,8 @@ export default CardMediaAboutUs;
 const useStyles = makeStyles({
   aboutUsCard: {
     height: "100%",
+    minWidth: 300,
+    minHeight: 435,
     maxWidth: 300,
     maxHeight: 435,
     boxShadow: "10px 5px 20px #0000001A",
