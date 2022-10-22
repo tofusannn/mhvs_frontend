@@ -35,7 +35,7 @@ const path = process.env.NEXT_PUBLIC_BASE_API;
 
 const NavBar = (props) => {
   const { locale } = props;
-  const router = useRouter();
+  const { pathname, query, push, replace } = useRouter();
   const classes = useStyles();
   const t = useTranslations();
   const dispatch = useDispatch();
@@ -46,10 +46,22 @@ const NavBar = (props) => {
   const open = Boolean(anchorEl);
 
   useEffect(() => {
-    const tk = Cookies.get("token");
-    setToken(tk ? tk : authPayload ? authPayload.token : null);
-    tk ? getProfile(token) : router.pathname === "/user" && router.push("/");
-  }, [token]);
+    const data = Cookies.get("token");
+    setToken(data ? data : authPayload ? authPayload.token : null);
+    if (data) {
+      getProfile(token);
+    } else {
+      if (pathname === "/user") {
+        return push("/");
+      }
+      if (query.action === "learning") {
+        return replace({
+          pathname: "/auth",
+          query: { action: "login", type: "phone" },
+        });
+      }
+    }
+  }, [token, query]);
 
   async function getProfile(token) {
     const data = await auth.getUser(token);
@@ -68,7 +80,7 @@ const NavBar = (props) => {
   };
 
   function handleClickRegister() {
-    router.push({ pathname: "/auth", query: { action: "register" } });
+    push({ pathname: "/auth", query: { action: "register" } });
   }
 
   function loopMenuBar() {
@@ -79,7 +91,11 @@ const NavBar = (props) => {
       if (token && i === 6) return rows;
       rows.push(
         <Grid key={i} sx={{ paddingLeft: 5 }}>
-          <Link sx={{ color: "#ffffff" }} href={t(`navbar-menu.menu${i}.link`)}>
+          <Link
+            component="button"
+            sx={{ color: "#ffffff", fontSize: 16 }}
+            onClick={() => push(t(`navbar-menu.menu${i}.link`))}
+          >
             {t(`navbar-menu.menu${i}.title`)}
           </Link>
         </Grid>
@@ -90,11 +106,11 @@ const NavBar = (props) => {
 
   function translationClick(e) {
     const locale = e.target.name;
-    router.push("/", "/", { locale: locale });
+    push("/", "/", { locale: locale });
   }
   async function logoutUser() {
     await auth.logout(token);
-    router.reload();
+    reload();
   }
 
   return (
@@ -150,7 +166,7 @@ const NavBar = (props) => {
                   >
                     <MenuItem
                       onClick={() =>
-                        router.push({
+                        push({
                           pathname: "/user",
                           query: { action: "lesson", type: "lesson" },
                         })
@@ -163,7 +179,7 @@ const NavBar = (props) => {
                     </MenuItem>
                     <MenuItem
                       onClick={() =>
-                        router.push({
+                        push({
                           pathname: "/user",
                           query: { action: "lesson", type: "homework" },
                         })
@@ -176,7 +192,7 @@ const NavBar = (props) => {
                     </MenuItem>
                     <MenuItem
                       onClick={() =>
-                        router.push({
+                        push({
                           pathname: "/user",
                           query: { action: "profile" },
                         })

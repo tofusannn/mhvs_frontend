@@ -60,19 +60,27 @@ const Home = () => {
               </Typography>
               <Typography mb={3} display={"flex"} alignItems={"center"}>
                 <Facebook sx={{ marginRight: 1, color: "#0076FF" }}></Facebook>
-                <Link href="https://www.facebook.com/mwgthailand">
+                <Link
+                  target="_blank"
+                  href="https://www.facebook.com/mwgthailand"
+                >
                   Migrant Working Group
                 </Link>
               </Typography>
               <Typography mb={3} display={"flex"} alignItems={"center"}>
                 <Message sx={{ marginRight: 1, color: "#0076FF" }}></Message>
-                <Link href="https://www.messenger.com/login.php?next=https%3A%2F%2Fwww.messenger.com%2Ft%2Fmwgthailand">
+                <Link
+                  target="_blank"
+                  href="https://www.messenger.com/login.php?next=https%3A%2F%2Fwww.messenger.com%2Ft%2Fmwgthailand"
+                >
                   MWG Thailand
                 </Link>
               </Typography>
               <Typography mb={3} display={"flex"} alignItems={"center"}>
                 <Language sx={{ marginRight: 1, color: "#0076FF" }}></Language>
-                <Link href="https://mitrthai.com/employees/">MitrThai.com</Link>
+                <Link target="_blank" href="https://mitrthai.com/employees/">
+                  MitrThai.com
+                </Link>
               </Typography>
             </Grid>
             <Grid xs={5} item>

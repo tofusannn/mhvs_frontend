@@ -25,7 +25,7 @@ const Home = () => {
       sponsor &&
         rows.push(
           <Grid key={i} item xs={2}>
-            <Link href={sponsor[i].link_ref}>
+            <Link target="_blank" href={sponsor[i].link_ref}>
               <img width={"70%"} src={`${path}${sponsor[i].file_path}`}></img>
             </Link>
           </Grid>

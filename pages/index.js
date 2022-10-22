@@ -93,7 +93,7 @@ const Banner = () => {
 const AboutUs = ({ locale }) => {
   const t = useTranslations();
   const [content, setContent] = useState();
-  const [openModal, setOpenModal] = useState();
+  const [openModal, setOpenModal] = useState(false);
   const [youtube, setYoutube] = useState();
 
   useEffect(() => {
@@ -186,7 +186,7 @@ const AboutUs = ({ locale }) => {
               src={youtube}
               title="YouTube video player"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
+              
             ></iframe>
           </CardContent>
         </Card>
@@ -198,6 +198,7 @@ const AboutUs = ({ locale }) => {
 const Sponsor = ({ locale }) => {
   const classes = useStyles();
   const [sponsor, setSponsor] = useState();
+  const { push } = useRouter();
 
   useEffect(() => {
     getSponsor();
@@ -214,7 +215,7 @@ const Sponsor = ({ locale }) => {
       sponsor &&
         rows.push(
           <Grid key={i} item xs={2}>
-            <Link href={sponsor[i].link_ref}>
+            <Link target="_blank" href={sponsor[i].link_ref}>
               <img width={"70%"} src={`${path}${sponsor[i].file_path}`}></img>
             </Link>
           </Grid>
@@ -231,8 +232,13 @@ const Sponsor = ({ locale }) => {
             <Typography fontWeight={500} fontSize={32}>
               ผู้สนับสนุนใจดี{" "}
               <Link
-                href="/sponsor"
-                style={{ color: "#2DA373", textDecorationColor: "#2DA373" }}
+                component="button"
+                onClick={() => push("/sponsor")}
+                sx={{
+                  color: "#2DA373",
+                  textDecorationColor: "#2DA373",
+                  fontSize: 16,
+                }}
               >
                 ดูทั้งหมด
               </Link>

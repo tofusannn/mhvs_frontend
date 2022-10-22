@@ -9,13 +9,6 @@ import LessonPreview from "../../components/lesson/LessonPreview";
 const Home = () => {
   const { query, push } = useRouter();
 
-  useEffect(() => {
-    const tk = Cookies.get("token");
-    !tk &&
-      query.action === "learning" &&
-      push({ pathname: "/auth", query: { action: "login", type: "phone" } });
-  }, [query]);
-
   return (
     <Fragment>
       <Banner
