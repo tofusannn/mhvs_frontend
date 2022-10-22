@@ -13,29 +13,24 @@ import {
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useRouter } from "next/router";
+import Lesson from "../../api/api_lesson";
 
-const { Fragment } = require("react");
+const { Fragment, useEffect, useState } = require("react");
 
-const header_lesson = ["บทเรียน", "รายละเอียด", "สถานะ", ""];
-const body_lesson = [
-  {
-    title: "เรียนรู้สู้ โควิด19",
-    sub_title:
-      "ท่ามกลางสถานการณ์ COVID-19 ทั้งแพทย์ พยาบาล บุคลากรทางการแพทย์ ผู้ป่วย และทุกคนล้วนมีความเครียดและความกังวลใจ ลองมาดูสักนิดว่า เราจะช่วยกันรับมือ ดูแลจิตใจ และผ่านวิกฤตินี้ไปด้วยกันได้อย่างไร กับการจัดการความเครียดเพื่อรับมือ COVID-19 อย่างถูกวิธีที่จิตแพทย์อยากแนะนำ ทำให้สะดวกมากขึ้น",
-    status: "ยังไม่ได้ลงทะเบียนเรียน",
-    button_confirm: true,
-  },
-];
+const header_lesson = ["บทเรียน", "รายละเอียด", ""];
 
 const LessonList = () => {
   const classes = useStyles();
   const { push, pathname } = useRouter();
+  const [lessonList, setLessonList] = useState([]);
 
-  function handleClick() {
-    push({
-      pathname,
-      query: { action: "learning", course: "1", chapter: "1" },
-    });
+  useEffect(() => {
+    getLessonList();
+  }, []);
+
+  async function getLessonList() {
+    const data = await Lesson.getLessonList();
+    setLessonList(data.result);
   }
 
   return (
@@ -71,7 +66,7 @@ const LessonList = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {body_lesson.map((e, idx) => (
+                {lessonList.map((e, idx) => (
                   <TableRow
                     key={idx}
                     sx={{
@@ -88,7 +83,7 @@ const LessonList = () => {
                         color: "#121212",
                       }}
                     >
-                      {e.title}
+                      {e.lesson_name}
                     </TableCell>
                     <TableCell
                       sx={{
@@ -98,12 +93,9 @@ const LessonList = () => {
                         color: "#121212",
                       }}
                     >
-                      {e.sub_title}
-                    </TableCell>
-                    <TableCell
-                      sx={{ fontWeight: 300, fontSize: 14, color: "#121212" }}
-                    >
-                      {e.status}
+                      {e.lesson_description.length > "100"
+                        ? e.lesson_description.substr(0, 150).concat("...")
+                        : e.lesson_description}
                     </TableCell>
                     <TableCell
                       align={"right"}
@@ -115,19 +107,24 @@ const LessonList = () => {
                         onClick={() =>
                           push({
                             pathname,
-                            query: { action: "preview" },
+                            query: { action: "preview", lesson: e.id },
                           })
                         }
                       >
                         ดูรายละเอียด
                       </Button>
                       <Button
-                        className={
-                          e.button_confirm
-                            ? classes.button_active
-                            : classes.button_disabled
+                        className={classes.button_active}
+                        onClick={() =>
+                          push({
+                            pathname,
+                            query: {
+                              action: "learning",
+                              lesson: e.id,
+                              chapter: e.chapter_id,
+                            },
+                          })
                         }
-                        onClick={handleClick}
                       >
                         ลงทะเบียนเรียน
                       </Button>
