@@ -26,12 +26,12 @@ const LessonLearn = () => {
                 <span style={{ color: "#0076FF" }}>เรียนรู้สู้ โควิด19</span>
               </Typography>
             </Grid>
-            <Grid>
+            {/* <Grid>
               <Button className={classes.button_confirm}>
                 <Coffee sx={{ marginRight: 1 }}></Coffee>
                 บันทึกและพักผ่อน
               </Button>
-            </Grid>
+            </Grid> */}
           </Grid>
         </Container>
       </Grid>
@@ -82,7 +82,6 @@ const LessonLearn = () => {
           <Button
             className={classes.button_submit}
             variant="contained"
-            onClick={() => handleClick()}
           >
             ส่งคำตอบ <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
           </Button>

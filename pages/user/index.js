@@ -106,7 +106,6 @@ const Home = () => {
           justifyContent={"center"}
         >
           <Button
-            name=""
             className={classes.button_confirm}
             variant="contained"
             onClick={confirmProfile}

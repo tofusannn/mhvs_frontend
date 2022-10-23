@@ -261,7 +261,7 @@ const Auth = () => {
           <Grid container justifyContent={"center"}>
             <Link
               className={classes.link_forgot_pw}
-              href="/auth/?action=forgot-password"
+              // href="/auth/?action=forgot-password"
             >
               {t("forgot-password-text")}
             </Link>
