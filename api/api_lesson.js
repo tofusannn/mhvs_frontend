@@ -1,4 +1,5 @@
 import api from "./https_request";
+import Cookies from "js-cookie";
 
 const Lesson = {
   async getLessonList() {
@@ -8,7 +9,8 @@ const Lesson = {
     return await api.get({ path: `/lesson/${id}` });
   },
   async getChapterByLessonId(id) {
-    return await api.get({ path: `/chapter/${id}` });
+    const token = Cookies.get("token");
+    return await api.get({ path: `/chapter/${id}`, headers: { token: token } });
   },
 };
 

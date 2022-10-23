@@ -259,12 +259,12 @@ const Auth = () => {
         </Grid>
         {query.action === "login" && (
           <Grid container justifyContent={"center"}>
-            <Link
+            {/* <Link
               className={classes.link_forgot_pw}
               // href="/auth/?action=forgot-password"
             >
               {t("forgot-password-text")}
-            </Link>
+            </Link> */}
           </Grid>
         )}
         {query.action === "forgot-password" && (
@@ -326,23 +326,23 @@ const Auth = () => {
                 <Fragment>
                   <Grid
                     container
-                    justifyContent={"space-between"}
+                    justifyContent={"center"}
                     alignItems={"center"}
                   >
-                    <Typography>เข้าสู่ระบบโดย</Typography>
+                    <Typography mr={5}>เข้าสู่ระบบโดย</Typography>
                     <Button
                       className={classes.button_type_active}
                       variant="contained"
                     >
                       หมายเลขโทรศัพท์มือถือ
                     </Button>
-                    <Button
+                    {/* <Button
                       disabled
                       className={classes.button_type_inactive}
                       variant="contained"
                     >
                       อีเมล
-                    </Button>
+                    </Button> */}
                   </Grid>
                   <Grid my={5} container justifyContent={"center"}>
                     <Divider width="240px"></Divider>

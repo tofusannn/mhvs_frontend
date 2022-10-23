@@ -93,7 +93,7 @@ const mockQuestion = {
   ],
 };
 
-const LessonQuiz = ({startQuiz, setStartQuiz}) => {
+const LessonQuiz = ({ chapter, startQuiz, setStartQuiz }) => {
   const classes = useStyles();
   const { query } = useRouter();
   const [question, setQuestion] = useState({});
@@ -284,40 +284,103 @@ const LessonQuiz = ({startQuiz, setStartQuiz}) => {
     setOpenSnackbar(false);
   }
 
+  function getDetails(menu) {
+    switch (menu) {
+      case "1":
+        return (
+          <Fragment>
+            <Typography fontWeight={500} fontSize={28}>
+              {chapter[parseInt(query.chapter) - 1].pre_test.name}
+            </Typography>
+            <Divider sx={{ marginY: 3 }}></Divider>
+            <Fragment>
+              <Typography fontSize={16}>
+                {chapter[parseInt(query.chapter) - 1].pre_test.description}
+              </Typography>
+              <Button
+                className={classes.button_start}
+                onClick={() => startQuizClick()}
+              >
+                เริ่มทำแบบทดสอบ{" "}
+                <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
+              </Button>
+            </Fragment>
+          </Fragment>
+        );
+        break;
+      case "2":
+        return (
+          <Fragment>
+            <Typography fontWeight={500} fontSize={28}>
+              {chapter[parseInt(query.chapter) - 1].video.name}
+            </Typography>
+            <Divider sx={{ marginY: 3 }}></Divider>
+            <Fragment>
+              <Typography fontSize={16}>
+                {chapter[parseInt(query.chapter) - 1].video.description}
+              </Typography>
+            </Fragment>
+          </Fragment>
+        );
+        break;
+      case "3":
+        return (
+          <Fragment>
+            <Typography fontWeight={500} fontSize={28}>
+              {chapter[parseInt(query.chapter) - 1].file.name}
+            </Typography>
+            <Divider sx={{ marginY: 3 }}></Divider>
+            <Fragment>
+              <Typography fontSize={16}>
+                {chapter[parseInt(query.chapter) - 1].file.description}
+              </Typography>
+            </Fragment>
+          </Fragment>
+        );
+        break;
+      case "4":
+        return (
+          <Fragment>
+            <Typography fontWeight={500} fontSize={28}>
+              {chapter[parseInt(query.chapter) - 1].post_test.name}
+            </Typography>
+            <Divider sx={{ marginY: 3 }}></Divider>
+            <Fragment>
+              <Typography fontSize={16}>
+                {chapter[parseInt(query.chapter) - 1].post_test.description}
+              </Typography>
+              <Button
+                className={classes.button_start}
+                onClick={() => startQuizClick()}
+              >
+                เริ่มทำแบบทดสอบ{" "}
+                <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
+              </Button>
+            </Fragment>
+          </Fragment>
+        );
+        break;
+      case "5":
+        return (
+          <Fragment>
+            <Typography fontWeight={500} fontSize={28}>
+              {chapter[parseInt(query.chapter) - 1].homework.name}
+            </Typography>
+            <Divider sx={{ marginY: 3 }}></Divider>
+            <Fragment>
+              <Typography fontSize={16}>
+                {chapter[parseInt(query.chapter) - 1].homework.description}
+              </Typography>
+            </Fragment>
+          </Fragment>
+        );
+        break;
+    }
+  }
+
   return (
     <Fragment>
-      <Typography fontWeight={500} fontSize={28}>
-        บทที่ {query.chapter} : {query.chapter === "1" ? "Pre-Quiz" : "Quiz"}
-      </Typography>
-      <Divider sx={{ marginY: 3 }}></Divider>
-      {!startQuiz ? (
-        <Fragment>
-          <Typography fontSize={16}>
-            ไวรัสโคโรนาเป็นไวรัสสายพันธุ์ใหญ่ที่รู้กันทั่วไปว่าเป็นสาเหตุทำให้เกิดความเจ็บป่วยหลากหลาย
-            ตั้งแต่ไข้หวัดธรรมดาจนถึงโรคที่มีอาการรุนแรงกว่า เช่น
-            โรคทางเดินหายใจตะวันออกกลาง (Middle East Respiratory Syndrome หรือ
-            MERS) และโรคทางเดินหายใจเฉียบพลัน (Severe Acute Respiratory Syndrome
-            หรือ SARS)
-            <br />
-            <br />
-            ไวรัสโคโรนาพันธุ์ใหม่ (โควิด-19) ถูกค้นพบเมื่อปี 2019 ในเมืองอู่ฮั่น
-            ประเทศจีน และไม่เคยมีการค้นพบไวรัสโคโรนาชนิดใหม่นี้ในคนมาก่อน
-            คอร์สอบรมนี้อธิบายความรู้เบื้องต้นเกี่ยวกับโควิด-19
-            และไวรัสโรคทางเดินหายใจอุบัติใหม่ (emerging respiratory viruses)
-            และมีวัตถุประสงค์เพื่อให้ความรู้แก่บุคลากรทางสาธารณสุขและผู้บริหารเหตุการณ์ฉุกเฉิน
-            รวมทั้งบุคลากรที่ทำงานกับองค์การสหประชาชาติ องค์กรระหว่างประเทศ
-            และองค์กรอิสระต่างๆ
-          </Typography>
-          <Button
-            className={classes.button_start}
-            onClick={() => startQuizClick()}
-          >
-            เริ่มทำแบบทดสอบ <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
-          </Button>
-        </Fragment>
-      ) : (
-        <Fragment>{questionList()}</Fragment>
-      )}
+      {chapter.length ? getDetails(query.menu) : ""}
       <Snackbar
         open={openSnackbar}
         autoHideDuration={3000}

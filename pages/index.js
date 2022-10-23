@@ -49,7 +49,7 @@ const Banner = () => {
 
   function changePage() {
     if (token) {
-      push({ pathname: "/lesson", query: { action: "preview" } });
+      push({ pathname: "/lesson", query: { action: "list" } });
     } else {
       push({ pathname: "/auth", query: { action: "register" } });
     }

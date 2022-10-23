@@ -121,7 +121,6 @@ const LessonList = () => {
                             query: {
                               action: "learning",
                               lesson: e.id,
-                              chapter: e.chapter_id,
                             },
                           })
                         }

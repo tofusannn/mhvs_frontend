@@ -35,7 +35,7 @@ const path = process.env.NEXT_PUBLIC_BASE_API;
 
 const NavBar = (props) => {
   const { locale } = props;
-  const { pathname, query, push, replace } = useRouter();
+  const { pathname, query, push, replace, reload } = useRouter();
   const classes = useStyles();
   const t = useTranslations();
   const dispatch = useDispatch();

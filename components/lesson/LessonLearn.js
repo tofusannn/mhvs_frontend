@@ -1,15 +1,17 @@
 import { Coffee, NavigateNext } from "@mui/icons-material";
 import { Button, Container, Grid, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { useRouter } from "next/router";
 import LessonMenu from "./LessonMenu";
 import LessonQuiz from "./LessonQuiz";
 
-const { Fragment, useState } = require("react");
+const { Fragment, useState, useEffect } = require("react");
 
-const LessonLearn = () => {
+const LessonLearn = ({ lesson, chapter }) => {
   const classes = useStyles();
+  const { query } = useRouter();
   const [startQuiz, setStartQuiz] = useState(false);
-
+  console.log(chapter);
   return (
     <Fragment>
       <Grid>
@@ -23,7 +25,7 @@ const LessonLearn = () => {
             <Grid>
               <Typography fontWeight={500} fontSize={32}>
                 บทเรียนออนไลน์ :{" "}
-                <span style={{ color: "#0076FF" }}>เรียนรู้สู้ โควิด19</span>
+                <span style={{ color: "#0076FF" }}>{lesson.lesson_name}</span>
               </Typography>
             </Grid>
             {/* <Grid>
@@ -37,19 +39,20 @@ const LessonLearn = () => {
       </Grid>
       <Grid
         sx={{
-          minHeight: "595px",
           background:
             "transparent linear-gradient(180deg, #F7F7F7 0%, #FFFFFF 100%) 0% 0% no-repeat padding-box;",
         }}
         py={3}
+        mb={10}
       >
         <Container>
           <Grid container>
             <Grid xs={3} pr={3} item>
-              <LessonMenu></LessonMenu>
+              <LessonMenu chapter={chapter}></LessonMenu>
             </Grid>
             <Grid xs={9} item>
               <LessonQuiz
+                chapter={chapter}
                 startQuiz={startQuiz}
                 setStartQuiz={setStartQuiz}
               ></LessonQuiz>
@@ -79,10 +82,7 @@ const LessonLearn = () => {
         >
           ยกเลิก
         </Button> */}
-          <Button
-            className={classes.button_submit}
-            variant="contained"
-          >
+          <Button className={classes.button_submit} variant="contained">
             ส่งคำตอบ <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
           </Button>
         </Grid>

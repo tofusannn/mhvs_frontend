@@ -3,22 +3,11 @@ import { Button, Container, Divider, Grid, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useRouter } from "next/router";
 import { Fragment, useEffect, useState } from "react";
-import Lesson from "../../api/api_lesson";
 const path = process.env.NEXT_PUBLIC_BASE_API;
 
-const LessonPreview = () => {
+const LessonPreview = ({ lesson }) => {
   const classes = useStyles();
   const { push, pathname, query } = useRouter();
-  const [lesson, setLesson] = useState({});
-
-  useEffect(() => {
-    query.lesson && getLesson(parseInt(query.lesson));
-  }, [query]);
-
-  async function getLesson(id) {
-    const data = await Lesson.getLessonById(id);
-    setLesson(data.result);
-  }
 
   return (
     <Fragment>
@@ -45,7 +34,6 @@ const LessonPreview = () => {
                     query: {
                       action: "learning",
                       lesson: lesson.id,
-                      chapter: lesson.chapter_id,
                     },
                   })
                 }
@@ -80,7 +68,11 @@ const LessonPreview = () => {
                   return (
                     <Grid key={idx} mb={3} container>
                       <Grid xs={3} item>
-                        <img src={`${path}${e.file_path}`} width={60} height={60} />
+                        <img
+                          src={`${path}${e.file_path}`}
+                          width={60}
+                          height={60}
+                        />
                       </Grid>
                       <Grid xs={9} item>
                         <Typography fontWeight={500} fontSize={24}>
