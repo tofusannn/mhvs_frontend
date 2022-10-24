@@ -1,9 +1,10 @@
-import { NavigateNext } from "@mui/icons-material";
+import { Description, NavigateNext } from "@mui/icons-material";
 import {
   Alert,
   Button,
   Divider,
   Grid,
+  Link,
   Radio,
   Snackbar,
   TextField,
@@ -12,6 +13,8 @@ import {
 import { makeStyles } from "@mui/styles";
 import { useRouter } from "next/router";
 import { Fragment, useEffect, useState } from "react";
+import upload from "../../api/api_upload";
+const path = process.env.NEXT_PUBLIC_BASE_API;
 
 const mockQuestion = {
   question: [
@@ -95,7 +98,7 @@ const mockQuestion = {
 
 const LessonQuiz = ({ chapter, startQuiz, setStartQuiz }) => {
   const classes = useStyles();
-  const { query } = useRouter();
+  const { query, push } = useRouter();
   const [question, setQuestion] = useState({});
   const [answerPayload, setAnswerPayload] = useState([]);
   const [validate, setValidate] = useState(false);
@@ -105,7 +108,7 @@ const LessonQuiz = ({ chapter, startQuiz, setStartQuiz }) => {
     status: false,
   });
 
-  useEffect(() => {}, [answerPayload]);
+  useEffect(() => {console.log(chapter);}, [answerPayload]);
 
   function startQuizClick(params) {
     setStartQuiz(true);
@@ -284,6 +287,11 @@ const LessonQuiz = ({ chapter, startQuiz, setStartQuiz }) => {
     setOpenSnackbar(false);
   }
 
+  async function downloadFile(id) {
+    const data = await upload.download(id);
+    console.log(data);
+  }
+
   function getDetails(menu) {
     switch (menu) {
       case "1":
@@ -319,6 +327,19 @@ const LessonQuiz = ({ chapter, startQuiz, setStartQuiz }) => {
               <Typography fontSize={16}>
                 {chapter[parseInt(query.chapter) - 1].video.description}
               </Typography>
+              {chapter[parseInt(query.chapter) - 1].video.link.map((e, idx) => (
+                <Grid mt={3} key={idx}>
+                  <iframe
+                    height="576"
+                    width="100%"
+                    src={e.link}
+                    title="YouTube video player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </Grid>
+              ))}
             </Fragment>
           </Fragment>
         );
@@ -331,9 +352,33 @@ const LessonQuiz = ({ chapter, startQuiz, setStartQuiz }) => {
             </Typography>
             <Divider sx={{ marginY: 3 }}></Divider>
             <Fragment>
-              <Typography fontSize={16}>
+              <Typography mb={3} fontSize={16}>
                 {chapter[parseInt(query.chapter) - 1].file.description}
               </Typography>
+              {chapter[parseInt(query.chapter) - 1].file.file.map((e, idx) => (
+                <Grid mt={3} key={idx}>
+                  <Link
+                    href={`${path}${e.file_path}`}
+                    target="_blank"
+                    sx={{ textDecoration: "none" }}
+                  >
+                    <Button
+                      sx={{
+                        color: "#1B6665",
+                        background: "#D8F8E4",
+                        fontSize: 24,
+                        textTransform: "none"
+                      }}
+                    >
+                      <Description
+                        sx={{ marginRight: 1, color: "#1B6665" }}
+                        fontSize="large"
+                      ></Description>
+                      {e.file_name}
+                    </Button>
+                  </Link>
+                </Grid>
+              ))}
             </Fragment>
           </Fragment>
         );

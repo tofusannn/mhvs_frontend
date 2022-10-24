@@ -185,8 +185,9 @@ const AboutUs = ({ locale }) => {
               width="1080"
               src={youtube}
               title="YouTube video player"
+              frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              
+              allowFullScreen
             ></iframe>
           </CardContent>
         </Card>
