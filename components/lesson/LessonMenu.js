@@ -1,4 +1,5 @@
 import {
+  CheckCircle,
   Description,
   PictureAsPdf,
   PlayCircle,
@@ -13,6 +14,10 @@ const LessonMenu = ({ chapter }) => {
   const classes = useStyles();
   const { push, pathname, query } = useRouter();
 
+  function handleClickMenu(menu) {
+    push({ pathname, query: { ...query, menu: menu } });
+  }
+
   return (
     <Fragment>
       <Typography fontWeight={500} fontSize={28}>
@@ -26,87 +31,161 @@ const LessonMenu = ({ chapter }) => {
             fontSize={20}
             sx={
               e.user_action
-                ? { color: "#3CBB8E" }
+                ? { color: "#3CBB8E", cursor: "pointer" }
                 : parseInt(query.chapter) === e.index
-                ? { color: "#0076FF" }
-                : { color: "#121212" }
+                ? { color: "#0076FF", cursor: "pointer" }
+                : { color: "#121212", cursor: "pointer" }
+            }
+            onClick={() =>
+              push({
+                pathname,
+                query: { ...query, chapter: e.index, menu: "1" },
+              })
             }
           >
             {e.chapter_name}
           </Typography>
           {parseInt(query.chapter) === e.index && (
             <Fragment>
-              <Typography fontSize={14} sx={{ color: "#727272" }}>
+              <Typography my={1} fontSize={14} sx={{ color: "#727272" }}>
                 {e.chapter_pre_description}
               </Typography>
               <Button
                 className={
-                  query.menu === "1"
+                  e.pre_test.user_action
+                    ? query.menu === "1"
+                      ? classes.button_passed_active
+                      : classes.button_passed_inactive
+                    : query.menu === "1"
                     ? classes.button_sub_active
                     : classes.button_sub_inactive
                 }
                 fullWidth
-                onClick={() =>
-                  push({ pathname, query: { ...query, menu: "1" } })
-                }
+                onClick={() => handleClickMenu("1")}
               >
-                <Quiz sx={{ marginRight: 1 }}></Quiz> Pre-Quiz
+                <Grid container>
+                  <Quiz sx={{ marginRight: 1 }}></Quiz> Pre-Quiz
+                </Grid>
+                {e.pre_test.user_action && (
+                  <CheckCircle
+                    sx={
+                      query.menu === "1"
+                        ? { color: "#ffffff" }
+                        : { color: "#3CBB8E" }
+                    }
+                    fontSize={"large"}
+                  ></CheckCircle>
+                )}
               </Button>
               <Button
                 className={
-                  query.menu === "2"
+                  e.video.user_action
+                    ? query.menu === "2"
+                      ? classes.button_passed_active
+                      : classes.button_passed_inactive
+                    : query.menu === "2"
                     ? classes.button_sub_active
                     : classes.button_sub_inactive
                 }
-                disabled={!e.pre_test.user_action}
                 fullWidth
-                onClick={() =>
-                  push({ pathname, query: { ...query, menu: "2" } })
-                }
+                onClick={() => handleClickMenu("2")}
               >
-                <PlayCircle sx={{ marginRight: 1 }}></PlayCircle> Video
+                <Grid container>
+                  <PlayCircle sx={{ marginRight: 1 }}></PlayCircle> Video
+                </Grid>
+                {e.video.user_action && (
+                  <CheckCircle
+                    sx={
+                      query.menu === "2"
+                        ? { color: "#ffffff" }
+                        : { color: "#3CBB8E" }
+                    }
+                    fontSize={"large"}
+                  ></CheckCircle>
+                )}
               </Button>
               <Button
                 className={
-                  query.menu === "3"
+                  e.file.user_action
+                    ? query.menu === "3"
+                      ? classes.button_passed_active
+                      : classes.button_passed_inactive
+                    : query.menu === "3"
                     ? classes.button_sub_active
                     : classes.button_sub_inactive
                 }
-                disabled={!e.video.user_action}
                 fullWidth
-                onClick={() =>
-                  push({ pathname, query: { ...query, menu: "3" } })
-                }
+                onClick={() => handleClickMenu("3")}
               >
-                <PictureAsPdf sx={{ marginRight: 1 }}></PictureAsPdf> PDF
+                <Grid container>
+                  <PictureAsPdf sx={{ marginRight: 1 }}></PictureAsPdf> PDF
+                </Grid>
+                {e.file.user_action && (
+                  <CheckCircle
+                    sx={
+                      query.menu === "3"
+                        ? { color: "#ffffff" }
+                        : { color: "#3CBB8E" }
+                    }
+                    fontSize={"large"}
+                  ></CheckCircle>
+                )}
               </Button>
               <Button
                 className={
-                  query.menu === "4"
+                  e.post_test.user_action
+                    ? query.menu === "4"
+                      ? classes.button_passed_active
+                      : classes.button_passed_inactive
+                    : query.menu === "4"
                     ? classes.button_sub_active
                     : classes.button_sub_inactive
                 }
                 disabled={!e.file.user_action}
                 fullWidth
-                onClick={() =>
-                  push({ pathname, query: { ...query, menu: "4" } })
-                }
+                onClick={() => handleClickMenu("4")}
               >
-                <Quiz sx={{ marginRight: 1 }}></Quiz> Quiz
+                <Grid container>
+                  <Quiz sx={{ marginRight: 1 }}></Quiz> Quiz
+                </Grid>
+                {e.post_test.user_action && (
+                  <CheckCircle
+                    sx={
+                      query.menu === "4"
+                        ? { color: "#ffffff" }
+                        : { color: "#3CBB8E" }
+                    }
+                    fontSize={"large"}
+                  ></CheckCircle>
+                )}
               </Button>
               <Button
                 className={
-                  query.menu === "5"
+                  e.homework.user_action
+                    ? query.menu === "5"
+                      ? classes.button_passed_active
+                      : classes.button_passed_inactive
+                    : query.menu === "5"
                     ? classes.button_sub_active
                     : classes.button_sub_inactive
                 }
                 disabled={!e.post_test.user_action}
                 fullWidth
-                onClick={() =>
-                  push({ pathname, query: { ...query, menu: "5" } })
-                }
+                onClick={() => handleClickMenu("5")}
               >
-                <Description sx={{ marginRight: 1 }}></Description> Homework
+                <Grid container>
+                  <Description sx={{ marginRight: 1 }}></Description> Homework
+                </Grid>
+                {e.homework.user_action && (
+                  <CheckCircle
+                    sx={
+                      query.menu === "5"
+                        ? { color: "#ffffff" }
+                        : { color: "#3CBB8E" }
+                    }
+                    fontSize={"large"}
+                  ></CheckCircle>
+                )}
               </Button>
             </Fragment>
           )}
@@ -144,6 +223,31 @@ const useStyles = makeStyles({
     height: 50,
     color: "#000000",
     background: "#F1F1F1 0% 0% no-repeat padding-box",
+    boxShadow: "none",
+    borderRadius: "100px",
+    textTransform: "none",
+  },
+  button_passed_active: {
+    fontSize: 16,
+    justifyContent: "start",
+    paddingLeft: 16,
+    marginTop: 16,
+    height: 50,
+    color: "#ffffff",
+    background:
+      "transparent linear-gradient(90deg, #3CBB8E 0%, #3CBB8E 100%) 0% 0% no-repeat padding-box",
+    boxShadow: "0px 5px 10px #3CBB8E",
+    borderRadius: "100px",
+    textTransform: "none",
+  },
+  button_passed_inactive: {
+    fontSize: 16,
+    justifyContent: "start",
+    paddingLeft: 16,
+    marginTop: 16,
+    height: 50,
+    color: "#000000",
+    background: "#DBFFF2",
     boxShadow: "none",
     borderRadius: "100px",
     textTransform: "none",
