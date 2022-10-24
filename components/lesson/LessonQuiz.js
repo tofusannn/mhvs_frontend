@@ -13,92 +13,18 @@ import {
 import { makeStyles } from "@mui/styles";
 import { useRouter } from "next/router";
 import { Fragment, useEffect, useState } from "react";
-import upload from "../../api/api_upload";
+import Question from "../../api/api_question";
 const path = process.env.NEXT_PUBLIC_BASE_API;
 
-const mockQuestion = {
-  question: [
-    {
-      index: 1,
-      question: "เพศตามที่ใช้ชีวิตปัจจุบัน",
-      question_cer_id: 11,
-      answer: [
-        {
-          index: 1,
-          choice: "ผู้ชาย",
-          is_input: false,
-          answer_cer_id: 1,
-        },
-        {
-          index: 2,
-          choice: "ผู้หญิง",
-          is_input: false,
-          answer_cer_id: 2,
-        },
-        {
-          index: 3,
-          choice: "เพศทางเลือก",
-          is_input: false,
-          answer_cer_id: 3,
-        },
-      ],
-    },
-    {
-      index: 2,
-      question: "ท่านนับถือศาสนา",
-      question_cer_id: 12,
-      answer: [
-        {
-          index: 1,
-          choice: "พุทธ",
-          is_input: false,
-          answer_cer_id: 4,
-        },
-        {
-          index: 2,
-          choice: "คริสต์",
-          is_input: false,
-          answer_cer_id: 5,
-        },
-        {
-          index: 3,
-          choice: "อิสลาม",
-          is_input: false,
-          answer_cer_id: 6,
-        },
-        {
-          index: 4,
-          choice: "ผี/บรรพบุรุษ",
-          is_input: false,
-          answer_cer_id: 7,
-        },
-        {
-          index: 5,
-          choice: "ไม่นับถือศาสนา",
-          is_input: false,
-          answer_cer_id: 8,
-        },
-      ],
-    },
-    {
-      index: 3,
-      question: "ปัจจุบันท่านอายุ....ปี",
-      question_cer_id: 13,
-      answer: [
-        {
-          index: 1,
-          choice: "อายุ",
-          is_input: true,
-          answer_cer_id: 9,
-        },
-      ],
-    },
-  ],
-};
-
-const LessonQuiz = ({ chapter, startQuiz, setStartQuiz }) => {
+const LessonQuiz = ({
+  chapter,
+  startQuiz,
+  setStartQuiz,
+  confirm,
+  setButtonNext,
+}) => {
   const classes = useStyles();
-  const { query, push } = useRouter();
+  const { pathname, query, push } = useRouter();
   const [question, setQuestion] = useState({});
   const [answerPayload, setAnswerPayload] = useState([]);
   const [validate, setValidate] = useState(false);
@@ -107,12 +33,20 @@ const LessonQuiz = ({ chapter, startQuiz, setStartQuiz }) => {
     msg: "",
     status: false,
   });
+  const [questPayload, setQuestPayload] = useState({ type: "", id: "" });
+  const [score, setScore] = useState("");
 
-  useEffect(() => {console.log(chapter);}, [answerPayload]);
+  useEffect(() => {
+    confirm && handleClick();
+  }, [confirm]);
 
-  function startQuizClick(params) {
+  useEffect(() => {}, [answerPayload]);
+
+  async function startQuizClick(type, id) {
+    setQuestPayload({ type: type, id: id });
+    const data = await Question.getQuestionList(id);
+    setQuestion(data.result);
     setStartQuiz(true);
-    setQuestion(mockQuestion);
   }
 
   function questionList() {
@@ -122,11 +56,8 @@ const LessonQuiz = ({ chapter, startQuiz, setStartQuiz }) => {
         rows.push(
           <Grid mt={5} key={header.index}>
             <Grid container>
-              <Typography fontWeight={500} fontSize={20} mr={1}>
-                {header.index}.
-              </Typography>
               <Typography fontWeight={500} fontSize={20}>
-                {header.question}
+                {header.index}.{header.question}
               </Typography>
             </Grid>
             {answerList(header, idx)}
@@ -143,22 +74,16 @@ const LessonQuiz = ({ chapter, startQuiz, setStartQuiz }) => {
         <Grid ml={1} key={ans.index}>
           <Grid container alignItems={"center"}>
             <Radio
-              className={checkValidate(
-                header.question_cer_id,
-                ans.answer_cer_id
-              )}
+              className={checkValidate(header.question_id, ans.answer_id)}
               size="small"
-              checked={checkPayload(header.question_cer_id, ans.answer_cer_id)}
+              checked={checkPayload(header.question_id, ans.answer_id)}
               onChange={() =>
-                handleChangeRadio(header.question_cer_id, ans.answer_cer_id)
+                handleChangeRadio(header.question_id, ans.answer_id)
               }
-              value={ans.answer_cer_id}
+              value={ans.answer_id}
             ></Radio>
             <Typography
-              className={checkValidate(
-                header.question_cer_id,
-                ans.answer_cer_id
-              )}
+              className={checkValidate(header.question_id, ans.answer_id)}
               fontWeight={400}
               fontSize={20}
             >
@@ -168,18 +93,12 @@ const LessonQuiz = ({ chapter, startQuiz, setStartQuiz }) => {
           {ans.is_input && (
             <Grid mt={1} ml={5} xs={7} item>
               <TextField
-                disabled={
-                  !checkPayload(header.question_cer_id, ans.answer_cer_id)
-                }
+                disabled={!checkPayload(header.question_id, ans.answer_id)}
                 className={classes.text_field}
                 fullWidth
                 size="small"
                 onChange={(e) =>
-                  handleChangeTextField(
-                    header.question_cer_id,
-                    ans.answer_cer_id,
-                    e
-                  )
+                  handleChangeTextField(header.question_id, ans.answer_id, e)
                 }
               ></TextField>
             </Grid>
@@ -193,8 +112,8 @@ const LessonQuiz = ({ chapter, startQuiz, setStartQuiz }) => {
   function checkPayload(quest, answer) {
     const bl = false;
     answerPayload.forEach((item) => {
-      if (item.question_cer_id === quest) {
-        if (item.answer_cer_id === answer) {
+      if (item.question_id === quest) {
+        if (item.answer_id === answer) {
           bl = true;
         }
       }
@@ -205,15 +124,15 @@ const LessonQuiz = ({ chapter, startQuiz, setStartQuiz }) => {
   function checkValidate(quest, answer) {
     const bl = "";
     answerPayload.forEach((item) => {
-      if (item.question_cer_id === quest) {
-        if (item.answer_cer_id === answer) {
+      if (item.question_id === quest) {
+        if (item.answer_id === answer) {
           bl = classes.select_choice;
         }
       }
     });
     if (
       validate &&
-      answerPayload.map((e) => e.question_cer_id).indexOf(quest) === -1
+      answerPayload.map((e) => e.question_id).indexOf(quest) === -1
     ) {
       bl = classes.validate_choice;
     }
@@ -225,22 +144,22 @@ const LessonQuiz = ({ chapter, startQuiz, setStartQuiz }) => {
     if (answerPayload.length) {
       answerPayload.forEach((item) => {
         newArr.push(item);
-        if (item.question_cer_id === quest) {
-          const idx = newArr.map((e) => e.question_cer_id).indexOf(quest);
+        if (item.question_id === quest) {
+          const idx = newArr.map((e) => e.question_id).indexOf(quest);
           newArr.splice(idx, 1);
         }
       });
     }
     newArr.push({
-      question_cer_id: quest,
-      answer_cer_id: answer,
+      question_id: quest,
+      answer_id: answer,
       input_text: "",
     });
     setAnswerPayload(newArr);
   }
 
   function handleChangeTextField(quest, answer, e) {
-    const idx = answerPayload.map((i) => i.question_cer_id).indexOf(quest);
+    const idx = answerPayload.map((i) => i.question_id).indexOf(quest);
     answerPayload[idx].input_text = e.target.value;
   }
 
@@ -248,17 +167,16 @@ const LessonQuiz = ({ chapter, startQuiz, setStartQuiz }) => {
     const valid = true;
     question.question.forEach((header) => {
       if (
-        answerPayload
-          .map((e) => e.question_cer_id)
-          .indexOf(header.question_cer_id) === -1
+        answerPayload.map((e) => e.question_id).indexOf(header.question_id) ===
+        -1
       ) {
         valid = false;
       } else {
         header.answer.forEach((ans) => {
           if (ans.is_input) {
             const idx = answerPayload
-              .map((e) => e.question_cer_id)
-              .indexOf(header.question_cer_id);
+              .map((e) => e.question_id)
+              .indexOf(header.question_id);
             if (answerPayload[idx].input_text === "") {
               valid = false;
             }
@@ -267,15 +185,16 @@ const LessonQuiz = ({ chapter, startQuiz, setStartQuiz }) => {
       }
     });
     if (valid) {
-      const data = await certificate.postUserQuestCertificate({
+      const data = await Question.postQuestion({
+        question_detail_id: questPayload.id,
+        quiz_type: questPayload.type,
         answer: answerPayload,
       });
       setOpenSnackbar(true);
       setPayloadSnackbar(data);
-      if (data.status) {
-        setOpenModal(false);
-        // router.reload();
-      }
+      setScore(data.result.total_score);
+      setButtonNext(true);
+      window.scrollTo(0, 0);
     }
     setValidate(true);
   }
@@ -287,32 +206,52 @@ const LessonQuiz = ({ chapter, startQuiz, setStartQuiz }) => {
     setOpenSnackbar(false);
   }
 
-  async function downloadFile(id) {
-    const data = await upload.download(id);
-    console.log(data);
-  }
-
   function getDetails(menu) {
     switch (menu) {
       case "1":
         return (
           <Fragment>
-            <Typography fontWeight={500} fontSize={28}>
-              {chapter[parseInt(query.chapter) - 1].pre_test.name}
-            </Typography>
-            <Divider sx={{ marginY: 3 }}></Divider>
-            <Fragment>
-              <Typography fontSize={16}>
-                {chapter[parseInt(query.chapter) - 1].pre_test.description}
+            <Grid container alignItems={"center"}>
+              <Typography fontWeight={500} fontSize={28}>
+                {chapter[parseInt(query.chapter) - 1].pre_test.name}
               </Typography>
-              <Button
-                className={classes.button_start}
-                onClick={() => startQuizClick()}
-              >
-                เริ่มทำแบบทดสอบ{" "}
-                <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
-              </Button>
-            </Fragment>
+              {score && (
+                <Typography
+                  ml={3}
+                  sx={{
+                    width: 114,
+                    color: "#0076FF",
+                    border: "1px solid #0076FF",
+                  }}
+                  fontSize={16}
+                  textAlign={"center"}
+                >
+                  {score} คะแนน
+                </Typography>
+              )}
+            </Grid>
+            <Divider sx={{ marginY: 3 }}></Divider>
+            {startQuiz ? (
+              <Fragment>{questionList()}</Fragment>
+            ) : (
+              <Fragment>
+                <Typography fontSize={16}>
+                  {chapter[parseInt(query.chapter) - 1].pre_test.description}
+                </Typography>
+                <Button
+                  className={classes.button_start}
+                  onClick={() =>
+                    startQuizClick(
+                      chapter[parseInt(query.chapter) - 1].pre_test.test_type,
+                      chapter[parseInt(query.chapter) - 1].pre_test.test_id
+                    )
+                  }
+                >
+                  เริ่มทำแบบทดสอบ{" "}
+                  <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
+                </Button>
+              </Fragment>
+            )}
           </Fragment>
         );
         break;
@@ -367,7 +306,7 @@ const LessonQuiz = ({ chapter, startQuiz, setStartQuiz }) => {
                         color: "#1B6665",
                         background: "#D8F8E4",
                         fontSize: 24,
-                        textTransform: "none"
+                        textTransform: "none",
                       }}
                     >
                       <Description
@@ -386,9 +325,25 @@ const LessonQuiz = ({ chapter, startQuiz, setStartQuiz }) => {
       case "4":
         return (
           <Fragment>
-            <Typography fontWeight={500} fontSize={28}>
-              {chapter[parseInt(query.chapter) - 1].post_test.name}
-            </Typography>
+            <Grid container alignItems={"center"}>
+              <Typography fontWeight={500} fontSize={28}>
+                {chapter[parseInt(query.chapter) - 1].post_test.name}
+              </Typography>
+              {score && (
+                <Typography
+                  ml={3}
+                  sx={{
+                    width: 114,
+                    color: "#0076FF",
+                    border: "1px solid #0076FF",
+                  }}
+                  fontSize={16}
+                  textAlign={"center"}
+                >
+                  {score} คะแนน
+                </Typography>
+              )}
+            </Grid>
             <Divider sx={{ marginY: 3 }}></Divider>
             <Fragment>
               <Typography fontSize={16}>
@@ -396,7 +351,12 @@ const LessonQuiz = ({ chapter, startQuiz, setStartQuiz }) => {
               </Typography>
               <Button
                 className={classes.button_start}
-                onClick={() => startQuizClick()}
+                onClick={() =>
+                  startQuizClick(
+                    chapter[parseInt(query.chapter) - 1].post_test.test_type,
+                    chapter[parseInt(query.chapter) - 1].post_test.test_id
+                  )
+                }
               >
                 เริ่มทำแบบทดสอบ{" "}
                 <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>

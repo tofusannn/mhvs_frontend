@@ -60,6 +60,7 @@ const LessonMenu = ({ chapter }) => {
                     ? classes.button_sub_active
                     : classes.button_sub_inactive
                 }
+                disabled={e.pre_test.user_action}
                 fullWidth
                 onClick={() => handleClickMenu("1")}
               >
@@ -141,7 +142,7 @@ const LessonMenu = ({ chapter }) => {
                     ? classes.button_sub_active
                     : classes.button_sub_inactive
                 }
-                disabled={!e.file.user_action}
+                disabled={e.post_test.user_action || !e.file.user_action}
                 fullWidth
                 onClick={() => handleClickMenu("4")}
               >

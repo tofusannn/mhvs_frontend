@@ -9,8 +9,14 @@ const { Fragment, useState, useEffect } = require("react");
 
 const LessonLearn = ({ lesson, chapter }) => {
   const classes = useStyles();
-  const { query } = useRouter();
+  const { push, pathname, query } = useRouter();
   const [startQuiz, setStartQuiz] = useState(false);
+  const [confirm, setConfirm] = useState(false);
+  const [buttonNext, setButtonNext] = useState(false);
+
+  useEffect(() => {
+    setStartQuiz(false);
+  }, [query]);
 
   return (
     <Fragment>
@@ -55,6 +61,8 @@ const LessonLearn = ({ lesson, chapter }) => {
                 chapter={chapter}
                 startQuiz={startQuiz}
                 setStartQuiz={setStartQuiz}
+                confirm={confirm}
+                setButtonNext={setButtonNext}
               ></LessonQuiz>
             </Grid>
           </Grid>
@@ -71,20 +79,23 @@ const LessonLearn = ({ lesson, chapter }) => {
             minHeight: 90,
           }}
         >
-          {/* <Button
-          className={classes.button_cancel}
-          variant="contained"
-          onClick={() => {
-            setOpenModal(false);
-            setValidate(false);
-            setAnswerPayload([]);
-          }}
-        >
-          ยกเลิก
-        </Button> */}
-          <Button className={classes.button_submit} variant="contained">
-            ส่งคำตอบ <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
-          </Button>
+          {buttonNext ? (
+            <Button
+              className={classes.button_submit}
+              variant="contained"
+              onClick={() => push({ pathname, query: { ...query, menu: 2 } })}
+            >
+              ต่อไป <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
+            </Button>
+          ) : (
+            <Button
+              className={classes.button_submit}
+              variant="contained"
+              onClick={() => setConfirm(true)}
+            >
+              ส่งคำตอบ <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
+            </Button>
+          )}
         </Grid>
       )}
     </Fragment>
