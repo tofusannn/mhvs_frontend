@@ -11,7 +11,7 @@ const LessonLearn = ({ lesson, chapter }) => {
   const classes = useStyles();
   const { query } = useRouter();
   const [startQuiz, setStartQuiz] = useState(false);
-  console.log(chapter);
+
   return (
     <Fragment>
       <Grid>

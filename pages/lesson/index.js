@@ -13,8 +13,17 @@ const Home = () => {
   const [chapter, setChapter] = useState([]);
 
   useEffect(() => {
+    const data = Cookies.get("token");
     query.lesson && getLesson(query.lesson);
-    query.lesson && !query.chapter && getChapter(query.lesson);
+    if (data && query.lesson) {
+      if (chapter.length) {
+        if (!query.chapter) {
+          getChapter(query.lesson);
+        }
+      } else {
+        getChapter(query.lesson);
+      }
+    }
   }, [query]);
 
   async function getLesson(id) {
@@ -25,7 +34,7 @@ const Home = () => {
   async function getChapter(id) {
     const end = false;
     const data = await Lesson.getChapterByLessonId(id);
-    setChapter(data.result)
+    setChapter(data.result);
     data.result.forEach((e) => {
       if (end) return;
       if (!e.user_action) {
