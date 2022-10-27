@@ -17,33 +17,32 @@ import { Fragment, useEffect, useState } from "react";
 import certificate from "../../api/api_certificate";
 import CertificateModal from "./CertificateModal";
 import lessonApi from "../../api/api_lesson";
+import Homework from "../../api/api_homework";
 
 const header_lesson = ["บทเรียนของคุณ", "สถานะ", "ใบเกียรติบัตร"];
 const header_homework = ["รายการ", "บทเรียน", "สถานะ", ""];
-const body_lesson = [
-  { title: "aa", status: "เรียนจบแล้ว", certificate: true },
-  { title: "bb", status: "กำลังเรียน", certificate: false },
-];
-const body_homework = [
-  { no: "1", title: "aa", status: "ส่งแล้ว", homework: true },
-  { no: "2", title: "bb", status: "ยังไม่ส่ง", homework: false },
-];
 
 const Lesson = () => {
   const classes = useStyles();
   const { query } = useRouter();
   const [lesson, setLesson] = useState([]);
+  const [homework, setHomework] = useState([]);
   const [question, setQuestion] = useState();
   const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
     getLessonList();
+    getHomeworkList();
   }, []);
+
+  async function getHomeworkList() {
+    const data = await Homework.getUserHomework();
+    setHomework(data.result);
+  }
 
   async function getLessonList() {
     const data = await lessonApi.getUserLessonList();
     setLesson(data.result);
-    console.log(data.result);
   }
 
   async function getQuestion() {
@@ -164,7 +163,7 @@ const Lesson = () => {
                     </TableCell>
                   </TableRow>
                 ))
-              : body_homework.map((e, idx) => (
+              : homework.map((e, idx) => (
                   <TableRow
                     key={idx}
                     sx={{
@@ -176,35 +175,50 @@ const Lesson = () => {
                     <TableCell
                       sx={{ fontWeight: 300, fontSize: 14, color: "#121212" }}
                     >
-                      {e.no}
+                      การบ้าน {e.chapter_homework_id}
                     </TableCell>
                     <TableCell
                       sx={{ fontWeight: 300, fontSize: 14, color: "#121212" }}
                     >
-                      {e.title}
+                      {e.lesson_name} / {e.chapter_name}
                     </TableCell>
-                    <TableCell
-                      sx={{ fontWeight: 300, fontSize: 14, color: "#121212" }}
-                    >
+                    <TableCell>
                       <Grid container alignItems={"center"}>
-                        {e.homework ? (
-                          <CheckCircle
-                            sx={{ marginRight: 1, color: "#6ECE5C" }}
-                          ></CheckCircle>
+                        {e.status ? (
+                          <Fragment>
+                            <CheckCircle
+                              sx={{ marginRight: 1, color: "#6ECE5C" }}
+                            ></CheckCircle>
+                            <Typography
+                              sx={{
+                                fontWeight: 300,
+                                fontSize: 14,
+                                color: "#121212",
+                              }}
+                            >
+                              ส่งแล้ว
+                            </Typography>
+                          </Fragment>
                         ) : (
-                          ""
+                          <Typography
+                            sx={{
+                              fontWeight: 300,
+                              fontSize: 14,
+                              color: "#121212",
+                            }}
+                          >
+                            กำลังทำ
+                          </Typography>
                         )}
-
-                        {e.status}
                       </Grid>
                     </TableCell>
                     <TableCell
                       sx={{ fontWeight: 300, fontSize: 14, color: "#121212" }}
                     >
                       <Button
-                        disabled={e.homework}
+                        disabled={e.status}
                         className={
-                          e.homework
+                          e.status
                             ? classes.button_disabled
                             : classes.button_inactive
                         }
