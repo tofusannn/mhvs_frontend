@@ -13,17 +13,52 @@ import Lesson from "../../api/api_lesson";
 
 const LessonMenu = ({ chapter, getLesson }) => {
   const classes = useStyles();
-  const { push, pathname, query } = useRouter();
+  const { query } = useRouter();
 
-  async function handleClickMenu(chapter, name, menu) {
+  async function handleClickMenu(chap, name, menu) {
+    if (name === "pre_test") {
+      return getLesson("learning", query.lesson, chap, name);
+    }
+    if (name === "post_test") {
+      return getLesson("learning", query.lesson, chap, name);
+    }
+    if (name === "homework") {
+      return getLesson("learning", query.lesson, chap, name);
+    }
+    if (name === "chapter") {
+      let pass = 0;
+      chapter.forEach(async (e) => {
+        if (e.id === chap) {
+          e.pre_test.user_action ? (pass += 1) : pass;
+          e.video.user_action ? (pass += 1) : pass;
+          e.file.user_action ? (pass += 1) : pass;
+          e.post_test.user_action ? (pass += 1) : pass;
+          e.homework.user_action ? (pass += 1) : pass;
+          if (pass === 5) {
+            const data = await Lesson.postUserLessonState({
+              lesson_id: parseInt(query.lesson),
+              chapter_id: chap,
+              object_name: name,
+              object_id: menu,
+            });
+            if (data.status) {
+              getLesson("learning", query.lesson, chap, name);
+            }
+          } else {
+            getLesson("learning", query.lesson, chap, name);
+          }
+        }
+      });
+      return;
+    }
     const data = await Lesson.postUserLessonState({
       lesson_id: parseInt(query.lesson),
-      chapter_id: chapter,
+      chapter_id: chap,
       object_name: name,
       object_id: menu,
     });
     if (data.status) {
-      getLesson("learning", query.lesson, chapter, name);
+      getLesson("learning", query.lesson, chap, name);
     }
   }
 

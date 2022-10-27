@@ -21,10 +21,11 @@ const Home = () => {
     setLesson(les.result);
     const chap = await Lesson.getChapterByLessonId(lesson);
     setChapter(chap.result);
+    return chap.result;
   }
 
   async function getLesson(action, lesson, chap, menu) {
-    getDetails(lesson);
+    const data = await getDetails(lesson);
     const q = {};
     switch (action) {
       case "preview":
@@ -37,7 +38,7 @@ const Home = () => {
         q = {
           action: action,
           lesson: lesson,
-          chapter: chap ? chap : chapter[0].id,
+          chapter: chap ? chap : data[0].id,
           menu: menu === "chapter" ? "pre_test" : menu,
         };
         break;
