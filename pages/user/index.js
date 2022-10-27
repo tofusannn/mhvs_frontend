@@ -1,4 +1,4 @@
-import { Save } from "@mui/icons-material";
+import { NavigateNext, Save } from "@mui/icons-material";
 import {
   Alert,
   Button,
@@ -34,6 +34,7 @@ const Home = () => {
     msg: "",
     status: false,
   });
+  const [confirm, setConfirm] = useState(false);
 
   useEffect(() => {
     setPayloadAuth(authPayload);
@@ -84,7 +85,16 @@ const Home = () => {
               ></Menu>
             </Grid>
             <Grid sx={{ minHeight: "595px" }} xs={9} mt={3} item>
-              {query.action === "lesson" ? <Lesson></Lesson> : ""}
+              {query.action === "lesson" ? (
+                <Lesson
+                  confirm={confirm}
+                  setOpenSnackbar={setOpenSnackbar}
+                  setPayloadSnackbar={setPayloadSnackbar}
+                  setOpenModalSuccess={setOpenModalSuccess}
+                ></Lesson>
+              ) : (
+                ""
+              )}
               {query.action === "profile" ? (
                 <Profile
                   setPayload={setPayload}
@@ -111,6 +121,24 @@ const Home = () => {
             onClick={confirmProfile}
           >
             <Save sx={{ marginRight: 1 }}></Save> บันทึกข้อมูล
+          </Button>
+        </Grid>
+      ) : (
+        ""
+      )}
+      {query.type === "homework" && query.id ? (
+        <Grid
+          className={classes.background_button}
+          py={3}
+          container
+          justifyContent={"center"}
+        >
+          <Button
+            className={classes.button_confirm}
+            variant="contained"
+            onClick={() => setConfirm(true)}
+          >
+            ส่งการบ้าน <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
           </Button>
         </Grid>
       ) : (

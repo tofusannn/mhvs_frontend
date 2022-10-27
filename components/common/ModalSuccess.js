@@ -9,12 +9,18 @@ import {
   Typography,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { useRouter } from "next/router";
 import { Fragment } from "react";
 
 const ModalSuccess = ({ type, openModalSuccess, setOpenModalSuccess }) => {
   const classes = useStyles();
+  const { query, push, pathname } = useRouter();
+
   return (
-    <Dialog open={openModalSuccess} sx={{ "& .MuiPaper-root": { borderRadius: "16px" } }}>
+    <Dialog
+      open={openModalSuccess}
+      sx={{ "& .MuiPaper-root": { borderRadius: "16px" } }}
+    >
       <Card>
         <CardContent sx={{ paddingX: 8 }}>
           <Grid container justifyContent={"center"}>
@@ -49,7 +55,16 @@ const ModalSuccess = ({ type, openModalSuccess, setOpenModalSuccess }) => {
                   ? classes.buttonConfirm
                   : classes.buttonConfirm2
               }
-              onClick={() => setOpenModalSuccess(false)}
+              onClick={() => {
+                setOpenModalSuccess(false);
+                push({
+                  pathname,
+                  query: {
+                    action: "lesson",
+                    type: "homework",
+                  },
+                });
+              }}
             >
               <Coffee sx={{ marginRight: 1 }}></Coffee> พักดื่มน้ำ
             </Button>

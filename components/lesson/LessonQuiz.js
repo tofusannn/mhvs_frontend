@@ -13,6 +13,7 @@ import {
 import { makeStyles } from "@mui/styles";
 import { useRouter } from "next/router";
 import { Fragment, useEffect, useState } from "react";
+import Lesson from "../../api/api_lesson";
 import Question from "../../api/api_question";
 const path = process.env.NEXT_PUBLIC_BASE_API;
 
@@ -35,6 +36,7 @@ const LessonQuiz = ({
   });
   const [questPayload, setQuestPayload] = useState({ type: "", id: "" });
   const [score, setScore] = useState("");
+  const [objectId, setObjectId] = useState();
 
   useEffect(() => {
     confirm && handleClick();
@@ -77,6 +79,7 @@ const LessonQuiz = ({
               className={checkValidate(header.question_id, ans.answer_id)}
               size="small"
               checked={checkPayload(header.question_id, ans.answer_id)}
+              disabled={confirm}
               onChange={() =>
                 handleChangeRadio(header.question_id, ans.answer_id)
               }
@@ -93,7 +96,9 @@ const LessonQuiz = ({
           {ans.is_input && (
             <Grid mt={1} ml={5} xs={7} item>
               <TextField
-                disabled={!checkPayload(header.question_id, ans.answer_id)}
+                disabled={
+                  !checkPayload(header.question_id, ans.answer_id) || confirm
+                }
                 className={classes.text_field}
                 fullWidth
                 size="small"
@@ -192,9 +197,17 @@ const LessonQuiz = ({
       });
       setOpenSnackbar(true);
       setPayloadSnackbar(data);
-      setScore(data.result.total_score);
-      setButtonNext(true);
-      window.scrollTo(0, 0);
+      if (data.status) {
+        await Lesson.postUserLessonState({
+          lesson_id: parseInt(query.lesson),
+          chapter_id: parseInt(query.chapter),
+          object_name: query.menu,
+          object_id: objectId,
+        });
+        setScore(`${data.result.total_score} / ${data.result.max_score}`);
+        setButtonNext(true);
+        window.scrollTo(0, 0);
+      }
     }
     setValidate(true);
   }
@@ -248,12 +261,14 @@ const LessonQuiz = ({
                 {!chap.pre_test.user_action && (
                   <Button
                     className={classes.button_start}
-                    onClick={() =>
+                    sx={{ width: 225 }}
+                    onClick={() => {
                       startQuizClick(
                         chap.pre_test.test_type,
                         chap.pre_test.test_id
-                      )
-                    }
+                      );
+                      setObjectId(chap.pre_test.id);
+                    }}
                   >
                     เริ่มทำแบบทดสอบ{" "}
                     <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
@@ -362,12 +377,14 @@ const LessonQuiz = ({
                 {!chap.post_test.user_action && (
                   <Button
                     className={classes.button_start}
-                    onClick={() =>
+                    sx={{ width: 225 }}
+                    onClick={() => {
                       startQuizClick(
                         chap.post_test.test_type,
                         chap.post_test.test_id
-                      )
-                    }
+                      );
+                      setObjectId(chap.post_test.id);
+                    }}
                   >
                     เริ่มทำแบบทดสอบ{" "}
                     <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
@@ -387,6 +404,25 @@ const LessonQuiz = ({
             <Divider sx={{ marginY: 3 }}></Divider>
             <Fragment>
               <Typography fontSize={16}>{chap.homework.description}</Typography>
+              <Button
+                className={classes.button_start}
+                variant="contained"
+                onClick={() =>
+                  push({
+                    pathname: "/user",
+                    query: { action: "lesson", type: "homework" },
+                  })
+                }
+              >
+                ส่งการบ้าน <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
+              </Button>
+              <Typography
+                sx={{ marginTop: 2, color: "#666666" }}
+                fontWeight={300}
+                fontSize={12}
+              >
+                *คุณสามารถดูโจทย์อีกครั้ง หรือส่งการบ้านได้ที่เมนูสมาชิก
+              </Typography>
             </Fragment>
           </Fragment>
         );
@@ -418,7 +454,7 @@ export default LessonQuiz;
 const useStyles = makeStyles({
   button_start: {
     marginTop: 26,
-    width: 225,
+    minWidth: 174,
     height: 48,
     color: "#ffffff",
     borderRadius: 100,
