@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { Fragment, useEffect, useState } from "react";
 const path = process.env.NEXT_PUBLIC_BASE_API;
 
-const LessonPreview = ({ lesson }) => {
+const LessonPreview = ({ lesson, getLesson }) => {
   const classes = useStyles();
   const { push, pathname, query } = useRouter();
 
@@ -28,15 +28,7 @@ const LessonPreview = ({ lesson }) => {
             <Grid>
               <Button
                 className={classes.button_confirm}
-                onClick={() =>
-                  push({
-                    pathname,
-                    query: {
-                      action: "learning",
-                      lesson: lesson.id,
-                    },
-                  })
-                }
+                onClick={() => getLesson("learning", lesson.id, "", "pre_test")}
               >
                 ลงทะเบียนเรียนฟรี
               </Button>

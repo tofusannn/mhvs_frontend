@@ -207,13 +207,20 @@ const LessonQuiz = ({
   }
 
   function getDetails(menu) {
+    const chap = {};
+    chapter.forEach((e) => {
+      const b = parseInt(query.chapter);
+      if (e.id === b) {
+        chap = e;
+      }
+    });
     switch (menu) {
-      case "1":
+      case "pre_test":
         return (
           <Fragment>
             <Grid container alignItems={"center"}>
               <Typography fontWeight={500} fontSize={28}>
-                {chapter[parseInt(query.chapter) - 1].pre_test.name}
+                {chap.pre_test.name}
               </Typography>
               {score && (
                 <Typography
@@ -236,37 +243,37 @@ const LessonQuiz = ({
             ) : (
               <Fragment>
                 <Typography fontSize={16}>
-                  {chapter[parseInt(query.chapter) - 1].pre_test.description}
+                  {chap.pre_test.description}
                 </Typography>
-                <Button
-                  className={classes.button_start}
-                  onClick={() =>
-                    startQuizClick(
-                      chapter[parseInt(query.chapter) - 1].pre_test.test_type,
-                      chapter[parseInt(query.chapter) - 1].pre_test.test_id
-                    )
-                  }
-                >
-                  เริ่มทำแบบทดสอบ{" "}
-                  <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
-                </Button>
+                {!chap.pre_test.user_action && (
+                  <Button
+                    className={classes.button_start}
+                    onClick={() =>
+                      startQuizClick(
+                        chap.pre_test.test_type,
+                        chap.pre_test.test_id
+                      )
+                    }
+                  >
+                    เริ่มทำแบบทดสอบ{" "}
+                    <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
+                  </Button>
+                )}
               </Fragment>
             )}
           </Fragment>
         );
         break;
-      case "2":
+      case "video":
         return (
           <Fragment>
             <Typography fontWeight={500} fontSize={28}>
-              {chapter[parseInt(query.chapter) - 1].video.name}
+              {chap.video.name}
             </Typography>
             <Divider sx={{ marginY: 3 }}></Divider>
             <Fragment>
-              <Typography fontSize={16}>
-                {chapter[parseInt(query.chapter) - 1].video.description}
-              </Typography>
-              {chapter[parseInt(query.chapter) - 1].video.link.map((e, idx) => (
+              <Typography fontSize={16}>{chap.video.description}</Typography>
+              {chap.video.link.map((e, idx) => (
                 <Grid mt={3} key={idx}>
                   <iframe
                     height="576"
@@ -283,18 +290,18 @@ const LessonQuiz = ({
           </Fragment>
         );
         break;
-      case "3":
+      case "file":
         return (
           <Fragment>
             <Typography fontWeight={500} fontSize={28}>
-              {chapter[parseInt(query.chapter) - 1].file.name}
+              {chap.file.name}
             </Typography>
             <Divider sx={{ marginY: 3 }}></Divider>
             <Fragment>
               <Typography mb={3} fontSize={16}>
-                {chapter[parseInt(query.chapter) - 1].file.description}
+                {chap.file.description}
               </Typography>
-              {chapter[parseInt(query.chapter) - 1].file.file.map((e, idx) => (
+              {chap.file.file.map((e, idx) => (
                 <Grid mt={3} key={idx}>
                   <Link
                     href={`${path}${e.file_path}`}
@@ -322,12 +329,12 @@ const LessonQuiz = ({
           </Fragment>
         );
         break;
-      case "4":
+      case "post_test":
         return (
           <Fragment>
             <Grid container alignItems={"center"}>
               <Typography fontWeight={500} fontSize={28}>
-                {chapter[parseInt(query.chapter) - 1].post_test.name}
+                {chap.post_test.name}
               </Typography>
               {score && (
                 <Typography
@@ -345,37 +352,41 @@ const LessonQuiz = ({
               )}
             </Grid>
             <Divider sx={{ marginY: 3 }}></Divider>
-            <Fragment>
-              <Typography fontSize={16}>
-                {chapter[parseInt(query.chapter) - 1].post_test.description}
-              </Typography>
-              <Button
-                className={classes.button_start}
-                onClick={() =>
-                  startQuizClick(
-                    chapter[parseInt(query.chapter) - 1].post_test.test_type,
-                    chapter[parseInt(query.chapter) - 1].post_test.test_id
-                  )
-                }
-              >
-                เริ่มทำแบบทดสอบ{" "}
-                <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
-              </Button>
-            </Fragment>
+            {startQuiz ? (
+              <Fragment>{questionList()}</Fragment>
+            ) : (
+              <Fragment>
+                <Typography fontSize={16}>
+                  {chap.post_test.description}
+                </Typography>
+                {!chap.post_test.user_action && (
+                  <Button
+                    className={classes.button_start}
+                    onClick={() =>
+                      startQuizClick(
+                        chap.post_test.test_type,
+                        chap.post_test.test_id
+                      )
+                    }
+                  >
+                    เริ่มทำแบบทดสอบ{" "}
+                    <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
+                  </Button>
+                )}
+              </Fragment>
+            )}
           </Fragment>
         );
         break;
-      case "5":
+      case "homework":
         return (
           <Fragment>
             <Typography fontWeight={500} fontSize={28}>
-              {chapter[parseInt(query.chapter) - 1].homework.name}
+              {chap.homework.name}
             </Typography>
             <Divider sx={{ marginY: 3 }}></Divider>
             <Fragment>
-              <Typography fontSize={16}>
-                {chapter[parseInt(query.chapter) - 1].homework.description}
-              </Typography>
+              <Typography fontSize={16}>{chap.homework.description}</Typography>
             </Fragment>
           </Fragment>
         );

@@ -7,7 +7,7 @@ import LessonQuiz from "./LessonQuiz";
 
 const { Fragment, useState, useEffect } = require("react");
 
-const LessonLearn = ({ lesson, chapter }) => {
+const LessonLearn = ({ lesson, chapter, getLesson }) => {
   const classes = useStyles();
   const { push, pathname, query } = useRouter();
   const [startQuiz, setStartQuiz] = useState(false);
@@ -34,12 +34,6 @@ const LessonLearn = ({ lesson, chapter }) => {
                 <span style={{ color: "#0076FF" }}>{lesson.lesson_name}</span>
               </Typography>
             </Grid>
-            {/* <Grid>
-              <Button className={classes.button_confirm}>
-                <Coffee sx={{ marginRight: 1 }}></Coffee>
-                บันทึกและพักผ่อน
-              </Button>
-            </Grid> */}
           </Grid>
         </Container>
       </Grid>
@@ -54,7 +48,7 @@ const LessonLearn = ({ lesson, chapter }) => {
         <Container>
           <Grid container>
             <Grid xs={3} pr={3} item>
-              <LessonMenu chapter={chapter}></LessonMenu>
+              <LessonMenu chapter={chapter} getLesson={getLesson}></LessonMenu>
             </Grid>
             <Grid xs={9} item>
               <LessonQuiz
@@ -83,7 +77,15 @@ const LessonLearn = ({ lesson, chapter }) => {
             <Button
               className={classes.button_submit}
               variant="contained"
-              onClick={() => push({ pathname, query: { ...query, menu: 2 } })}
+              onClick={() =>
+                push({
+                  pathname,
+                  query: {
+                    ...query,
+                    menu: query.menu === "pre_test" ? "video" : "homework",
+                  },
+                })
+              }
             >
               ต่อไป <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
             </Button>

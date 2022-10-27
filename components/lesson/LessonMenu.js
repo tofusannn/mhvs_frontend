@@ -9,13 +9,22 @@ import { Button, Divider, Grid, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useRouter } from "next/router";
 import { Fragment } from "react";
+import Lesson from "../../api/api_lesson";
 
-const LessonMenu = ({ chapter }) => {
+const LessonMenu = ({ chapter, getLesson }) => {
   const classes = useStyles();
   const { push, pathname, query } = useRouter();
 
-  function handleClickMenu(menu) {
-    push({ pathname, query: { ...query, menu: menu } });
+  async function handleClickMenu(chapter, name, menu) {
+    const data = await Lesson.postUserLessonState({
+      lesson_id: parseInt(query.lesson),
+      chapter_id: chapter,
+      object_name: name,
+      object_id: menu,
+    });
+    if (data.status) {
+      getLesson("learning", query.lesson, chapter, name);
+    }
   }
 
   return (
@@ -32,20 +41,15 @@ const LessonMenu = ({ chapter }) => {
             sx={
               e.user_action
                 ? { color: "#3CBB8E", cursor: "pointer" }
-                : parseInt(query.chapter) === e.index
+                : parseInt(query.chapter) === e.id
                 ? { color: "#0076FF", cursor: "pointer" }
                 : { color: "#121212", cursor: "pointer" }
             }
-            onClick={() =>
-              push({
-                pathname,
-                query: { ...query, chapter: e.index, menu: "1" },
-              })
-            }
+            onClick={() => handleClickMenu(e.id, "chapter", e.id)}
           >
             {e.chapter_name}
           </Typography>
-          {parseInt(query.chapter) === e.index && (
+          {parseInt(query.chapter) === e.id && (
             <Fragment>
               <Typography my={1} fontSize={14} sx={{ color: "#727272" }}>
                 {e.chapter_pre_description}
@@ -53,16 +57,17 @@ const LessonMenu = ({ chapter }) => {
               <Button
                 className={
                   e.pre_test.user_action
-                    ? query.menu === "1"
+                    ? query.menu === "pre_test"
                       ? classes.button_passed_active
                       : classes.button_passed_inactive
-                    : query.menu === "1"
+                    : query.menu === "pre_test"
                     ? classes.button_sub_active
                     : classes.button_sub_inactive
                 }
-                disabled={e.pre_test.user_action}
                 fullWidth
-                onClick={() => handleClickMenu("1")}
+                onClick={() =>
+                  handleClickMenu(query.chapter, "pre_test", e.pre_test.id)
+                }
               >
                 <Grid container>
                   <Quiz sx={{ marginRight: 1 }}></Quiz> Pre-Quiz
@@ -70,7 +75,7 @@ const LessonMenu = ({ chapter }) => {
                 {e.pre_test.user_action && (
                   <CheckCircle
                     sx={
-                      query.menu === "1"
+                      query.menu === "pre_test"
                         ? { color: "#ffffff" }
                         : { color: "#3CBB8E" }
                     }
@@ -81,15 +86,17 @@ const LessonMenu = ({ chapter }) => {
               <Button
                 className={
                   e.video.user_action
-                    ? query.menu === "2"
+                    ? query.menu === "video"
                       ? classes.button_passed_active
                       : classes.button_passed_inactive
-                    : query.menu === "2"
+                    : query.menu === "video"
                     ? classes.button_sub_active
                     : classes.button_sub_inactive
                 }
                 fullWidth
-                onClick={() => handleClickMenu("2")}
+                onClick={() =>
+                  handleClickMenu(query.chapter, "video", e.video.id)
+                }
               >
                 <Grid container>
                   <PlayCircle sx={{ marginRight: 1 }}></PlayCircle> Video
@@ -97,7 +104,7 @@ const LessonMenu = ({ chapter }) => {
                 {e.video.user_action && (
                   <CheckCircle
                     sx={
-                      query.menu === "2"
+                      query.menu === "video"
                         ? { color: "#ffffff" }
                         : { color: "#3CBB8E" }
                     }
@@ -108,15 +115,17 @@ const LessonMenu = ({ chapter }) => {
               <Button
                 className={
                   e.file.user_action
-                    ? query.menu === "3"
+                    ? query.menu === "file"
                       ? classes.button_passed_active
                       : classes.button_passed_inactive
-                    : query.menu === "3"
+                    : query.menu === "file"
                     ? classes.button_sub_active
                     : classes.button_sub_inactive
                 }
                 fullWidth
-                onClick={() => handleClickMenu("3")}
+                onClick={() =>
+                  handleClickMenu(query.chapter, "file", e.file.id)
+                }
               >
                 <Grid container>
                   <PictureAsPdf sx={{ marginRight: 1 }}></PictureAsPdf> PDF
@@ -124,7 +133,7 @@ const LessonMenu = ({ chapter }) => {
                 {e.file.user_action && (
                   <CheckCircle
                     sx={
-                      query.menu === "3"
+                      query.menu === "file"
                         ? { color: "#ffffff" }
                         : { color: "#3CBB8E" }
                     }
@@ -135,16 +144,17 @@ const LessonMenu = ({ chapter }) => {
               <Button
                 className={
                   e.post_test.user_action
-                    ? query.menu === "4"
+                    ? query.menu === "post_test"
                       ? classes.button_passed_active
                       : classes.button_passed_inactive
-                    : query.menu === "4"
+                    : query.menu === "post_test"
                     ? classes.button_sub_active
                     : classes.button_sub_inactive
                 }
-                disabled={e.post_test.user_action || !e.file.user_action}
                 fullWidth
-                onClick={() => handleClickMenu("4")}
+                onClick={() =>
+                  handleClickMenu(query.chapter, "post_test", e.post_test.id)
+                }
               >
                 <Grid container>
                   <Quiz sx={{ marginRight: 1 }}></Quiz> Quiz
@@ -152,7 +162,7 @@ const LessonMenu = ({ chapter }) => {
                 {e.post_test.user_action && (
                   <CheckCircle
                     sx={
-                      query.menu === "4"
+                      query.menu === "post_test"
                         ? { color: "#ffffff" }
                         : { color: "#3CBB8E" }
                     }
@@ -163,16 +173,17 @@ const LessonMenu = ({ chapter }) => {
               <Button
                 className={
                   e.homework.user_action
-                    ? query.menu === "5"
+                    ? query.menu === "homework"
                       ? classes.button_passed_active
                       : classes.button_passed_inactive
-                    : query.menu === "5"
+                    : query.menu === "homework"
                     ? classes.button_sub_active
                     : classes.button_sub_inactive
                 }
-                disabled={!e.post_test.user_action}
                 fullWidth
-                onClick={() => handleClickMenu("5")}
+                onClick={() =>
+                  handleClickMenu(query.chapter, "homework", e.homework.id)
+                }
               >
                 <Grid container>
                   <Description sx={{ marginRight: 1 }}></Description> Homework
@@ -180,7 +191,7 @@ const LessonMenu = ({ chapter }) => {
                 {e.homework.user_action && (
                   <CheckCircle
                     sx={
-                      query.menu === "5"
+                      query.menu === "homework"
                         ? { color: "#ffffff" }
                         : { color: "#3CBB8E" }
                     }

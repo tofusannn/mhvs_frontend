@@ -13,67 +13,38 @@ const Home = () => {
   const [chapter, setChapter] = useState([]);
 
   useEffect(() => {
-    const data = Cookies.get("token");
-    query.lesson && getLesson(query.lesson);
-    if (data && query.lesson) {
-      if (chapter.length) {
-        if (!query.chapter) {
-          getChapter(query.lesson);
-        }
-      } else {
-        getChapter(query.lesson);
-      }
-    }
+    query.lesson && getDetails(query.lesson);
   }, [query]);
 
-  async function getLesson(id) {
-    const data = await Lesson.getLessonById(id);
-    setLesson(data.result);
+  async function getDetails(lesson) {
+    const les = await Lesson.getLessonById(lesson);
+    setLesson(les.result);
+    const chap = await Lesson.getChapterByLessonId(lesson);
+    setChapter(chap.result);
   }
 
-  async function getChapter(id) {
-    const end = false;
-    const data = await Lesson.getChapterByLessonId(id);
-    setChapter(data.result);
-    data.result.forEach((e) => {
-      if (end) return;
-      if (!e.user_action) {
-        if (!e.pre_test.user_action) {
-          end = true;
-          return push({
-            pathname,
-            query: { ...query, chapter: e.index, menu: 1 },
-          });
-        }
-        if (!e.video.user_action) {
-          end = true;
-          return push({
-            pathname,
-            query: { ...query, chapter: e.index, menu: 2 },
-          });
-        }
-        if (!e.file.user_action) {
-          end = true;
-          return push({
-            pathname,
-            query: { ...query, chapter: e.index, menu: 3 },
-          });
-        }
-        if (!e.post_test.user_action) {
-          end = true;
-          return push({
-            pathname,
-            query: { ...query, chapter: e.index, menu: 4 },
-          });
-        }
-        if (!e.homework.user_action) {
-          end = true;
-          return push({
-            pathname,
-            query: { ...query, chapter: e.index, menu: 5 },
-          });
-        }
-      }
+  async function getLesson(action, lesson, chap, menu) {
+    getDetails(lesson);
+    const q = {};
+    switch (action) {
+      case "preview":
+        q = {
+          action: action,
+          lesson: lesson,
+        };
+        break;
+      case "learning":
+        q = {
+          action: action,
+          lesson: lesson,
+          chapter: chap ? chap : chapter[0].id,
+          menu: menu === "chapter" ? "pre_test" : menu,
+        };
+        break;
+    }
+    push({
+      pathname,
+      query: q,
     });
   }
 
@@ -84,12 +55,18 @@ const Home = () => {
         subPage={query.action != "list" && lesson.lesson_name}
         hideImage={query.action === "learning"}
       ></Banner>
-      {query.action === "list" && <LessonList></LessonList>}
+      {query.action === "list" && (
+        <LessonList getLesson={getLesson}></LessonList>
+      )}
       {query.action === "preview" && (
-        <LessonPreview lesson={lesson}></LessonPreview>
+        <LessonPreview lesson={lesson} getLesson={getLesson}></LessonPreview>
       )}
       {query.action === "learning" && (
-        <LessonLearn lesson={lesson} chapter={chapter}></LessonLearn>
+        <LessonLearn
+          lesson={lesson}
+          chapter={chapter}
+          getLesson={getLesson}
+        ></LessonLearn>
       )}
     </Fragment>
   );

@@ -13,9 +13,10 @@ import {
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useRouter } from "next/router";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import certificate from "../../api/api_certificate";
 import CertificateModal from "./CertificateModal";
+import lessonApi from "../../api/api_lesson";
 
 const header_lesson = ["บทเรียนของคุณ", "สถานะ", "ใบเกียรติบัตร"];
 const header_homework = ["รายการ", "บทเรียน", "สถานะ", ""];
@@ -31,8 +32,19 @@ const body_homework = [
 const Lesson = () => {
   const classes = useStyles();
   const { query } = useRouter();
+  const [lesson, setLesson] = useState([]);
   const [question, setQuestion] = useState();
   const [openModal, setOpenModal] = useState(false);
+
+  useEffect(() => {
+    getLessonList();
+  }, []);
+
+  async function getLessonList() {
+    const data = await lessonApi.getUserLessonList();
+    setLesson(data.result);
+    console.log(data.result);
+  }
 
   async function getQuestion() {
     const data = await certificate.getQuestCertificate();
@@ -83,7 +95,7 @@ const Lesson = () => {
           </TableHead>
           <TableBody>
             {query.type === "lesson"
-              ? body_lesson.map((e, idx) => (
+              ? lesson.map((e, idx) => (
                   <TableRow
                     key={idx}
                     sx={{
@@ -95,33 +107,55 @@ const Lesson = () => {
                     <TableCell
                       sx={{ fontWeight: 300, fontSize: 14, color: "#121212" }}
                     >
-                      {e.title}
+                      {e.lesson_name}
                     </TableCell>
-                    <TableCell
-                      sx={{ fontWeight: 300, fontSize: 14, color: "#121212" }}
-                    >
+                    <TableCell>
                       <Grid container alignItems={"center"}>
-                        {e.certificate ? (
-                          <CheckCircle
-                            sx={{ marginRight: 1, color: "#6ECE5C" }}
-                          ></CheckCircle>
+                        {e.status ? (
+                          <Fragment>
+                            <CheckCircle
+                              sx={{ marginRight: 1, color: "#6ECE5C" }}
+                            ></CheckCircle>
+                            <Typography
+                              sx={{
+                                fontWeight: 300,
+                                fontSize: 14,
+                                color: "#121212",
+                              }}
+                            >
+                              เรียนจบแล้ว
+                            </Typography>
+                          </Fragment>
                         ) : (
-                          ""
+                          <Fragment>
+                            <Typography
+                              sx={{
+                                fontWeight: 300,
+                                fontSize: 14,
+                                color: "#121212",
+                              }}
+                            >
+                              กำลังเรียน
+                            </Typography>
+                          </Fragment>
                         )}
-
-                        {e.status}
                       </Grid>
                     </TableCell>
                     <TableCell
                       sx={{ fontWeight: 300, fontSize: 14, color: "#121212" }}
                     >
-                      {e.certificate ? (
+                      {e.is_certificate ? (
                         <Button className={classes.button_active}>
                           ดาวน์โหลด
                         </Button>
                       ) : (
                         <Button
-                          className={classes.button_inactive}
+                          className={
+                            e.status
+                              ? classes.button_inactive
+                              : classes.button_disabled
+                          }
+                          disabled={!e.status}
                           onClick={() => getQuestion()}
                         >
                           ขอรับใบเกียรติบัตร
