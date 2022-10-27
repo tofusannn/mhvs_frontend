@@ -49,7 +49,7 @@ const Banner = () => {
 
   function changePage() {
     if (token) {
-      push({ pathname: "/lesson", query: { action: "preview" } });
+      push({ pathname: "/lesson", query: { action: "list" } });
     } else {
       push({ pathname: "/auth", query: { action: "register" } });
     }
@@ -185,8 +185,9 @@ const AboutUs = ({ locale }) => {
               width="1080"
               src={youtube}
               title="YouTube video player"
+              frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              
+              allowFullScreen
             ></iframe>
           </CardContent>
         </Card>

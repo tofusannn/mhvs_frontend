@@ -12,6 +12,7 @@ import {
   Typography,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import Lesson from "../../api/api_lesson";
 
@@ -19,9 +20,9 @@ const { Fragment, useEffect, useState } = require("react");
 
 const header_lesson = ["บทเรียน", "รายละเอียด", ""];
 
-const LessonList = () => {
+const LessonList = ({ getLesson }) => {
   const classes = useStyles();
-  const { push, pathname } = useRouter();
+  const { push, pathname, replace } = useRouter();
   const [lessonList, setLessonList] = useState([]);
 
   useEffect(() => {
@@ -31,6 +32,25 @@ const LessonList = () => {
   async function getLessonList() {
     const data = await Lesson.getLessonList();
     setLessonList(data.result);
+  }
+
+  function previewLesson(id) {
+    getLesson("preview", id, "", "");
+  }
+
+  async function registerLesson(id) {
+    const token = Cookies.get("token");
+    if (token) {
+      const data = await Lesson.postUserLesson({ lesson_id: id });
+      if (data.status) {
+        getLesson("learning", id, "", "pre_test");
+      }
+    } else {
+      replace({
+        pathname: "/auth",
+        query: { action: "login", type: "phone" },
+      });
+    }
   }
 
   return (
@@ -104,27 +124,13 @@ const LessonList = () => {
                       <Button
                         sx={{ marginRight: 2 }}
                         className={classes.button_details}
-                        onClick={() =>
-                          push({
-                            pathname,
-                            query: { action: "preview", lesson: e.id },
-                          })
-                        }
+                        onClick={() => previewLesson(e.id)}
                       >
                         ดูรายละเอียด
                       </Button>
                       <Button
                         className={classes.button_active}
-                        onClick={() =>
-                          push({
-                            pathname,
-                            query: {
-                              action: "learning",
-                              lesson: e.id,
-                              chapter: e.chapter_id,
-                            },
-                          })
-                        }
+                        onClick={() => registerLesson(e.id)}
                       >
                         ลงทะเบียนเรียน
                       </Button>
