@@ -44,6 +44,16 @@ const LessonQuiz = ({
 
   useEffect(() => {}, [answerPayload]);
 
+  useEffect(() => {
+    setScore("");
+    setPayloadSnackbar({
+      msg: "",
+      status: false,
+    });
+    setAnswerPayload([]);
+    setValidate(false);
+  }, [query]);
+
   async function startQuizClick(type, id) {
     setQuestPayload({ type: type, id: id });
     const data = await Question.getQuestionList(id);
