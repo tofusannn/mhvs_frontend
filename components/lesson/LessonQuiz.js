@@ -44,6 +44,16 @@ const LessonQuiz = ({
 
   useEffect(() => {}, [answerPayload]);
 
+  useEffect(() => {
+    setScore("");
+    setPayloadSnackbar({
+      msg: "",
+      status: false,
+    });
+    setAnswerPayload([]);
+    setValidate(false);
+  }, [query]);
+
   async function startQuizClick(type, id) {
     setQuestPayload({ type: type, id: id });
     const data = await Question.getQuestionList(id);
@@ -270,7 +280,7 @@ const LessonQuiz = ({
                       setObjectId(chap.pre_test.id);
                     }}
                   >
-                    เริ่มทำแบบทดสอบ{" "}
+                    เริ่มเข้าสู่บทเรียน{" "}
                     <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
                   </Button>
                 )}
@@ -386,7 +396,7 @@ const LessonQuiz = ({
                       setObjectId(chap.post_test.id);
                     }}
                   >
-                    เริ่มทำแบบทดสอบ{" "}
+                    เริ่มเข้าสู่บทเรียน{" "}
                     <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
                   </Button>
                 )}

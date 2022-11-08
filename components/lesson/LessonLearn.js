@@ -16,6 +16,8 @@ const LessonLearn = ({ lesson, chapter, getLesson }) => {
 
   useEffect(() => {
     setStartQuiz(false);
+    setConfirm(false);
+    setButtonNext(false);
   }, [query]);
 
   return (
@@ -62,7 +64,7 @@ const LessonLearn = ({ lesson, chapter, getLesson }) => {
           </Grid>
         </Container>
       </Grid>
-      {startQuiz && (
+      {startQuiz && !buttonNext && (
         <Grid
           mt={10}
           container
@@ -73,31 +75,13 @@ const LessonLearn = ({ lesson, chapter, getLesson }) => {
             minHeight: 90,
           }}
         >
-          {buttonNext ? (
-            <Button
-              className={classes.button_submit}
-              variant="contained"
-              onClick={() =>
-                push({
-                  pathname,
-                  query: {
-                    ...query,
-                    menu: query.menu === "pre_test" ? "video" : "homework",
-                  },
-                })
-              }
-            >
-              ต่อไป <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
-            </Button>
-          ) : (
-            <Button
-              className={classes.button_submit}
-              variant="contained"
-              onClick={() => setConfirm(true)}
-            >
-              ส่งคำตอบ <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
-            </Button>
-          )}
+          <Button
+            className={classes.button_submit}
+            variant="contained"
+            onClick={() => setConfirm(true)}
+          >
+            ส่งคำตอบ <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
+          </Button>
         </Grid>
       )}
     </Fragment>

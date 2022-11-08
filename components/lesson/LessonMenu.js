@@ -105,7 +105,7 @@ const LessonMenu = ({ chapter, getLesson }) => {
                 }
               >
                 <Grid container>
-                  <Quiz sx={{ marginRight: 1 }}></Quiz> Pre-Quiz
+                  <Quiz sx={{ marginRight: 1 }}></Quiz> แบบฝึกหัดก่อนเรียน
                 </Grid>
                 {e.pre_test.user_action && (
                   <CheckCircle
@@ -163,7 +163,7 @@ const LessonMenu = ({ chapter, getLesson }) => {
                 }
               >
                 <Grid container>
-                  <PictureAsPdf sx={{ marginRight: 1 }}></PictureAsPdf> PDF
+                  <PictureAsPdf sx={{ marginRight: 1 }}></PictureAsPdf> เอกสารอ่านเพิ่มเติม
                 </Grid>
                 {e.file.user_action && (
                   <CheckCircle
@@ -192,7 +192,7 @@ const LessonMenu = ({ chapter, getLesson }) => {
                 }
               >
                 <Grid container>
-                  <Quiz sx={{ marginRight: 1 }}></Quiz> Quiz
+                  <Quiz sx={{ marginRight: 1 }}></Quiz> แบบทดสอบหลังเรียน
                 </Grid>
                 {e.post_test.user_action && (
                   <CheckCircle
@@ -221,7 +221,7 @@ const LessonMenu = ({ chapter, getLesson }) => {
                 }
               >
                 <Grid container>
-                  <Description sx={{ marginRight: 1 }}></Description> Homework
+                  <Description sx={{ marginRight: 1 }}></Description> การบ้าน
                 </Grid>
                 {e.homework.user_action && (
                   <CheckCircle

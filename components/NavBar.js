@@ -115,11 +115,11 @@ const NavBar = (props) => {
 
   return (
     <AppBar sx={{ backgroundColor: "#0076FF", height: 90 }} position="static">
-      <Container sx={{ height: "100%" }}>
+      <Container className={classes.containre_main}>
         <Toolbar sx={{ height: "100%" }} disableGutters>
           <Grid container alignSelf={"center"} justifyContent={"space-between"}>
             <Grid item xs={3}>
-              <img src="/icon/logo.svg"></img>
+              <img src="/image/aorsortor_online.png" width={"60%"}></img>
             </Grid>
             <Grid
               item
@@ -248,6 +248,10 @@ const NavBar = (props) => {
 export default NavBar;
 
 const useStyles = makeStyles({
+  containre_main: {
+    height: "100%",
+    paddingLeft: 0,
+  },
   buttonRegister: {
     width: 200,
     color: "#ffffff",

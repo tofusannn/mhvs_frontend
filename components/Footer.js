@@ -16,7 +16,13 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 import en from "../messages/en.json";
 import th from "../messages/th.json";
-import { Facebook, Instagram, Twitter } from "@mui/icons-material";
+import {
+  Facebook,
+  Instagram,
+  Mail,
+  Twitter,
+  YouTube,
+} from "@mui/icons-material";
 
 const Footer = (props) => {
   const { locale } = props;
@@ -30,7 +36,7 @@ const Footer = (props) => {
         <Container>
           <Grid mb={5}>
             <Typography fontWeight={500} fontSize={45} color="white">
-              MHVS Online
+              AORSORTOR Online
             </Typography>
           </Grid>
           <Grid container alignItems={"start"} justifyContent={"space-between"}>
@@ -86,15 +92,24 @@ const Footer = (props) => {
               </Link>
             </Grid>
             <Grid item xs={6} textAlign="end">
-              <IconButton sx={{ color: "#ffffff" }}>
-                <Instagram></Instagram>
-              </IconButton>
-              <IconButton sx={{ color: "#ffffff" }}>
-                <Facebook></Facebook>
-              </IconButton>
-              <IconButton sx={{ color: "#ffffff" }}>
-                <Twitter></Twitter>
-              </IconButton>
+              <Link target="_blank" href="www.facebook.com/aorsortor.online">
+                <IconButton sx={{ color: "#ffffff" }}>
+                  <Facebook></Facebook>
+                </IconButton>
+              </Link>
+              <Link
+                target="_blank"
+                href="https://www.youtube.com/channel/UC1V-Vvkf9hwtRJe5oEd-7DQ"
+              >
+                <IconButton sx={{ color: "#ffffff" }}>
+                  <YouTube></YouTube>
+                </IconButton>
+              </Link>
+              <Link target="_blank" href="aorsortor.onlineth@gmail.com">
+                <IconButton sx={{ color: "#ffffff" }}>
+                  <Mail></Mail>
+                </IconButton>
+              </Link>
             </Grid>
           </Grid>
         </Container>

@@ -56,36 +56,32 @@ const Banner = () => {
   }
 
   return (
-    <Grid
-      className={classes.banner_main}
-      container
-      alignItems={"center"}
-      justifyContent={"center"}
-    >
-      <Grid className={classes.banner_text} item>
-        <Container>
-          <Typography mb={1} fontWeight={500} fontSize={32}>
-            {t("banner-text.banner1")}
-          </Typography>
-          <Typography mb={1} fontWeight={500} fontSize={72}>
-            {t("banner-text.banner2")}
-          </Typography>
-          <Typography mb={1} fontWeight={500} fontSize={48}>
-            {t("banner-text.banner3")}
-          </Typography>
-          <Button
-            className={classes.buttonRegister}
-            variant="contained"
-            onClick={() => changePage()}
-          >
-            {token ? "เริ่มต้นเลย" : t("button-register-text")}
-          </Button>
-        </Container>
-      </Grid>
-      <Grid className={classes.banner_image} item>
-        <img width={1366} src="/image/banner.svg"></img>
-      </Grid>
-      <div className={classes.banner_background}></div>
+    <Grid className={classes.banner_main}>
+      <Container>
+        <Grid container>
+          <Grid xs={6} className={classes.banner_text} item>
+            <Typography mb={1} fontWeight={500} fontSize={32}>
+              {t("banner-text.banner1")}
+            </Typography>
+            <Typography mb={1} fontWeight={500} fontSize={60}>
+              {t("banner-text.banner2")}
+            </Typography>
+            <Typography mb={1} fontWeight={500} fontSize={40}>
+              {t("banner-text.banner3")}
+            </Typography>
+            <Button
+              className={classes.buttonRegister}
+              variant="contained"
+              onClick={() => changePage()}
+            >
+              {token ? "เริ่มต้นเลย" : t("button-register-text")}
+            </Button>
+          </Grid>
+          <Grid className={classes.banner_image} item>
+            <img width={"100%"} src="/image/banner.svg"></img>
+          </Grid>
+        </Grid>
+      </Container>
     </Grid>
   );
 };
@@ -321,27 +317,23 @@ const CountUser = ({ locale }) => {
 
 const useStyles = makeStyles({
   banner_main: {
-    height: "100vh",
-    position: "relative",
-  },
-  banner_background: {
-    width: "100%",
-    height: "90vh",
+    height: 630,
+    marginBottom: 40,
+    paddingTop: 70,
     background:
       "transparent linear-gradient(180deg, #FFFFFF 0%, #F1F8FE 100%) 0% 0% no-repeat padding-box",
-    position: "static",
+    position: "relative",
     zIndex: -2,
   },
   banner_text: {
     position: "absolute",
-    top: 100,
-    left: 70,
+    zIndex: 0,
   },
   banner_image: {
+    top: -90,
+    right: 0,
     position: "absolute",
     zIndex: -1,
-    top: -100,
-    right: 0,
   },
   buttonRegister: {
     marginTop: 20,
