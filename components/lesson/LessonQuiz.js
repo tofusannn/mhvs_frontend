@@ -280,7 +280,7 @@ const LessonQuiz = ({
                       setObjectId(chap.pre_test.id);
                     }}
                   >
-                    เริ่มทำแบบทดสอบ{" "}
+                    เริ่มเข้าสู่บทเรียน{" "}
                     <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
                   </Button>
                 )}
@@ -396,7 +396,7 @@ const LessonQuiz = ({
                       setObjectId(chap.post_test.id);
                     }}
                   >
-                    เริ่มทำแบบทดสอบ{" "}
+                    เริ่มเข้าสู่บทเรียน{" "}
                     <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
                   </Button>
                 )}
