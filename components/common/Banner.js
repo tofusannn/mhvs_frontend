@@ -36,10 +36,10 @@ const Banner = ({ page, subPage, hideImage }) => {
         <Fragment>
           <Grid className={classes.banner_text} item>
             <Container>
-              <Typography mb={1} fontWeight={500} fontSize={72}>
+              <Typography mb={1} fontWeight={500} fontSize={38}>
                 {t("banner-text.banner2")}
               </Typography>
-              <Typography mb={3} fontWeight={500} fontSize={48}>
+              <Typography mb={3} fontWeight={500} fontSize={38}>
                 {t("banner-text.banner3")}
               </Typography>
               <Typography fontWeight={500} fontSize={16}>

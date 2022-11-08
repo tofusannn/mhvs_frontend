@@ -43,7 +43,12 @@ const Home = () => {
               ผู้ใหญ่ใจดี
             </Typography>
           </Grid>
-          <Grid container spacing={2} alignItems={"center"}>
+          <Grid
+            container
+            spacing={2}
+            justifyContent={"center"}
+            alignItems={"center"}
+          >
             {sponsor && loopImage()}
           </Grid>
         </Container>
