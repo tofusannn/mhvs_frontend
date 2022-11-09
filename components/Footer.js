@@ -92,7 +92,7 @@ const Footer = (props) => {
               </Link>
             </Grid>
             <Grid item xs={6} textAlign="end">
-              <Link target="_blank" href="www.facebook.com/aorsortor.online">
+              <Link target="_blank" href="https://www.facebook.com/aorsortor.online">
                 <IconButton sx={{ color: "#ffffff" }}>
                   <Facebook></Facebook>
                 </IconButton>
@@ -105,7 +105,7 @@ const Footer = (props) => {
                   <YouTube></YouTube>
                 </IconButton>
               </Link>
-              <Link target="_blank" href="aorsortor.onlineth@gmail.com">
+              <Link target="_blank" href="mailto: aorsortor.onlineth@gmail.com">
                 <IconButton sx={{ color: "#ffffff" }}>
                   <Mail></Mail>
                 </IconButton>
