@@ -227,19 +227,20 @@ const Sponsor = ({ locale }) => {
         <Container>
           <Grid mb={5} container justifyContent={"center"}>
             <Typography fontWeight={500} fontSize={32}>
-              ผู้สนับสนุนใจดี{" "}
-              <Link
-                component="button"
-                onClick={() => push("/sponsor")}
-                sx={{
-                  color: "#2DA373",
-                  textDecorationColor: "#2DA373",
-                  fontSize: 16,
-                }}
-              >
-                ดูทั้งหมด
-              </Link>
+              ผู้สนับสนุนใจดี
             </Typography>
+            <Link
+              component="button"
+              onClick={() => push("/sponsor")}
+              sx={{
+                marginLeft: 1,
+                color: "#2DA373",
+                textDecorationColor: "#2DA373",
+                fontSize: 32,
+              }}
+            >
+              ดูทั้งหมด
+            </Link>
           </Grid>
           <Grid
             container

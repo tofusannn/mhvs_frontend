@@ -24,12 +24,13 @@ const CardMediaAboutUs = (props) => {
         {/* <Typography mb={3} fontSize={16}>
           {detail}
         </Typography> */}
-        <Button
+        <Link
+          component={"button"}
           sx={{
             color: "#2DA373",
             fontWeight: 500,
             fontSize: 14,
-            textTransform: "none",
+            textDecoration: "none",
           }}
           onClick={() => {
             setOpenModal(true);
@@ -37,7 +38,7 @@ const CardMediaAboutUs = (props) => {
           }}
         >
           ดูเพิ่มเติม
-        </Button>
+        </Link>
       </CardContent>
     </Card>
   );
