@@ -69,7 +69,7 @@ const Banner = () => {
       alignItems={"center"}
       justifyContent={"center"}
     >
-      <Grid className={classes.banner_text} item>
+      {/* <Grid className={classes.banner_text} item>
         <Container>
           <Typography fontWeight={500} fontSize={60}>
             ผู้ใหญ่ใจดี มอบโอกาส
@@ -77,9 +77,9 @@ const Banner = () => {
             สร้างการศึกษาไร้พรมแดน
           </Typography>
         </Container>
-      </Grid>
+      </Grid> */}
       <Grid className={classes.banner_image} item>
-        <img width={850} src="/image/banner_sub.svg"></img>
+        <img width={1310} src="/image/AST_sub banner -01.png"></img>
       </Grid>
       <div className={classes.banner_background}></div>
     </Grid>
@@ -88,7 +88,7 @@ const Banner = () => {
 
 const useStyles = makeStyles({
   banner_main: {
-    height: "55vh",
+    height: "50vh",
     position: "relative",
   },
   banner_background: {

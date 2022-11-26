@@ -34,7 +34,7 @@ const Banner = ({ page, subPage, hideImage }) => {
       </Grid>
       {!hideImage && (
         <Fragment>
-          <Grid className={classes.banner_text} item>
+          {/* <Grid className={classes.banner_text} item>
             <Container>
               <Typography mb={1} fontWeight={500} fontSize={38}>
                 {t("banner-text.banner2")}
@@ -49,9 +49,9 @@ const Banner = ({ page, subPage, hideImage }) => {
                 จากโรคไวรัสโคโรน่า (โควิด-19)
               </Typography>
             </Container>
-          </Grid>
+          </Grid> */}
           <Grid className={classes.banner_image} item>
-            <img width={850} src="/image/banner_sub.svg"></img>
+            <img width={1310} src="/image/AST_sub banner -01.png"></img>
           </Grid>
           <div className={classes.banner_background}></div>
         </Fragment>
@@ -70,8 +70,8 @@ const useStyles = makeStyles({
   banner_background: {
     width: "100%",
     height: "100%",
-    background:
-      "transparent linear-gradient(180deg, #FFFFFF 0%, #F1F8FE 100%) 0% 0% no-repeat padding-box",
+    // background:
+    //   "transparent linear-gradient(180deg, #FFFFFF 0%, #F1F8FE 100%) 0% 0% no-repeat padding-box",
     position: "static",
     zIndex: -2,
   },

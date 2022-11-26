@@ -60,7 +60,7 @@ const Banner = () => {
       <Container>
         <Grid container>
           <Grid xs={6} className={classes.banner_text} item>
-            <Typography mb={1} fontWeight={500} fontSize={32}>
+            {/* <Typography mb={1} fontWeight={500} fontSize={32}>
               {t("banner-text.banner1")}
             </Typography>
             <Typography mb={1} fontWeight={500} fontSize={60}>
@@ -68,7 +68,7 @@ const Banner = () => {
             </Typography>
             <Typography mb={1} fontWeight={500} fontSize={40}>
               {t("banner-text.banner3")}
-            </Typography>
+            </Typography> */}
             <Button
               className={classes.buttonRegister}
               variant="contained"
@@ -78,7 +78,7 @@ const Banner = () => {
             </Button>
           </Grid>
           <Grid className={classes.banner_image} item>
-            <img width={"100%"} src="/image/banner.svg"></img>
+            <img width={"100%"} src="/image/index.png"></img>
           </Grid>
         </Grid>
       </Container>
@@ -319,10 +319,10 @@ const CountUser = ({ locale }) => {
 const useStyles = makeStyles({
   banner_main: {
     height: 630,
-    marginBottom: 40,
+    marginBottom: 120,
     paddingTop: 70,
-    background:
-      "transparent linear-gradient(180deg, #FFFFFF 0%, #F1F8FE 100%) 0% 0% no-repeat padding-box",
+    // background:
+    //   "transparent linear-gradient(180deg, #FFFFFF 0%, #F1F8FE 100%) 0% 0% no-repeat padding-box",
     position: "relative",
     zIndex: -2,
   },
@@ -331,13 +331,13 @@ const useStyles = makeStyles({
     zIndex: 0,
   },
   banner_image: {
-    top: -90,
+    top: 0,
     right: 0,
     position: "absolute",
     zIndex: -1,
   },
   buttonRegister: {
-    marginTop: 20,
+    marginTop: 420,
     width: 200,
     color: "#ffffff",
     borderRadius: 100,
