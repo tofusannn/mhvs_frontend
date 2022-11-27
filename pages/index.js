@@ -57,6 +57,7 @@ const Banner = () => {
 
   return (
     <Grid className={classes.banner_main}>
+      <div className={classes.banner_color}></div>
       <Container>
         <Grid container>
           <Grid xs={6} className={classes.banner_text} item>
@@ -318,17 +319,21 @@ const CountUser = ({ locale }) => {
 
 const useStyles = makeStyles({
   banner_main: {
-    height: 630,
     marginBottom: 40,
-    paddingTop: 70,
+    height: 630,
+    position: "relative",
+  },
+  banner_color: {
+    width: "100%",
+    height: "100%",
     background:
       "transparent linear-gradient(180deg, #FFFFFF 0%, #F1F8FE 100%) 0% 0% no-repeat padding-box",
-    position: "relative",
-    zIndex: -2,
+    zIndex: -1,
+    position: "absolute",
   },
   banner_text: {
+    paddingTop: 70,
     position: "absolute",
-    zIndex: 0,
   },
   banner_image: {
     top: -90,

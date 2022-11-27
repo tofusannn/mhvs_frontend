@@ -300,6 +300,8 @@ const LessonQuiz = ({
               <Typography fontSize={16}>{chap.video.description}</Typography>
               {chap.video.link.map((e, idx) => (
                 <Grid mt={3} key={idx}>
+                  <Typography mb={1} fontWeight={500} fontSize={16}>{e.name}1</Typography>
+                  <Typography mb={3} fontSize={14}>{e.description}2</Typography>
                   <iframe
                     height="576"
                     width="100%"
