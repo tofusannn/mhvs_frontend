@@ -56,7 +56,7 @@ const Home = () => {
           <Grid mt={3} container justifyContent={"space-between"}>
             <Grid item>
               <Typography mb={3} color={"#727272"} fontSize={16}>
-                Aorsortor Online
+                ศูนย์การเรียนรู้ อสต ผ่านระบบออนไลน์
               </Typography>
               <Typography mb={3} display={"flex"} alignItems={"center"}>
                 <Facebook sx={{ marginRight: 1, color: "#0076FF" }}></Facebook>
