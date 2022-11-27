@@ -205,9 +205,25 @@ const Sponsor = ({ locale }) => {
     const data = await sponsorApi.getSponsor();
     setSponsor(data.result);
   }
+  // function loopImage() {
+  //   const rows = [];
+  //   const count = sponsor ? (sponsor.length < 7 ? sponsor.length : 7) : 0;
+  //   for (let i = 0; i < count; i++) {
+  //     sponsor &&
+  //       rows.push(
+  //         <Grid key={i} item xs={2}>
+  //           <Link target="_blank" href={sponsor[i].link_ref}>
+  //             <img width={"70%"} src={`${path}${sponsor[i].file_path}`}></img>
+  //           </Link>
+  //         </Grid>
+  //       );
+  //   }
+  //   return rows;
+  // }
+
   function loopImage() {
     const rows = [];
-    const count = sponsor ? (sponsor.length < 7 ? sponsor.length : 7) : 0;
+    const count = sponsor ? sponsor.length : 0;
     for (let i = 0; i < count; i++) {
       sponsor &&
         rows.push(

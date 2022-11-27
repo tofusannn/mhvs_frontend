@@ -94,8 +94,8 @@ const useStyles = makeStyles({
   banner_background: {
     width: "100%",
     height: "100%",
-    background:
-      "transparent linear-gradient(180deg, #FFFFFF 0%, #F1F8FE 100%) 0% 0% no-repeat padding-box",
+    // background:
+    //   "transparent linear-gradient(180deg, #FFFFFF 0%, #F1F8FE 100%) 0% 0% no-repeat padding-box",
     position: "static",
     zIndex: -2,
   },
