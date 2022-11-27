@@ -458,6 +458,7 @@ const LessonQuiz = ({
         openModalSuccess={openModalSuccess}
         setOpenModalSuccess={setOpenModalSuccess}
         handleClickNext={handleClickNext}
+        setOpenSnackbar={setOpenSnackbar}
         score={score}
       ></ModalSuccess>
       <Snackbar

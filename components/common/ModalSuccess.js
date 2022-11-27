@@ -16,6 +16,7 @@ const ModalSuccess = ({
   type,
   openModalSuccess,
   setOpenModalSuccess,
+  setOpenSnackbar,
   score,
   handleClickNext,
 }) => {
@@ -82,6 +83,7 @@ const ModalSuccess = ({
                 sx={{ marginLeft: 3 }}
                 className={classes.buttonConfirm}
                 onClick={() => {
+                  setOpenSnackbar(false);
                   setOpenModalSuccess(false);
                   handleClickNext();
                 }}

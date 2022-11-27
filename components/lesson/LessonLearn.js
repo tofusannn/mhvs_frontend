@@ -22,12 +22,7 @@ const LessonLearn = ({ lesson, chapter, getLesson }) => {
   }, [query]);
 
   async function handleClick() {
-    const data = await Lesson.postUserLessonState({
-      lesson_id: parseInt(query.lesson),
-      chapter_id: parseInt(query.chapter),
-      object_name: query.name,
-      object_id: parseInt(query.menu),
-    });
+    let chap = 0;
     let name = "";
     let menu = 0;
     const idxChapter = chapter
@@ -37,54 +32,67 @@ const LessonLearn = ({ lesson, chapter, getLesson }) => {
     switch (query.name) {
       case "pre_test":
         if (chapArray.video.display) {
+          chap = query.chapter;
           name = "video";
           menu = chapArray.video.id;
         } else if (chapArray.file.display) {
+          chap = query.chapter;
           name = "file";
           menu = chapArray.file.id;
         } else {
+          chap = query.chapter;
           name = "post_test";
           menu = chapArray.post_test.id;
         }
         break;
       case "video":
         if (chapArray.file.display) {
+          chap = query.chapter;
           name = "file";
           menu = chapArray.file.id;
         } else {
+          chap = query.chapter;
           name = "post_test";
           menu = chapArray.post_test.id;
         }
         break;
       case "file":
+        chap = query.chapter;
         name = "post_test";
         menu = chapArray.post_test.id;
         break;
       case "post_test":
         if (chapArray.homework.display) {
+          chap = query.chapter;
           name = "homework";
           menu = chapArray.homework.id;
         } else {
-          chapter[idxChapter + 1]
-            ? getLesson(
-                "learning",
-                query.lesson,
-                chapter[idxChapter + 1].id,
-                "chapter",
-                chapter[idxChapter + 1].id
-              )
-            : getLesson(
-                "learning",
-                query.lesson,
-                query.chapter,
-                "post_test",
-                chapArray.post_test.id
-              );
+          if (chapter[idxChapter + 1]) {
+            chap = chapter[idxChapter + 1].id;
+            name = "pre_test";
+            menu = chapter[idxChapter + 1].pre_test.id;
+          } else {
+            chap = query.chapter;
+            name = "post_test";
+            menu = chapArray.post_test.id;
+          }
+          const data = await Lesson.postUserLessonState({
+            lesson_id: parseInt(query.lesson),
+            chapter_id: parseInt(query.chapter),
+            object_name: "chapter",
+            object_id: parseInt(query.chapter),
+          });
         }
         break;
     }
+    const data = await Lesson.postUserLessonState({
+      lesson_id: parseInt(query.lesson),
+      chapter_id: parseInt(query.chapter),
+      object_name: query.name,
+      object_id: parseInt(query.menu),
+    });
     if (data.status) {
-      getLesson("learning", query.lesson, query.chapter, name, menu);
+      getLesson("learning", query.lesson, chap, name, menu);
     }
   }
 
