@@ -127,12 +127,13 @@ const LessonLearn = ({ lesson, chapter, getLesson }) => {
                 setStartQuiz={setStartQuiz}
                 confirm={confirm}
                 setButtonNext={setButtonNext}
+                handleClickNext={handleClick}
               ></LessonQuiz>
             </Grid>
           </Grid>
         </Container>
       </Grid>
-      {startQuiz && (
+      {startQuiz && !buttonNext && (
         <Grid
           mt={10}
           container
@@ -143,23 +144,13 @@ const LessonLearn = ({ lesson, chapter, getLesson }) => {
             minHeight: 90,
           }}
         >
-          {!buttonNext ? (
-            <Button
-              className={classes.button_submit}
-              variant="contained"
-              onClick={() => setConfirm(true)}
-            >
-              ส่งคำตอบ <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
-            </Button>
-          ) : (
-            <Button
-              className={classes.button_submit}
-              variant="contained"
-              onClick={() => handleClick()}
-            >
-              บทถัดไป <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
-            </Button>
-          )}
+          <Button
+            className={classes.button_submit}
+            variant="contained"
+            onClick={() => setConfirm(true)}
+          >
+            ส่งคำตอบ <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
+          </Button>
         </Grid>
       )}
       {query.name != "pre_test" && query.name != "post_test" && (

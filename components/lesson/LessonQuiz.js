@@ -15,6 +15,7 @@ import { useRouter } from "next/router";
 import { Fragment, useEffect, useState } from "react";
 import Lesson from "../../api/api_lesson";
 import Question from "../../api/api_question";
+import ModalSuccess from "../common/ModalSuccess";
 const path = process.env.NEXT_PUBLIC_BASE_API;
 
 const LessonQuiz = ({
@@ -23,6 +24,7 @@ const LessonQuiz = ({
   setStartQuiz,
   confirm,
   setButtonNext,
+  handleClickNext,
 }) => {
   const classes = useStyles();
   const { pathname, query, push } = useRouter();
@@ -30,6 +32,7 @@ const LessonQuiz = ({
   const [answerPayload, setAnswerPayload] = useState([]);
   const [validate, setValidate] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [openModalSuccess, setOpenModalSuccess] = useState(false);
   const [payloadSnackbar, setPayloadSnackbar] = useState({
     msg: "",
     status: false,
@@ -216,7 +219,8 @@ const LessonQuiz = ({
         });
         setScore(`${data.result.total_score} / ${data.result.max_score}`);
         setButtonNext(true);
-        window.scrollTo(0, 0);
+        setOpenModalSuccess(true)
+        // window.scrollTo(0, 0);
       }
     }
     setValidate(true);
@@ -245,7 +249,7 @@ const LessonQuiz = ({
               <Typography fontWeight={500} fontSize={28}>
                 {chap.pre_test.name}
               </Typography>
-              {score && (
+              {/* {score && (
                 <Typography
                   ml={3}
                   sx={{
@@ -258,7 +262,7 @@ const LessonQuiz = ({
                 >
                   {score} คะแนน
                 </Typography>
-              )}
+              )} */}
             </Grid>
             <Divider sx={{ marginY: 3 }}></Divider>
             {startQuiz ? (
@@ -334,7 +338,7 @@ const LessonQuiz = ({
               </Typography>
               {chap.file.file.map((e, idx) => (
                 <Grid mt={3} key={idx}>
-                  <Link
+                  {/* <Link
                     href={`${path}${e.file_path}`}
                     target="_blank"
                     sx={{ textDecoration: "none" }}
@@ -353,7 +357,8 @@ const LessonQuiz = ({
                       ></Description>
                       {e.file_name}
                     </Button>
-                  </Link>
+                  </Link> */}
+                  <img width="100%" src={`${path}${e.file_path}`}></img>
                 </Grid>
               ))}
             </Fragment>
@@ -367,7 +372,7 @@ const LessonQuiz = ({
               <Typography fontWeight={500} fontSize={28}>
                 {chap.post_test.name}
               </Typography>
-              {score && (
+              {/* {score && (
                 <Typography
                   ml={3}
                   sx={{
@@ -380,7 +385,7 @@ const LessonQuiz = ({
                 >
                   {score} คะแนน
                 </Typography>
-              )}
+              )} */}
             </Grid>
             <Divider sx={{ marginY: 3 }}></Divider>
             {startQuiz ? (
@@ -449,6 +454,12 @@ const LessonQuiz = ({
   return (
     <Fragment>
       {chapter.length ? getDetails(query.name) : ""}
+      <ModalSuccess
+        openModalSuccess={openModalSuccess}
+        setOpenModalSuccess={setOpenModalSuccess}
+        handleClickNext={handleClickNext}
+        score={score}
+      ></ModalSuccess>
       <Snackbar
         open={openSnackbar}
         autoHideDuration={3000}

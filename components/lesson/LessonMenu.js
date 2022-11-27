@@ -50,7 +50,7 @@ const LessonMenu = ({ chapter, getLesson }) => {
         ความคืบหน้า
       </Typography>
       <Divider sx={{ marginY: 3 }}></Divider>
-      {chapter.map((e, idx) => (
+      {chapter && chapter.map((e, idx) => (
         <Grid key={idx}>
           <Typography
             fontWeight={500}

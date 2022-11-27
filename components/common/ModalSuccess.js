@@ -12,9 +12,17 @@ import { makeStyles } from "@mui/styles";
 import { useRouter } from "next/router";
 import { Fragment } from "react";
 
-const ModalSuccess = ({ type, openModalSuccess, setOpenModalSuccess }) => {
+const ModalSuccess = ({
+  type,
+  openModalSuccess,
+  setOpenModalSuccess,
+  score,
+  handleClickNext,
+}) => {
   const classes = useStyles();
   const { query, push, pathname } = useRouter();
+
+  function handleClick() {}
 
   return (
     <Dialog
@@ -43,38 +51,40 @@ const ModalSuccess = ({ type, openModalSuccess, setOpenModalSuccess }) => {
                   ยินดีด้วย คุณสอบผ่านแล้ว
                 </Typography>
                 <Typography fontWeight={500} fontSize={24}>
-                  คุณได้คะแนน <span style={{ color: "#3CBB8E" }}>90%</span>
+                  คุณได้คะแนน <span style={{ color: "#3CBB8E" }}>{score}</span>
                 </Typography>
               </Fragment>
             )}
           </Grid>
           <Grid container justifyContent={"center"}>
-            <Button
-              className={
-                type === "homework"
-                  ? classes.buttonConfirm
-                  : classes.buttonConfirm2
-              }
-              onClick={() => {
-                setOpenModalSuccess(false);
-                push({
-                  pathname,
-                  query: {
-                    action: "lesson",
-                    type: "homework",
-                  },
-                });
-              }}
-            >
-              <Coffee sx={{ marginRight: 1 }}></Coffee> พักดื่มน้ำ
-            </Button>
             {type === "homework" ? (
-              ""
+              <Button
+                className={
+                  type === "homework"
+                    ? classes.buttonConfirm
+                    : classes.buttonConfirm2
+                }
+                onClick={() => {
+                  setOpenModalSuccess(false);
+                  push({
+                    pathname,
+                    query: {
+                      action: "lesson",
+                      type: "homework",
+                    },
+                  });
+                }}
+              >
+                <Coffee sx={{ marginRight: 1 }}></Coffee> พักดื่มน้ำ
+              </Button>
             ) : (
               <Button
                 sx={{ marginLeft: 3 }}
                 className={classes.buttonConfirm}
-                onClick={() => setOpenModalSuccess(false)}
+                onClick={() => {
+                  setOpenModalSuccess(false);
+                  handleClickNext();
+                }}
               >
                 บทต่อไป <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
               </Button>
