@@ -56,32 +56,17 @@ const Banner = () => {
   }
 
   return (
-    <Grid className={classes.banner_main}>
-      <Container>
-        <Grid container>
-          <Grid xs={6} className={classes.banner_text} item>
-            {/* <Typography mb={1} fontWeight={500} fontSize={32}>
-              {t("banner-text.banner1")}
-            </Typography>
-            <Typography mb={1} fontWeight={500} fontSize={60}>
-              {t("banner-text.banner2")}
-            </Typography>
-            <Typography mb={1} fontWeight={500} fontSize={40}>
-              {t("banner-text.banner3")}
-            </Typography> */}
-            <Button
-              className={classes.buttonRegister}
-              variant="contained"
-              onClick={() => changePage()}
-            >
-              {token ? "เริ่มต้นเลย" : t("button-register-text")}
-            </Button>
-          </Grid>
-          <Grid className={classes.banner_image} item>
-            <img width={"100%"} src="/image/index.png"></img>
-          </Grid>
-        </Grid>
-      </Container>
+    // <Grid className={classes.banner_main}>
+    //   <Container>
+    //     <Grid container>
+    //       <Grid className={classes.banner_image} item>
+    //         <img width={"100%"} src="/image/index.png"></img>
+    //       </Grid>
+    //     </Grid>
+    //   </Container>
+    // </Grid>
+    <Grid>
+      <img width="100%" src="/image/index.png"></img>
     </Grid>
   );
 };
@@ -140,7 +125,7 @@ const AboutUs = ({ locale }) => {
   };
 
   return (
-    <Container sx={{ marginBottom: 4 }}>
+    <Container sx={{ marginTop: 4, marginBottom: 4 }}>
       <Grid container justifyContent={"space-between"}>
         <Grid item xs={3}>
           <Typography mb={1} sx={{ color: "#2DA373" }} fontSize={24}>
@@ -333,41 +318,41 @@ const CountUser = ({ locale }) => {
 };
 
 const useStyles = makeStyles({
-  banner_main: {
-    height: 630,
-    marginBottom: 120,
-    paddingTop: 70,
-    // background:
-    //   "transparent linear-gradient(180deg, #FFFFFF 0%, #F1F8FE 100%) 0% 0% no-repeat padding-box",
-    position: "relative",
-    zIndex: -2,
-  },
-  banner_text: {
-    position: "absolute",
-    zIndex: 0,
-  },
-  banner_image: {
-    top: 0,
-    right: 0,
-    position: "absolute",
-    zIndex: -1,
-  },
-  buttonRegister: {
-    marginTop: 420,
-    width: 200,
-    color: "#ffffff",
-    borderRadius: 100,
-    borderColor: "#ffffff",
-    textTransform: "none",
-    fontWeight: 500,
-    fontSize: 18,
-    background:
-      "transparent linear-gradient(90deg, #3CBB8E 0%, #2DA373 100%) 0% 0% no-repeat padding-box",
-    boxShadow: "0px 5px 10px #3CBB8E7A",
-    "&:hover": {
-      borderColor: "#ffffff",
-    },
-  },
+  // banner_main: {
+  //   height: 630,
+  //   marginBottom: 120,
+  //   paddingTop: 70,
+  //   // background:
+  //   //   "transparent linear-gradient(180deg, #FFFFFF 0%, #F1F8FE 100%) 0% 0% no-repeat padding-box",
+  //   position: "relative",
+  //   zIndex: -2,
+  // },
+  // banner_text: {
+  //   position: "absolute",
+  //   zIndex: 0,
+  // },
+  // banner_image: {
+  //   top: 0,
+  //   right: 0,
+  //   position: "absolute",
+  //   zIndex: -1,
+  // },
+  // buttonRegister: {
+  //   marginTop: 420,
+  //   width: 200,
+  //   color: "#ffffff",
+  //   borderRadius: 100,
+  //   borderColor: "#ffffff",
+  //   textTransform: "none",
+  //   fontWeight: 500,
+  //   fontSize: 18,
+  //   background:
+  //     "transparent linear-gradient(90deg, #3CBB8E 0%, #2DA373 100%) 0% 0% no-repeat padding-box",
+  //   boxShadow: "0px 5px 10px #3CBB8E7A",
+  //   "&:hover": {
+  //     borderColor: "#ffffff",
+  //   },
+  // },
   sponsor_main: {
     paddingTop: 50,
     paddingBottom: 50,

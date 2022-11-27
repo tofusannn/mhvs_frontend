@@ -63,25 +63,28 @@ const Banner = () => {
   const classes = useStyles();
   const t = useTranslations();
   return (
-    <Grid
-      className={classes.banner_main}
-      container
-      alignItems={"center"}
-      justifyContent={"center"}
-    >
-      {/* <Grid className={classes.banner_text} item>
-        <Container>
-          <Typography fontWeight={500} fontSize={60}>
-            ผู้ใหญ่ใจดี มอบโอกาส
-            <br />
-            สร้างการศึกษาไร้พรมแดน
-          </Typography>
-        </Container>
-      </Grid> */}
-      <Grid className={classes.banner_image} item>
-        <img width={1310} src="/image/AST_sub banner -01.png"></img>
-      </Grid>
-      <div className={classes.banner_background}></div>
+    // <Grid
+    //   className={classes.banner_main}
+    //   container
+    //   alignItems={"center"}
+    //   justifyContent={"center"}
+    // >
+    //   {/* <Grid className={classes.banner_text} item>
+    //     <Container>
+    //       <Typography fontWeight={500} fontSize={60}>
+    //         ผู้ใหญ่ใจดี มอบโอกาส
+    //         <br />
+    //         สร้างการศึกษาไร้พรมแดน
+    //       </Typography>
+    //     </Container>
+    //   </Grid> */}
+    //   <Grid className={classes.banner_image} item>
+    //     <img width={1310} src="/image/AST_sub banner -01.png"></img>
+    //   </Grid>
+    //   <div className={classes.banner_background}></div>
+    // </Grid>
+    <Grid>
+      <img width="100%" src="/image/AST_sub banner -01.png"></img>
     </Grid>
   );
 };

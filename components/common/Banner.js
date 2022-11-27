@@ -50,10 +50,11 @@ const Banner = ({ page, subPage, hideImage }) => {
               </Typography>
             </Container>
           </Grid> */}
-          <Grid className={classes.banner_image} item>
-            <img width={1310} src="/image/AST_sub banner -01.png"></img>
+          {/* <Grid className={classes.banner_image} item>
+            <img width="100%" src="/image/AST_sub banner -01.png"></img>
           </Grid>
-          <div className={classes.banner_background}></div>
+          <div className={classes.banner_background}></div> */}
+          <img width="100%" src="/image/AST_sub banner -01.png"></img>
         </Fragment>
       )}
     </Grid>
