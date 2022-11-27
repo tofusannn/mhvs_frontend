@@ -44,37 +44,40 @@ const Banner = () => {
   const classes = useStyles();
   const t = useTranslations();
   return (
-    <Grid
-      className={classes.banner_main}
-      container
-      alignItems={"center"}
-      justifyContent={"center"}
-    >
-      <Grid className={classes.banner_text} item>
-        <Container>
-          <Typography fontWeight={500} fontSize={60}>
-            aorsortor.online
-          </Typography>
-        </Container>
-      </Grid>
-      <Grid className={classes.banner_image} item>
-        <img width={850} src="/image/banner_sub.svg"></img>
-      </Grid>
-      <div className={classes.banner_background}></div>
+    // <Grid
+    //   className={classes.banner_main}
+    //   container
+    //   alignItems={"center"}
+    //   justifyContent={"center"}
+    // >
+    //   {/* <Grid className={classes.banner_text} item>
+    //     <Container>
+    //       <Typography fontWeight={500} fontSize={60}>
+    //         aorsortor.online
+    //       </Typography>
+    //     </Container>
+    //   </Grid> */}
+    //   <Grid className={classes.banner_image} item>
+    //     <img width={1310} src="/image/AST_About Us.png"></img>
+    //   </Grid>
+    //   <div className={classes.banner_background}></div>
+    // </Grid>
+    <Grid>
+      <img width="100%" src="/image/AST_About Us.png"></img>
     </Grid>
   );
 };
 
 const useStyles = makeStyles({
   banner_main: {
-    height: "55vh",
+    height: "50vh",
     position: "relative",
   },
   banner_background: {
     width: "100%",
     height: "100%",
-    background:
-      "transparent linear-gradient(180deg, #FFFFFF 0%, #F1F8FE 100%) 0% 0% no-repeat padding-box",
+    // background:
+    //   "transparent linear-gradient(180deg, #FFFFFF 0%, #F1F8FE 100%) 0% 0% no-repeat padding-box",
     position: "static",
     zIndex: -2,
   },

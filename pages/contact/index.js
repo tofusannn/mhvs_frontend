@@ -56,34 +56,34 @@ const Home = () => {
           <Grid mt={3} container justifyContent={"space-between"}>
             <Grid item>
               <Typography mb={3} color={"#727272"} fontSize={16}>
-                มิตรไทย โดย เครือข่ายองค์กรด้านประชากรข้ามชาติ
+                ศูนย์การเรียนรู้ อสต ผ่านระบบออนไลน์
               </Typography>
               <Typography mb={3} display={"flex"} alignItems={"center"}>
                 <Facebook sx={{ marginRight: 1, color: "#0076FF" }}></Facebook>
                 <Link
                   target="_blank"
-                  href="https://www.facebook.com/mwgthailand"
+                  href="https://www.facebook.com/aorsortor.online"
                 >
-                  Migrant Working Group
+                  Facebook Fanpage
                 </Link>
               </Typography>
               <Typography mb={3} display={"flex"} alignItems={"center"}>
                 <Message sx={{ marginRight: 1, color: "#0076FF" }}></Message>
                 <Link
                   target="_blank"
-                  href="https://www.messenger.com/login.php?next=https%3A%2F%2Fwww.messenger.com%2Ft%2Fmwgthailand"
+                  href="https://m.me/aorsortor.online"
                 >
-                  MWG Thailand
+                  Facebook Messenger
                 </Link>
               </Typography>
               <Typography mb={3} display={"flex"} alignItems={"center"}>
                 <Language sx={{ marginRight: 1, color: "#0076FF" }}></Language>
-                <Link target="_blank" href="https://mitrthai.com/employees/">
-                  MitrThai.com
+                <Link target="_blank" href="https://www.youtube.com/channel/UC1V-Vvkf9hwtRJe5oEd-7DQ">
+                  Youtube Channel
                 </Link>
               </Typography>
               <iframe
-                src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fmwgthailand&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
+                src="https://www.facebook.com/plugins/page.php?href=https://www.facebook.com/aorsortor.online&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
                 width="340"
                 height="130"
                 scrolling="no"

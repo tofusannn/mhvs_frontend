@@ -79,7 +79,7 @@ const Footer = (props) => {
           <Grid container alignItems="center">
             <Grid item xs={6}>
               <Typography mb={1} fontWeight={500} fontSize={16} color="white">
-                ©2021 MHVS Online, All Rights Reserved.
+                ©2022 Aorsortor Online, All Rights Reserved.
               </Typography>
               <Link
                 sx={{ color: "#ffffff", fontSize: 16, marginRight: 3 }}
