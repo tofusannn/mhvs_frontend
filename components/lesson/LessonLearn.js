@@ -2,6 +2,7 @@ import { Coffee, NavigateNext } from "@mui/icons-material";
 import { Button, Container, Grid, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useRouter } from "next/router";
+import Lesson from "../../api/api_lesson";
 import LessonMenu from "./LessonMenu";
 import LessonQuiz from "./LessonQuiz";
 
@@ -19,6 +20,73 @@ const LessonLearn = ({ lesson, chapter, getLesson }) => {
     setConfirm(false);
     setButtonNext(false);
   }, [query]);
+
+  async function handleClick() {
+    const data = await Lesson.postUserLessonState({
+      lesson_id: parseInt(query.lesson),
+      chapter_id: parseInt(query.chapter),
+      object_name: query.name,
+      object_id: parseInt(query.menu),
+    });
+    let name = "";
+    let menu = 0;
+    const idxChapter = chapter
+      .map((e) => e.id)
+      .indexOf(parseInt(query.chapter));
+    const chapArray = chapter[idxChapter];
+    switch (query.name) {
+      case "pre_test":
+        if (chapArray.video.display) {
+          name = "video";
+          menu = chapArray.video.id;
+        } else if (chapArray.file.display) {
+          name = "file";
+          menu = chapArray.file.id;
+        } else {
+          name = "post_test";
+          menu = chapArray.post_test.id;
+        }
+        break;
+      case "video":
+        if (chapArray.file.display) {
+          name = "file";
+          menu = chapArray.file.id;
+        } else {
+          name = "post_test";
+          menu = chapArray.post_test.id;
+        }
+        break;
+      case "file":
+        name = "post_test";
+        menu = chapArray.post_test.id;
+        break;
+      case "post_test":
+        if (chapArray.homework.display) {
+          name = "homework";
+          menu = chapArray.homework.id;
+        } else {
+          chapter[idxChapter + 1]
+            ? getLesson(
+                "learning",
+                query.lesson,
+                chapter[idxChapter + 1].id,
+                "chapter",
+                chapter[idxChapter + 1].id
+              )
+            : getLesson(
+                "learning",
+                query.lesson,
+                query.chapter,
+                "post_test",
+                chapArray.post_test.id
+              );
+        }
+        break;
+    }
+    if (data.status) {
+      getLesson("learning", query.lesson, query.chapter, name, menu);
+    }
+  }
 
   return (
     <Fragment>
@@ -64,7 +132,37 @@ const LessonLearn = ({ lesson, chapter, getLesson }) => {
           </Grid>
         </Container>
       </Grid>
-      {startQuiz && !buttonNext && (
+      {startQuiz && (
+        <Grid
+          mt={10}
+          container
+          justifyContent={"center"}
+          alignItems={"center"}
+          sx={{
+            background: "#F1F8FE 0% 0% no-repeat padding-box",
+            minHeight: 90,
+          }}
+        >
+          {!buttonNext ? (
+            <Button
+              className={classes.button_submit}
+              variant="contained"
+              onClick={() => setConfirm(true)}
+            >
+              ส่งคำตอบ <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
+            </Button>
+          ) : (
+            <Button
+              className={classes.button_submit}
+              variant="contained"
+              onClick={() => handleClick()}
+            >
+              บทถัดไป <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
+            </Button>
+          )}
+        </Grid>
+      )}
+      {query.name != "pre_test" && query.name != "post_test" && (
         <Grid
           mt={10}
           container
@@ -78,9 +176,9 @@ const LessonLearn = ({ lesson, chapter, getLesson }) => {
           <Button
             className={classes.button_submit}
             variant="contained"
-            onClick={() => setConfirm(true)}
+            onClick={() => handleClick()}
           >
-            ส่งคำตอบ <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
+            บทถัดไป <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
           </Button>
         </Grid>
       )}

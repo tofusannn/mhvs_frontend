@@ -24,7 +24,7 @@ const Home = () => {
     return chap.result;
   }
 
-  async function getLesson(action, lesson, chap, menu) {
+  async function getLesson(action, lesson, chap, name, menu) {
     const data = await getDetails(lesson);
     const q = {};
     switch (action) {
@@ -39,7 +39,8 @@ const Home = () => {
           action: action,
           lesson: lesson,
           chapter: chap ? chap : data[0].id,
-          menu: menu === "chapter" ? "pre_test" : menu,
+          name: name === "chapter" ? "pre_test" : name,
+          menu: menu
         };
         break;
     }

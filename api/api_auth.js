@@ -13,7 +13,7 @@ const auth = {
       path: "/logout",
       headers: { token: params ? params : token },
     });
-    data.status && Cookies.set("token", "");
+    Cookies.set("token", "");
     return { msg: data.msg, status: data.status };
   },
   async register(params) {

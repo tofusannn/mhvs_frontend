@@ -320,7 +320,7 @@ const Lesson = ({
       ) : (
         <Fragment>
           <Typography fontWeight={500} fontSize={28}>
-            บทเรียนของคุณ
+            {query.type === "lesson" ? "บทเรียนของคุณ" : "การบ้านของคุณ"}
           </Typography>
           <TableContainer
             component={Paper}

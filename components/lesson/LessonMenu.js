@@ -16,15 +16,7 @@ const LessonMenu = ({ chapter, getLesson }) => {
   const { query } = useRouter();
 
   async function handleClickMenu(chap, name, menu) {
-    if (name === "pre_test") {
-      return getLesson("learning", query.lesson, chap, name);
-    }
-    if (name === "post_test") {
-      return getLesson("learning", query.lesson, chap, name);
-    }
-    if (name === "homework") {
-      return getLesson("learning", query.lesson, chap, name);
-    }
+    getLesson("learning", query.lesson, chap, name, menu);
     if (name === "chapter") {
       let pass = 0;
       chapter.forEach(async (e) => {
@@ -33,8 +25,8 @@ const LessonMenu = ({ chapter, getLesson }) => {
           e.video.user_action ? (pass += 1) : pass;
           e.file.user_action ? (pass += 1) : pass;
           e.post_test.user_action ? (pass += 1) : pass;
-          e.homework.user_action ? (pass += 1) : pass;
-          if (pass === 5) {
+          // e.homework.user_action ? (pass += 1) : pass;
+          if (pass === 4) {
             const data = await Lesson.postUserLessonState({
               lesson_id: parseInt(query.lesson),
               chapter_id: chap,
@@ -42,23 +34,13 @@ const LessonMenu = ({ chapter, getLesson }) => {
               object_id: menu,
             });
             if (data.status) {
-              getLesson("learning", query.lesson, chap, name);
+              getLesson("learning", query.lesson, chap, name, menu);
             }
           } else {
-            getLesson("learning", query.lesson, chap, name);
+            getLesson("learning", query.lesson, chap, name, menu);
           }
         }
       });
-      return;
-    }
-    const data = await Lesson.postUserLessonState({
-      lesson_id: parseInt(query.lesson),
-      chapter_id: chap,
-      object_name: name,
-      object_id: menu,
-    });
-    if (data.status) {
-      getLesson("learning", query.lesson, chap, name);
     }
   }
 
@@ -93,10 +75,10 @@ const LessonMenu = ({ chapter, getLesson }) => {
                 <Button
                   className={
                     e.pre_test.user_action
-                      ? query.menu === "pre_test"
+                      ? query.name === "pre_test"
                         ? classes.button_passed_active
                         : classes.button_passed_inactive
-                      : query.menu === "pre_test"
+                      : query.name === "pre_test"
                       ? classes.button_sub_active
                       : classes.button_sub_inactive
                   }
@@ -111,7 +93,7 @@ const LessonMenu = ({ chapter, getLesson }) => {
                   {e.pre_test.user_action && (
                     <CheckCircle
                       sx={
-                        query.menu === "pre_test"
+                        query.name === "pre_test"
                           ? { color: "#ffffff" }
                           : { color: "#3CBB8E" }
                       }
@@ -126,13 +108,14 @@ const LessonMenu = ({ chapter, getLesson }) => {
                 <Button
                   className={
                     e.video.user_action
-                      ? query.menu === "video"
+                      ? query.name === "video"
                         ? classes.button_passed_active
                         : classes.button_passed_inactive
-                      : query.menu === "video"
+                      : query.name === "video"
                       ? classes.button_sub_active
                       : classes.button_sub_inactive
                   }
+                  disabled={!e.pre_test.user_action}
                   fullWidth
                   onClick={() =>
                     handleClickMenu(query.chapter, "video", e.video.id)
@@ -144,7 +127,7 @@ const LessonMenu = ({ chapter, getLesson }) => {
                   {e.video.user_action && (
                     <CheckCircle
                       sx={
-                        query.menu === "video"
+                        query.name === "video"
                           ? { color: "#ffffff" }
                           : { color: "#3CBB8E" }
                       }
@@ -159,13 +142,14 @@ const LessonMenu = ({ chapter, getLesson }) => {
                 <Button
                   className={
                     e.file.user_action
-                      ? query.menu === "file"
+                      ? query.name === "file"
                         ? classes.button_passed_active
                         : classes.button_passed_inactive
-                      : query.menu === "file"
+                      : query.name === "file"
                       ? classes.button_sub_active
                       : classes.button_sub_inactive
                   }
+                  disabled={!e.video.user_action}
                   fullWidth
                   onClick={() =>
                     handleClickMenu(query.chapter, "file", e.file.id)
@@ -178,7 +162,7 @@ const LessonMenu = ({ chapter, getLesson }) => {
                   {e.file.user_action && (
                     <CheckCircle
                       sx={
-                        query.menu === "file"
+                        query.name === "file"
                           ? { color: "#ffffff" }
                           : { color: "#3CBB8E" }
                       }
@@ -193,13 +177,14 @@ const LessonMenu = ({ chapter, getLesson }) => {
                 <Button
                   className={
                     e.post_test.user_action
-                      ? query.menu === "post_test"
+                      ? query.name === "post_test"
                         ? classes.button_passed_active
                         : classes.button_passed_inactive
-                      : query.menu === "post_test"
+                      : query.name === "post_test"
                       ? classes.button_sub_active
                       : classes.button_sub_inactive
                   }
+                  disabled={!e.file.user_action}
                   fullWidth
                   onClick={() =>
                     handleClickMenu(query.chapter, "post_test", e.post_test.id)
@@ -211,7 +196,7 @@ const LessonMenu = ({ chapter, getLesson }) => {
                   {e.post_test.user_action && (
                     <CheckCircle
                       sx={
-                        query.menu === "post_test"
+                        query.name === "post_test"
                           ? { color: "#ffffff" }
                           : { color: "#3CBB8E" }
                       }
@@ -226,13 +211,14 @@ const LessonMenu = ({ chapter, getLesson }) => {
                 <Button
                   className={
                     e.homework.user_action
-                      ? query.menu === "homework"
+                      ? query.name === "homework"
                         ? classes.button_passed_active
                         : classes.button_passed_inactive
-                      : query.menu === "homework"
+                      : query.name === "homework"
                       ? classes.button_sub_active
                       : classes.button_sub_inactive
                   }
+                  disabled={!e.post_test.user_action}
                   fullWidth
                   onClick={() =>
                     handleClickMenu(query.chapter, "homework", e.homework.id)
@@ -244,7 +230,7 @@ const LessonMenu = ({ chapter, getLesson }) => {
                   {e.homework.user_action && (
                     <CheckCircle
                       sx={
-                        query.menu === "homework"
+                        query.name === "homework"
                           ? { color: "#ffffff" }
                           : { color: "#3CBB8E" }
                       }

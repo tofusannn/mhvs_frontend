@@ -211,7 +211,7 @@ const LessonQuiz = ({
         await Lesson.postUserLessonState({
           lesson_id: parseInt(query.lesson),
           chapter_id: parseInt(query.chapter),
-          object_name: query.menu,
+          object_name: query.name,
           object_id: objectId,
         });
         setScore(`${data.result.total_score} / ${data.result.max_score}`);
@@ -229,7 +229,7 @@ const LessonQuiz = ({
     setOpenSnackbar(false);
   }
 
-  function getDetails(menu) {
+  function getDetails(name) {
     const chap = {};
     chapter.forEach((e) => {
       const b = parseInt(query.chapter);
@@ -237,7 +237,7 @@ const LessonQuiz = ({
         chap = e;
       }
     });
-    switch (menu) {
+    switch (name) {
       case "pre_test":
         return (
           <Fragment>
@@ -300,8 +300,12 @@ const LessonQuiz = ({
               <Typography fontSize={16}>{chap.video.description}</Typography>
               {chap.video.link.map((e, idx) => (
                 <Grid mt={3} key={idx}>
-                  <Typography mb={1} fontWeight={500} fontSize={16}>{e.name}1</Typography>
-                  <Typography mb={3} fontSize={14}>{e.description}2</Typography>
+                  <Typography mb={1} fontWeight={500} fontSize={16}>
+                    {e.name}
+                  </Typography>
+                  <Typography mb={3} fontSize={14}>
+                    {e.description}
+                  </Typography>
                   <iframe
                     height="576"
                     width="100%"
@@ -444,7 +448,7 @@ const LessonQuiz = ({
 
   return (
     <Fragment>
-      {chapter.length ? getDetails(query.menu) : ""}
+      {chapter.length ? getDetails(query.name) : ""}
       <Snackbar
         open={openSnackbar}
         autoHideDuration={3000}
