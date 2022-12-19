@@ -21,7 +21,7 @@ import {
   Typography,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import { Fragment, useEffect, useState } from "react";
 import certificate from "../../api/api_certificate";
 import CertificateModal from "./CertificateModal";
@@ -29,7 +29,6 @@ import lessonApi from "../../api/api_lesson";
 import Homework from "../../api/api_homework";
 import upload from "../../api/api_upload";
 const path = process.env.NEXT_PUBLIC_BASE_API;
-
 const header_lesson = ["บทเรียนของคุณ", "สถานะ", "ใบเกียรติบัตร"];
 const header_homework = ["รายการ", "บทเรียน", "สถานะ", ""];
 
@@ -160,11 +159,9 @@ const Lesson = ({
 
   async function uploadFile({ target }) {
     const files = [];
-    const fileList = [];
     const data = await upload.upload(target.files[0]);
     filePayload.forEach((e) => {
       files.push(e);
-      fileList.push(e);
     });
     setOpenSnackbar(true);
     setPayloadSnackbar(data);
@@ -176,10 +173,8 @@ const Lesson = ({
 
   function deleteFile(idx) {
     const files = [];
-    const fileList = [];
     filePayload.forEach((e) => {
       files.push(e);
-      fileList.push(e);
     });
     files.splice(idx, 1);
     fileList.splice(idx, 1);
@@ -187,7 +182,7 @@ const Lesson = ({
     setFilePayload(files);
   }
 
- async function handleConfirm() {
+  async function handleConfirm() {
     const payload = {
       lesson_id: query.lesson,
       chapter_id: query.chapter,
@@ -201,6 +196,20 @@ const Lesson = ({
     if (data.status) {
       setOpenModalSuccess(true);
     }
+  }
+
+  async function pushLearning(lesson) {
+    const data = await lessonApi.getChapterByLessonId(lesson);
+    push({
+      pathname: "/lesson",
+      query: {
+        action: "learning",
+        lesson: lesson,
+        chapter: data.result[0].id,
+        name: "pre_test",
+        menu: "",
+      },
+    });
   }
 
   return (
@@ -334,15 +343,23 @@ const Lesson = ({
               <TableHead sx={{ background: "#1276FF" }}>
                 <TableRow>
                   {query.type === "lesson"
-                    ? header_lesson.map((e) => (
+                    ? header_lesson.map((e, idx) => (
                         <TableCell
                           key={e}
-                          sx={{
-                            width: "33%",
-                            fontWeight: 500,
-                            fontSize: 20,
-                            color: "#ffffff",
-                          }}
+                          sx={
+                            idx === 2
+                              ? {
+                                  textAlign: "center",
+                                  fontWeight: 500,
+                                  fontSize: 20,
+                                  color: "#ffffff",
+                                }
+                              : {
+                                  fontWeight: 500,
+                                  fontSize: 20,
+                                  color: "#ffffff",
+                                }
+                          }
                         >
                           {e}
                         </TableCell>
@@ -416,26 +433,36 @@ const Lesson = ({
                         </TableCell>
                         <TableCell
                           sx={{
+                            textAlign: "center",
                             fontWeight: 300,
                             fontSize: 14,
                             color: "#121212",
                           }}
                         >
-                          {e.is_certificate ? (
-                            <Button className={classes.button_active}>
-                              ดาวน์โหลด
-                            </Button>
+                          {e.status ? (
+                            e.is_certificate ? (
+                              <Button className={classes.button_active}>
+                                ดาวน์โหลด
+                              </Button>
+                            ) : (
+                              <Button
+                                className={
+                                  e.status
+                                    ? classes.button_inactive
+                                    : classes.button_disabled
+                                }
+                                disabled={!e.status}
+                                onClick={() => getQuestion()}
+                              >
+                                ขอรับใบเกียรติบัตร
+                              </Button>
+                            )
                           ) : (
                             <Button
-                              className={
-                                e.status
-                                  ? classes.button_inactive
-                                  : classes.button_disabled
-                              }
-                              disabled={!e.status}
-                              onClick={() => getQuestion()}
+                              className={classes.button_active}
+                              onClick={() => pushLearning(e.id)}
                             >
-                              ขอรับใบเกียรติบัตร
+                              เรียนต่อ
                             </Button>
                           )}
                         </TableCell>

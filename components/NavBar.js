@@ -254,14 +254,12 @@ const useStyles = makeStyles({
   },
   buttonRegister: {
     width: 200,
-    color: "#ffffff",
     borderRadius: 20,
-    borderColor: "#ffffff",
     textTransform: "none",
     fontWeight: 500,
-    "&:hover": {
-      borderColor: "#ffffff",
-    },
+    color: "#ffffff",
+    background:
+      "transparent linear-gradient(90deg, #3CBB8E 0%, #2DA373 100%) 0% 0% no-repeat padding-box",
   },
   buttonTranslation: {
     color: "#ffffff",

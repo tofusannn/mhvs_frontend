@@ -56,17 +56,23 @@ const Banner = () => {
   }
 
   return (
-    // <Grid className={classes.banner_main}>
-    //   <Container>
-    //     <Grid container>
-    //       <Grid className={classes.banner_image} item>
-    //         <img width={"100%"} src="/image/index.png"></img>
-    //       </Grid>
-    //     </Grid>
-    //   </Container>
-    // </Grid>
-    <Grid>
-      <img width="100%" src="/image/index.png"></img>
+    <Grid className={classes.banner_main}>
+      <Grid className={classes.banner_image}>
+        <img width="100%" src="/image/index.png"></img>
+      </Grid>
+      {token && (
+        <Container>
+          <Grid className={classes.banner_text}>
+            <Button
+              className={classes.buttonRegister}
+              variant="contained"
+              onClick={() => changePage()}
+            >
+              เริ่มต้นเลย
+            </Button>
+          </Grid>
+        </Container>
+      )}
     </Grid>
   );
 };
@@ -318,41 +324,40 @@ const CountUser = ({ locale }) => {
 };
 
 const useStyles = makeStyles({
-  // banner_main: {
-  //   height: 630,
-  //   marginBottom: 120,
-  //   paddingTop: 70,
-  //   // background:
-  //   //   "transparent linear-gradient(180deg, #FFFFFF 0%, #F1F8FE 100%) 0% 0% no-repeat padding-box",
-  //   position: "relative",
-  //   zIndex: -2,
-  // },
-  // banner_text: {
-  //   position: "absolute",
-  //   zIndex: 0,
-  // },
-  // banner_image: {
-  //   top: 0,
-  //   right: 0,
-  //   position: "absolute",
-  //   zIndex: -1,
-  // },
-  // buttonRegister: {
-  //   marginTop: 420,
-  //   width: 200,
-  //   color: "#ffffff",
-  //   borderRadius: 100,
-  //   borderColor: "#ffffff",
-  //   textTransform: "none",
-  //   fontWeight: 500,
-  //   fontSize: 18,
-  //   background:
-  //     "transparent linear-gradient(90deg, #3CBB8E 0%, #2DA373 100%) 0% 0% no-repeat padding-box",
-  //   boxShadow: "0px 5px 10px #3CBB8E7A",
-  //   "&:hover": {
-  //     borderColor: "#ffffff",
-  //   },
-  // },
+  banner_main: {
+    position: "relative",
+    height: "90vh",
+  },
+  banner_text: {
+    position: "absolute",
+    zIndex: 0,
+    top: 530,
+    "@media (min-width: 2048px)": {
+      top: 670,
+    },
+    "@media (max-width: 2040px) and (min-width: 1200px)": {
+      top: 530,
+    },
+  },
+  banner_image: {
+    position: "absolute",
+    zIndex: -1,
+  },
+  buttonRegister: {
+    width: 200,
+    color: "#ffffff",
+    borderRadius: 100,
+    borderColor: "#ffffff",
+    textTransform: "none",
+    fontWeight: 500,
+    fontSize: 18,
+    background:
+      "transparent linear-gradient(90deg, #3CBB8E 0%, #2DA373 100%) 0% 0% no-repeat padding-box",
+    boxShadow: "0px 5px 10px #3CBB8E7A",
+    "&:hover": {
+      borderColor: "#ffffff",
+    },
+  },
   sponsor_main: {
     paddingTop: 50,
     paddingBottom: 50,

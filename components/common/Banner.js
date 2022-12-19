@@ -9,15 +9,15 @@ const Banner = ({ page, subPage, hideImage }) => {
   const t = useTranslations();
   return (
     <Grid className={!hideImage ? classes.banner_main : ""} container>
-      <Grid
-        sx={
-          !hideImage
-            ? { position: "absolute", top: 40, left: 70 }
-            : { justifyContent: "start", marginTop: 5, marginLeft: 9 }
-        }
-        item
-      >
-        <Container>
+      <Container>
+        <Grid
+          sx={
+            !hideImage
+              ? { position: "absolute", top: 40}
+              : { justifyContent: "start", marginTop: 5, marginLeft: 9 }
+          }
+          item
+        >
           <Typography fontSize={16} display={"flex"} alignItems={"center"}>
             หน้าแรก <NavigateNext></NavigateNext>
             {subPage ? (
@@ -30,8 +30,9 @@ const Banner = ({ page, subPage, hideImage }) => {
               <span style={{ color: "#2699FB" }}>{page}</span>
             )}
           </Typography>
-        </Container>
-      </Grid>
+        </Grid>
+      </Container>
+
       {!hideImage && (
         <Fragment>
           {/* <Grid className={classes.banner_text} item>

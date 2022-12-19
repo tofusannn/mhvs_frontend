@@ -14,6 +14,7 @@ const LessonLearn = ({ lesson, chapter, getLesson }) => {
   const [startQuiz, setStartQuiz] = useState(false);
   const [confirm, setConfirm] = useState(false);
   const [buttonNext, setButtonNext] = useState(false);
+  const chapterQ = parseInt(query.chapter);
 
   useEffect(() => {
     setStartQuiz(false);
@@ -161,7 +162,7 @@ const LessonLearn = ({ lesson, chapter, getLesson }) => {
           </Button>
         </Grid>
       )}
-      {query.name != "pre_test" && query.name != "post_test" && (
+      {query.name != "pre_test" && query.name != "post_test" ? (
         <Grid
           mt={10}
           container
@@ -180,6 +181,33 @@ const LessonLearn = ({ lesson, chapter, getLesson }) => {
             บทถัดไป <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
           </Button>
         </Grid>
+      ) : (
+        chapter &&
+        chapter.map(
+          (e, idx) =>
+            e.id === chapterQ &&
+            e.pre_test.user_action && (
+              <Grid
+                key={idx}
+                mt={10}
+                container
+                justifyContent={"center"}
+                alignItems={"center"}
+                sx={{
+                  background: "#F1F8FE 0% 0% no-repeat padding-box",
+                  minHeight: 90,
+                }}
+              >
+                <Button
+                  className={classes.button_submit}
+                  variant="contained"
+                  onClick={() => handleClick()}
+                >
+                  บทถัดไป <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
+                </Button>
+              </Grid>
+            )
+        )
       )}
     </Fragment>
   );

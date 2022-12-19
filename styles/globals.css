@@ -1,5 +1,7 @@
 html,
-body, th, td {
+body,
+th,
+td {
   padding: 0;
   margin: 0;
   font-family: 'Kanit', sans-serif !important;
@@ -22,6 +24,14 @@ a {
   box-sizing: border-box;
 }
 
-.MuiContainer-root {
-  max-width: 1366px !important;
+@media (min-width: 2048px) {
+  .MuiContainer-root {
+    max-width: 1866px;
+  }
+}
+
+@media (max-width: 2040px) and (min-width: 1200px) {
+  .MuiContainer-root {
+    max-width: 1366px;
+  }
 }

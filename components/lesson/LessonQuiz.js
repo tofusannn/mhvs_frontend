@@ -219,7 +219,7 @@ const LessonQuiz = ({
         });
         setScore(`${data.result.total_score} / ${data.result.max_score}`);
         setButtonNext(true);
-        setOpenModalSuccess(true)
+        setOpenModalSuccess(true);
         // window.scrollTo(0, 0);
       }
     }
@@ -272,7 +272,21 @@ const LessonQuiz = ({
                 <Typography fontSize={16}>
                   {chap.pre_test.description}
                 </Typography>
-                {!chap.pre_test.user_action && (
+                {chap.pre_test.user_action ? (
+                  <Grid
+                    mt={5}
+                    sx={{ border: "3px solid #3CBB8E", padding: 1 }}
+                    xs={3}
+                  >
+                    <Typography
+                      color={"#3CBB8E"}
+                      fontSize={24}
+                      fontWeight={700}
+                    >
+                      คุณผ่านบทเรียนนี้แล้ว
+                    </Typography>
+                  </Grid>
+                ) : (
                   <Button
                     className={classes.button_start}
                     sx={{ width: 225 }}
@@ -395,7 +409,21 @@ const LessonQuiz = ({
                 <Typography fontSize={16}>
                   {chap.post_test.description}
                 </Typography>
-                {!chap.post_test.user_action && (
+                {chap.post_test.user_action ? (
+                  <Grid
+                    mt={5}
+                    sx={{ border: "3px solid #3CBB8E", padding: 1 }}
+                    xs={3}
+                  >
+                    <Typography
+                      color={"#3CBB8E"}
+                      fontSize={24}
+                      fontWeight={700}
+                    >
+                      คุณผ่านบทเรียนนี้แล้ว
+                    </Typography>
+                  </Grid>
+                ) : (
                   <Button
                     className={classes.button_start}
                     sx={{ width: 225 }}
