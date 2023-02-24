@@ -181,12 +181,40 @@ const LessonLearn = ({ lesson, chapter, getLesson }) => {
             บทถัดไป <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
           </Button>
         </Grid>
-      ) : (
+      ) : query.name === "pre_test" ? (
         chapter &&
         chapter.map(
           (e, idx) =>
             e.id === chapterQ &&
             e.pre_test.user_action && (
+              <Grid
+                key={idx}
+                mt={10}
+                container
+                justifyContent={"center"}
+                alignItems={"center"}
+                sx={{
+                  background: "#F1F8FE 0% 0% no-repeat padding-box",
+                  minHeight: 90,
+                }}
+              >
+                <Button
+                  className={classes.button_submit}
+                  variant="contained"
+                  onClick={() => handleClick()}
+                >
+                  บทถัดไป <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
+                </Button>
+              </Grid>
+            )
+        )
+      ) : (
+        query.name === "post_test" &&
+        chapter &&
+        chapter.map(
+          (e, idx) =>
+            e.id === chapterQ &&
+            e.post_test.user_action && (
               <Grid
                 key={idx}
                 mt={10}

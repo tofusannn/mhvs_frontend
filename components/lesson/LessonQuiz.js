@@ -16,6 +16,7 @@ import { Fragment, useEffect, useState } from "react";
 import Lesson from "../../api/api_lesson";
 import Question from "../../api/api_question";
 import ModalSuccess from "../common/ModalSuccess";
+import ModalFail from "../common/ModalFail";
 const path = process.env.NEXT_PUBLIC_BASE_API;
 
 const LessonQuiz = ({
@@ -33,6 +34,7 @@ const LessonQuiz = ({
   const [validate, setValidate] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [openModalSuccess, setOpenModalSuccess] = useState(false);
+  const [openModalFail, setOpenModalFail] = useState(false);
   const [payloadSnackbar, setPayloadSnackbar] = useState({
     msg: "",
     status: false,
@@ -217,10 +219,14 @@ const LessonQuiz = ({
           object_name: query.name,
           object_id: objectId,
         });
-        setScore(`${data.result.total_score} / ${data.result.max_score}`);
-        setButtonNext(true);
-        setOpenModalSuccess(true);
-        // window.scrollTo(0, 0);
+        if (data.result.estimate) {
+          setScore(`${data.result.total_score} / ${data.result.max_score}`);
+          setButtonNext(true);
+          setOpenModalSuccess(true);
+        } else {
+          setOpenModalFail(true);
+          setScore(`${data.result.total_score} / ${data.result.max_score}`);
+        }
       }
     }
     setValidate(true);
@@ -489,6 +495,13 @@ const LessonQuiz = ({
         setOpenSnackbar={setOpenSnackbar}
         score={score}
       ></ModalSuccess>
+      <ModalFail
+        openModalFail={openModalFail}
+        setOpenModalFail={setOpenModalFail}
+        handleClickNext={handleClickNext}
+        setOpenSnackbar={setOpenSnackbar}
+        score={score}
+      ></ModalFail>
       <Snackbar
         open={openSnackbar}
         autoHideDuration={3000}

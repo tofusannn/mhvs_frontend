@@ -10,7 +10,14 @@ import {
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
-const ModalFail = ({ type, openModalFail, setOpenModalFail }) => {
+const ModalFail = ({
+  type,
+  openModalFail,
+  setOpenModalFail,
+  setOpenSnackbar,
+  score,
+  handleClickNext,
+}) => {
   const classes = useStyles();
   return (
     <Dialog
@@ -31,7 +38,7 @@ const ModalFail = ({ type, openModalFail, setOpenModalFail }) => {
               พยายามอีกนิดนะ พวกเราเป็นกำลังใจให้
             </Typography>
             <Typography fontWeight={500} fontSize={24}>
-              คุณได้คะแนน <span style={{ color: "#FF698B" }}>90%</span>
+              คุณได้คะแนน <span style={{ color: "#FF698B" }}>{score}</span>
             </Typography>
           </Grid>
           <Grid container justifyContent={"center"}>
@@ -51,7 +58,10 @@ const ModalFail = ({ type, openModalFail, setOpenModalFail }) => {
               <Button
                 sx={{ marginLeft: 3 }}
                 className={classes.buttonConfirm}
-                onClick={() => setOpenModalFail(false)}
+                onClick={() => {
+                  setOpenSnackbar(false);
+                  setOpenModalFail(false);
+                }}
               >
                 พยายามอีกครั้ง <Replay sx={{ marginLeft: 1 }}></Replay>
               </Button>

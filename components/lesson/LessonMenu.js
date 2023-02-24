@@ -185,7 +185,7 @@ const LessonMenu = ({ chapter, getLesson }) => {
                         ? classes.button_sub_active
                         : classes.button_sub_inactive
                     }
-                    disabled={!e.file.user_action}
+                    disabled={!e.video.user_action}
                     fullWidth
                     onClick={() =>
                       handleClickMenu(
