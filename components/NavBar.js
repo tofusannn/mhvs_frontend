@@ -220,24 +220,22 @@ const NavBar = (props) => {
                     size="small"
                     onClick={handleClickRegister}
                   >
-                    {t("button-register-text")}
+                    {t("register")}
                   </Button>
                 </Grid>
               )}
+              <Grid sx={{ marginLeft: 4 }}>
+                <Button
+                  name={locale === "th" ? "en" : "th"}
+                  className={classes.buttonTranslation}
+                  variant="outlined"
+                  size="small"
+                  onClick={translationClick}
+                >
+                  {locale === "th" ? "EN" : "TH"}
+                </Button>
+              </Grid>
             </Grid>
-
-            {/* <Grid item>
-              <Button
-                name={locale === "th" ? "en" : "th"}
-                className={classes.buttonTranslation}
-                variant="outlined"
-                fullWidth
-                size="small"
-                onClick={translationClick}
-              >
-                {locale === "th" ? "EN" : "TH"}
-              </Button>
-            </Grid> */}
           </Grid>
         </Toolbar>
       </Container>

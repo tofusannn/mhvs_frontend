@@ -187,6 +187,8 @@ const Sponsor = ({ locale }) => {
   const classes = useStyles();
   const [sponsor, setSponsor] = useState();
   const { push } = useRouter();
+  const t = useTranslations();
+  const message = locale === "th" ? th : en;
 
   useEffect(() => {
     getSponsor();
@@ -196,21 +198,6 @@ const Sponsor = ({ locale }) => {
     const data = await sponsorApi.getSponsor();
     setSponsor(data.result);
   }
-  // function loopImage() {
-  //   const rows = [];
-  //   const count = sponsor ? (sponsor.length < 7 ? sponsor.length : 7) : 0;
-  //   for (let i = 0; i < count; i++) {
-  //     sponsor &&
-  //       rows.push(
-  //         <Grid key={i} item xs={2}>
-  //           <Link target="_blank" href={sponsor[i].link_ref}>
-  //             <img width={"70%"} src={`${path}${sponsor[i].file_path}`}></img>
-  //           </Link>
-  //         </Grid>
-  //       );
-  //   }
-  //   return rows;
-  // }
 
   function loopImage() {
     const rows = [];
@@ -234,7 +221,7 @@ const Sponsor = ({ locale }) => {
         <Container>
           <Grid mb={5} container justifyContent={"center"}>
             <Typography fontWeight={500} fontSize={32}>
-              ผู้สนับสนุนใจดี
+              {t("sponsor-text.title")}
             </Typography>
             <Link
               component="button"
@@ -246,7 +233,7 @@ const Sponsor = ({ locale }) => {
                 fontSize: 32,
               }}
             >
-              ดูทั้งหมด
+              {t("sponsor-text.button")}
             </Link>
           </Grid>
           <Grid

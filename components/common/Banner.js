@@ -13,13 +13,13 @@ const Banner = ({ page, subPage, hideImage }) => {
         <Grid
           sx={
             !hideImage
-              ? { position: "absolute", top: 40}
+              ? { position: "absolute", top: 40 }
               : { justifyContent: "start", marginTop: 5, marginLeft: 9 }
           }
           item
         >
           <Typography fontSize={16} display={"flex"} alignItems={"center"}>
-            หน้าแรก <NavigateNext></NavigateNext>
+            {t("banner-home")} <NavigateNext></NavigateNext>
             {subPage ? (
               <Fragment>
                 {page}

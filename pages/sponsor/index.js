@@ -9,6 +9,7 @@ const path = process.env.NEXT_PUBLIC_BASE_API;
 
 const Home = () => {
   const [sponsor, setSponsor] = useState();
+  const t = useTranslations();
 
   useEffect(() => {
     getSponsor();
@@ -40,7 +41,7 @@ const Home = () => {
         <Container>
           <Grid my={3} container justifyContent={"center"}>
             <Typography fontWeight={500} fontSize={32}>
-              ผู้ใหญ่ใจดี
+              {t("sponsor-text.title")}
             </Typography>
           </Grid>
           <Grid

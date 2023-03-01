@@ -6,11 +6,13 @@ import Banner from "../../components/common/Banner";
 import LessonLearn from "../../components/lesson/LessonLearn";
 import LessonList from "../../components/lesson/LessonList";
 import LessonPreview from "../../components/lesson/LessonPreview";
+import { useTranslations } from "next-intl";
 
 const Home = () => {
   const { query, push, pathname } = useRouter();
   const [lesson, setLesson] = useState({});
   const [chapter, setChapter] = useState([]);
+  const t = useTranslations();
 
   useEffect(() => {
     query.lesson && getDetails(query.lesson);
@@ -40,7 +42,7 @@ const Home = () => {
           lesson: lesson,
           chapter: chap ? chap : data[0].id,
           name: name === "chapter" ? "pre_test" : name,
-          menu: menu
+          menu: menu,
         };
         break;
     }
@@ -53,7 +55,7 @@ const Home = () => {
   return (
     <Fragment>
       <Banner
-        page={"บทเรียนออนไลน์"}
+        page={t("learning-online")}
         subPage={query.action != "list" && lesson.lesson_name}
         hideImage={query.action === "learning"}
       ></Banner>

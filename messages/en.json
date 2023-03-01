@@ -1,107 +1,139 @@
 {
   "navbar-menu": {
     "menu1": {
-      "title": "",
-      "link": ""
+      "title": "หน้าแรก",
+      "link": "/"
     },
     "menu2": {
-      "title": "",
-      "link": ""
+      "title": "บทเรียน",
+      "link": "/lesson?action=list"
     },
     "menu3": {
-      "title": "",
-      "link": ""
+      "title": "เกี่ยวกับเรา",
+      "link": "/about_us"
     },
     "menu4": {
-      "title": "",
-      "link": ""
+      "title": "ผู้สนับสนุน",
+      "link": "/sponsor"
     },
     "menu5": {
-      "title": "",
-      "link": ""
-    }
-  },
-  "button-register-text": "",
-  "footer-text": {
-    "footer1": {
-      "title": "",
-      "des": ""
+      "title": "ติดต่อเรา",
+      "link": "/contact"
     },
-    "footer2": {
-      "title": "",
-      "des": ""
-    },
-    "footer3": {
-      "title": "",
-      "des": ""
+    "menu6": {
+      "title": "เข้าสู่ระบบ",
+      "link": "/auth?action=login&type=phone"
     }
   },
   "banner-text": {
-    "banner1": "",
-    "banner2": "",
-    "banner3": ""
+    "banner1": "ขอเชิญเรียนออนไลน์ หลักสูตร (เร่งรัด)",
+    "banner2": "ฝึกอบรมอาสาสมัครสาธารณสุขต่างด้าว (อสต.)",
+    "banner3": "เรียนฟรี...รับเกียรติบัตร ต่อยอดสู่ความสําเร็จ"
   },
   "about-us-text": {
-    "about-us1": "",
-    "about-us2": "",
-    "about-us3": ""
+    "about-us1": "Learning Platform",
+    "about-us2": "อสต. ออนไลน์",
+    "about-us3": "เพื่อพัฒนาความรู้ อสต. ให้สามารถนำไปปรับใช้ และช่วยเหลือคนในชุมชน",
+    "about-us-button": "ดูเพิ่มเติม"
   },
   "about-us-card-text": {
     "card1": {
-      "image": "",
-      "title": "",
-      "link": ""
+      "image": "/image/who.png",
+      "title": "สารผู้บริหาร อสต. ออนไลน์",
+      "link": "#"
     },
     "card2": {
-      "image": "",
-      "title": "",
-      "link": ""
+      "image": "/image/learning.png",
+      "title": "อสต. ออนไลน์ คืออะไร?",
+      "link": "#"
     },
     "card3": {
-      "image": "",
-      "title": "",
-      "link": ""
+      "image": "/image/homework.png",
+      "title": "คู่มือการใช้งาน อสต. ออนไลน์",
+      "link": "#"
     },
     "card4": {
-      "image": "",
-      "title": "",
-      "link": ""
+      "image": "/image/check_list.png",
+      "title": "เพิ่มแบบประเมิน website",
+      "link": "#"
     }
   },
-  "sponsor-list": {
-    "sponsor1": "",
-    "sponsor2": "",
-    "sponsor3": "",
-    "sponsor4": "",
-    "sponsor5": "",
-    "sponsor6": ""
+  "sponsor-text": {
+    "title": "ผู้สนับสนุนใจดี",
+    "button": "ดูทั้งหมด"
   },
   "count-user-text": {
     "count-user1": {
-      "icon": "",
-      "title": "",
-      "count": ""
+      "icon": "/icon/viewer.svg",
+      "title": "ผู้เข้าชมเว็บไซต์",
+      "count": "page_count"
     },
     "count-user2": {
-      "icon": "",
-      "title": "",
-      "count": ""
+      "icon": "/icon/group_user.svg",
+      "title": "ผู้เข้าอบรม",
+      "count": "user_train"
     },
     "count-user3": {
-      "icon": "",
-      "title": "",
-      "count": ""
+      "icon": "/icon/congratulation_user.svg",
+      "title": "ผู้ผ่านการอบรม",
+      "count": "user_train_success"
     }
   },
-  "button-login": "",
-  "button-register": "",
-  "button-login-phone": "",
-  "button-login-email": "",
-  "login-email-text": "",
-  "login-password-text": "",
-  "login-phone-text": "",
-  "remember-password": "",
-  "button-login-confirm": "",
-  "forgot-password-text": "",
-  "button-register-confirm": ""
+  "footer-text": {
+    "footer1": {
+      "title": "ศูนย์การเรียนรู้ อสต ผ่านระบบออนไลน์",
+      "des": "420/6 ถนน ราชวิถี ราชเทวี กรุงเทพมหานคร ประเทศไทย"
+    },
+    "footer2": {
+      "title": "ติดต่อ",
+      "des": "โทร: 0 2354 9100-19 aorsortor.onlineth@gmail.com"
+    },
+    "footer3": {
+      "title": "ติดตามข่าวสาร",
+      "des": ""
+    }
+  },
+  "about-text": {
+    "title": "โครงการ",
+    "subtitle": "“สร้างเสริมความรอบรู้ด้านสุขภาพในชุมชนไทยและเมียนมา”",
+    "description": ""
+  },
+  "contact-text": {
+    "title": "ติดต่อเรา",
+    "subtitle": "ศูนย์การเรียนรู้ อสต ผ่านระบบออนไลน์",
+    "fullname": "ชื่อจริง - นามสกุล",
+    "title-description": "หัวข้อที่ต้องการติดต่อ",
+    "description": "ข้อความ",
+    "button": "ส่งข้อความ"
+  },
+  "login-page": {
+    "login-for": "เข้าสู่ระบบโดย"
+  },
+  "register-page": {
+    "title": "",
+    "firstname": "",
+    "lastname": ""
+  },
+  "banner-home": "หน้าแรก",
+  "learning-online": "บทเรียนออนไลน์",
+  "submit": "ตกลง",
+  "cancel": "ยกเลิก",
+  "register-free": "ลงทะเบียนเรียนฟรี",
+  "login": "เข้าสู่ระบบ",
+  "register": "สมัครสมาชิก",
+  "phone": "หมายเลขโทรศัพท์มือถือ",
+  "email": "อีเมล",
+  "password": "รหัสผ่าน",
+  "remember-password": "จำฉันไว้ในระบบ",
+  "forgot-password": "ลืมรหัสผ่าน",
+  "reset-password": "รีเซ็ตรหัสผ่าน",
+  "change-password": "ตั้งรหัสผ่านใหม่",
+  "gender": "เพศ",
+  "male": "ชาย",
+  "female": "หญิง",
+  "nationality": "สัญชาติ",
+  "thailand": "ไทย",
+  "myanmar": "พม่า",
+  "laos": "ลาว",
+  "cambodia": "กัมพูชา"
 }

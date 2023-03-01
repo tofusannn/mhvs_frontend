@@ -10,6 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import contact from "../../api/api_contact.js";
+import { useTranslations } from "next-intl";
 const { Fragment, useState } = require("react");
 
 const payload_main = {
@@ -24,6 +25,7 @@ const Home = () => {
   const [check, setCheck] = useState(false);
   const [result, setResult] = useState();
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const t = useTranslations();
 
   async function confirm() {
     setCheck(true);
@@ -51,12 +53,12 @@ const Home = () => {
       <Grid my={6} sx={{ height: "90vh" }}>
         <Container>
           <Typography fontWeight={500} fontSize={32}>
-            ติดต่อเรา
+            {t("contact-text.title")}
           </Typography>
           <Grid mt={3} container justifyContent={"space-between"}>
             <Grid item>
               <Typography mb={3} color={"#727272"} fontSize={16}>
-                ศูนย์การเรียนรู้ อสต ผ่านระบบออนไลน์
+                {t("contact-text.subtitle")}
               </Typography>
               <Typography mb={3} display={"flex"} alignItems={"center"}>
                 <Facebook sx={{ marginRight: 1, color: "#0076FF" }}></Facebook>
@@ -69,16 +71,16 @@ const Home = () => {
               </Typography>
               <Typography mb={3} display={"flex"} alignItems={"center"}>
                 <Message sx={{ marginRight: 1, color: "#0076FF" }}></Message>
-                <Link
-                  target="_blank"
-                  href="https://m.me/aorsortor.online"
-                >
+                <Link target="_blank" href="https://m.me/aorsortor.online">
                   Facebook Messenger
                 </Link>
               </Typography>
               <Typography mb={3} display={"flex"} alignItems={"center"}>
                 <Language sx={{ marginRight: 1, color: "#0076FF" }}></Language>
-                <Link target="_blank" href="https://www.youtube.com/channel/UC1V-Vvkf9hwtRJe5oEd-7DQ">
+                <Link
+                  target="_blank"
+                  href="https://www.youtube.com/channel/UC1V-Vvkf9hwtRJe5oEd-7DQ"
+                >
                   Youtube Channel
                 </Link>
               </Typography>
@@ -96,7 +98,8 @@ const Home = () => {
               <Grid container justifyContent={"space-between"} spacing={3}>
                 <Grid xs={6} item>
                   <Typography mb={1}>
-                    ชื่อจริง - นามสกุล <span style={{ color: "red" }}>*</span>
+                    {t("contact-text.fullname")}{" "}
+                    <span style={{ color: "red" }}>*</span>
                   </Typography>
                   <TextField
                     name="contact_name"
@@ -114,7 +117,7 @@ const Home = () => {
                 </Grid>
                 <Grid xs={6} item>
                   <Typography mb={1}>
-                    อีเมล <span style={{ color: "red" }}>*</span>
+                    {t("email")} <span style={{ color: "red" }}>*</span>
                   </Typography>
                   <TextField
                     name="contact_email"
@@ -132,7 +135,7 @@ const Home = () => {
                 </Grid>
               </Grid>
               <Typography mt={3} mb={1}>
-                หัวข้อที่ต้องการติดต่อ
+                {t("contact-text.title-description")}
               </Typography>
               <TextField
                 name="section"
@@ -144,7 +147,7 @@ const Home = () => {
                 }
               ></TextField>
               <Typography mt={3} mb={1}>
-                ข้อความ
+                {t("contact-text.description")}
               </Typography>
               <TextField
                 name="message"
@@ -162,7 +165,7 @@ const Home = () => {
                 variant="contained"
                 onClick={confirm}
               >
-                ส่งข้อความ
+                {t("contact-text.button")}
               </Button>
             </Grid>
           </Grid>

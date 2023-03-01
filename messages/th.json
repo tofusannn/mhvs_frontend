@@ -25,21 +25,6 @@
       "link": "/auth?action=login&type=phone"
     }
   },
-  "button-register-text": "ลงทะเบียนเรียนฟรี",
-  "footer-text": {
-    "footer1": {
-      "title": "ศูนย์การเรียนรู้ อสต ผ่านระบบออนไลน์",
-      "des": "420/6 ถนน ราชวิถี ราชเทวี กรุงเทพมหานคร ประเทศไทย"
-    },
-    "footer2": {
-      "title": "ติดต่อ",
-      "des": "โทร: 0 2354 9100-19 aorsortor.onlineth@gmail.com"
-    },
-    "footer3": {
-      "title": "ติดตามข่าวสาร",
-      "des": ""
-    }
-  },
   "banner-text": {
     "banner1": "ขอเชิญเรียนออนไลน์ หลักสูตร (เร่งรัด)",
     "banner2": "ฝึกอบรมอาสาสมัครสาธารณสุขต่างด้าว (อสต.)",
@@ -48,7 +33,8 @@
   "about-us-text": {
     "about-us1": "Learning Platform",
     "about-us2": "อสต. ออนไลน์",
-    "about-us3": "เพื่อพัฒนาความรู้ อสต. ให้สามารถนำไปปรับใช้ และช่วยเหลือคนในชุมชน"
+    "about-us3": "เพื่อพัฒนาความรู้ อสต. ให้สามารถนำไปปรับใช้ และช่วยเหลือคนในชุมชน",
+    "about-us-button": "ดูเพิ่มเติม"
   },
   "about-us-card-text": {
     "card1": {
@@ -72,13 +58,9 @@
       "link": "#"
     }
   },
-  "sponsor-list": {
-    "sponsor1": "/image/google.png",
-    "sponsor2": "/image/master_card.png",
-    "sponsor3": "/image/premier.png",
-    "sponsor4": "/image/kor_yur_sor.png",
-    "sponsor5": "/image/apple.png",
-    "sponsor6": "/image/coca_cola.png"
+  "sponsor-text": {
+    "title": "ผู้สนับสนุนใจดี",
+    "button": "ดูทั้งหมด"
   },
   "count-user-text": {
     "count-user1": {
@@ -97,17 +79,61 @@
       "count": "user_train_success"
     }
   },
-  "button-login": "เข้าสู่ระบบ",
-  "button-register": "สมัครสมาชิก",
-  "button-login-phone": "หมายเลขโทรศัพท์มือถือ",
-  "button-login-email": "อีเมล",
-  "login-email-text": "อีเมล",
-  "login-password-text": "รหัสผ่าน",
-  "login-phone-text": "หมายเลขโทรศัพท์มือถือ",
+  "footer-text": {
+    "footer1": {
+      "title": "ศูนย์การเรียนรู้ อสต ผ่านระบบออนไลน์",
+      "des": "420/6 ถนน ราชวิถี ราชเทวี กรุงเทพมหานคร ประเทศไทย"
+    },
+    "footer2": {
+      "title": "ติดต่อ",
+      "des": "โทร: 0 2354 9100-19 aorsortor.onlineth@gmail.com"
+    },
+    "footer3": {
+      "title": "ติดตามข่าวสาร",
+      "des": ""
+    }
+  },
+  "about-text": {
+    "title": "โครงการ",
+    "subtitle": "“สร้างเสริมความรอบรู้ด้านสุขภาพในชุมชนไทยและเมียนมา”",
+    "description": ""
+  },
+  "contact-text": {
+    "title": "ติดต่อเรา",
+    "subtitle": "ศูนย์การเรียนรู้ อสต ผ่านระบบออนไลน์",
+    "fullname": "ชื่อจริง - นามสกุล",
+    "title-description": "หัวข้อที่ต้องการติดต่อ",
+    "description": "ข้อความ",
+    "button": "ส่งข้อความ"
+  },
+  "login-page": {
+    "login-for": "เข้าสู่ระบบโดย"
+  },
+  "register-page": {
+    "title": "",
+    "firstname": "",
+    "lastname": ""
+  },
+  "banner-home": "หน้าแรก",
+  "learning-online": "บทเรียนออนไลน์",
+  "submit": "ตกลง",
+  "cancel": "ยกเลิก",
+  "register-free": "ลงทะเบียนเรียนฟรี",
+  "login": "เข้าสู่ระบบ",
+  "register": "สมัครสมาชิก",
+  "phone": "หมายเลขโทรศัพท์มือถือ",
+  "email": "อีเมล",
+  "password": "รหัสผ่าน",
   "remember-password": "จำฉันไว้ในระบบ",
-  "button-login-confirm": "เข้าสู่ระบบ",
-  "forgot-password-text": "ลืมรหัสผ่าน",
-  "button-register-confirm": "สมัครสมาชิก",
-  "button-forgot-confirm": "รีเซ็ตรหัสผ่าน",
-  "button-change-confirm": "ตั้งรหัสผ่านใหม่"
+  "forgot-password": "ลืมรหัสผ่าน",
+  "reset-password": "รีเซ็ตรหัสผ่าน",
+  "change-password": "ตั้งรหัสผ่านใหม่",
+  "gender": "เพศ",
+  "male": "ชาย",
+  "female": "หญิง",
+  "nationality": "สัญชาติ",
+  "thailand": "ไทย",
+  "myanmar": "พม่า",
+  "laos": "ลาว",
+  "cambodia": "กัมพูชา"
 }

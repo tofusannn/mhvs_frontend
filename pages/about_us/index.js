@@ -8,6 +8,8 @@ import sponsorApi from "../../api/api_sponsor";
 const path = process.env.NEXT_PUBLIC_BASE_API;
 
 const Home = () => {
+  const t = useTranslations();
+
   return (
     <Fragment>
       <Banner></Banner>
@@ -15,12 +17,13 @@ const Home = () => {
         <Container>
           <Grid my={3}>
             <Typography fontWeight={500} fontSize={32}>
-              โครงการ
+              {t("about-text.title")}
             </Typography>
             <Typography fontWeight={500} fontSize={24}>
-              “สร้างเสริมความรอบรู้ด้านสุขภาพในชุมชนไทยและเมียนมา”
+              {t("about-text.subtitle")}
             </Typography>
             <Typography mt={3}>
+              {t("about-text.description")}
               นำเสนอหลักสูตรสำหรับอาสาสมัครต่างด้าว (อสต.)
               ในสถานประกอบการหรือในชุมชน ผ่านทางเครือข่ายระบบสื่อสังคมออนไลน์
               โดยใช้ระบบเรียนออนไลน์ (E-learning) บนหน้าเว็บไซต์

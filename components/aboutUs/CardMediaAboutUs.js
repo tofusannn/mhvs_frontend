@@ -8,11 +8,13 @@ import {
   Link,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 const CardMediaAboutUs = (props) => {
   const { image, title, detail, link, setOpenModal, setYoutube } = props;
   const classes = useStyles();
+  const t = useTranslations();
 
   return (
     <Card className={classes.aboutUsCard}>
@@ -37,7 +39,7 @@ const CardMediaAboutUs = (props) => {
             setYoutube(link);
           }}
         >
-          ดูเพิ่มเติม
+          {t("about-us-text.about-us-button")}
         </Link>
       </CardContent>
     </Card>

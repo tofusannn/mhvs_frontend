@@ -246,9 +246,9 @@ const Auth = () => {
             variant="contained"
             onClick={buttonConfirmClick}
           >
-            {query.action === "login" && t("button-login-confirm")}
-            {query.action === "register" && t("button-register-confirm")}
-            {query.action === "forgot-password" && t("button-forgot-confirm")}
+            {query.action === "login" && t("login")}
+            {query.action === "register" && t("register")}
+            {query.action === "forgot-password" && t("reset-password")}
             {query.action === "change-password" &&
               t(
                 payload.status === "success"
@@ -273,7 +273,7 @@ const Auth = () => {
               className={classes.link_forgot_pw}
               href="/auth/?action=login&type=phone"
             >
-              ยกเลิก
+              ยกเลิก {t("cancel")}
             </Link>
           </Grid>
         )}
@@ -283,7 +283,7 @@ const Auth = () => {
               className={classes.link_forgot_pw}
               href="/auth/?action=forgot-password"
             >
-              ยกเลิก
+              ยกเลิก {t("cancel")}
             </Link>
           </Grid>
         )}
@@ -315,7 +315,7 @@ const Auth = () => {
                 alignContent={"center"}
               >
                 <Typography fontSize={22} fontWeight={500}>
-                  ตั้งรหัสผ่านใหม่
+                  {t("change-password")}
                 </Typography>
               </Grid>
             ) : (
@@ -329,12 +329,12 @@ const Auth = () => {
                     justifyContent={"center"}
                     alignItems={"center"}
                   >
-                    <Typography mr={5}>เข้าสู่ระบบโดย</Typography>
+                    <Typography mr={5}>{t("login-page.login-for")}</Typography>
                     <Button
                       className={classes.button_type_active}
                       variant="contained"
                     >
-                      หมายเลขโทรศัพท์มือถือ
+                      {t("phone")}
                     </Button>
                     {/* <Button
                       disabled
@@ -348,7 +348,7 @@ const Auth = () => {
                     <Divider width="240px"></Divider>
                   </Grid>
                   <Typography>
-                    หมายเลขโทรศัพท์มือถือ{" "}
+                    {t("phone")}
                     <span style={{ color: "red" }}>*</span>
                   </Typography>
                   <Grid mt={1} mb={3} container>
@@ -369,7 +369,8 @@ const Auth = () => {
               {query.action === "register" && (
                 <Fragment>
                   <Typography>
-                    คำนำหน้าชื่อ <span style={{ color: "red" }}>*</span>
+                    {t("register-page.title")}{" "}
+                    <span style={{ color: "red" }}>*</span>
                   </Typography>
                   <Grid mt={1} mb={3} container>
                     <TextField
@@ -384,7 +385,8 @@ const Auth = () => {
                     ></TextField>
                   </Grid>
                   <Typography>
-                    ชื่อจริง <span style={{ color: "red" }}>*</span>
+                    {t("register-page.firstname")}{" "}
+                    <span style={{ color: "red" }}>*</span>
                   </Typography>
                   <Grid mt={1} mb={3} container>
                     <TextField
@@ -399,7 +401,8 @@ const Auth = () => {
                     ></TextField>
                   </Grid>
                   <Typography>
-                    นามสกุล <span style={{ color: "red" }}>*</span>
+                    {t("register-page.lastname")}{" "}
+                    <span style={{ color: "red" }}>*</span>
                   </Typography>
                   <Grid mt={1} mb={3} container>
                     <TextField
@@ -414,7 +417,7 @@ const Auth = () => {
                     ></TextField>
                   </Grid>
                   <Typography>
-                    หมายเลขโทรศัพท์มือถือ{" "}
+                    {t("phone")}
                     <span style={{ color: "red" }}>*</span>
                   </Typography>
                   <Grid mt={1} mb={3} container>
@@ -440,7 +443,7 @@ const Auth = () => {
                     justifyContent={"space-between"}
                   >
                     <Typography>
-                      เพศ <span style={{ color: "red" }}>*</span>
+                      {t("gender")} <span style={{ color: "red" }}>*</span>
                     </Typography>
                     <Button
                       name="male"
@@ -456,7 +459,7 @@ const Auth = () => {
                         }))
                       }
                     >
-                      ชาย
+                      {t("male")}
                     </Button>
                     <Button
                       name="female"
@@ -472,7 +475,7 @@ const Auth = () => {
                         }))
                       }
                     >
-                      หญิง
+                      {t("female")}
                     </Button>
                   </Grid>
                   <Grid
@@ -484,7 +487,7 @@ const Auth = () => {
                     justifyContent={"space-between"}
                   >
                     <Typography>
-                      สัญชาติ <span style={{ color: "red" }}>*</span>
+                      {t("nationality")} <span style={{ color: "red" }}>*</span>
                     </Typography>
                     <Button
                       name="thai"
@@ -500,7 +503,7 @@ const Auth = () => {
                         }))
                       }
                     >
-                      ไทย
+                      {t("thailand")}
                     </Button>
                     <Button
                       name="myanmar"
@@ -516,7 +519,7 @@ const Auth = () => {
                         }))
                       }
                     >
-                      พม่า
+                      {t("myanmar")}
                     </Button>
                     <Button
                       name="laos"
@@ -532,7 +535,7 @@ const Auth = () => {
                         }))
                       }
                     >
-                      ลาว
+                      {t("laos")}
                     </Button>
                     <Button
                       name="cambodia"
@@ -548,7 +551,7 @@ const Auth = () => {
                         }))
                       }
                     >
-                      กัมพูชา
+                      {t("cambodia")}
                     </Button>
                   </Grid>
                 </Fragment>
@@ -757,6 +760,7 @@ const useStyles = makeStyles({
     },
   },
   button_confirm: {
+    textTransform: "none",
     width: 228,
     height: 48,
     background: "transparent linear-gradient(90deg, #3CBB8E 0%, #2DA373 100%)",
