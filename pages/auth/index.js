@@ -220,7 +220,7 @@ const Auth = () => {
           fullWidth
           onClick={buttonActionClick}
         >
-          {t("button-register")}
+          {t("register")}
         </Button>
         <Button
           name="login"
@@ -228,7 +228,7 @@ const Auth = () => {
           fullWidth
           onClick={buttonActionClick}
         >
-          {t("button-login")}
+          {t("login")}
         </Button>
       </ButtonGroup>
     );

@@ -1,12 +1,14 @@
 import { Face, MenuBook, PlayCircle, Quiz } from "@mui/icons-material";
 import { Button, Divider, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 import { Fragment } from "react";
 
 const Menu = ({ payload, setChangeMenu }) => {
   const classes = useStyles();
   const { push, query } = useRouter();
+  const t = useTranslations();
 
   function changeMenu(path) {
     const newQuery = { action: path };
@@ -22,27 +24,29 @@ const Menu = ({ payload, setChangeMenu }) => {
   return (
     <Fragment>
       <Typography fontWeight={500} fontSize={16}>
-        ยินดีต้อนรับ!
+        {t("profile-menu.welcome")}!
       </Typography>
       <Typography fontWeight={500} fontSize={28}>
-        คุณ{payload && payload.first_name} {payload && payload.last_name}
+        {payload && payload.pre_name} {payload && payload.first_name}{" "}
+        {payload && payload.last_name}
       </Typography>
       <Divider sx={{ marginY: 3 }}></Divider>
       <Typography
         className={query.action === "lesson" ? classes.button_active : ""}
-        sx={{ cursor: "pointer" }}
+        sx={{ cursor: "pointer", textTransform: "none" }}
         fontWeight={500}
         fontSize={20}
         display={"flex"}
         alignItems={"center"}
         onClick={() => changeSubMenu("lesson")}
       >
-        <MenuBook sx={{ marginRight: 1 }}></MenuBook> บทเรียนของคุณ
+        <MenuBook sx={{ marginRight: 1 }}></MenuBook>{" "}
+        {t("profile-menu.your-lesson")}
       </Typography>
       {query.action === "lesson" ? (
         <Fragment>
           <Typography pl={4} color={"#727272"} fontSize={14}>
-            รายการบทเรียนที่คุณลงทะเบียนเรียน
+            {t("profile-menu.lesson-enroll")}
           </Typography>
           <Button
             className={
@@ -53,7 +57,8 @@ const Menu = ({ payload, setChangeMenu }) => {
             fullWidth
             onClick={() => changeSubMenu("lesson")}
           >
-            <PlayCircle sx={{ marginRight: 1 }}></PlayCircle> บทเรียน
+            <PlayCircle sx={{ marginRight: 1 }}></PlayCircle>{" "}
+            {t("lesson-page.lesson")}
           </Button>
           <Button
             className={
@@ -64,7 +69,7 @@ const Menu = ({ payload, setChangeMenu }) => {
             fullWidth
             onClick={() => changeSubMenu("homework")}
           >
-            <Quiz sx={{ marginRight: 1 }}></Quiz> การบ้าน
+            <Quiz sx={{ marginRight: 1 }}></Quiz> {t("profile-menu.homework")}
           </Button>
         </Fragment>
       ) : (
@@ -80,7 +85,8 @@ const Menu = ({ payload, setChangeMenu }) => {
         alignItems={"center"}
         onClick={() => changeMenu("profile")}
       >
-        <Face sx={{ marginRight: 1 }}></Face> ข้อมูลของคุณ
+        <Face sx={{ marginRight: 1 }}></Face>
+        {t("profile-page.information")}
       </Typography>
       <Divider sx={{ marginY: 3 }}></Divider>
     </Fragment>
@@ -103,6 +109,7 @@ const useStyles = makeStyles({
       "transparent linear-gradient(90deg, #50AFFF 0%, #0076FF 100%) 0% 0% no-repeat padding-box",
     boxShadow: "0px 5px 10px #0076FF7A",
     borderRadius: "100px",
+    textTransform: "none"
   },
   button_sub_inactive: {
     justifyContent: "start",
@@ -113,5 +120,6 @@ const useStyles = makeStyles({
     background: "#F1F8FE 0% 0% no-repeat padding-box",
     boxShadow: "none",
     borderRadius: "100px",
+    textTransform: "none"
   },
 });

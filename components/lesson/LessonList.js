@@ -15,15 +15,20 @@ import { makeStyles } from "@mui/styles";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import Lesson from "../../api/api_lesson";
+import { useTranslations } from "next-intl";
 
 const { Fragment, useEffect, useState } = require("react");
-
-const header_lesson = ["บทเรียน", "รายละเอียด", ""];
 
 const LessonList = ({ getLesson }) => {
   const classes = useStyles();
   const { push, pathname, replace } = useRouter();
   const [lessonList, setLessonList] = useState([]);
+  const t = useTranslations();
+  const header_lesson = [
+    `${t("lesson-page.lesson")}`,
+    `${t("lesson-page.description")}`,
+    "",
+  ];
 
   useEffect(() => {
     getLessonList();
@@ -58,7 +63,7 @@ const LessonList = ({ getLesson }) => {
       <Grid my={6}>
         <Container>
           <Typography fontWeight={500} fontSize={28}>
-            บทเรียนทั้งหมด
+            {t("lesson-page.lesson-list")}
           </Typography>
           <TableContainer
             component={Paper}
@@ -126,13 +131,13 @@ const LessonList = ({ getLesson }) => {
                         className={classes.button_details}
                         onClick={() => previewLesson(e.id)}
                       >
-                        ดูรายละเอียด
+                        {t("lesson-page.details")}
                       </Button>
                       <Button
                         className={classes.button_active}
                         onClick={() => registerLesson(e.id)}
                       >
-                        ลงทะเบียนเรียน
+                        {t("lesson-page.enroll")}
                       </Button>
                     </TableCell>
                   </TableRow>
@@ -159,6 +164,7 @@ const useStyles = makeStyles({
       "transparent linear-gradient(90deg, #3CBB8E 0%, #2DA373 100%) 0% 0% no-repeat padding-box",
     boxShadow: "0px 5px 10px #3CBB8E7A",
     borderRadius: 100,
+    textTransform: "none"
   },
   button_disabled: {
     width: 150,
@@ -178,5 +184,6 @@ const useStyles = makeStyles({
     color: "#3CBB8E",
     border: "2px solid #3CBB8E",
     borderRadius: 100,
+    textTransform: "none"
   },
 });

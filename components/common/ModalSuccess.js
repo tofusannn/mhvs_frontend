@@ -9,6 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 import { Fragment } from "react";
 
@@ -22,14 +23,12 @@ const ModalSuccess = ({
 }) => {
   const classes = useStyles();
   const { query, push, pathname } = useRouter();
+  const t = useTranslations();
 
   function handleClick() {}
 
   return (
-    <Dialog
-      open={openModalSuccess}
-      sx={{ "& .MuiPaper-root": { borderRadius: "16px" } }}
-    >
+    <Dialog open={openModalSuccess} sx={{ "& .MuiPaper-root": { borderRadius: "16px" } }}>
       <Card>
         <CardContent sx={{ paddingX: 8 }}>
           <Grid container justifyContent={"center"}>
@@ -42,17 +41,18 @@ const ModalSuccess = ({
           <Grid mb={6} container justifyContent={"center"} textAlign={"center"}>
             {type === "homework" ? (
               <Typography fontWeight={500} fontSize={36}>
-                สุดยอดไปเลย
+                {t("modal-text.text1")}
                 <br />
-                คุณส่งการบ้านสำเร็จแล้ว
+                {t("modal-text.text2")}
               </Typography>
             ) : (
               <Fragment>
                 <Typography mb={1} fontWeight={500} fontSize={36}>
-                  ยินดีด้วย คุณสอบผ่านแล้ว
+                  {t("modal-text.text3")}
                 </Typography>
                 <Typography fontWeight={500} fontSize={24}>
-                  คุณได้คะแนน <span style={{ color: "#3CBB8E" }}>{score}</span>
+                  {t("modal-text.text4")}{" "}
+                  <span style={{ color: "#3CBB8E" }}>{score}</span>
                 </Typography>
               </Fragment>
             )}
@@ -76,7 +76,8 @@ const ModalSuccess = ({
                   });
                 }}
               >
-                <Coffee sx={{ marginRight: 1 }}></Coffee> พักดื่มน้ำ
+                <Coffee sx={{ marginRight: 1 }}></Coffee>
+                {t("modal-text.text5")}
               </Button>
             ) : (
               <Button
@@ -88,7 +89,8 @@ const ModalSuccess = ({
                   handleClickNext();
                 }}
               >
-                บทต่อไป <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
+                {t("lesson-page.next-chapter")}{" "}
+                <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
               </Button>
             )}
           </Grid>

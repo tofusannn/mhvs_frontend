@@ -161,7 +161,7 @@ const Home = () => {
                 rows={6}
               ></TextField>
               <Button
-                sx={{ marginTop: 6 }}
+                sx={{ marginTop: 6, textTransform: "none" }}
                 variant="contained"
                 onClick={confirm}
               >

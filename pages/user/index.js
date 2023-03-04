@@ -17,6 +17,7 @@ import Lesson from "../../components/user/Lesson";
 import Menu from "../../components/user/Menu";
 import Profile from "../../components/user/Profile";
 import { userProfile } from "../../redux/authSlice";
+import { useTranslations } from "next-intl";
 
 const { Fragment, useState, useEffect } = require("react");
 
@@ -35,6 +36,7 @@ const Home = () => {
     status: false,
   });
   const [confirm, setConfirm] = useState(false);
+  const t = useTranslations();
 
   useEffect(() => {
     setPayloadAuth(authPayload);
@@ -120,7 +122,7 @@ const Home = () => {
             variant="contained"
             onClick={confirmProfile}
           >
-            <Save sx={{ marginRight: 1 }}></Save> บันทึกข้อมูล
+            <Save sx={{ marginRight: 1 }}></Save> {t("save-data")}
           </Button>
         </Grid>
       ) : (
@@ -138,7 +140,8 @@ const Home = () => {
             variant="contained"
             onClick={() => setConfirm(true)}
           >
-            ส่งการบ้าน <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
+            {t("profile-page.sent-homework")}{" "}
+            <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
           </Button>
         </Grid>
       ) : (
@@ -182,5 +185,6 @@ const useStyles = makeStyles({
     fontSize: 20,
     fontWeight: 500,
     color: "#ffffff",
+    textTransform: "none"
   },
 });

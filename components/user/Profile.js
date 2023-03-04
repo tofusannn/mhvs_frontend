@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import upload from "../../api/api_upload";
 import auth from "../../api/api_auth";
+import { useTranslations } from "next-intl";
 const path = process.env.NEXT_PUBLIC_BASE_API;
 
 const profile_payload = {
@@ -35,36 +36,6 @@ const profile_payload = {
   img_id: null,
 };
 
-const nationality_main = [
-  {
-    label: "ไทย",
-    value: "thai",
-  },
-  {
-    label: "พม่า",
-    value: "myanmar",
-  },
-  {
-    label: "ลาว",
-    value: "laos",
-  },
-  {
-    label: "กัมพูชา",
-    value: "cambodia",
-  },
-];
-
-const gender_main = [
-  {
-    label: "ชาย",
-    value: "male",
-  },
-  {
-    label: "หญิง",
-    value: "female",
-  },
-];
-
 const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -75,6 +46,36 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
   const lengthPY = authPayload.result
     ? Object.keys(authPayload.result).length
     : null;
+  const t = useTranslations();
+  const nationality_main = [
+    {
+      label: t("thailand"),
+      value: "thai",
+    },
+    {
+      label: t("myanmar"),
+      value: "myanmar",
+    },
+    {
+      label: t("laos"),
+      value: "laos",
+    },
+    {
+      label: t("cambodia"),
+      value: "cambodia",
+    },
+  ];
+
+  const gender_main = [
+    {
+      label: t("male"),
+      value: "male",
+    },
+    {
+      label: t("female"),
+      value: "female",
+    },
+  ];
   useEffect(() => {
     setProfilePayload(lengthPY ? authPayload.result : profile_payload);
     checkImageID(lengthPY ? authPayload.result : profile_payload);
@@ -140,13 +141,13 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
   return (
     <Fragment>
       <Typography fontWeight={500} fontSize={28}>
-        ข้อมูลของคุณ
+        {t("profile-page.information")}
       </Typography>
       <Divider sx={{ marginY: 3 }}></Divider>
       <Grid container>
         <Grid xs={3} item>
           <Typography fontWeight={500} fontSize={20}>
-            รูปของคุณ
+            {t("profile-page.picture")}
           </Typography>
           <Grid my={3}>
             <Badge
@@ -175,15 +176,15 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
             </Badge>
           </Grid>
           <Typography color={"#A6ADB4"} fontSize={12}>
-            - สนับสนุนไฟล์: .PNG, .JPG
+            - {t("profile-page.support-files")}: .PNG, .JPG
           </Typography>
           <Typography color={"#A6ADB4"} fontSize={12}>
-            - ไฟล์ขนาด: ไม่เกิน 2mb
+            - {t("profile-page.file-size")}: ไม่เกิน 2mb
           </Typography>
         </Grid>
         <Grid xs={9} item>
           <Typography sx={{ marginBottom: 3 }} fontWeight={500} fontSize={20}>
-            ข้อมูลส่วนตัวของคุณ
+            {t("profile-page.personal-information")}
           </Typography>
           <Grid mb={3} container spacing={3}>
             <Grid item>
@@ -201,7 +202,7 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
                 select
                 name="nationality"
                 size="small"
-                label="สัญชาติ"
+                label={t("nationality")}
                 placeholder="กรุณากรอก"
                 value={profilePayload.nationality}
                 onChange={changeField}
@@ -218,7 +219,7 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
                 focused
                 name="idcard"
                 size="small"
-                label="เลขบัตรประจำตัวประชาชน"
+                label={t("card-number")}
                 placeholder="กรุณากรอก"
                 value={profilePayload.idcard}
                 onChange={changeField}
@@ -229,7 +230,7 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
                 focused
                 name="pre_name"
                 size="small"
-                label="คำนำหน้าชื่อ"
+                label={t("register-page.title")}
                 placeholder="กรุณากรอก"
                 value={profilePayload.pre_name}
                 onChange={changeField}
@@ -242,7 +243,7 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
                 focused
                 name="first_name"
                 size="small"
-                label="ชื่อจริง"
+                label={t("register-page.firstname")}
                 placeholder="กรุณากรอก"
                 value={profilePayload.first_name}
                 onChange={changeField}
@@ -253,7 +254,7 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
                 focused
                 name="last_name"
                 size="small"
-                label="นามสกุล"
+                label={t("register-page.lastname")}
                 placeholder="กรุณากรอก"
                 value={profilePayload.last_name}
                 onChange={changeField}
@@ -263,7 +264,7 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
               <LocalizationProvider dateAdapter={AdapterMoment}>
                 <DatePicker
                   inputFormat="yyyy-MM-DD"
-                  label="วันเกิด"
+                  label={t("birthday")}
                   disableFuture
                   value={profilePayload.date_of_birth || null}
                   onChange={(value) => {
@@ -304,7 +305,7 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
                 select
                 name="gender"
                 size="small"
-                label="เพศ"
+                label={t("gender")}
                 placeholder="กรุณากรอก"
                 value={profilePayload.gender}
                 onChange={changeField}
@@ -321,7 +322,7 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
                 focused
                 name="phone"
                 size="small"
-                label="โทรศัพท์"
+                label={t("phone")}
                 placeholder="กรุณากรอก"
                 error={checkPhoneTh}
                 value={profilePayload.phone}
@@ -333,7 +334,7 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
                 focused
                 name="email"
                 size="small"
-                label="อีเมล"
+                label={t("email")}
                 placeholder="กรุณากรอก"
                 value={profilePayload.email}
                 onChange={changeField}

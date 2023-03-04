@@ -17,6 +17,7 @@ import Lesson from "../../api/api_lesson";
 import Question from "../../api/api_question";
 import ModalSuccess from "../common/ModalSuccess";
 import ModalFail from "../common/ModalFail";
+import { useTranslations } from "next-intl";
 const path = process.env.NEXT_PUBLIC_BASE_API;
 
 const LessonQuiz = ({
@@ -42,6 +43,7 @@ const LessonQuiz = ({
   const [questPayload, setQuestPayload] = useState({ type: "", id: "" });
   const [score, setScore] = useState("");
   const [objectId, setObjectId] = useState();
+  const t = useTranslations();
 
   useEffect(() => {
     confirm && handleClick();
@@ -281,7 +283,11 @@ const LessonQuiz = ({
                 {chap.pre_test.user_action ? (
                   <Grid
                     mt={5}
-                    sx={{ border: "3px solid #3CBB8E", padding: 1 }}
+                    sx={{
+                      border: "3px solid #3CBB8E",
+                      padding: 1,
+                      textAlign: "center",
+                    }}
                     xs={3}
                   >
                     <Typography
@@ -289,7 +295,7 @@ const LessonQuiz = ({
                       fontSize={24}
                       fontWeight={700}
                     >
-                      คุณผ่านบทเรียนนี้แล้ว
+                      {t("lesson-page.passed")}
                     </Typography>
                   </Grid>
                 ) : (
@@ -304,7 +310,7 @@ const LessonQuiz = ({
                       setObjectId(chap.pre_test.id);
                     }}
                   >
-                    เริ่มเข้าสู่บทเรียน{" "}
+                    {t("lesson-page.start")}{" "}
                     <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
                   </Button>
                 )}
@@ -426,7 +432,7 @@ const LessonQuiz = ({
                       fontSize={24}
                       fontWeight={700}
                     >
-                      คุณผ่านบทเรียนนี้แล้ว
+                      {t("lesson-page.passed")}
                     </Typography>
                   </Grid>
                 ) : (
@@ -441,7 +447,7 @@ const LessonQuiz = ({
                       setObjectId(chap.post_test.id);
                     }}
                   >
-                    เริ่มเข้าสู่บทเรียน{" "}
+                    {t("lesson-page.start")}{" "}
                     <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
                   </Button>
                 )}
@@ -469,14 +475,15 @@ const LessonQuiz = ({
                   })
                 }
               >
-                ส่งการบ้าน <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
+                {t("profile-page.sent-homework")}{" "}
+                <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
               </Button>
               <Typography
                 sx={{ marginTop: 2, color: "#666666" }}
                 fontWeight={300}
                 fontSize={12}
               >
-                *คุณสามารถดูโจทย์อีกครั้ง หรือส่งการบ้านได้ที่เมนูสมาชิก
+                *{t("lesson-page.homework-des")}
               </Typography>
             </Fragment>
           </Fragment>

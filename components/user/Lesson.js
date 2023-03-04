@@ -28,9 +28,8 @@ import CertificateModal from "./CertificateModal";
 import lessonApi from "../../api/api_lesson";
 import Homework from "../../api/api_homework";
 import upload from "../../api/api_upload";
+import { useTranslations } from "next-intl";
 const path = process.env.NEXT_PUBLIC_BASE_API;
-const header_lesson = ["บทเรียนของคุณ", "สถานะ", "ใบเกียรติบัตร"];
-const header_homework = ["รายการ", "บทเรียน", "สถานะ", ""];
 
 const Lesson = ({
   setOpenSnackbar,
@@ -48,6 +47,13 @@ const Lesson = ({
   const [linkPayload, setLinkPayload] = useState([]);
   const [filePayload, setFilePayload] = useState([]);
   const [fileList, setFileList] = useState([]);
+  const t = useTranslations();
+  const header_lesson = [
+    t("profile-menu.your-lesson"),
+    t("status"),
+    t("certificate"),
+  ];
+  const header_homework = [t("list"), t("lesson-page.lesson"), t("status"), ""];
 
   useEffect(() => {
     getLessonList();
@@ -217,13 +223,13 @@ const Lesson = ({
       {query.id ? (
         <Fragment>
           <Typography fontWeight={500} fontSize={28}>
-            การบ้าน {homework.chapter_homework_id}
+            {t("profile-menu.homework")} {homework.chapter_homework_id}
           </Typography>
           <Divider sx={{ marginY: 3 }}></Divider>
           <Typography fontSize={16}>{homework.homework_description}</Typography>
           <Grid mt={3} container>
             <Typography sx={{ marginRight: 5 }} fontSize={16}>
-              แนบลิงก์
+              {t("attach-link")}
             </Typography>
             <Grid xs={8} item>
               {loopTextField()}
@@ -231,7 +237,7 @@ const Lesson = ({
           </Grid>
           <Grid mt={3} container>
             <Typography sx={{ marginRight: 8 }} fontSize={16}>
-              แนบไฟล์
+              {t("attach-file")}
             </Typography>
             <Grid xs={8} item>
               <Button
@@ -239,7 +245,7 @@ const Lesson = ({
                 variant="contained"
                 component="label"
               >
-                อัพโหลดไฟล์
+                {t("upload-file")}
                 <input hidden multiple type="file" onChange={uploadFile} />
               </Button>
               <TableContainer
@@ -261,7 +267,7 @@ const Lesson = ({
                           color: "#ffffff",
                         }}
                       >
-                        รายการไฟล์
+                        {t("file-list")}
                       </TableCell>
                       <TableCell
                         sx={{
@@ -329,7 +335,9 @@ const Lesson = ({
       ) : (
         <Fragment>
           <Typography fontWeight={500} fontSize={28}>
-            {query.type === "lesson" ? "บทเรียนของคุณ" : "การบ้านของคุณ"}
+            {query.type === "lesson"
+              ? t("profile-menu.your-lesson")
+              : t("profile-menu.your-homework")}
           </Typography>
           <TableContainer
             component={Paper}
@@ -413,7 +421,7 @@ const Lesson = ({
                                     color: "#121212",
                                   }}
                                 >
-                                  เรียนจบแล้ว
+                                  {t("lesson-page.graduated")}
                                 </Typography>
                               </Fragment>
                             ) : (
@@ -425,7 +433,7 @@ const Lesson = ({
                                     color: "#121212",
                                   }}
                                 >
-                                  กำลังเรียน
+                                  {t("lesson-page.studying")}
                                 </Typography>
                               </Fragment>
                             )}
@@ -442,7 +450,7 @@ const Lesson = ({
                           {e.status ? (
                             e.is_certificate ? (
                               <Button className={classes.button_active}>
-                                ดาวน์โหลด
+                                {t("download")}
                               </Button>
                             ) : (
                               <Button
@@ -454,7 +462,7 @@ const Lesson = ({
                                 disabled={!e.status}
                                 onClick={() => getQuestion()}
                               >
-                                ขอรับใบเกียรติบัตร
+                                {t("certificate")}
                               </Button>
                             )
                           ) : (
@@ -462,7 +470,7 @@ const Lesson = ({
                               className={classes.button_active}
                               onClick={() => pushLearning(e.id)}
                             >
-                              เรียนต่อ
+                              {t("profile-page.continue-studying")}
                             </Button>
                           )}
                         </TableCell>
@@ -484,7 +492,7 @@ const Lesson = ({
                             color: "#121212",
                           }}
                         >
-                          การบ้าน {e.chapter_homework_id}
+                          {t("profile-menu.homework")} {e.chapter_homework_id}
                         </TableCell>
                         <TableCell
                           sx={{
@@ -509,7 +517,7 @@ const Lesson = ({
                                     color: "#121212",
                                   }}
                                 >
-                                  ส่งแล้ว
+                                  {t("profile-page.sent-success")}
                                 </Typography>
                               </Fragment>
                             ) : (
@@ -520,7 +528,7 @@ const Lesson = ({
                                   color: "#121212",
                                 }}
                               >
-                                กำลังทำ
+                                {t("profile-page.doing")}
                               </Typography>
                             )}
                           </Grid>
@@ -541,7 +549,7 @@ const Lesson = ({
                             }
                             onClick={() => pageSentHomework(e)}
                           >
-                            ส่งการบ้าน
+                            {t("profile-page.sent-homework")}
                           </Button>
                         </TableCell>
                       </TableRow>
@@ -573,6 +581,7 @@ const useStyles = makeStyles({
       "transparent linear-gradient(90deg, #3CBB8E 0%, #2DA373 100%) 0% 0% no-repeat padding-box",
     boxShadow: "0px 5px 10px #3CBB8E7A",
     borderRadius: 100,
+    textTransform: "none",
   },
   button_inactive: {
     width: 150,
@@ -582,6 +591,7 @@ const useStyles = makeStyles({
     color: "#3CBB8E",
     border: "2px solid #3CBB8E",
     borderRadius: 100,
+    textTransform: "none",
   },
   button_disabled: {
     width: 150,
@@ -592,5 +602,6 @@ const useStyles = makeStyles({
     border: "2px solid #F1F1F1",
     background: "#F1F1F1",
     borderRadius: 100,
+    textTransform: "none",
   },
 });

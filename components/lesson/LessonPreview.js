@@ -1,6 +1,7 @@
 import { CardMembership, VerifiedOutlined } from "@mui/icons-material";
 import { Button, Container, Divider, Grid, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 import { Fragment, useEffect, useState } from "react";
 const path = process.env.NEXT_PUBLIC_BASE_API;
@@ -8,6 +9,7 @@ const path = process.env.NEXT_PUBLIC_BASE_API;
 const LessonPreview = ({ lesson, getLesson }) => {
   const classes = useStyles();
   const { push, pathname, query } = useRouter();
+  const t = useTranslations();
 
   return (
     <Fragment>
@@ -16,12 +18,12 @@ const LessonPreview = ({ lesson, getLesson }) => {
           <Grid
             sx={{ height: 130 }}
             container
-            alignContent={"center"}
+            alignItems={"center"}
             justifyContent={"space-between"}
           >
             <Grid>
               <Typography fontWeight={500} fontSize={32}>
-                บทเรียนออนไลน์ :{" "}
+                {t("learning-online")} :{" "}
                 <span style={{ color: "#0076FF" }}>{lesson.lesson_name}</span>
               </Typography>
             </Grid>
@@ -30,7 +32,7 @@ const LessonPreview = ({ lesson, getLesson }) => {
                 className={classes.button_confirm}
                 onClick={() => getLesson("learning", lesson.id, "", "pre_test")}
               >
-                ลงทะเบียนเรียนฟรี
+                {t("register-free")}
               </Button>
             </Grid>
           </Grid>
@@ -52,7 +54,7 @@ const LessonPreview = ({ lesson, getLesson }) => {
           >
             <Grid xs={3} pr={3} item>
               <Typography fontWeight={500} fontSize={28}>
-                จุดเด่น
+                {t("lesson-page.highlight")}
               </Typography>
               <Divider sx={{ marginY: 3 }}></Divider>
               {lesson.prominent_point &&
@@ -80,7 +82,7 @@ const LessonPreview = ({ lesson, getLesson }) => {
             </Grid>
             <Grid xs={9} item>
               <Typography fontWeight={500} fontSize={28}>
-                รายละเอียด
+                {t("lesson-page.description")}
               </Typography>
               <Divider sx={{ marginY: 3 }}></Divider>
               <Typography color={"#727272"} fontSize={16}>
@@ -106,5 +108,6 @@ const useStyles = makeStyles({
     fontSize: 24,
     fontWeight: 500,
     color: "#ffffff",
+    textTransform: "none",
   },
 });

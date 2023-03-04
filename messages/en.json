@@ -1,27 +1,27 @@
 {
   "navbar-menu": {
     "menu1": {
-      "title": "หน้าแรก",
+      "title": "Home",
       "link": "/"
     },
     "menu2": {
-      "title": "บทเรียน",
+      "title": "Lesson",
       "link": "/lesson?action=list"
     },
     "menu3": {
-      "title": "เกี่ยวกับเรา",
+      "title": "About Us",
       "link": "/about_us"
     },
     "menu4": {
-      "title": "ผู้สนับสนุน",
+      "title": "Sponsor",
       "link": "/sponsor"
     },
     "menu5": {
-      "title": "ติดต่อเรา",
+      "title": "Contact",
       "link": "/contact"
     },
     "menu6": {
-      "title": "เข้าสู่ระบบ",
+      "title": "Login",
       "link": "/auth?action=login&type=phone"
     }
   },
@@ -32,9 +32,9 @@
   },
   "about-us-text": {
     "about-us1": "Learning Platform",
-    "about-us2": "อสต. ออนไลน์",
-    "about-us3": "เพื่อพัฒนาความรู้ อสต. ให้สามารถนำไปปรับใช้ และช่วยเหลือคนในชุมชน",
-    "about-us-button": "ดูเพิ่มเติม"
+    "about-us2": "Aorsortor Online",
+    "about-us3": "To develop knowledge of SAO to be able to apply and helping people in the community",
+    "about-us-button": "See more"
   },
   "about-us-card-text": {
     "card1": {
@@ -59,81 +59,142 @@
     }
   },
   "sponsor-text": {
-    "title": "ผู้สนับสนุนใจดี",
-    "button": "ดูทั้งหมด"
+    "title": "Sponsor",
+    "button": "See more"
   },
   "count-user-text": {
     "count-user1": {
       "icon": "/icon/viewer.svg",
-      "title": "ผู้เข้าชมเว็บไซต์",
+      "title": "Website Visitors",
       "count": "page_count"
     },
     "count-user2": {
       "icon": "/icon/group_user.svg",
-      "title": "ผู้เข้าอบรม",
+      "title": "Participants",
       "count": "user_train"
     },
     "count-user3": {
       "icon": "/icon/congratulation_user.svg",
-      "title": "ผู้ผ่านการอบรม",
+      "title": "Trained",
       "count": "user_train_success"
     }
   },
   "footer-text": {
     "footer1": {
-      "title": "ศูนย์การเรียนรู้ อสต ผ่านระบบออนไลน์",
-      "des": "420/6 ถนน ราชวิถี ราชเทวี กรุงเทพมหานคร ประเทศไทย"
+      "title": "Learning Center for the Ministry of Education through online system",
+      "des": "420/6 Ratchawithi Road, Ratchathewi, Bangkok, Thailand"
     },
     "footer2": {
-      "title": "ติดต่อ",
-      "des": "โทร: 0 2354 9100-19 aorsortor.onlineth@gmail.com"
+      "title": "Contact",
+      "des": "Phone: 0 2354 9100-19 aorsortor.onlineth@gmail.com"
     },
     "footer3": {
-      "title": "ติดตามข่าวสาร",
+      "title": "Follow the news",
       "des": ""
     }
   },
   "about-text": {
-    "title": "โครงการ",
-    "subtitle": "“สร้างเสริมความรอบรู้ด้านสุขภาพในชุมชนไทยและเมียนมา”",
+    "title": "Project",
+    "subtitle": "“Promoting health literacy in Thai and Myanmar communities”",
     "description": ""
   },
   "contact-text": {
-    "title": "ติดต่อเรา",
-    "subtitle": "ศูนย์การเรียนรู้ อสต ผ่านระบบออนไลน์",
-    "fullname": "ชื่อจริง - นามสกุล",
-    "title-description": "หัวข้อที่ต้องการติดต่อ",
-    "description": "ข้อความ",
-    "button": "ส่งข้อความ"
+    "title": "Contact Us",
+    "subtitle": "Learning Center for the Ministry of Education through online system",
+    "fullname": "Firstname - Lastname",
+    "title-description": "Title",
+    "description": "Message",
+    "button": "Sent"
   },
   "login-page": {
-    "login-for": "เข้าสู่ระบบโดย"
+    "login-for": "Login By"
   },
   "register-page": {
-    "title": "",
-    "firstname": "",
-    "lastname": ""
+    "title": "Title",
+    "firstname": "Firstname",
+    "lastname": "Lastname"
   },
-  "banner-home": "หน้าแรก",
-  "learning-online": "บทเรียนออนไลน์",
-  "submit": "ตกลง",
-  "cancel": "ยกเลิก",
-  "register-free": "ลงทะเบียนเรียนฟรี",
-  "login": "เข้าสู่ระบบ",
-  "register": "สมัครสมาชิก",
-  "phone": "หมายเลขโทรศัพท์มือถือ",
-  "email": "อีเมล",
-  "password": "รหัสผ่าน",
-  "remember-password": "จำฉันไว้ในระบบ",
-  "forgot-password": "ลืมรหัสผ่าน",
-  "reset-password": "รีเซ็ตรหัสผ่าน",
-  "change-password": "ตั้งรหัสผ่านใหม่",
-  "gender": "เพศ",
-  "male": "ชาย",
-  "female": "หญิง",
-  "nationality": "สัญชาติ",
-  "thailand": "ไทย",
-  "myanmar": "พม่า",
-  "laos": "ลาว",
-  "cambodia": "กัมพูชา"
+  "lesson-page": {
+    "lesson-list": "Lesson List",
+    "details": "Details",
+    "enroll": "Register Lesson",
+    "lesson": "Lesson",
+    "description": "Description",
+    "highlight": "Highlight",
+    "studying": "Studying",
+    "graduated": "Graduated",
+    "sent-answer": "Sent",
+    "next-chapter": "Next Chapter",
+    "passed": "You have passed this lesson",
+    "start": "Start the lesson",
+    "homework-des": "You can look at the problem again. or submit homework at the member menu"
+  },
+  "lesson-menu": {
+    "progress": "Progress",
+    "pre-test": "Pre Test",
+    "video": "Video",
+    "file": "Files",
+    "post-test": "Post Test",
+    "homework": "Homework"
+  },
+  "profile-menu": {
+    "welcome": "Welcome",
+    "your-lesson": "Lesson",
+    "your-homework": "Homework",
+    "homework": "Homework",
+    "lesson-enroll": "Lesson Enroll List"
+  },
+  "profile-page": {
+    "information": "Information",
+    "picture": "Picture",
+    "support-files": "Support File",
+    "file-size": "File Size",
+    "personal-information": "Personal Information",
+    "sent-homework": "Sent",
+    "sent-success": "Success",
+    "doing": "Doing",
+    "continue-studying": "Continue"
+  },
+  "modal-text": {
+    "text1": "Awesome",
+    "text2": "You have successfully submitted your homework.",
+    "text3": "Congratulations, you have passed the exam.",
+    "text4": "You score",
+    "text5": "Water break",
+    "text6": "Try a little more we are encouraged",
+    "text7": "Try again"
+  },
+  "banner-home": "Home",
+  "learning-online": "Lesson Online",
+  "submit": "Confirm",
+  "cancel": "Cancel",
+  "register-free": "Register Free",
+  "login": "Login",
+  "register": "Register",
+  "phone": "Phone Number",
+  "email": "Email",
+  "password": "Password",
+  "save-data": "Save",
+  "remember-password": "Remember",
+  "forgot-password": "Forgot Password",
+  "reset-password": "Reset Password",
+  "change-password": "Change Password",
+  "gender": "Gender",
+  "male": "Male",
+  "female": "Female",
+  "nationality": "Nationality",
+  "thailand": "Thailand",
+  "myanmar": "Myanmar",
+  "laos": "Laos",
+  "cambodia": "Cambodia",
+  "card-number": "ID Card Number",
+  "birthday": "Birthday",
+  "download": "Download",
+  "certificate": "Certificate",
+  "upload-file": "Upload File",
+  "attach-file": "Attach File",
+  "attach-link": "Attach Link",
+  "file-list": "File List",
+  "status": "Status",
+  "list": "List"
 }

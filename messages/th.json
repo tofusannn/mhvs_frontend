@@ -110,9 +110,59 @@
     "login-for": "เข้าสู่ระบบโดย"
   },
   "register-page": {
-    "title": "",
-    "firstname": "",
-    "lastname": ""
+    "title": "คำนำหน้า",
+    "firstname": "ชื่อจริง",
+    "lastname": "นามสกุล"
+  },
+  "lesson-page": {
+    "lesson-list": "บทเรียนทั้งหมด",
+    "details": "ดูรายละเอียด",
+    "enroll": "ลงทะเบียนเรียน",
+    "lesson": "บทเรียน",
+    "description": "รายละเอียด",
+    "highlight": "จุดเด่น",
+    "studying": "กำลังเรียน",
+    "graduated": "เรียนจบแล้ว",
+    "sent-answer": "ส่งคำตอบ",
+    "next-chapter": "บทถัดไป",
+    "passed": "คุณผ่านบทเรียนนี้แล้ว",
+    "start": "เริ่มเข้าสู่บทเรียน",
+    "homework-des": "คุณสามารถดูโจทย์อีกครั้ง หรือส่งการบ้านได้ที่เมนูสมาชิก"
+  },
+  "lesson-menu": {
+    "progress": "ความคืบหน้า",
+    "pre-test": "แบบฝึกหัดก่อนเรียน",
+    "video": "วิดีโอ",
+    "file": "เอกสารอ่านเพิ่มเติม",
+    "post-test": "แบบทดสอบหลังเรียน",
+    "homework": "การบ้าน"
+  },
+  "profile-menu": {
+    "welcome": "ยินดีต้อนรับ",
+    "your-lesson": "บทเรียนของคุณ",
+    "your-homework": "การบ้านของคุณ",
+    "homework": "การบ้าน",
+    "lesson-enroll": "รายการบทเรียนที่คุณลงทะเบียนเรียน"
+  },
+  "profile-page": {
+    "information": "ข้อมูลของคุณ",
+    "picture": "รูปของคุณ",
+    "support-files": "สนับสนุนไฟล์",
+    "file-size": "ไฟล์ขนาด",
+    "personal-information": "ข้อมูลส่วนตัวของคุณ",
+    "sent-homework": "ส่งการบ้าน",
+    "sent-success": "ส่งแล้ว",
+    "doing": "กำลังทำ",
+    "continue-studying": "เรียนต่อ"
+  },
+  "modal-text": {
+    "text1": "สุดยอดไปเลย",
+    "text2": "คุณส่งการบ้านสำเร็จแล้ว",
+    "text3": "ยินดีด้วย คุณสอบผ่านแล้ว",
+    "text4": "คุณได้คะแนน",
+    "text5": "พักดื่มน้ำ",
+    "text6": "พยายามอีกนิดนะ พวกเราเป็นกำลังใจให้",
+    "text7": "พยายามอีกครั้ง"
   },
   "banner-home": "หน้าแรก",
   "learning-online": "บทเรียนออนไลน์",
@@ -124,6 +174,7 @@
   "phone": "หมายเลขโทรศัพท์มือถือ",
   "email": "อีเมล",
   "password": "รหัสผ่าน",
+  "save-data": "บันทึกข้อมูล",
   "remember-password": "จำฉันไว้ในระบบ",
   "forgot-password": "ลืมรหัสผ่าน",
   "reset-password": "รีเซ็ตรหัสผ่าน",
@@ -135,5 +186,15 @@
   "thailand": "ไทย",
   "myanmar": "พม่า",
   "laos": "ลาว",
-  "cambodia": "กัมพูชา"
+  "cambodia": "กัมพูชา",
+  "card-number": "เลขบัตรประจำตัวประชาชน",
+  "birthday": "วันเกิด",
+  "download": "ดาวน์โหลด",
+  "certificate": "ขอรับใบเกียรติบัตร",
+  "upload-file": "อัพโหลดไฟล์",
+  "attach-file": "แนบไฟล์",
+  "attach-link": "แนบลิงก์",
+  "file-list": "รายการไฟล์",
+  "status": "สถานะ",
+  "list": "รายการ"
 }

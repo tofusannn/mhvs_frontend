@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import Lesson from "../../api/api_lesson";
 import LessonMenu from "./LessonMenu";
 import LessonQuiz from "./LessonQuiz";
+import { useTranslations } from "next-intl";
 
 const { Fragment, useState, useEffect } = require("react");
 
@@ -15,6 +16,7 @@ const LessonLearn = ({ lesson, chapter, getLesson }) => {
   const [confirm, setConfirm] = useState(false);
   const [buttonNext, setButtonNext] = useState(false);
   const chapterQ = parseInt(query.chapter);
+  const t = useTranslations();
 
   useEffect(() => {
     setStartQuiz(false);
@@ -109,7 +111,7 @@ const LessonLearn = ({ lesson, chapter, getLesson }) => {
           >
             <Grid>
               <Typography fontWeight={500} fontSize={32}>
-                บทเรียนออนไลน์ :{" "}
+                {t("learning-online")} :{" "}
                 <span style={{ color: "#0076FF" }}>{lesson.lesson_name}</span>
               </Typography>
             </Grid>
@@ -158,7 +160,8 @@ const LessonLearn = ({ lesson, chapter, getLesson }) => {
             variant="contained"
             onClick={() => setConfirm(true)}
           >
-            ส่งคำตอบ <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
+            {t("lesson-page.sent-answer")}{" "}
+            <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
           </Button>
         </Grid>
       )}
@@ -178,7 +181,8 @@ const LessonLearn = ({ lesson, chapter, getLesson }) => {
             variant="contained"
             onClick={() => handleClick()}
           >
-            บทถัดไป <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
+            {t("lesson-page.next-chapter")}{" "}
+            <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
           </Button>
         </Grid>
       ) : query.name === "pre_test" ? (
@@ -203,7 +207,8 @@ const LessonLearn = ({ lesson, chapter, getLesson }) => {
                   variant="contained"
                   onClick={() => handleClick()}
                 >
-                  บทถัดไป <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
+                  {t("lesson-page.next-chapter")}{" "}
+                  <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
                 </Button>
               </Grid>
             )
@@ -231,7 +236,8 @@ const LessonLearn = ({ lesson, chapter, getLesson }) => {
                   variant="contained"
                   onClick={() => handleClick()}
                 >
-                  บทถัดไป <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
+                  {t("lesson-page.next-chapter")}{" "}
+                  <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
                 </Button>
               </Grid>
             )

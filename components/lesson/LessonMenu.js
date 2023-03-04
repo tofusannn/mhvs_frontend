@@ -10,10 +10,12 @@ import { makeStyles } from "@mui/styles";
 import { useRouter } from "next/router";
 import { Fragment } from "react";
 import Lesson from "../../api/api_lesson";
+import { useTranslations } from "next-intl";
 
 const LessonMenu = ({ chapter, getLesson }) => {
   const classes = useStyles();
   const { query } = useRouter();
+  const t = useTranslations();
 
   async function handleClickMenu(chap, name, menu) {
     getLesson("learning", query.lesson, chap, name, menu);
@@ -47,7 +49,7 @@ const LessonMenu = ({ chapter, getLesson }) => {
   return (
     <Fragment>
       <Typography fontWeight={500} fontSize={28}>
-        ความคืบหน้า
+        {t("lesson-menu.progress")}
       </Typography>
       <Divider sx={{ marginY: 3 }}></Divider>
       {chapter &&
@@ -89,7 +91,8 @@ const LessonMenu = ({ chapter, getLesson }) => {
                     }
                   >
                     <Grid container>
-                      <Quiz sx={{ marginRight: 1 }}></Quiz> แบบฝึกหัดก่อนเรียน
+                      <Quiz sx={{ marginRight: 1 }}></Quiz>{" "}
+                      {t("lesson-menu.pre-test")}
                     </Grid>
                     {e.pre_test.user_action && (
                       <CheckCircle
@@ -123,7 +126,8 @@ const LessonMenu = ({ chapter, getLesson }) => {
                     }
                   >
                     <Grid container>
-                      <PlayCircle sx={{ marginRight: 1 }}></PlayCircle> Video
+                      <PlayCircle sx={{ marginRight: 1 }}></PlayCircle>{" "}
+                      {t("lesson-menu.video")}
                     </Grid>
                     {e.video.user_action && (
                       <CheckCircle
@@ -158,7 +162,7 @@ const LessonMenu = ({ chapter, getLesson }) => {
                   >
                     <Grid container>
                       <PictureAsPdf sx={{ marginRight: 1 }}></PictureAsPdf>{" "}
-                      เอกสารอ่านเพิ่มเติม
+                      {t("lesson-menu.file")}
                     </Grid>
                     {e.file.user_action && (
                       <CheckCircle
@@ -196,7 +200,8 @@ const LessonMenu = ({ chapter, getLesson }) => {
                     }
                   >
                     <Grid container>
-                      <Quiz sx={{ marginRight: 1 }}></Quiz> แบบทดสอบหลังเรียน
+                      <Quiz sx={{ marginRight: 1 }}></Quiz>{" "}
+                      {t("lesson-menu.post-test")}
                     </Grid>
                     {e.post_test.user_action && (
                       <CheckCircle
@@ -231,7 +236,7 @@ const LessonMenu = ({ chapter, getLesson }) => {
                   >
                     <Grid container>
                       <Description sx={{ marginRight: 1 }}></Description>{" "}
-                      การบ้าน
+                      {t("lesson-menu.homework")}
                     </Grid>
                     {e.homework.user_action && (
                       <CheckCircle

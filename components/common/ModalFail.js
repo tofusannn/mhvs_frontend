@@ -9,6 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { useTranslations } from "next-intl";
 
 const ModalFail = ({
   type,
@@ -19,11 +20,9 @@ const ModalFail = ({
   handleClickNext,
 }) => {
   const classes = useStyles();
+  const t = useTranslations();
   return (
-    <Dialog
-      open={openModalFail}
-      sx={{ "& .MuiPaper-root": { borderRadius: "16px" } }}
-    >
+    <Dialog open={openModalFail} sx={{ "& .MuiPaper-root": { borderRadius: "16px" } }}>
       <Card>
         <CardContent>
           <Grid container justifyContent={"center"}>
@@ -35,10 +34,11 @@ const ModalFail = ({
           </Grid>
           <Grid mb={6} container justifyContent={"center"} textAlign={"center"}>
             <Typography mb={1} fontWeight={500} fontSize={32}>
-              พยายามอีกนิดนะ พวกเราเป็นกำลังใจให้
+              {t("modal-text.text6")}
             </Typography>
             <Typography fontWeight={500} fontSize={24}>
-              คุณได้คะแนน <span style={{ color: "#FF698B" }}>{score}</span>
+              {t("modal-text.text4")}{" "}
+              <span style={{ color: "#FF698B" }}>{score}</span>
             </Typography>
           </Grid>
           <Grid container justifyContent={"center"}>
@@ -48,9 +48,10 @@ const ModalFail = ({
                   ? classes.buttonConfirm
                   : classes.buttonConfirm2
               }
+              sx={{ textTransform: "none" }}
               onClick={() => setOpenModalFail(false)}
             >
-              <Coffee sx={{ marginRight: 1 }}></Coffee> พักดื่มน้ำ
+              <Coffee sx={{ marginRight: 1 }}></Coffee> {t("modal-text.text5")}
             </Button>
             {type === "homework" ? (
               ""
@@ -63,7 +64,7 @@ const ModalFail = ({
                   setOpenModalFail(false);
                 }}
               >
-                พยายามอีกครั้ง <Replay sx={{ marginLeft: 1 }}></Replay>
+                {t("modal-text.text7")} <Replay sx={{ marginLeft: 1 }}></Replay>
               </Button>
             )}
           </Grid>
