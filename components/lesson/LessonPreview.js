@@ -21,13 +21,17 @@ const LessonPreview = ({ lesson, getLesson }) => {
             alignItems={"center"}
             justifyContent={"space-between"}
           >
-            <Grid>
+            <Grid xs={3}>
               <Typography fontWeight={500} fontSize={32}>
-                {t("learning-online")} :{" "}
+                {t("learning-online")} :
+              </Typography>
+            </Grid>
+            <Grid xs={7}>
+              <Typography fontWeight={500} fontSize={32}>
                 <span style={{ color: "#0076FF" }}>{lesson.lesson_name}</span>
               </Typography>
             </Grid>
-            <Grid>
+            <Grid xs={2}>
               <Button
                 className={classes.button_confirm}
                 onClick={() => getLesson("learning", lesson.id, "", "pre_test")}

@@ -177,7 +177,7 @@ const useStyles = makeStyles({
     background: "#F1F8FE 0% 0% no-repeat padding-box",
   },
   button_confirm: {
-    width: 228,
+    minWidth: 228,
     height: 48,
     background: "transparent linear-gradient(90deg, #3CBB8E 0%, #2DA373 100%)",
     boxShadow: "0px 5px 10px #3CBB8E7A",

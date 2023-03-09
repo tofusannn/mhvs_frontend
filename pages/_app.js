@@ -2,7 +2,9 @@ import { useRouter } from "next/router";
 import { NextIntlProvider } from "next-intl";
 import { Fragment } from "react";
 import th from "../messages/th.json";
-import en from "../messages/en.json";
+import mm from "../messages/mm.json";
+import ls from "../messages/ls.json";
+import cd from "../messages/cd.json";
 import Head from "next/head";
 import NavBar from "../components/NavBar";
 import "../styles/globals.css";
@@ -13,7 +15,9 @@ import { Provider } from "react-redux";
 
 const messages = {
   th,
-  en,
+  mm,
+  ls,
+  cd,
 };
 
 function MyApp({ Component, pageProps }) {

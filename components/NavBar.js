@@ -44,6 +44,8 @@ const NavBar = (props) => {
   const [imageUser, setImageUser] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  const [anchorElTrans, setAnchorElTrans] = useState(null);
+  const openTrans = Boolean(anchorElTrans);
 
   useEffect(() => {
     const data = Cookies.get("token");
@@ -104,10 +106,41 @@ const NavBar = (props) => {
     return rows;
   }
 
-  function translationClick(e) {
-    const locale = e.target.name;
-    push("/", "/", { locale: locale });
+  function translationClick(name) {
+    handleCloseTrans();
+    push("/", "/", { locale: name });
   }
+
+  function getNameTranslate(locale) {
+    let name;
+    switch (locale) {
+      case "th":
+        name = "TH";
+        break;
+      case "mm":
+        name = "MM";
+        break;
+      case "ls":
+        name = "LS";
+        break;
+      case "cd":
+        name = "CD";
+        break;
+      default:
+        name = "TH";
+        break;
+    }
+    return name;
+  }
+
+  const handleClickTrans = (event) => {
+    setAnchorElTrans(event.currentTarget);
+  };
+
+  const handleCloseTrans = () => {
+    setAnchorElTrans(null);
+  };
+
   async function logoutUser() {
     await auth.logout(token);
     reload();
@@ -118,12 +151,15 @@ const NavBar = (props) => {
       <Container className={classes.containre_main}>
         <Toolbar sx={{ height: "100%" }} disableGutters>
           <Grid container alignSelf={"center"} justifyContent={"space-between"}>
-            <Grid item xs={3}>
-              <img src="/image/aorsortor_online.png" width={"60%"}></img>
+            <Grid item xs={locale === "th" ? 3 : 1}>
+              <img
+                src="/image/aorsortor_online.png"
+                width={locale === "th" ? "60%" : "150%"}
+              ></img>
             </Grid>
             <Grid
               item
-              xs={9}
+              xs={locale === "th" ? 9 : 11}
               container
               columnSpacing={10}
               alignItems={"center"}
@@ -157,12 +193,13 @@ const NavBar = (props) => {
                     ></Avatar>
                   </IconButton>
                   <Menu
+                    sx={{ marginTop: 1 }}
                     anchorEl={anchorEl}
                     open={open}
                     onClose={handleClose}
                     onClick={handleClose}
-                    transformOrigin={{ horizontal: "right", vertical: "top" }}
-                    anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+                    transformOrigin={{ horizontal: "center", vertical: "top" }}
+                    anchorOrigin={{ horizontal: "center", vertical: "bottom" }}
                   >
                     <MenuItem
                       onClick={() =>
@@ -175,7 +212,7 @@ const NavBar = (props) => {
                       <ListItemIcon>
                         <MenuBook></MenuBook>
                       </ListItemIcon>
-                      <Typography>Lesson</Typography>
+                      <Typography>{t("lesson-page.lesson")}</Typography>
                     </MenuItem>
                     <MenuItem
                       onClick={() =>
@@ -188,7 +225,7 @@ const NavBar = (props) => {
                       <ListItemIcon>
                         <Quiz></Quiz>
                       </ListItemIcon>
-                      <Typography>Homework</Typography>
+                      <Typography>{t("lesson-menu.homework")}</Typography>
                     </MenuItem>
                     <MenuItem
                       onClick={() =>
@@ -201,13 +238,13 @@ const NavBar = (props) => {
                       <ListItemIcon>
                         <ManageAccounts></ManageAccounts>
                       </ListItemIcon>
-                      <Typography>Profile</Typography>
+                      <Typography>{t("profile-page.information")}</Typography>
                     </MenuItem>
                     <MenuItem onClick={() => logoutUser()}>
                       <ListItemIcon>
                         <Logout />
                       </ListItemIcon>
-                      <Typography>Logout</Typography>
+                      <Typography>{t("logout")}</Typography>
                     </MenuItem>
                   </Menu>
                 </Fragment>
@@ -226,14 +263,50 @@ const NavBar = (props) => {
               )}
               <Grid sx={{ marginLeft: 4 }}>
                 <Button
-                  name={locale === "th" ? "en" : "th"}
                   className={classes.buttonTranslation}
                   variant="outlined"
                   size="small"
-                  onClick={translationClick}
+                  onClick={handleClickTrans}
                 >
-                  {locale === "th" ? "EN" : "TH"}
+                  {getNameTranslate(locale)}
                 </Button>
+                <Menu
+                  sx={{ marginTop: 1 }}
+                  anchorEl={anchorElTrans}
+                  open={openTrans}
+                  onClose={handleCloseTrans}
+                  transformOrigin={{ horizontal: "center", vertical: "top" }}
+                  anchorOrigin={{ horizontal: "center", vertical: "bottom" }}
+                >
+                  <MenuItem
+                    name="th"
+                    disabled={locale === "th"}
+                    onClick={() => translationClick("th")}
+                  >
+                    ภาษาไทย
+                  </MenuItem>
+                  <MenuItem
+                    name="mm"
+                    disabled={locale === "mm"}
+                    onClick={() => translationClick("mm")}
+                  >
+                    မြန်မာဘာသာ
+                  </MenuItem>
+                  {/* <MenuItem
+                    name="ls"
+                    disabled={locale === "ls"}
+                    onClick={() => translationClick("ls")}
+                  >
+                    ພາສາລາວ
+                  </MenuItem>
+                  <MenuItem
+                    name="cd"
+                    disabled={locale === "cd"}
+                    onClick={() => translationClick("cd")}
+                  >
+                    ភាសាខ្មែរ
+                  </MenuItem> */}
+                </Menu>
               </Grid>
             </Grid>
           </Grid>

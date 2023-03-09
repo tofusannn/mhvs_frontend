@@ -1,0 +1,201 @@
+{
+    "navbar-menu": {
+      "menu1": {
+        "title": "หน้าแรก",
+        "link": "/"
+      },
+      "menu2": {
+        "title": "บทเรียน",
+        "link": "/lesson?action=list"
+      },
+      "menu3": {
+        "title": "เกี่ยวกับเรา",
+        "link": "/about_us"
+      },
+      "menu4": {
+        "title": "ผู้สนับสนุน",
+        "link": "/sponsor"
+      },
+      "menu5": {
+        "title": "ติดต่อเรา",
+        "link": "/contact"
+      },
+      "menu6": {
+        "title": "เข้าสู่ระบบ",
+        "link": "/auth?action=login&type=phone"
+      }
+    },
+    "banner-text": {
+      "banner1": "ขอเชิญเรียนออนไลน์ หลักสูตร (เร่งรัด)",
+      "banner2": "ฝึกอบรมอาสาสมัครสาธารณสุขต่างด้าว (อสต.)",
+      "banner3": "เรียนฟรี...รับเกียรติบัตร ต่อยอดสู่ความสําเร็จ"
+    },
+    "about-us-text": {
+      "about-us1": "Learning Platform",
+      "about-us2": "อสต. ออนไลน์",
+      "about-us3": "เพื่อพัฒนาความรู้ อสต. ให้สามารถนำไปปรับใช้ และช่วยเหลือคนในชุมชน",
+      "about-us-button": "ดูเพิ่มเติม"
+    },
+    "about-us-card-text": {
+      "card1": {
+        "image": "/image/who.png",
+        "title": "สารผู้บริหาร อสต. ออนไลน์",
+        "link": "#"
+      },
+      "card2": {
+        "image": "/image/learning.png",
+        "title": "อสต. ออนไลน์ คืออะไร?",
+        "link": "#"
+      },
+      "card3": {
+        "image": "/image/homework.png",
+        "title": "คู่มือการใช้งาน อสต. ออนไลน์",
+        "link": "#"
+      },
+      "card4": {
+        "image": "/image/check_list.png",
+        "title": "เพิ่มแบบประเมิน website",
+        "link": "#"
+      }
+    },
+    "sponsor-text": {
+      "title": "ผู้สนับสนุนใจดี",
+      "button": "ดูทั้งหมด"
+    },
+    "count-user-text": {
+      "count-user1": {
+        "icon": "/icon/viewer.svg",
+        "title": "ผู้เข้าชมเว็บไซต์",
+        "count": "page_count"
+      },
+      "count-user2": {
+        "icon": "/icon/group_user.svg",
+        "title": "ผู้เข้าอบรม",
+        "count": "user_train"
+      },
+      "count-user3": {
+        "icon": "/icon/congratulation_user.svg",
+        "title": "ผู้ผ่านการอบรม",
+        "count": "user_train_success"
+      }
+    },
+    "footer-text": {
+      "footer1": {
+        "title": "ศูนย์การเรียนรู้ อสต ผ่านระบบออนไลน์",
+        "des": "420/6 ถนน ราชวิถี ราชเทวี กรุงเทพมหานคร ประเทศไทย"
+      },
+      "footer2": {
+        "title": "ติดต่อ",
+        "des": "โทร: 0 2354 9100-19 aorsortor.onlineth@gmail.com"
+      },
+      "footer3": {
+        "title": "ติดตามข่าวสาร",
+        "des": ""
+      }
+    },
+    "about-text": {
+      "title": "โครงการ",
+      "subtitle": "“สร้างเสริมความรอบรู้ด้านสุขภาพในชุมชนไทยและเมียนมา”",
+      "description": ""
+    },
+    "contact-text": {
+      "title": "ติดต่อเรา",
+      "subtitle": "ศูนย์การเรียนรู้ อสต ผ่านระบบออนไลน์",
+      "fullname": "ชื่อจริง - นามสกุล",
+      "title-description": "หัวข้อที่ต้องการติดต่อ",
+      "description": "ข้อความ",
+      "button": "ส่งข้อความ"
+    },
+    "login-page": {
+      "login-for": "เข้าสู่ระบบโดย"
+    },
+    "register-page": {
+      "title": "คำนำหน้า",
+      "firstname": "ชื่อจริง",
+      "lastname": "นามสกุล"
+    },
+    "lesson-page": {
+      "lesson-list": "บทเรียนทั้งหมด",
+      "details": "ดูรายละเอียด",
+      "enroll": "ลงทะเบียนเรียน",
+      "lesson": "บทเรียน",
+      "description": "รายละเอียด",
+      "highlight": "จุดเด่น",
+      "studying": "กำลังเรียน",
+      "graduated": "เรียนจบแล้ว",
+      "sent-answer": "ส่งคำตอบ",
+      "next-chapter": "บทถัดไป",
+      "passed": "คุณผ่านบทเรียนนี้แล้ว",
+      "start": "เริ่มเข้าสู่บทเรียน",
+      "homework-des": "คุณสามารถดูโจทย์อีกครั้ง หรือส่งการบ้านได้ที่เมนูสมาชิก"
+    },
+    "lesson-menu": {
+      "progress": "ความคืบหน้า",
+      "pre-test": "แบบฝึกหัดก่อนเรียน",
+      "video": "วิดีโอ",
+      "file": "เอกสารอ่านเพิ่มเติม",
+      "post-test": "แบบทดสอบหลังเรียน",
+      "homework": "การบ้าน"
+    },
+    "profile-menu": {
+      "welcome": "ยินดีต้อนรับ",
+      "your-lesson": "บทเรียนของคุณ",
+      "your-homework": "การบ้านของคุณ",
+      "homework": "การบ้าน",
+      "lesson-enroll": "รายการบทเรียนที่คุณลงทะเบียนเรียน"
+    },
+    "profile-page": {
+      "information": "ข้อมูลของคุณ",
+      "picture": "รูปของคุณ",
+      "support-files": "สนับสนุนไฟล์",
+      "file-size": "ไฟล์ขนาด",
+      "personal-information": "ข้อมูลส่วนตัวของคุณ",
+      "sent-homework": "ส่งการบ้าน",
+      "sent-success": "ส่งแล้ว",
+      "doing": "กำลังทำ",
+      "continue-studying": "เรียนต่อ"
+    },
+    "modal-text": {
+      "text1": "สุดยอดไปเลย",
+      "text2": "คุณส่งการบ้านสำเร็จแล้ว",
+      "text3": "ยินดีด้วย คุณสอบผ่านแล้ว",
+      "text4": "คุณได้คะแนน",
+      "text5": "พักดื่มน้ำ",
+      "text6": "พยายามอีกนิดนะ พวกเราเป็นกำลังใจให้",
+      "text7": "พยายามอีกครั้ง"
+    },
+    "banner-home": "หน้าแรก",
+    "learning-online": "บทเรียนออนไลน์",
+    "submit": "ตกลง",
+    "cancel": "ยกเลิก",
+    "register-free": "ลงทะเบียนเรียนฟรี",
+    "login": "เข้าสู่ระบบ",
+    "register": "สมัครสมาชิก",
+    "phone": "หมายเลขโทรศัพท์มือถือ",
+    "email": "อีเมล",
+    "password": "รหัสผ่าน",
+    "save-data": "บันทึกข้อมูล",
+    "remember-password": "จำฉันไว้ในระบบ",
+    "forgot-password": "ลืมรหัสผ่าน",
+    "reset-password": "รีเซ็ตรหัสผ่าน",
+    "change-password": "ตั้งรหัสผ่านใหม่",
+    "gender": "เพศ",
+    "male": "ชาย",
+    "female": "หญิง",
+    "nationality": "สัญชาติ",
+    "thailand": "ไทย",
+    "myanmar": "พม่า",
+    "laos": "ลาว",
+    "cambodia": "กัมพูชา",
+    "card-number": "เลขบัตรประจำตัวประชาชน",
+    "birthday": "วันเกิด",
+    "download": "ดาวน์โหลด",
+    "certificate": "ขอรับใบเกียรติบัตร",
+    "upload-file": "อัพโหลดไฟล์",
+    "attach-file": "แนบไฟล์",
+    "attach-link": "แนบลิงก์",
+    "file-list": "รายการไฟล์",
+    "status": "สถานะ",
+    "list": "รายการ"
+  }
+  

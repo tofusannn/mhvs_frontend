@@ -4,7 +4,7 @@ const nextConfig = {
   trailingSlash: true,
   swcMinify: false,
   i18n: {
-    locales: ["en", "th"],
+    locales: ["th", "mm", "ls", "cd"],
     defaultLocale: "th",
     localeDetection: false,
   },

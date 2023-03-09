@@ -68,7 +68,7 @@ const Banner = () => {
               variant="contained"
               onClick={() => changePage()}
             >
-              เริ่มต้นเลย
+              {t("started")}
             </Button>
           </Grid>
         </Container>
@@ -219,7 +219,7 @@ const Sponsor = ({ locale }) => {
     <Fragment>
       <div className={classes.sponsor_main}>
         <Container>
-          <Grid mb={5} container justifyContent={"center"}>
+          <Grid mb={5} container justifyContent={"center"} alignItems={"center"}>
             <Typography fontWeight={500} fontSize={32}>
               {t("sponsor-text.title")}
             </Typography>

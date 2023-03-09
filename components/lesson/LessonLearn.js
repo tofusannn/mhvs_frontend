@@ -11,7 +11,7 @@ const { Fragment, useState, useEffect } = require("react");
 
 const LessonLearn = ({ lesson, chapter, getLesson }) => {
   const classes = useStyles();
-  const { push, pathname, query } = useRouter();
+  const { push, pathname, query, locale } = useRouter();
   const [startQuiz, setStartQuiz] = useState(false);
   const [confirm, setConfirm] = useState(false);
   const [buttonNext, setButtonNext] = useState(false);
@@ -128,10 +128,10 @@ const LessonLearn = ({ lesson, chapter, getLesson }) => {
       >
         <Container>
           <Grid container>
-            <Grid xs={3} pr={3} item>
+            <Grid xs={locale === "mm" ? 3.1 : 3} pr={3} item>
               <LessonMenu chapter={chapter} getLesson={getLesson}></LessonMenu>
             </Grid>
-            <Grid xs={9} item>
+            <Grid xs={locale === "mm" ? 8.9 : 9} item>
               <LessonQuiz
                 chapter={chapter}
                 startQuiz={startQuiz}

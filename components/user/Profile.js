@@ -176,10 +176,10 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
             </Badge>
           </Grid>
           <Typography color={"#A6ADB4"} fontSize={12}>
-            - {t("profile-page.support-files")}: .PNG, .JPG
+            - {t("profile-page.support-files")}
           </Typography>
           <Typography color={"#A6ADB4"} fontSize={12}>
-            - {t("profile-page.file-size")}: ไม่เกิน 2mb
+            - {t("profile-page.file-size")}
           </Typography>
         </Grid>
         <Grid xs={9} item>
@@ -192,9 +192,9 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
                 focused
                 sx={{
                   width: 195,
-                  "& .MuiSelect-select .notranslate::after": "กรุณากรอก"
+                  "& .MuiSelect-select .notranslate::after": t("placeholder")
                     ? {
-                        content: `"กรุณากรอก"`,
+                        content: `""`,
                         opacity: 0.42,
                       }
                     : {},
@@ -203,7 +203,7 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
                 name="nationality"
                 size="small"
                 label={t("nationality")}
-                placeholder="กรุณากรอก"
+                placeholder={t("placeholder")}
                 value={profilePayload.nationality}
                 onChange={changeField}
               >
@@ -220,7 +220,7 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
                 name="idcard"
                 size="small"
                 label={t("card-number")}
-                placeholder="กรุณากรอก"
+                placeholder={t("placeholder")}
                 value={profilePayload.idcard}
                 onChange={changeField}
               ></TextField>
@@ -231,7 +231,7 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
                 name="pre_name"
                 size="small"
                 label={t("register-page.title")}
-                placeholder="กรุณากรอก"
+                placeholder={t("placeholder")}
                 value={profilePayload.pre_name}
                 onChange={changeField}
               ></TextField>
@@ -244,7 +244,7 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
                 name="first_name"
                 size="small"
                 label={t("register-page.firstname")}
-                placeholder="กรุณากรอก"
+                placeholder={t("placeholder")}
                 value={profilePayload.first_name}
                 onChange={changeField}
               ></TextField>
@@ -255,7 +255,7 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
                 name="last_name"
                 size="small"
                 label={t("register-page.lastname")}
-                placeholder="กรุณากรอก"
+                placeholder={t("placeholder")}
                 value={profilePayload.last_name}
                 onChange={changeField}
               ></TextField>
@@ -295,9 +295,9 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
                 focused
                 sx={{
                   width: 195,
-                  "& .MuiSelect-select .notranslate::after": "กรุณากรอก"
+                  "& .MuiSelect-select .notranslate::after": t("placeholder")
                     ? {
-                        content: `"กรุณากรอก"`,
+                        content: `""`,
                         opacity: 0.42,
                       }
                     : {},
@@ -306,7 +306,7 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
                 name="gender"
                 size="small"
                 label={t("gender")}
-                placeholder="กรุณากรอก"
+                placeholder={t("placeholder")}
                 value={profilePayload.gender}
                 onChange={changeField}
               >
@@ -323,7 +323,7 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
                 name="phone"
                 size="small"
                 label={t("phone")}
-                placeholder="กรุณากรอก"
+                placeholder={t("placeholder")}
                 error={checkPhoneTh}
                 value={profilePayload.phone}
                 onChange={changeField}
@@ -335,7 +335,7 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
                 name="email"
                 size="small"
                 label={t("email")}
-                placeholder="กรุณากรอก"
+                placeholder={t("placeholder")}
                 value={profilePayload.email}
                 onChange={changeField}
               ></TextField>
