@@ -57,7 +57,7 @@ const Home = () => {
       <Banner
         page={t("learning-online")}
         subPage={query.action != "list" && lesson.lesson_name}
-        hideImage={query.action === "learning"}
+        chapter={chapter}
       ></Banner>
       {query.action === "list" && (
         <LessonList getLesson={getLesson}></LessonList>

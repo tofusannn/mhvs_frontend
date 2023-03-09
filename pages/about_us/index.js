@@ -33,6 +33,7 @@ const Home = () => {
 export default Home;
 
 const Banner = () => {
+  const { locale } = useRouter();
   const classes = useStyles();
   const t = useTranslations();
   return (
@@ -50,12 +51,12 @@ const Banner = () => {
     //     </Container>
     //   </Grid> */}
     //   <Grid className={classes.banner_image} item>
-    //     <img width={1310} src="/image/AST_About Us.png"></img>
+    //     <img width={1310} src="/image/th/AST_About Us.png"></img>
     //   </Grid>
     //   <div className={classes.banner_background}></div>
     // </Grid>
     <Grid>
-      <img width="100%" src="/image/AST_About Us.png"></img>
+      <img width="100%" src={`/image/${locale}/AST_About Us.png`}></img>
     </Grid>
   );
 };

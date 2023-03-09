@@ -40,7 +40,7 @@ export default Home;
 const Banner = () => {
   const classes = useStyles();
   const t = useTranslations();
-  const { push } = useRouter();
+  const { push, locale } = useRouter();
   const [token, setToken] = useState();
   useEffect(() => {
     const token = Cookies.get("token");
@@ -58,7 +58,7 @@ const Banner = () => {
   return (
     <Grid className={classes.banner_main}>
       <Grid className={classes.banner_image}>
-        <img width="100%" src="/image/index.png"></img>
+        <img width="100%" src={`/image/${locale}/index.png`}></img>
       </Grid>
       {token && (
         <Container>
@@ -219,7 +219,12 @@ const Sponsor = ({ locale }) => {
     <Fragment>
       <div className={classes.sponsor_main}>
         <Container>
-          <Grid mb={5} container justifyContent={"center"} alignItems={"center"}>
+          <Grid
+            mb={5}
+            container
+            justifyContent={"center"}
+            alignItems={"center"}
+          >
             <Typography fontWeight={500} fontSize={32}>
               {t("sponsor-text.title")}
             </Typography>

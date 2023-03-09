@@ -2,22 +2,17 @@ import { NavigateNext } from "@mui/icons-material";
 import { Container, Grid, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/router";
 import { Fragment } from "react";
 
-const Banner = ({ page, subPage, hideImage }) => {
+const Banner = ({ page, subPage }) => {
+  const { query, locale } = useRouter();
   const classes = useStyles();
   const t = useTranslations();
   return (
-    <Grid className={!hideImage ? classes.banner_main : ""} container>
+    <Grid className={classes.banner_main} container>
       <Container>
-        <Grid
-          sx={
-            !hideImage
-              ? { position: "absolute", top: 40 }
-              : { justifyContent: "start", marginTop: 5, marginLeft: 9 }
-          }
-          item
-        >
+        <Grid sx={{ position: "absolute", top: 15 }} item>
           <Typography fontSize={16} display={"flex"} alignItems={"center"}>
             {t("banner-home")} <NavigateNext></NavigateNext>
             {subPage ? (
@@ -32,31 +27,24 @@ const Banner = ({ page, subPage, hideImage }) => {
           </Typography>
         </Grid>
       </Container>
-
-      {!hideImage && (
-        <Fragment>
-          {/* <Grid className={classes.banner_text} item>
-            <Container>
-              <Typography mb={1} fontWeight={500} fontSize={38}>
-                {t("banner-text.banner2")}
-              </Typography>
-              <Typography mb={3} fontWeight={500} fontSize={38}>
-                {t("banner-text.banner3")}
-              </Typography>
-              <Typography fontWeight={500} fontSize={16}>
-                ขณะที่ผู้คนทั่วโลกกำลังใช้ความระมัดระวังในการปกป้องตนเอง
-                ครอบครัว และชุมชน
-                <br />
-                จากโรคไวรัสโคโรน่า (โควิด-19)
-              </Typography>
-            </Container>
-          </Grid> */}
-          {/* <Grid className={classes.banner_image} item>
-            <img width="100%" src="/image/AST_sub banner -01.png"></img>
-          </Grid>
-          <div className={classes.banner_background}></div> */}
-          <img width="100%" src="/image/AST_sub banner -01.png"></img>
-        </Fragment>
+      {locale === "mm" ? (
+        <img width="100%" src={`/image/th/AST_sub banner -01.png`}></img>
+      ) : (
+        <>
+          {parseInt(query.chapter) <= 9 && parseInt(query.chapter) >= 1 ? (
+            <img
+              width="100%"
+              src={`/image/${locale}/AST_sub banner -0${parseInt(
+                query.chapter
+              )}.png`}
+            ></img>
+          ) : (
+            <img
+              width="100%"
+              src={`/image/${locale}/AST_sub banner -01.png`}
+            ></img>
+          )}
+        </>
       )}
     </Grid>
   );
