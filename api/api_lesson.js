@@ -2,8 +2,11 @@ import api from "./https_request";
 import Cookies from "js-cookie";
 
 const Lesson = {
-  async getLessonList() {
-    return await api.get({ path: "/lesson" });
+  // async getLessonList() {
+  //   return await api.get({ path: "/lesson" });
+  // },
+  async getLessonList(lg) {
+    return await api.get({ path: `/lesson_language/${lg}` });
   },
   async getLessonById(id) {
     return await api.get({ path: `/lesson/${id}` });
@@ -31,6 +34,13 @@ const Lesson = {
   async getUserLessonList() {
     const token = Cookies.get("token");
     return await api.get({ path: "/user_lesson", headers: { token: token } });
+  },
+  async getChapterHomework(id) {
+    const token = Cookies.get("token");
+    return await api.get({
+      path: `/chapter_homework/${id}`,
+      headers: { token: token },
+    });
   },
 };
 

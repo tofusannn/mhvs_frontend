@@ -21,7 +21,7 @@ const { Fragment, useEffect, useState } = require("react");
 
 const LessonList = ({ getLesson }) => {
   const classes = useStyles();
-  const { push, pathname, replace } = useRouter();
+  const { push, pathname, replace, locale } = useRouter();
   const [lessonList, setLessonList] = useState([]);
   const t = useTranslations();
   const header_lesson = [
@@ -35,7 +35,7 @@ const LessonList = ({ getLesson }) => {
   }, []);
 
   async function getLessonList() {
-    const data = await Lesson.getLessonList();
+    const data = await Lesson.getLessonList(locale);
     setLessonList(data.result);
   }
 
