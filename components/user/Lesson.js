@@ -72,11 +72,12 @@ const Lesson = ({
   async function getHomeworkList() {
     const data = await Homework.getUserHomework();
     const list = [];
-    data.result.map((e) => {
-      if (e.chapter_name === "ภาคปฏิบัติ") {
-        list.push(e);
-      }
-    });
+    Object.keys(data.result).length &&
+      data.result.map((e) => {
+        if (e.chapter_name === "ภาคปฏิบัติ") {
+          list.push(e);
+        }
+      });
     setHomeworkList(list);
   }
 
@@ -235,6 +236,11 @@ const Lesson = ({
         menu: "",
       },
     });
+  }
+
+  async function downloadCertificate(id) {
+    const data = await certificate.getCertificate(id);
+    console.log(data);
   }
 
   return (
@@ -468,7 +474,10 @@ const Lesson = ({
                         >
                           {e.status ? (
                             e.is_certificate ? (
-                              <Button className={classes.button_active}>
+                              <Button
+                                className={classes.button_active}
+                                onClick={() => downloadCertificate(e.id)}
+                              >
                                 {t("download")}
                               </Button>
                             ) : (

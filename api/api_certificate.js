@@ -17,6 +17,13 @@ const certificate = {
       body: params,
     });
   },
+  async getCertificate(id) {
+    const token = Cookies.get("token");
+    return await api.get({
+      path: `/certificate/${id}`,
+      headers: { token: token },
+    });
+  },
 };
 
 export default certificate;
