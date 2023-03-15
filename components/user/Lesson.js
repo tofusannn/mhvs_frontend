@@ -71,8 +71,22 @@ const Lesson = ({
 
   async function getHomeworkList() {
     const data = await Homework.getUserHomework();
-    setHomeworkList(data.result);
+    const list = [];
+    data.result.map((e) => {
+      if (e.chapter_name === "ภาคปฏิบัติ") {
+        list.push(e);
+      }
+    });
+    setHomeworkList(list);
   }
+
+  useEffect(() => {
+    homeworkList.map((e, idx) => {
+      if (parseInt(query.lesson) === e.lesson_id) {
+        pageSentHomework(e, `${t("profile-menu.homework")} ${idx + 1}`);
+      }
+    });
+  }, [homeworkList]);
 
   async function getLessonList() {
     const data = await lessonApi.getUserLessonList();
@@ -85,7 +99,7 @@ const Lesson = ({
     setQuestion(data.result);
   }
 
-  function pageSentHomework(e) {
+  function pageSentHomework(e, title) {
     push({
       pathname,
       query: {
@@ -95,7 +109,11 @@ const Lesson = ({
         id: e.chapter_homework_id,
       },
     });
-    setHomework(e);
+    const hw = {
+      ...e,
+      title: title,
+    };
+    setHomework(hw);
   }
 
   function changeTextFieldLink(e, idx) {
@@ -189,10 +207,11 @@ const Lesson = ({
   }
 
   async function handleConfirm() {
+    const hw = await lessonApi.getChapterHomework(parseInt(query.id));
     const payload = {
-      lesson_id: query.lesson,
-      chapter_id: query.chapter,
-      chapter_homework_id: query.id,
+      lesson_id: hw.result.lesson_id,
+      chapter_id: hw.result.chapter_id,
+      chapter_homework_id: hw.result.id,
       file: filePayload,
       link: linkPayload,
     };
@@ -223,7 +242,7 @@ const Lesson = ({
       {query.id ? (
         <Fragment>
           <Typography fontWeight={500} fontSize={28}>
-            {t("profile-menu.homework")} {homework.chapter_homework_id}
+            {homework.title}
           </Typography>
           <Divider sx={{ marginY: 3 }}></Divider>
           <Typography fontSize={16}>{homework.homework_description}</Typography>
@@ -492,7 +511,7 @@ const Lesson = ({
                             color: "#121212",
                           }}
                         >
-                          {t("profile-menu.homework")} {e.chapter_homework_id}
+                          {t("profile-menu.homework")} {idx + 1}
                         </TableCell>
                         <TableCell
                           sx={{
@@ -547,7 +566,12 @@ const Lesson = ({
                                 ? classes.button_disabled
                                 : classes.button_inactive
                             }
-                            onClick={() => pageSentHomework(e)}
+                            onClick={() =>
+                              pageSentHomework(
+                                e,
+                                `${t("profile-menu.homework")} ${idx + 1}`
+                              )
+                            }
                           >
                             {t("profile-page.sent-homework")}
                           </Button>

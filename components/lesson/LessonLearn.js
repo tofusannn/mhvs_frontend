@@ -165,7 +165,9 @@ const LessonLearn = ({ lesson, chapter, getLesson }) => {
           </Button>
         </Grid>
       )}
-      {query.name != "pre_test" && query.name != "post_test" ? (
+      {query.name != "pre_test" &&
+      query.name != "post_test" &&
+      query.name != "homework" ? (
         <Grid
           mt={10}
           container

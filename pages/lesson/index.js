@@ -46,6 +46,7 @@ const Home = () => {
         };
         break;
     }
+
     push({
       pathname,
       query: q,

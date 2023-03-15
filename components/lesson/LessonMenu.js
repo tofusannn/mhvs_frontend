@@ -65,7 +65,13 @@ const LessonMenu = ({ chapter, getLesson }) => {
                   ? { color: "#0076FF", cursor: "pointer" }
                   : { color: "#121212", cursor: "pointer" }
               }
-              onClick={() => handleClickMenu(e.id, "chapter", e.id)}
+              onClick={() =>
+                handleClickMenu(
+                  e.id,
+                  e.chapter_name === "ภาคปฏิบัติ" ? "homework" : "chapter",
+                  e.id
+                )
+              }
             >
               {e.chapter_name}
             </Typography>
@@ -217,7 +223,7 @@ const LessonMenu = ({ chapter, getLesson }) => {
                 ) : (
                   ""
                 )}
-                {e.homework.display ? (
+                {e.homework.display && e.chapter_name != "ภาคปฏิบัติ" ? (
                   <Button
                     className={
                       e.homework.user_action

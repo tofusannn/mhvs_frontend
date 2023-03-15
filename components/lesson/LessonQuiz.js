@@ -471,7 +471,11 @@ const LessonQuiz = ({
                 onClick={() =>
                   push({
                     pathname: "/user",
-                    query: { action: "lesson", type: "homework" },
+                    query: {
+                      action: "lesson",
+                      type: "homework",
+                      lesson: query.lesson,
+                    },
                   })
                 }
               >
