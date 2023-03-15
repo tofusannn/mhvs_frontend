@@ -220,6 +220,12 @@ const Lesson = ({
     setOpenSnackbar(true);
     setPayloadSnackbar(data);
     if (data.status) {
+      await lessonApi.postUserLessonState({
+        lesson_id: hw.result.lesson_id,
+        chapter_id: hw.result.chapter_id,
+        object_name: "homework",
+        object_id: hw.result.id,
+      });
       setOpenModalSuccess(true);
     }
   }
