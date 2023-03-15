@@ -38,7 +38,7 @@ const Lesson = ({
   setOpenModalSuccess,
 }) => {
   const classes = useStyles();
-  const { query, push, pathname } = useRouter();
+  const { query, push, pathname, locale } = useRouter();
   const [lesson, setLesson] = useState([]);
   const [homeworkList, setHomeworkList] = useState([]);
   const [question, setQuestion] = useState();
@@ -70,7 +70,7 @@ const Lesson = ({
   }, [confirm]);
 
   async function getHomeworkList() {
-    const data = await Homework.getUserHomework();
+    const data = await Homework.getUserHomework(locale);
     const list = [];
     Object.keys(data.result).length &&
       data.result.map((e) => {
@@ -90,7 +90,7 @@ const Lesson = ({
   }, [homeworkList]);
 
   async function getLessonList() {
-    const data = await lessonApi.getUserLessonList();
+    const data = await lessonApi.getUserLessonList(locale);
     setLesson(data.result);
   }
 
