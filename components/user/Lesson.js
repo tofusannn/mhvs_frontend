@@ -245,8 +245,24 @@ const Lesson = ({
   }
 
   async function downloadCertificate(id) {
-    const data = await certificate.getCertificate(id);
-    console.log(data);
+    // const data = await certificate.getCertificate(id);
+    fetch(`http://116.204.182.19:8000/v1/certificate/${id}`, {
+      method: "GET",
+      headers: { token: "0f343d88-8ca7-44b0-a1e4-1057b633b1ba" },
+    })
+      .then((response) => {
+        response.arrayBuffer().then(function (buffer) {
+          const url = window.URL.createObjectURL(new Blob([buffer]));
+          const link = document.createElement("a");
+          link.href = url;
+          link.setAttribute("download", "image.png"); //or any other extension
+          document.body.appendChild(link);
+          link.click();
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   return (
@@ -494,7 +510,9 @@ const Lesson = ({
                                     : classes.button_disabled
                                 }
                                 disabled={!e.status}
-                                onClick={() => getQuestion(e.questionnaire_cer_id)}
+                                onClick={() =>
+                                  getQuestion(e.questionnaire_cer_id)
+                                }
                               >
                                 {t("certificate")}
                               </Button>
