@@ -2,10 +2,10 @@ import Cookies from "js-cookie";
 import api from "./https_request";
 
 const certificate = {
-  async getQuestCertificate(params) {
+  async getQuestCertificate(id) {
     const token = Cookies.get("token");
     return await api.get({
-      path: "/questionnaire_cer",
+      path: `/questionnaire_cer/${id}`,
       headers: { token: token },
     });
   },

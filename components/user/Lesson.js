@@ -74,7 +74,7 @@ const Lesson = ({
     const list = [];
     Object.keys(data.result).length &&
       data.result.map((e) => {
-        if (e.chapter_name === "ภาคปฏิบัติ") {
+        if (e.practical) {
           list.push(e);
         }
       });
@@ -94,8 +94,8 @@ const Lesson = ({
     setLesson(data.result);
   }
 
-  async function getQuestion() {
-    const data = await certificate.getQuestCertificate();
+  async function getQuestion(id) {
+    const data = await certificate.getQuestCertificate(id);
     setOpenModal(data.status);
     setQuestion(data.result);
   }
@@ -494,7 +494,7 @@ const Lesson = ({
                                     : classes.button_disabled
                                 }
                                 disabled={!e.status}
-                                onClick={() => getQuestion()}
+                                onClick={() => getQuestion(e.questionnaire_cer_id)}
                               >
                                 {t("certificate")}
                               </Button>

@@ -183,13 +183,14 @@ const CertificateModal = ({ question, openModal, setOpenModal }) => {
     });
     if (valid) {
       const data = await certificate.postUserQuestCertificate({
+        questionnaire_cer_id: question.id,
         answer: answerPayload,
       });
       setOpenSnackbar(true);
       setPayloadSnackbar(data);
       if (data.status) {
         setOpenModal(false);
-        // router.reload();
+        router.reload();
       }
     }
     setValidate(true);
