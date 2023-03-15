@@ -65,10 +65,10 @@ const LessonLearn = ({ lesson, chapter, getLesson }) => {
         menu = chapArray.post_test.id;
         break;
       case "post_test":
-        if (chapArray.homework.display) {
-          chap = query.chapter;
+        if (chapter[idxChapter + 1].practical) {
+          chap = chapter[idxChapter + 1].id;
           name = "homework";
-          menu = chapArray.homework.id;
+          menu = chapter[idxChapter + 1].homework.id;
         } else {
           if (chapter[idxChapter + 1]) {
             chap = chapter[idxChapter + 1].id;
