@@ -147,8 +147,8 @@
   "profile-page": {
     "information": "ข้อมูลของคุณ",
     "picture": "รูปของคุณ",
-    "support-files": "สนับสนุนไฟล์",
-    "file-size": "ไฟล์ขนาด",
+    "support-files": "สนับสนุนไฟล์ .PNG, .JPG",
+    "file-size": "ไฟล์ขนาดไม่เกิน 2 mb",
     "personal-information": "ข้อมูลส่วนตัวของคุณ",
     "sent-homework": "ส่งการบ้าน",
     "sent-success": "ส่งแล้ว",
@@ -163,6 +163,10 @@
     "text5": "พักดื่มน้ำ",
     "text6": "พยายามอีกนิดนะ พวกเราเป็นกำลังใจให้",
     "text7": "พยายามอีกครั้ง"
+  },
+  "certificate-page": {
+    "title": "แบบสอบถาม",
+    "button": "ส่งแบบสอบถาม"
   },
   "started": "เริ่มต้นเลย",
   "banner-home": "หน้าแรก",

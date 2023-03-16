@@ -35,7 +35,7 @@ const Home = () => {
     msg: "",
     status: false,
   });
-  const [confirm, setConfirm] = useState(false);
+  const [trigger, setTrigger] = useState(0);
   const t = useTranslations();
 
   useEffect(() => {
@@ -89,7 +89,7 @@ const Home = () => {
             <Grid sx={{ minHeight: "595px" }} xs={9} mt={3} item>
               {query.action === "lesson" ? (
                 <Lesson
-                  confirm={confirm}
+                trigger={trigger}
                   setOpenSnackbar={setOpenSnackbar}
                   setPayloadSnackbar={setPayloadSnackbar}
                   setOpenModalSuccess={setOpenModalSuccess}
@@ -138,7 +138,9 @@ const Home = () => {
           <Button
             className={classes.button_confirm}
             variant="contained"
-            onClick={() => setConfirm(true)}
+            onClick={() => {
+              setTrigger((trigger) => trigger + 1);
+            }}
           >
             {t("profile-page.sent-homework")}{" "}
             <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
@@ -185,6 +187,6 @@ const useStyles = makeStyles({
     fontSize: 20,
     fontWeight: 500,
     color: "#ffffff",
-    textTransform: "none"
+    textTransform: "none",
   },
 });

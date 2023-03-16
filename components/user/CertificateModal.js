@@ -16,8 +16,10 @@ import { makeStyles } from "@mui/styles";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import certificate from "../../api/api_certificate";
+import { useTranslations } from "next-intl";
 
 const CertificateModal = ({ question, openModal, setOpenModal }) => {
+  const t = useTranslations();
   const classes = useStyles();
   const router = useRouter();
   const [answerPayload, setAnswerPayload] = useState([]);
@@ -219,7 +221,7 @@ const CertificateModal = ({ question, openModal, setOpenModal }) => {
             ></CardMedia>
           </Grid>
           <Typography fontWeight={500} fontSize={36} textAlign={"center"}>
-            แบบสอบถาม
+            {t("certificate-page.title")}
           </Typography>
           {questionList()}
           <Grid mt={10} mb={1} container justifyContent={"space-between"}>
@@ -232,14 +234,14 @@ const CertificateModal = ({ question, openModal, setOpenModal }) => {
                 setAnswerPayload([]);
               }}
             >
-              ยกเลิก
+              {t("cancel")}
             </Button>
             <Button
               className={classes.button_confirm}
               variant="contained"
               onClick={() => handleClick()}
             >
-              ส่งแบบสอบถาม
+              {t("certificate-page.button")}
             </Button>
           </Grid>
         </CardContent>

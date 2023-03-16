@@ -22,13 +22,16 @@ const ModalSuccess = ({
   handleClickNext,
 }) => {
   const classes = useStyles();
-  const { query, push, pathname } = useRouter();
+  const { query, push, pathname, reload } = useRouter();
   const t = useTranslations();
 
   function handleClick() {}
 
   return (
-    <Dialog open={openModalSuccess} sx={{ "& .MuiPaper-root": { borderRadius: "16px" } }}>
+    <Dialog
+      open={openModalSuccess}
+      sx={{ "& .MuiPaper-root": { borderRadius: "16px" } }}
+    >
       <Card>
         <CardContent sx={{ paddingX: 8 }}>
           <Grid container justifyContent={"center"}>
@@ -74,6 +77,7 @@ const ModalSuccess = ({
                       type: "homework",
                     },
                   });
+                  reload();
                 }}
               >
                 <Coffee sx={{ marginRight: 1 }}></Coffee>

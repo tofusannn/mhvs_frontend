@@ -34,7 +34,7 @@ const path = process.env.NEXT_PUBLIC_BASE_API;
 const Lesson = ({
   setOpenSnackbar,
   setPayloadSnackbar,
-  confirm,
+  trigger,
   setOpenModalSuccess,
 }) => {
   const classes = useStyles();
@@ -66,8 +66,10 @@ const Lesson = ({
   useEffect(() => {}, [linkPayload, filePayload]);
 
   useEffect(() => {
-    confirm && handleConfirm();
-  }, [confirm]);
+    if (trigger) {
+      handleConfirm();
+    }
+  }, [trigger]);
 
   async function getHomeworkList() {
     const data = await Homework.getUserHomework(locale);
@@ -208,6 +210,9 @@ const Lesson = ({
   }
 
   async function handleConfirm() {
+    if (!filePayload.length && linkPayload[0].link === "") {
+      return;
+    }
     const hw = await lessonApi.getChapterHomework(parseInt(query.id));
     const payload = {
       lesson_id: hw.result.lesson_id,
