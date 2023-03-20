@@ -29,6 +29,7 @@ import lessonApi from "../../api/api_lesson";
 import Homework from "../../api/api_homework";
 import upload from "../../api/api_upload";
 import { useTranslations } from "next-intl";
+import Cookies from "js-cookie";
 const path = process.env.NEXT_PUBLIC_BASE_API;
 
 const Lesson = ({
@@ -248,12 +249,12 @@ const Lesson = ({
       },
     });
   }
-
+  const token = Cookies.get("token");
   async function downloadCertificate(id) {
     // const data = await certificate.getCertificate(id);
     fetch(`http://116.204.182.19:8000/v1/certificate/${id}`, {
       method: "GET",
-      headers: { token: "0f343d88-8ca7-44b0-a1e4-1057b633b1ba" },
+      headers: { token: token },
     })
       .then((response) => {
         response.arrayBuffer().then(function (buffer) {
