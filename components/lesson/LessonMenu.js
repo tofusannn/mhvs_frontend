@@ -68,7 +68,7 @@ const LessonMenu = ({ chapter, getLesson }) => {
               onClick={() =>
                 handleClickMenu(
                   e.id,
-                  e.chapter_name === "ภาคปฏิบัติ" ? "homework" : "chapter",
+                  e.practical ? "homework" : "chapter",
                   e.id
                 )
               }
@@ -223,7 +223,7 @@ const LessonMenu = ({ chapter, getLesson }) => {
                 ) : (
                   ""
                 )}
-                {e.homework.display && e.chapter_name != "ภาคปฏิบัติ" ? (
+                {e.homework.display && !e.practical ? (
                   <Button
                     className={
                       e.homework.user_action

@@ -460,7 +460,7 @@ const LessonQuiz = ({
         return (
           <Fragment>
             <Typography fontWeight={500} fontSize={28}>
-              {chap.homework.name}
+              {chap.homework.name}1
             </Typography>
             <Divider sx={{ marginY: 3 }}></Divider>
             <Fragment>
