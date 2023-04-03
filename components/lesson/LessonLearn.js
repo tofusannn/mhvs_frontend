@@ -139,6 +139,7 @@ const LessonLearn = ({ lesson, chapter, getLesson }) => {
                 confirm={confirm}
                 setButtonNext={setButtonNext}
                 handleClickNext={handleClick}
+                setConfirm={setConfirm}
               ></LessonQuiz>
             </Grid>
           </Grid>

@@ -27,6 +27,7 @@ const LessonQuiz = ({
   confirm,
   setButtonNext,
   handleClickNext,
+  setConfirm,
 }) => {
   const classes = useStyles();
   const { pathname, query, push } = useRouter();
@@ -96,7 +97,7 @@ const LessonQuiz = ({
               className={checkValidate(header.question_id, ans.answer_id)}
               size="small"
               checked={checkPayload(header.question_id, ans.answer_id)}
-              disabled={confirm}
+              // disabled={confirm}
               onChange={() =>
                 handleChangeRadio(header.question_id, ans.answer_id)
               }
@@ -162,6 +163,7 @@ const LessonQuiz = ({
   }
 
   function handleChangeRadio(quest, answer) {
+    setConfirm(false);
     const newArr = [];
     if (answerPayload.length) {
       answerPayload.forEach((item) => {
@@ -282,6 +284,7 @@ const LessonQuiz = ({
                 </Typography>
                 {chap.pre_test.user_action ? (
                   <Grid
+                    item
                     mt={5}
                     sx={{
                       border: "3px solid #3CBB8E",
@@ -423,6 +426,7 @@ const LessonQuiz = ({
                 </Typography>
                 {chap.post_test.user_action ? (
                   <Grid
+                    item
                     mt={5}
                     sx={{ border: "3px solid #3CBB8E", padding: 1 }}
                     xs={3}
