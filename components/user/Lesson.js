@@ -45,9 +45,17 @@ const Lesson = ({
   const [question, setQuestion] = useState();
   const [openModal, setOpenModal] = useState(false);
   const [homework, setHomework] = useState({});
-  const [linkPayload, setLinkPayload] = useState([]);
+  const [linkPayload, setLinkPayload] = useState([
+    { link: "" },
+    { link: "" },
+    { link: "" },
+  ]);
   const [filePayload, setFilePayload] = useState([]);
-  const [fileList, setFileList] = useState([]);
+  const [fileList, setFileList] = useState([
+    { file_id: "", file_name: "", file_path: "" },
+    { file_id: "", file_name: "", file_path: "" },
+    { file_id: "", file_name: "", file_path: "" },
+  ]);
   const t = useTranslations();
   const header_lesson = [
     t("profile-menu.your-lesson"),
@@ -131,6 +139,9 @@ const Lesson = ({
 
   function addTextFieldLink() {
     const cols = [];
+    if (linkPayload.length === 3) {
+      return;
+    }
     linkPayload.forEach((e) => {
       cols.push(e);
     });
@@ -154,8 +165,17 @@ const Lesson = ({
     linkPayload.forEach((e, idx) => {
       rows.push(
         <Grid key={idx} mb={3} container>
-          <Grid xs={1} item>
+          {/* <Grid xs={1} item>
             <Typography textAlign={"center"}>{idx + 1}.</Typography>
+          </Grid> */}
+          <Grid xs={2} item>
+            <Typography textAlign={"start"}>
+              {idx === 0
+                ? "เพื่อตัวเอง"
+                : idx === 1
+                ? "เพื่อสังคม"
+                : idx === 2 && "เพื่อ..."}
+            </Typography>
           </Grid>
           <TextField
             value={e.link}
@@ -164,7 +184,7 @@ const Lesson = ({
             placeholder="Google drive หรือ YouTube"
             onChange={(e) => changeTextFieldLink(e, idx)}
           ></TextField>
-          {idx === linkPayload.length - 1 ? (
+          {/* {linkPayload.length != 3 && idx === linkPayload.length - 1 ? (
             <IconButton
               sx={{ marginLeft: 2 }}
               onClick={() => addTextFieldLink()}
@@ -178,14 +198,14 @@ const Lesson = ({
             >
               <Delete sx={{ color: "#3CBB8E" }}></Delete>
             </IconButton>
-          )}
+          )} */}
         </Grid>
       );
     });
     return rows;
   }
 
-  async function uploadFile({ target }) {
+  async function uploadFile({ target }, idx) {
     const files = [];
     const data = await upload.upload(target.files[0]);
     filePayload.forEach((e) => {
@@ -194,33 +214,61 @@ const Lesson = ({
     setOpenSnackbar(true);
     setPayloadSnackbar(data);
     files.push({ file_id: data.result.id });
-    fileList.push(data.result);
+    // fileList.push(data.result);
+    fileList[idx] = data.result;
     setFileList(fileList);
     setFilePayload(files);
   }
 
   function deleteFile(idx) {
     const files = [];
+    // filePayload.forEach((e) => {
+    //   files.push(e);
+    // });
+    // files.splice(idx, 1);
+    // fileList.splice(idx, 1);
+    // setFileList(fileList);
+    // setFilePayload(files);
     filePayload.forEach((e) => {
       files.push(e);
     });
     files.splice(idx, 1);
-    fileList.splice(idx, 1);
+    fileList[idx] = { file_name: "", file_path: "" };
     setFileList(fileList);
     setFilePayload(files);
   }
 
   async function handleConfirm() {
-    if (!filePayload.length && linkPayload[0].link === "") {
-      return;
+    let count = 0;
+    if (!filePayload.length) {
+      linkPayload.forEach((e) => {
+        if (e.link === "") {
+          count += 1;
+        }
+      });
+      if (count === 3) {
+        setOpenSnackbar(true);
+        setPayloadSnackbar({
+          msg: "Field not data",
+          status: false,
+        });
+        return;
+      }
     }
+    const linkList = [];
+    linkPayload.forEach((e, idx) => {
+      if (e.link != "") {
+        linkList.push(e);
+      }
+    });
+
     const hw = await lessonApi.getChapterHomework(parseInt(query.id));
     const payload = {
       lesson_id: hw.result.lesson_id,
       chapter_id: hw.result.chapter_id,
       chapter_homework_id: hw.result.id,
       file: filePayload,
-      link: linkPayload,
+      link: linkList,
     };
     const data = await Homework.postUserHomework(payload);
     setOpenSnackbar(true);
@@ -293,18 +341,22 @@ const Lesson = ({
               {t("attach-file")}
             </Typography>
             <Grid xs={8} item>
-              <Button
-                className={classes.button_active}
-                variant="contained"
-                component="label"
-              >
-                {t("upload-file")}
-                <input hidden multiple type="file" onChange={uploadFile} />
-              </Button>
+              {/* {fileList.length != 3 ? (
+                <Button
+                  sx={{marginBottom: 3}}
+                  className={classes.button_active}
+                  variant="contained"
+                  component="label"
+                >
+                  {t("upload-file")}
+                  <input hidden multiple type="file" onChange={uploadFile} />
+                </Button>
+              ) : (
+                ""
+              )} */}
               <TableContainer
                 component={Paper}
                 sx={{
-                  marginTop: 3,
                   boxShadow: "none",
                   border: "1px solid #D6D6D6",
                 }}
@@ -342,41 +394,64 @@ const Lesson = ({
                           },
                         }}
                       >
-                        <TableCell
-                          sx={{
-                            fontWeight: 300,
-                            fontSize: 14,
-                            color: "#121212",
-                          }}
-                        >
-                          {e.file_name}
-                        </TableCell>
-                        <TableCell
-                          align="right"
-                          sx={{
-                            fontWeight: 300,
-                            fontSize: 14,
-                            color: "#121212",
-                          }}
-                        >
-                          <Link
-                            href={`${path}${e.file_path}`}
-                            target="_blank"
-                            sx={{ textDecoration: "none" }}
-                          >
-                            <IconButton>
-                              <Visibility
-                                sx={{ color: "#3CBB8E" }}
-                              ></Visibility>
-                            </IconButton>
-                          </Link>
-                          <IconButton
-                            sx={{ marginLeft: 1 }}
-                            onClick={() => deleteFile(idx)}
-                          >
-                            <Delete sx={{ color: "#3CBB8E" }}></Delete>
-                          </IconButton>
-                        </TableCell>
+                        {e.file_name === "" ? (
+                          <>
+                            <TableCell>
+                              <Button
+                                className={classes.button_active}
+                                variant="contained"
+                                component="label"
+                              >
+                                {t("upload-file")}
+                                <input
+                                  hidden
+                                  multiple
+                                  type="file"
+                                  onChange={(e) => uploadFile(e, idx)}
+                                />
+                              </Button>
+                            </TableCell>
+                            <TableCell></TableCell>
+                          </>
+                        ) : (
+                          <>
+                            <TableCell
+                              sx={{
+                                fontWeight: 300,
+                                fontSize: 14,
+                                color: "#121212",
+                              }}
+                            >
+                              {e.file_name}
+                            </TableCell>
+                            <TableCell
+                              align="right"
+                              sx={{
+                                fontWeight: 300,
+                                fontSize: 14,
+                                color: "#121212",
+                              }}
+                            >
+                              <Link
+                                href={`${path}${e.file_path}`}
+                                target="_blank"
+                                sx={{ textDecoration: "none" }}
+                              >
+                                <IconButton>
+                                  <Visibility
+                                    sx={{ color: "#3CBB8E" }}
+                                  ></Visibility>
+                                </IconButton>
+                              </Link>
+                              <IconButton
+                                sx={{ marginLeft: 1 }}
+                                onClick={() => deleteFile(idx)}
+                              >
+                                <Delete sx={{ color: "#3CBB8E" }}></Delete>
+                              </IconButton>
+                            </TableCell>
+                          </>
+                        )}
                       </TableRow>
                     ))}
                   </TableBody>
