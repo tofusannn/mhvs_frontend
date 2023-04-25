@@ -77,19 +77,19 @@ const Home = () => {
             : null
         }
       ></Banner>
-      <Grid>
+      <Grid pt={3}>
         <Container>
           <Grid my={3} container>
-            <Grid xs={3} pr={3} item>
+            <Grid xs={12} sm={3} pr={3} item>
               <Menu
                 payload={payloadAuth ? payloadAuth.result : null}
                 setChangeMenu={setChangeMenu}
               ></Menu>
             </Grid>
-            <Grid sx={{ minHeight: "595px" }} xs={9} mt={3} item>
+            <Grid sx={{ minHeight: "595px" }} xs={12} sm={9} mt={3} item>
               {query.action === "lesson" ? (
                 <Lesson
-                trigger={trigger}
+                  trigger={trigger}
                   setOpenSnackbar={setOpenSnackbar}
                   setPayloadSnackbar={setPayloadSnackbar}
                   setOpenModalSuccess={setOpenModalSuccess}

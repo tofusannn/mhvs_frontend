@@ -7,6 +7,7 @@ import {
   MenuItem,
   TextField,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -76,6 +77,8 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
       value: "female",
     },
   ];
+  const matches = useMediaQuery("(min-width:600px)");
+
   useEffect(() => {
     setProfilePayload(lengthPY ? authPayload.result : profile_payload);
     checkImageID(lengthPY ? authPayload.result : profile_payload);
@@ -145,7 +148,7 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
       </Typography>
       <Divider sx={{ marginY: 3 }}></Divider>
       <Grid container>
-        <Grid xs={3} item>
+        <Grid xs={12} sm={3} item sx={{ textAlign: matches ? "" : "center" }}>
           <Typography fontWeight={500} fontSize={20}>
             {t("profile-page.picture")}
           </Typography>
@@ -182,16 +185,17 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
             - {t("profile-page.file-size")}
           </Typography>
         </Grid>
-        <Grid xs={9} item>
+        <Grid xs={12} sm={9} item sx={{ marginTop: matches ? "" : 3 }}>
           <Typography sx={{ marginBottom: 3 }} fontWeight={500} fontSize={20}>
             {t("profile-page.personal-information")}
           </Typography>
+
           <Grid mb={3} container spacing={3}>
-            <Grid item>
+            <Grid item xs={12} sm={4}>
               <TextField
+                fullWidth
                 focused
                 sx={{
-                  width: 195,
                   "& .MuiSelect-select .notranslate::after": t("placeholder")
                     ? {
                         content: `""`,
@@ -214,8 +218,9 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
                 ))}
               </TextField>
             </Grid>
-            <Grid item>
+            <Grid item xs={12} sm={4}>
               <TextField
+                fullWidth
                 focused
                 name="idcard"
                 size="small"
@@ -225,8 +230,9 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
                 onChange={changeField}
               ></TextField>
             </Grid>
-            <Grid item>
+            <Grid item xs={12} sm={4}>
               <TextField
+                fullWidth
                 focused
                 name="pre_name"
                 size="small"
@@ -238,8 +244,9 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
             </Grid>
           </Grid>
           <Grid mb={3} container spacing={3}>
-            <Grid item>
+            <Grid item xs={12} sm={4}>
               <TextField
+                fullWidth
                 focused
                 name="first_name"
                 size="small"
@@ -249,8 +256,9 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
                 onChange={changeField}
               ></TextField>
             </Grid>
-            <Grid item>
+            <Grid item xs={12} sm={4}>
               <TextField
+                fullWidth
                 focused
                 name="last_name"
                 size="small"
@@ -260,7 +268,7 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
                 onChange={changeField}
               ></TextField>
             </Grid>
-            <Grid item>
+            <Grid item xs={12} sm={4}>
               <LocalizationProvider dateAdapter={AdapterMoment}>
                 <DatePicker
                   inputFormat="yyyy-MM-DD"
@@ -277,8 +285,8 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
                   }}
                   renderInput={(params) => (
                     <TextField
+                      fullWidth
                       focused
-                      sx={{ width: 195 }}
                       name="date_of_birth"
                       size="small"
                       onKeyDown={(e) => e.preventDefault()}
@@ -290,11 +298,11 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
             </Grid>
           </Grid>
           <Grid mb={3} container spacing={3}>
-            <Grid item>
+            <Grid item xs={12} sm={4}>
               <TextField
+                fullWidth
                 focused
                 sx={{
-                  width: 195,
                   "& .MuiSelect-select .notranslate::after": t("placeholder")
                     ? {
                         content: `""`,
@@ -317,8 +325,9 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
                 ))}
               </TextField>
             </Grid>
-            <Grid item>
+            <Grid item xs={12} sm={4}>
               <TextField
+                fullWidth
                 focused
                 name="phone"
                 size="small"
@@ -329,8 +338,9 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
                 onChange={changeField}
               ></TextField>
             </Grid>
-            <Grid item>
+            <Grid item xs={12} sm={4}>
               <TextField
+                fullWidth
                 focused
                 name="email"
                 size="small"

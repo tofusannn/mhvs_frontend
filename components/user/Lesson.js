@@ -475,7 +475,7 @@ const Lesson = ({
               border: "1px solid #D6D6D6",
             }}
           >
-            <Table>
+            <Table sx={{ minWidth: "700px" }}>
               <TableHead sx={{ background: "#1276FF" }}>
                 <TableRow>
                   {query.type === "lesson"

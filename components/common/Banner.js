@@ -1,5 +1,5 @@
 import { NavigateNext } from "@mui/icons-material";
-import { Container, Grid, Typography } from "@mui/material";
+import { Container, Grid, Typography, useMediaQuery } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
@@ -9,9 +9,11 @@ const Banner = ({ page, subPage }) => {
   const { query, locale } = useRouter();
   const classes = useStyles();
   const t = useTranslations();
+  const matches = useMediaQuery("(min-width:600px)");
+
   return (
     <Grid className={classes.banner_main} container>
-      <Container>
+      <Container sx={{ display: matches ? "" : "none" }}>
         <Grid sx={{ position: "absolute", top: 15 }} item>
           <Typography fontSize={16} display={"flex"} alignItems={"center"}>
             {t("banner-home")} <NavigateNext></NavigateNext>
@@ -54,7 +56,6 @@ export default Banner;
 
 const useStyles = makeStyles({
   banner_main: {
-    height: "55vh",
     position: "relative",
   },
   banner_background: {

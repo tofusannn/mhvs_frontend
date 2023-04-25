@@ -73,7 +73,7 @@ const LessonList = ({ getLesson }) => {
               border: "1px solid #D6D6D6",
             }}
           >
-            <Table>
+            <Table sx={{ minWidth: "1000px" }}>
               <TableHead sx={{ background: "#1276FF" }}>
                 <TableRow>
                   {header_lesson.map((e) => (
@@ -164,7 +164,7 @@ const useStyles = makeStyles({
       "transparent linear-gradient(90deg, #3CBB8E 0%, #2DA373 100%) 0% 0% no-repeat padding-box",
     boxShadow: "0px 5px 10px #3CBB8E7A",
     borderRadius: 100,
-    textTransform: "none"
+    textTransform: "none",
   },
   button_disabled: {
     width: 150,
@@ -184,6 +184,6 @@ const useStyles = makeStyles({
     color: "#3CBB8E",
     border: "2px solid #3CBB8E",
     borderRadius: 100,
-    textTransform: "none"
+    textTransform: "none",
   },
 });

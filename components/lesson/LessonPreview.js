@@ -1,5 +1,12 @@
 import { CardMembership, VerifiedOutlined } from "@mui/icons-material";
-import { Button, Container, Divider, Grid, Typography } from "@mui/material";
+import {
+  Button,
+  Container,
+  Divider,
+  Grid,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
@@ -10,28 +17,29 @@ const LessonPreview = ({ lesson, getLesson }) => {
   const classes = useStyles();
   const { push, pathname, query } = useRouter();
   const t = useTranslations();
+  const matches = useMediaQuery("(min-width:600px)");
 
   return (
     <Fragment>
       <Grid>
         <Container>
           <Grid
-            sx={{ height: 130 }}
+            sx={{ height: matches ? 130 : "100%" }}
             container
             alignItems={"center"}
-            justifyContent={"space-between"}
+            justifyContent={matches ? "space-between" : "start"}
           >
-            <Grid xs={3}>
-              <Typography fontWeight={500} fontSize={32}>
+            <Grid xs={12} sm={3} pt={matches ? 0 : 3}>
+              <Typography fontWeight={500} fontSize={matches ? 32 : 20}>
                 {t("learning-online")} :
               </Typography>
             </Grid>
-            <Grid xs={7}>
-              <Typography fontWeight={500} fontSize={32}>
+            <Grid xs={12} sm={7} pt={matches ? 0 : 3}>
+              <Typography fontWeight={500} fontSize={matches ? 32 : 20}>
                 <span style={{ color: "#0076FF" }}>{lesson.lesson_name}</span>
               </Typography>
             </Grid>
-            <Grid xs={2}>
+            <Grid xs={12} sm={2} py={matches ? 0 : 3}>
               <Button
                 className={classes.button_confirm}
                 onClick={() => getLesson("learning", lesson.id, "", "pre_test")}
@@ -56,7 +64,7 @@ const LessonPreview = ({ lesson, getLesson }) => {
             }}
             container
           >
-            <Grid xs={3} pr={3} item>
+            <Grid xs={12} sm={3} pr={3} item>
               <Typography fontWeight={500} fontSize={28}>
                 {t("lesson-page.highlight")}
               </Typography>
@@ -84,7 +92,7 @@ const LessonPreview = ({ lesson, getLesson }) => {
                   );
                 })}
             </Grid>
-            <Grid xs={9} item>
+            <Grid xs={12} sm={9} item>
               <Typography fontWeight={500} fontSize={28}>
                 {t("lesson-page.description")}
               </Typography>
@@ -113,5 +121,10 @@ const useStyles = makeStyles({
     fontWeight: 500,
     color: "#ffffff",
     textTransform: "none",
+    "@media (max-width: 600px)": {
+      width: 220,
+      height: 40,
+      fontSize: 18,
+    },
   },
 });
