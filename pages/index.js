@@ -346,15 +346,17 @@ const useStyles = makeStyles({
   banner_text: {
     position: "absolute",
     zIndex: 0,
-    top: 530,
-    "@media (min-width: 2048px)": {
-      top: 670,
+    top: "calc(90vh - 25vh)",
+    // "@media (min-width: 2048px)": {
+    //   top: 670,
+    // },
+    "@media (max-width: 1200px)": {
+      top: "calc(90vh - 45vh)",
+      left: "calc(90vh - 82vh)",
     },
-    "@media (max-width: 2040px) and (min-width: 1200px)": {
-      top: 530,
-    },
-    "@media (max-width: 1190px) and (min-width: 100px)": {
-      top: 110,
+    "@media (max-width: 600px)": {
+      top: "calc(25vh - 10vh)",
+      left: "calc(25vh - 22vh)",
     },
   },
   banner_image: {
@@ -375,7 +377,7 @@ const useStyles = makeStyles({
     "&:hover": {
       borderColor: "#ffffff",
     },
-    "@media (max-width: 1190px) and (min-width: 100px)": {
+    "@media (max-width: 600px)": {
       fontSize: 10,
       width: "100%",
       height: 20,

@@ -315,12 +315,12 @@ const NavBar = (props) => {
                   item
                   xs={9}
                   sx={{
-                    objectFit: "contain",
-                    position: "relative",
+                    position: "sticky",
                     height: 56,
                   }}
                 >
                   <Image
+                    sx={{ objectFit: "cover" }}
                     src={"/image/aorsortor_online.png"}
                     layout="fill"
                     alt="logo"
