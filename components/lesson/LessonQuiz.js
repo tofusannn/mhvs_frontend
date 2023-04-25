@@ -9,6 +9,7 @@ import {
   Snackbar,
   TextField,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useRouter } from "next/router";
@@ -45,6 +46,7 @@ const LessonQuiz = ({
   const [score, setScore] = useState("");
   const [objectId, setObjectId] = useState();
   const t = useTranslations();
+  const matches = useMediaQuery("(min-width:600px)");
 
   useEffect(() => {
     confirm && handleClick();
@@ -291,7 +293,8 @@ const LessonQuiz = ({
                       padding: 1,
                       textAlign: "center",
                     }}
-                    xs={3}
+                    xs={12}
+                    sm={3}
                   >
                     <Typography
                       color={"#3CBB8E"}
@@ -429,7 +432,8 @@ const LessonQuiz = ({
                     item
                     mt={5}
                     sx={{ border: "3px solid #3CBB8E", padding: 1 }}
-                    xs={3}
+                    xs={12}
+                    sm={3}
                   >
                     <Typography
                       color={"#3CBB8E"}

@@ -1,5 +1,11 @@
 import { Coffee, NavigateNext } from "@mui/icons-material";
-import { Button, Container, Grid, Typography } from "@mui/material";
+import {
+  Button,
+  Container,
+  Grid,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useRouter } from "next/router";
 import Lesson from "../../api/api_lesson";
@@ -17,6 +23,7 @@ const LessonLearn = ({ lesson, chapter, getLesson }) => {
   const [buttonNext, setButtonNext] = useState(false);
   const chapterQ = parseInt(query.chapter);
   const t = useTranslations();
+  const matches = useMediaQuery("(min-width:600px)");
 
   useEffect(() => {
     setStartQuiz(false);
@@ -110,10 +117,23 @@ const LessonLearn = ({ lesson, chapter, getLesson }) => {
             justifyContent={"space-between"}
           >
             <Grid>
-              <Typography fontWeight={500} fontSize={32}>
-                {t("learning-online")} :{" "}
-                <span style={{ color: "#0076FF" }}>{lesson.lesson_name}</span>
-              </Typography>
+              {matches ? (
+                <Typography fontWeight={500} fontSize={32}>
+                  {t("learning-online")} :{" "}
+                  <span style={{ color: "#0076FF" }}>{lesson.lesson_name}</span>
+                </Typography>
+              ) : (
+                <>
+                  <Typography fontWeight={500} fontSize={20}>
+                    {t("learning-online")} :
+                  </Typography>
+                  <Typography fontWeight={500} fontSize={20}>
+                    <span style={{ color: "#0076FF" }}>
+                      {lesson.lesson_name}
+                    </span>
+                  </Typography>
+                </>
+              )}
             </Grid>
           </Grid>
         </Container>
@@ -128,10 +148,15 @@ const LessonLearn = ({ lesson, chapter, getLesson }) => {
       >
         <Container>
           <Grid container>
-            <Grid xs={locale === "mm" ? 3.1 : 3} pr={3} item>
+            <Grid xs={12} sm={locale === "mm" ? 3.1 : 3} pr={3} item>
               <LessonMenu chapter={chapter} getLesson={getLesson}></LessonMenu>
             </Grid>
-            <Grid xs={locale === "mm" ? 8.9 : 9} item>
+            <Grid
+              xs={12}
+              sm={locale === "mm" ? 8.9 : 9}
+              item
+              pt={matches ? 0 : 3}
+            >
               <LessonQuiz
                 chapter={chapter}
                 startQuiz={startQuiz}

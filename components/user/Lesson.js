@@ -168,7 +168,15 @@ const Lesson = ({
           {/* <Grid xs={1} item>
             <Typography textAlign={"center"}>{idx + 1}.</Typography>
           </Grid> */}
-          <Grid xs={2} item>
+          <Grid
+            xs={12}
+            sm={2}
+            item
+            sx={{
+              paddingLeft: { xs: 1, sm: 0 },
+              paddingBottom: { xs: 1, sm: 0 },
+            }}
+          >
             <Typography textAlign={"start"}>
               {idx === 0
                 ? "เพื่อตัวเอง"
@@ -329,18 +337,24 @@ const Lesson = ({
           <Divider sx={{ marginY: 3 }}></Divider>
           <Typography fontSize={16}>{homework.homework_description}</Typography>
           <Grid mt={3} container>
-            <Typography sx={{ marginRight: 5 }} fontSize={16}>
+            <Typography
+              sx={{ marginRight: 5, paddingBottom: { xs: 1, sm: 0 } }}
+              fontSize={16}
+            >
               {t("attach-link")}
             </Typography>
-            <Grid xs={8} item>
+            <Grid xs={12} sm={8} item>
               {loopTextField()}
             </Grid>
           </Grid>
           <Grid mt={3} container>
-            <Typography sx={{ marginRight: 8 }} fontSize={16}>
+            <Typography
+              sx={{ marginRight: 8, paddingBottom: { xs: 1, sm: 0 } }}
+              fontSize={16}
+            >
               {t("attach-file")}
             </Typography>
-            <Grid xs={8} item>
+            <Grid xs={12} sm={8} item>
               {/* {fileList.length != 3 ? (
                 <Button
                   sx={{marginBottom: 3}}
