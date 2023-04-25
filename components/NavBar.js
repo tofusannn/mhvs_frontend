@@ -5,6 +5,7 @@ import {
   NotificationsOutlined,
   Quiz,
 } from "@mui/icons-material";
+import MenuIcon from "@mui/icons-material/Menu";
 import {
   AppBar,
   Avatar,
@@ -19,6 +20,8 @@ import {
   Menu,
   MenuItem,
   ListItemIcon,
+  Drawer,
+  List,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useTranslations } from "next-intl";
@@ -31,6 +34,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { userProfile } from "../redux/authSlice";
 import Cookies from "js-cookie";
 import upload from "../api/api_upload";
+import Image from "next/image";
 const path = process.env.NEXT_PUBLIC_BASE_API;
 
 const NavBar = (props) => {
@@ -46,6 +50,15 @@ const NavBar = (props) => {
   const open = Boolean(anchorEl);
   const [anchorElTrans, setAnchorElTrans] = useState(null);
   const openTrans = Boolean(anchorElTrans);
+  const [openDrawer, setOpenDrawer] = useState(false);
+
+  const handleDrawerOpen = () => {
+    setOpenDrawer(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpenDrawer(false);
+  };
 
   useEffect(() => {
     const data = Cookies.get("token");
@@ -92,11 +105,18 @@ const NavBar = (props) => {
     for (let i = 1; i <= count; i++) {
       if (token && i === 6) return rows;
       rows.push(
-        <Grid key={i} sx={{ paddingLeft: 5 }}>
+        <Grid key={i} sx={{ paddingLeft: 5, margin: "15px 0px" }}>
           <Link
             component="button"
-            sx={{ color: "#ffffff", fontSize: 16 }}
-            onClick={() => push(t(`navbar-menu.menu${i}.link`))}
+            sx={{
+              color: { xs: "#000000", sm: "#ffffff" },
+              fontSize: 16,
+              textDecoration: "none",
+            }}
+            onClick={() => {
+              push(t(`navbar-menu.menu${i}.link`));
+              handleDrawerClose();
+            }}
           >
             {t(`navbar-menu.menu${i}.title`)}
           </Link>
@@ -147,152 +167,112 @@ const NavBar = (props) => {
   }
 
   return (
-    <AppBar sx={{ backgroundColor: "#0076FF", height: 90 }} position="static">
-      <Container className={classes.containre_main}>
-        <Toolbar sx={{ height: "100%" }} disableGutters>
-          <Grid container alignSelf={"center"} justifyContent={"space-between"}>
-            <Grid item xs={locale === "th" ? 3 : 1}>
-              <img
-                src="/image/aorsortor_online.png"
-                width={locale === "th" ? "60%" : "150%"}
-              ></img>
-            </Grid>
+    <>
+      <AppBar
+        sx={{
+          position: { xs: "fixed", sm: "static" },
+          backgroundColor: "#0076FF",
+          height: { sm: 90, xs: "auto" },
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+        }}
+      >
+        <Container
+          className={classes.container_main}
+          sx={{ display: { sm: "flex", xs: "none" } }}
+        >
+          <Toolbar sx={{ height: "100%" }} disableGutters>
             <Grid
-              item
-              xs={locale === "th" ? 9 : 11}
               container
-              columnSpacing={10}
-              alignItems={"center"}
-              textAlign={"center"}
-              justifyContent={"end"}
+              alignSelf={"center"}
+              justifyContent={"space-between"}
             >
-              {loopMenuBar()}
-              {token ? (
-                <Fragment>
-                  <Divider
-                    sx={{ marginLeft: 4, opacity: 0.16, height: 44 }}
-                    orientation="vertical"
-                    color="white"
-                  ></Divider>
-                  <IconButton sx={{ marginX: 3 }}>
-                    <NotificationsOutlined
-                      sx={{
-                        width: 36,
-                        height: 36,
-                        color: "#ffffff",
-                      }}
-                    ></NotificationsOutlined>
-                  </IconButton>
-                  <IconButton
-                    sx={{ padding: 0, border: "2px solid #ffffff" }}
-                    onClick={handleClick}
+              <Grid item xs={locale === "th" ? 3 : 1}>
+                <img
+                  src="/image/aorsortor_online.png"
+                  width={locale === "th" ? "60%" : "150%"}
+                ></img>
+              </Grid>
+              <Grid
+                item
+                xs={locale === "th" ? 9 : 11}
+                container
+                columnSpacing={10}
+                alignItems={"center"}
+                textAlign={"center"}
+                justifyContent={"end"}
+              >
+                {loopMenuBar()}
+                {token ? (
+                  <Fragment>
+                    <Divider
+                      sx={{ marginLeft: 4, opacity: 0.16, height: 44 }}
+                      orientation="vertical"
+                      color="white"
+                    ></Divider>
+                    <IconButton sx={{ marginX: 3 }}>
+                      <NotificationsOutlined
+                        sx={{
+                          width: 36,
+                          height: 36,
+                          color: "#ffffff",
+                        }}
+                      ></NotificationsOutlined>
+                    </IconButton>
+                    <IconButton
+                      sx={{ padding: 0, border: "2px solid #ffffff" }}
+                      onClick={handleClick}
+                    >
+                      <Avatar
+                        sx={{ width: 36, height: 36 }}
+                        src={imageUser && `${path}${imageUser}`}
+                      ></Avatar>
+                    </IconButton>
+                  </Fragment>
+                ) : (
+                  <Grid sx={{ marginLeft: 4 }}>
+                    <Button
+                      className={classes.buttonRegister}
+                      variant="outlined"
+                      fullWidth
+                      size="small"
+                      onClick={handleClickRegister}
+                    >
+                      {t("register")}
+                    </Button>
+                  </Grid>
+                )}
+                <Grid sx={{ marginLeft: 4 }}>
+                  <Button
+                    className={classes.buttonTranslation}
+                    variant="outlined"
+                    size="small"
+                    onClick={handleClickTrans}
                   >
-                    <Avatar
-                      sx={{ width: 36, height: 36 }}
-                      src={imageUser && `${path}${imageUser}`}
-                    ></Avatar>
-                  </IconButton>
+                    {getNameTranslate(locale)}
+                  </Button>
                   <Menu
                     sx={{ marginTop: 1 }}
-                    anchorEl={anchorEl}
-                    open={open}
-                    onClose={handleClose}
-                    onClick={handleClose}
+                    anchorEl={anchorElTrans}
+                    open={openTrans}
+                    onClose={handleCloseTrans}
                     transformOrigin={{ horizontal: "center", vertical: "top" }}
                     anchorOrigin={{ horizontal: "center", vertical: "bottom" }}
                   >
                     <MenuItem
-                      onClick={() =>
-                        push({
-                          pathname: "/user",
-                          query: { action: "lesson", type: "lesson" },
-                        })
-                      }
+                      name="th"
+                      disabled={locale === "th"}
+                      onClick={() => translationClick("th")}
                     >
-                      <ListItemIcon>
-                        <MenuBook></MenuBook>
-                      </ListItemIcon>
-                      <Typography>{t("lesson-page.lesson")}</Typography>
+                      ภาษาไทย
                     </MenuItem>
                     <MenuItem
-                      onClick={() =>
-                        push({
-                          pathname: "/user",
-                          query: { action: "lesson", type: "homework" },
-                        })
-                      }
+                      name="mm"
+                      disabled={locale === "mm"}
+                      onClick={() => translationClick("mm")}
                     >
-                      <ListItemIcon>
-                        <Quiz></Quiz>
-                      </ListItemIcon>
-                      <Typography>{t("lesson-menu.homework")}</Typography>
+                      မြန်မာဘာသာ
                     </MenuItem>
-                    <MenuItem
-                      onClick={() =>
-                        push({
-                          pathname: "/user",
-                          query: { action: "profile" },
-                        })
-                      }
-                    >
-                      <ListItemIcon>
-                        <ManageAccounts></ManageAccounts>
-                      </ListItemIcon>
-                      <Typography>{t("profile-page.information")}</Typography>
-                    </MenuItem>
-                    <MenuItem onClick={() => logoutUser()}>
-                      <ListItemIcon>
-                        <Logout />
-                      </ListItemIcon>
-                      <Typography>{t("logout")}</Typography>
-                    </MenuItem>
-                  </Menu>
-                </Fragment>
-              ) : (
-                <Grid sx={{ marginLeft: 4 }}>
-                  <Button
-                    className={classes.buttonRegister}
-                    variant="outlined"
-                    fullWidth
-                    size="small"
-                    onClick={handleClickRegister}
-                  >
-                    {t("register")}
-                  </Button>
-                </Grid>
-              )}
-              <Grid sx={{ marginLeft: 4 }}>
-                <Button
-                  className={classes.buttonTranslation}
-                  variant="outlined"
-                  size="small"
-                  onClick={handleClickTrans}
-                >
-                  {getNameTranslate(locale)}
-                </Button>
-                <Menu
-                  sx={{ marginTop: 1 }}
-                  anchorEl={anchorElTrans}
-                  open={openTrans}
-                  onClose={handleCloseTrans}
-                  transformOrigin={{ horizontal: "center", vertical: "top" }}
-                  anchorOrigin={{ horizontal: "center", vertical: "bottom" }}
-                >
-                  <MenuItem
-                    name="th"
-                    disabled={locale === "th"}
-                    onClick={() => translationClick("th")}
-                  >
-                    ภาษาไทย
-                  </MenuItem>
-                  <MenuItem
-                    name="mm"
-                    disabled={locale === "mm"}
-                    onClick={() => translationClick("mm")}
-                  >
-                    မြန်မာဘာသာ
-                  </MenuItem>
-                  {/* <MenuItem
+                    {/* <MenuItem
                     name="ls"
                     disabled={locale === "ls"}
                     onClick={() => translationClick("ls")}
@@ -306,20 +286,230 @@ const NavBar = (props) => {
                   >
                     ភាសាខ្មែរ
                   </MenuItem> */}
-                </Menu>
+                  </Menu>
+                </Grid>
               </Grid>
             </Grid>
-          </Grid>
-        </Toolbar>
-      </Container>
-    </AppBar>
+          </Toolbar>
+        </Container>
+        <Container sx={{ display: { sm: "none" } }}>
+          <Toolbar disableGutters>
+            <Grid
+              container
+              alignItems={"center"}
+              justifyContent={"space-between"}
+            >
+              <Grid item xs={5} sx={{ display: "flex", alignItems: " center" }}>
+                {/* Menu */}
+                <Grid item xs={3}>
+                  <IconButton
+                    color="inherit"
+                    onClick={handleDrawerOpen}
+                    edge="start"
+                  >
+                    <MenuIcon />
+                  </IconButton>
+                </Grid>
+                {/* LOGO */}
+                <Grid
+                  item
+                  xs={9}
+                  sx={{
+                    objectFit: "contain",
+                    position: "relative",
+                    height: 56,
+                  }}
+                >
+                  <Image
+                    src={"/image/aorsortor_online.png"}
+                    layout="fill"
+                    alt="logo"
+                  ></Image>
+                </Grid>
+              </Grid>
+              {/* Profile BT */}
+              <Grid>
+                {token ? (
+                  <>
+                    <IconButton>
+                      <NotificationsOutlined
+                        sx={{
+                          width: 18,
+                          height: 18,
+                          color: "#ffffff",
+                        }}
+                      ></NotificationsOutlined>
+                    </IconButton>
+                    <IconButton
+                      sx={{ padding: 0, border: "1px solid #ffffff" }}
+                      onClick={handleClick}
+                    >
+                      <Avatar
+                        sx={{ width: 18, height: 18 }}
+                        src={imageUser && `${path}${imageUser}`}
+                      ></Avatar>
+                    </IconButton>
+                  </>
+                ) : (
+                  <Button
+                    sx={{
+                      width: { xs: 90, sm: 200 },
+                      fontSize: 10,
+                      borderRadius: 20,
+                      textTransform: "none",
+                      fontWeight: 500,
+                      color: "#ffffff",
+                      background:
+                        "transparent linear-gradient(90deg, #3CBB8E 0%, #2DA373 100%) 0% 0% no-repeat padding-box",
+                    }}
+                    variant="outlined"
+                    fullWidth
+                    size="small"
+                    onClick={handleClickRegister}
+                  >
+                    {t("register")}
+                  </Button>
+                )}
+                <Button
+                  sx={{
+                    margin: "8px",
+                    fontSize: 10,
+                    width: 18,
+                    height: 18,
+                    minWidth: 10,
+                    minHeight: 10,
+                  }}
+                  className={classes.buttonTranslation}
+                  variant="outlined"
+                  onClick={handleClickTrans}
+                >
+                  {getNameTranslate(locale)}
+                </Button>
+              </Grid>
+            </Grid>
+          </Toolbar>
+        </Container>
+      </AppBar>
+      {/* Profile */}
+      <Menu
+        sx={{ marginTop: 1 }}
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        onClick={handleClose}
+        transformOrigin={{
+          horizontal: "center",
+          vertical: "top",
+        }}
+        anchorOrigin={{
+          horizontal: "center",
+          vertical: "bottom",
+        }}
+      >
+        <MenuItem
+          onClick={() =>
+            push({
+              pathname: "/user",
+              query: { action: "lesson", type: "lesson" },
+            })
+          }
+        >
+          <ListItemIcon>
+            <MenuBook></MenuBook>
+          </ListItemIcon>
+          <Typography>{t("lesson-page.lesson")}</Typography>
+        </MenuItem>
+        <MenuItem
+          onClick={() =>
+            push({
+              pathname: "/user",
+              query: { action: "lesson", type: "homework" },
+            })
+          }
+        >
+          <ListItemIcon>
+            <Quiz></Quiz>
+          </ListItemIcon>
+          <Typography>{t("lesson-menu.homework")}</Typography>
+        </MenuItem>
+        <MenuItem
+          onClick={() =>
+            push({
+              pathname: "/user",
+              query: { action: "profile" },
+            })
+          }
+        >
+          <ListItemIcon>
+            <ManageAccounts></ManageAccounts>
+          </ListItemIcon>
+          <Typography>{t("profile-page.information")}</Typography>
+        </MenuItem>
+        <MenuItem onClick={() => logoutUser()}>
+          <ListItemIcon>
+            <Logout />
+          </ListItemIcon>
+          <Typography>{t("logout")}</Typography>
+        </MenuItem>
+      </Menu>
+      {/* Translate */}
+      <Menu
+        sx={{ marginTop: 1 }}
+        anchorEl={anchorElTrans}
+        open={openTrans}
+        onClose={handleCloseTrans}
+        transformOrigin={{ horizontal: "center", vertical: "top" }}
+        anchorOrigin={{ horizontal: "center", vertical: "bottom" }}
+      >
+        <MenuItem
+          name="th"
+          disabled={locale === "th"}
+          onClick={() => translationClick("th")}
+        >
+          ภาษาไทย
+        </MenuItem>
+        <MenuItem
+          name="mm"
+          disabled={locale === "mm"}
+          onClick={() => translationClick("mm")}
+        >
+          မြန်မာဘာသာ
+        </MenuItem>
+        {/* <MenuItem
+      name="ls"
+      disabled={locale === "ls"}
+      onClick={() => translationClick("ls")}
+    >
+      ພາສາລາວ
+    </MenuItem>
+    <MenuItem
+      name="cd"
+      disabled={locale === "cd"}
+      onClick={() => translationClick("cd")}
+    >
+      ភាសាខ្មែរ
+    </MenuItem> */}
+      </Menu>
+      {/* Menu */}
+      <Drawer
+        sx={{
+          width: 240,
+          [`& .MuiDrawer-paper`]: { width: 240, boxSizing: "border-box" },
+        }}
+        open={openDrawer}
+        onClose={handleDrawerClose}
+      >
+        <Toolbar />
+        {loopMenuBar()}
+      </Drawer>
+    </>
   );
 };
 
 export default NavBar;
 
-const useStyles = makeStyles({
-  containre_main: {
+const useStyles = makeStyles((theme) => ({
+  container_main: {
     height: "100%",
     paddingLeft: 0,
   },
@@ -341,4 +531,4 @@ const useStyles = makeStyles({
       borderColor: "#ffffff",
     },
   },
-});
+}));

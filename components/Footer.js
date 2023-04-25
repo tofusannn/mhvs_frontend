@@ -10,6 +10,7 @@ import {
   TextField,
   Toolbar,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useTranslations } from "next-intl";
@@ -29,6 +30,7 @@ const Footer = (props) => {
   const router = useRouter();
   const classes = useStyles();
   const t = useTranslations();
+  const matches = useMediaQuery("(min-width:600px)");
 
   return (
     <Fragment>
@@ -40,7 +42,7 @@ const Footer = (props) => {
             </Typography>
           </Grid>
           <Grid container alignItems={"start"} justifyContent={"space-between"}>
-            <Grid item xs={3}>
+            <Grid item xs={12} sm={3} sx={{ paddingBottom: { xs: 3, sm: 0 } }}>
               <Typography fontWeight={500} fontSize={16} color="white">
                 {t("footer-text.footer1.title")}
               </Typography>
@@ -48,7 +50,7 @@ const Footer = (props) => {
                 {t("footer-text.footer1.des")}
               </Typography>
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={12} sm={2} sx={{ paddingBottom: { xs: 3, sm: 0 } }}>
               <Typography fontWeight={500} fontSize={16} color="white">
                 {t("footer-text.footer2.title")}
               </Typography>
@@ -56,7 +58,7 @@ const Footer = (props) => {
                 {t("footer-text.footer2.des")}
               </Typography>
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={12} sm={4} sx={{ paddingBottom: { xs: 3, sm: 0 } }}>
               <Typography mb={1} fontWeight={500} fontSize={16} color="white">
                 {t("footer-text.footer3.title")}
               </Typography>
@@ -77,7 +79,7 @@ const Footer = (props) => {
           </Grid>
           <Divider sx={{ marginY: 5 }} color="white"></Divider>
           <Grid container alignItems="center">
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6} sx={{ paddingBottom: { xs: 3, sm: 0 } }}>
               <Typography mb={1} fontWeight={500} fontSize={16} color="white">
                 ©2022 Aorsortor Online, All Rights Reserved.
               </Typography>
@@ -91,8 +93,17 @@ const Footer = (props) => {
                 Terms of Use
               </Link>
             </Grid>
-            <Grid item xs={6} textAlign="end">
-              <Link target="_blank" href="https://www.facebook.com/aorsortor.online">
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              sx={{ paddingBottom: { xs: 3, sm: 0 } }}
+              textAlign={matches ? "end" : "start"}
+            >
+              <Link
+                target="_blank"
+                href="https://www.facebook.com/aorsortor.online"
+              >
                 <IconButton sx={{ color: "#ffffff" }}>
                   <Facebook></Facebook>
                 </IconButton>

@@ -8,7 +8,7 @@ import cd from "../messages/cd.json";
 import Head from "next/head";
 import NavBar from "../components/NavBar";
 import "../styles/globals.css";
-import { CssBaseline } from "@mui/material";
+import { CssBaseline, Toolbar } from "@mui/material";
 import Footer from "../components/Footer";
 import store from "../redux/store";
 import { Provider } from "react-redux";
@@ -41,6 +41,7 @@ function MyApp({ Component, pageProps }) {
           {checkPage() ? (
             <Fragment>
               <NavBar locale={locale}></NavBar>
+              <Toolbar sx={{ display: { sm: "none" } }} />
               <Component {...pageProps} />
               <Footer></Footer>
             </Fragment>

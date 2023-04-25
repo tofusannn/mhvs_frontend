@@ -7,6 +7,7 @@ import {
   Grid,
   Link,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import { Fragment, useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
@@ -42,6 +43,8 @@ const Banner = () => {
   const t = useTranslations();
   const { push, locale } = useRouter();
   const [token, setToken] = useState();
+  const matches = useMediaQuery("(min-width:600px)");
+
   useEffect(() => {
     const token = Cookies.get("token");
     setToken(token);
@@ -56,11 +59,11 @@ const Banner = () => {
   }
 
   return (
-    <Grid className={classes.banner_main}>
-      <Grid className={classes.banner_image}>
+    <Grid sx={{ position: "relative", height: { xs: "25vh", sm: "90vh" } }}>
+      <Grid sx={{ position: "absolute", zIndex: -1 }}>
         <img width="100%" src={`/image/${locale}/index.png`}></img>
       </Grid>
-      {token && (
+      {!token && (
         <Container>
           <Grid className={classes.banner_text}>
             <Button
@@ -82,6 +85,7 @@ const AboutUs = ({ locale }) => {
   const [content, setContent] = useState();
   const [openModal, setOpenModal] = useState(false);
   const [youtube, setYoutube] = useState();
+  const matches = useMediaQuery("(min-width:600px)");
 
   useEffect(() => {
     getContentList();
@@ -97,14 +101,25 @@ const AboutUs = ({ locale }) => {
     const rows = [];
     const message = locale === "th" ? th : en;
     const count = content ? content.length : 0;
-    const sliderItems = count > 3 ? 3 : count;
+    let sliderItems;
+    if (matches) {
+      sliderItems = count > 3 ? 3 : count;
+    } else {
+      sliderItems = count > 1 ? 1 : count;
+    }
     for (let i = 1; i <= count; i++) {
       data.push(content[i - 1]);
     }
     for (let i = 0; i < count; i += sliderItems) {
       if (i % sliderItems === 0) {
         rows.push(
-          <Grid key={i} pl={3} container spacing={2}>
+          <Grid
+            key={i}
+            sx={{ paddingLeft: { sm: 3 } }}
+            container
+            justifyContent={matches ? "start" : "center"}
+            spacing={2}
+          >
             {data.slice(i, i + sliderItems).map((items, index) => {
               return (
                 <Grid key={index} item>
@@ -133,28 +148,30 @@ const AboutUs = ({ locale }) => {
   return (
     <Container sx={{ marginTop: 4, marginBottom: 4 }}>
       <Grid container justifyContent={"space-between"}>
-        <Grid item xs={3}>
-          <Typography mb={1} sx={{ color: "#2DA373" }} fontSize={24}>
+        <Grid item xs={12} sm={3}>
+          <Typography
+            mb={1}
+            sx={{ color: "#2DA373", fontSize: { xs: 20, md: 24 } }}
+          >
             {t("about-us-text.about-us1")}
           </Typography>
           <Typography
             mb={1}
-            sx={{ color: "#2DA373" }}
+            sx={{ color: "#2DA373", fontSize: { xs: 44, md: 48 } }}
             fontWeight={500}
-            fontSize={48}
           >
             {t("about-us-text.about-us2")}
           </Typography>
-          <Typography mb={3} fontSize={24}>
+          <Typography mb={3} sx={{ fontSize: { xs: 20, md: 24 } }}>
             {t("about-us-text.about-us3")}
           </Typography>
-          <Link>
+          <Link sx={{ display: { xs: "none", sm: "block" } }}>
             <img src="/icon/arrow-right-green.svg"></img>
           </Link>
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={12} sm={9}>
           <Carousel
-            height={450}
+            height={matches ? 450 : 400}
             autoPlay={false}
             indicators={false}
             cycleNavigation={false}
@@ -168,8 +185,8 @@ const AboutUs = ({ locale }) => {
         <Card>
           <CardContent>
             <iframe
-              height="576"
-              width="1080"
+              height={matches ? "576" : "300"}
+              width={matches ? "1080" : "260"}
               src={youtube}
               title="YouTube video player"
               frameBorder="0"
@@ -189,6 +206,7 @@ const Sponsor = ({ locale }) => {
   const { push } = useRouter();
   const t = useTranslations();
   const message = locale === "th" ? th : en;
+  const matches = useMediaQuery("(min-width:600px)");
 
   useEffect(() => {
     getSponsor();
@@ -205,8 +223,12 @@ const Sponsor = ({ locale }) => {
     for (let i = 0; i < count; i++) {
       sponsor &&
         rows.push(
-          <Grid key={i} item xs={2}>
-            <Link target="_blank" href={sponsor[i].link_ref}>
+          <Grid key={i} item xs={matches ? 2 : 6} sx={{ display: "flex" }}>
+            <Link
+              target="_blank"
+              href={sponsor[i].link_ref}
+              textAlign={"center"}
+            >
               <img width={"70%"} src={`${path}${sponsor[i].file_path}`}></img>
             </Link>
           </Grid>
@@ -225,7 +247,7 @@ const Sponsor = ({ locale }) => {
             justifyContent={"center"}
             alignItems={"center"}
           >
-            <Typography fontWeight={500} fontSize={32}>
+            <Typography fontWeight={500} sx={{ fontSize: { xs: 28, sm: 32 } }}>
               {t("sponsor-text.title")}
             </Typography>
             <Link
@@ -235,7 +257,7 @@ const Sponsor = ({ locale }) => {
                 marginLeft: 1,
                 color: "#2DA373",
                 textDecorationColor: "#2DA373",
-                fontSize: 32,
+                fontSize: { xs: 28, sm: 32 },
               }}
             >
               {t("sponsor-text.button")}
@@ -259,6 +281,7 @@ const CountUser = ({ locale }) => {
   const classes = useStyles();
   const t = useTranslations();
   const [pageCount, setPageCount] = useState();
+  const matches = useMediaQuery("(min-width:600px)");
 
   useEffect(() => {
     getPageCount();
@@ -276,7 +299,7 @@ const CountUser = ({ locale }) => {
 
     for (let i = 0; i < count; i++) {
       rows.push(
-        <Grid key={i} item xs={4}>
+        <Grid key={i} item xs={12} sm={4}>
           <Card className={classes.count_user_card}>
             <CardContent>
               <Grid container>
@@ -330,6 +353,9 @@ const useStyles = makeStyles({
     "@media (max-width: 2040px) and (min-width: 1200px)": {
       top: 530,
     },
+    "@media (max-width: 1190px) and (min-width: 100px)": {
+      top: 110,
+    },
   },
   banner_image: {
     position: "absolute",
@@ -348,6 +374,12 @@ const useStyles = makeStyles({
     boxShadow: "0px 5px 10px #3CBB8E7A",
     "&:hover": {
       borderColor: "#ffffff",
+    },
+    "@media (max-width: 1190px) and (min-width: 100px)": {
+      fontSize: 10,
+      width: "100%",
+      height: 20,
+      minHight: 10,
     },
   },
   sponsor_main: {

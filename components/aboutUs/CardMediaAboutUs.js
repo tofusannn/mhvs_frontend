@@ -57,5 +57,11 @@ const useStyles = makeStyles({
     maxHeight: 435,
     boxShadow: "10px 5px 20px #0000001A",
     borderRadius: 8,
+    "@media (max-width: 1190px) and (min-width: 100px)": {
+      minWidth: 100,
+      minHeight: 100,
+      maxWidth: 270,
+      maxHeight: 450,
+    },
   },
 });
