@@ -11,6 +11,7 @@ import {
   Snackbar,
   TextField,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useTranslations } from "next-intl";
@@ -51,6 +52,7 @@ const Auth = () => {
   const [checkPhoneTh, setCheckPhoneTh] = useState(false);
   const [checkButtonConfirm, setCheckButtonConfirm] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const matches = useMediaQuery("(min-width:600px)");
 
   useEffect(() => {
     setCheckPhoneTh(false);
@@ -326,10 +328,12 @@ const Auth = () => {
                 <Fragment>
                   <Grid
                     container
-                    justifyContent={"center"}
+                    justifyContent={matches ? "center" : "space-between"}
                     alignItems={"center"}
                   >
-                    <Typography mr={5}>{t("login-page.login-for")}</Typography>
+                    <Typography mr={matches ? 5 : 0}>
+                      {t("login-page.login-for")}
+                    </Typography>
                     <Button
                       className={classes.button_type_active}
                       variant="contained"
@@ -434,7 +438,8 @@ const Auth = () => {
                     ></TextField>
                   </Grid>
                   <Grid
-                    xs={6}
+                    xs={8}
+                    sm={6}
                     mt={1}
                     mb={3}
                     item
@@ -486,9 +491,12 @@ const Auth = () => {
                     alignItems={"center"}
                     justifyContent={"space-between"}
                   >
-                    <Typography>
-                      {t("nationality")} <span style={{ color: "red" }}>*</span>
-                    </Typography>
+                    <Grid item xs={12} sm={2} mb={matches ? 0 : 2}>
+                      <Typography>
+                        {t("nationality")}{" "}
+                        <span style={{ color: "red" }}>*</span>
+                      </Typography>
+                    </Grid>
                     <Button
                       name="thai"
                       className={
@@ -674,6 +682,9 @@ const useStyles = makeStyles({
     marginRight: "108px",
     marginLeft: "108px",
     marginTop: "36px",
+    "@media (max-width: 600px)": {
+      margin: 0,
+    },
   },
   card_action: {
     position: "absolute",
@@ -696,6 +707,9 @@ const useStyles = makeStyles({
       color: "#FFFFFF",
       background: "#0076FF",
     },
+    "@media (max-width: 600px)": {
+      fontSize: 18,
+    },
   },
   button_inactive: {
     height: 72,
@@ -707,6 +721,9 @@ const useStyles = makeStyles({
     "&:hover": {
       color: "#0076FF",
       background: "#DCEFFF",
+    },
+    "@media (max-width: 600px)": {
+      fontSize: 18,
     },
   },
   button_type_active: {

@@ -1,4 +1,4 @@
-import { Grid, Link, Typography } from "@mui/material";
+import { Grid, Link, Typography, useMediaQuery } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Container } from "@mui/system";
 import { useTranslations } from "next-intl";
@@ -10,6 +10,7 @@ const path = process.env.NEXT_PUBLIC_BASE_API;
 const Home = () => {
   const [sponsor, setSponsor] = useState();
   const t = useTranslations();
+  const matches = useMediaQuery("(min-width:600px)");
 
   useEffect(() => {
     getSponsor();
@@ -25,8 +26,8 @@ const Home = () => {
     for (let i = 0; i < count; i++) {
       sponsor &&
         rows.push(
-          <Grid key={i} item xs={2}>
-            <Link target="_blank" href={sponsor[i].link_ref}>
+          <Grid key={i} item xs={matches ? 2 : 6} sx={{ display: "flex" }}>
+            <Link target="_blank" href={sponsor[i].link_ref} textAlign={"center"}>
               <img width={"70%"} src={`${path}${sponsor[i].file_path}`}></img>
             </Link>
           </Grid>
@@ -40,7 +41,7 @@ const Home = () => {
       <Grid mt={6} mb={15}>
         <Container>
           <Grid my={3} container justifyContent={"center"}>
-            <Typography fontWeight={500} fontSize={32}>
+            <Typography fontWeight={500} sx={{ fontSize: { xs: 28, sm: 32 } }}>
               {t("sponsor-text.title")}
             </Typography>
           </Grid>

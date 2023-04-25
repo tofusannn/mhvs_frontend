@@ -50,7 +50,7 @@ const Home = () => {
 
   return (
     <Fragment>
-      <Grid my={6} sx={{ height: "90vh" }}>
+      <Grid my={6} sx={{ minHeight: "90vh" }}>
         <Container>
           <Typography fontWeight={500} fontSize={32}>
             {t("contact-text.title")}
@@ -94,7 +94,7 @@ const Home = () => {
                 allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
               ></iframe>
             </Grid>
-            <Grid xs={5} item>
+            <Grid xs={12} sm={5} item sx={{ marginTop: { xs: 5, sm: 0 } }}>
               <Grid container justifyContent={"space-between"} spacing={3}>
                 <Grid xs={6} item>
                   <Typography mb={1}>

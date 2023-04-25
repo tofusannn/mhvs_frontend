@@ -353,7 +353,7 @@ const NavBar = (props) => {
                 ) : (
                   <Button
                     sx={{
-                      width: { xs: 90, sm: 200 },
+                      width: { xs: locale === "th" ? 90 : 120, sm: 200 },
                       fontSize: 10,
                       borderRadius: 20,
                       textTransform: "none",
