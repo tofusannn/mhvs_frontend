@@ -320,7 +320,7 @@ const NavBar = (props) => {
                   }}
                 >
                   <Image
-                    sx={{ objectFit: "cover" }}
+                    objectFit="cover"
                     src={"/image/aorsortor_online.png"}
                     layout="fill"
                     alt="logo"
