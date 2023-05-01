@@ -148,7 +148,12 @@ const LessonLearn = ({ lesson, chapter, getLesson }) => {
       >
         <Container>
           <Grid container>
-            <Grid xs={12} sm={locale === "mm" ? 3.1 : 3} pr={3} item>
+            <Grid
+              xs={12}
+              sm={locale === "mm" ? 3.1 : 3}
+              pr={matches ? 3 : 0}
+              item
+            >
               <LessonMenu chapter={chapter} getLesson={getLesson}></LessonMenu>
             </Grid>
             <Grid

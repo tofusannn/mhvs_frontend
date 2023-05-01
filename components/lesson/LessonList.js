@@ -10,6 +10,7 @@ import {
   TableHead,
   TableRow,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import Cookies from "js-cookie";
@@ -24,6 +25,8 @@ const LessonList = ({ getLesson }) => {
   const { push, pathname, replace, locale } = useRouter();
   const [lessonList, setLessonList] = useState([]);
   const t = useTranslations();
+  const matches = useMediaQuery("(min-width:600px)");
+
   const header_lesson = [
     `${t("lesson-page.lesson")}`,
     `${t("lesson-page.description")}`,
@@ -73,13 +76,14 @@ const LessonList = ({ getLesson }) => {
               border: "1px solid #D6D6D6",
             }}
           >
-            <Table sx={{ minWidth: "1000px" }}>
+            <Table sx={{ minWidth: matches ? "1000px" : "" }}>
               <TableHead sx={{ background: "#1276FF" }}>
                 <TableRow>
-                  {header_lesson.map((e) => (
+                  {header_lesson.map((e, idx) => (
                     <TableCell
-                      key={e}
+                      key={idx}
                       sx={{
+                        display: matches ? "" : idx >= 1 && "none",
                         fontWeight: 500,
                         fontSize: 20,
                         color: "#ffffff",
@@ -91,57 +95,120 @@ const LessonList = ({ getLesson }) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {lessonList.map((e, idx) => (
-                  <TableRow
-                    key={idx}
-                    sx={{
-                      "&:nth-of-type(odd)": {
-                        backgroundColor: "#F9F9F9",
-                      },
-                    }}
-                  >
-                    <TableCell
+                {lessonList.map((e, idx) =>
+                  matches ? (
+                    <TableRow
+                      key={idx}
                       sx={{
-                        width: "20%",
-                        fontWeight: 300,
-                        fontSize: 14,
-                        color: "#121212",
+                        "&:nth-of-type(odd)": {
+                          backgroundColor: "#F9F9F9",
+                        },
                       }}
                     >
-                      {e.lesson_name}
-                    </TableCell>
-                    <TableCell
+                      <TableCell
+                        sx={{
+                          width: "20%",
+                          fontWeight: 300,
+                          fontSize: 14,
+                          color: "#121212",
+                        }}
+                      >
+                        {e.lesson_name}
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          width: "40%",
+                          fontWeight: 300,
+                          fontSize: 14,
+                          color: "#121212",
+                        }}
+                      >
+                        {e.lesson_description.length > "100"
+                          ? e.lesson_description.substr(0, 150).concat("...")
+                          : e.lesson_description}
+                      </TableCell>
+                      <TableCell
+                        align={"right"}
+                        sx={{ fontWeight: 300, fontSize: 14, color: "#121212" }}
+                      >
+                        <Button
+                          sx={{ marginRight: 2 }}
+                          className={classes.button_details}
+                          onClick={() => previewLesson(e.id)}
+                        >
+                          {t("lesson-page.details")}
+                        </Button>
+                        <Button
+                          className={classes.button_active}
+                          onClick={() => registerLesson(e.id)}
+                        >
+                          {t("lesson-page.enroll")}
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  ) : (
+                    <TableRow
+                      key={idx}
                       sx={{
-                        width: "40%",
-                        fontWeight: 300,
-                        fontSize: 14,
-                        color: "#121212",
+                        "&:nth-of-type(odd)": {
+                          backgroundColor: "#F9F9F9",
+                        },
                       }}
                     >
-                      {e.lesson_description.length > "100"
-                        ? e.lesson_description.substr(0, 150).concat("...")
-                        : e.lesson_description}
-                    </TableCell>
-                    <TableCell
-                      align={"right"}
-                      sx={{ fontWeight: 300, fontSize: 14, color: "#121212" }}
-                    >
-                      <Button
-                        sx={{ marginRight: 2 }}
-                        className={classes.button_details}
-                        onClick={() => previewLesson(e.id)}
-                      >
-                        {t("lesson-page.details")}
-                      </Button>
-                      <Button
-                        className={classes.button_active}
-                        onClick={() => registerLesson(e.id)}
-                      >
-                        {t("lesson-page.enroll")}
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
+                      <TableRow>
+                        <TableCell
+                          sx={{
+                            fontWeight: 300,
+                            fontSize: 14,
+                            color: "#121212",
+                          }}
+                        >
+                          {e.lesson_name}
+                        </TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell
+                          sx={{
+                            fontWeight: 300,
+                            fontSize: 14,
+                            color: "#121212",
+                          }}
+                        >
+                          {e.lesson_description.length > "100"
+                            ? e.lesson_description.substr(0, 150).concat("...")
+                            : e.lesson_description}
+                        </TableCell>
+                      </TableRow>
+                      <TableRow sx={{ justifyContent: "space-between" }}>
+                        <TableCell
+                          sx={{
+                            fontWeight: 300,
+                            fontSize: 14,
+                            color: "#121212",
+                            justifyContent: "space-between",
+                            width: "100%",
+                            display: "flex",
+                          }}
+                        >
+                          <Button
+                            sx={{ width: "140px !important" }}
+                            className={classes.button_details}
+                            onClick={() => previewLesson(e.id)}
+                          >
+                            {t("lesson-page.details")}
+                          </Button>
+                          <Button
+                            sx={{ width: "140px !important" }}
+                            className={classes.button_active}
+                            onClick={() => registerLesson(e.id)}
+                          >
+                            {t("lesson-page.enroll")}
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    </TableRow>
+                  )
+                )}
               </TableBody>
             </Table>
           </TableContainer>
