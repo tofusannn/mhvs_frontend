@@ -7,6 +7,7 @@ import {
   Dialog,
   Grid,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useTranslations } from "next-intl";
@@ -21,8 +22,14 @@ const ModalFail = ({
 }) => {
   const classes = useStyles();
   const t = useTranslations();
+  const matches = useMediaQuery("(min-width:600px)");
+
   return (
-    <Dialog open={openModalFail} sx={{ "& .MuiPaper-root": { borderRadius: "16px" } }}>
+    <Dialog
+      open={openModalFail}
+      // open={true}
+      sx={{ "& .MuiPaper-root": { borderRadius: "16px" } }}
+    >
       <Card>
         <CardContent>
           <Grid container justifyContent={"center"}>
@@ -33,10 +40,17 @@ const ModalFail = ({
             ></CardMedia>
           </Grid>
           <Grid mb={6} container justifyContent={"center"} textAlign={"center"}>
-            <Typography mb={1} fontWeight={500} fontSize={32}>
-              {t("modal-text.text6")}
+            <Typography
+              mt={1}
+              mb={1}
+              fontWeight={500}
+              fontSize={matches ? 32 : 24}
+            >
+              {t("modal-text.text6").slice(0, 14)}
+              <br />
+              {t("modal-text.text6").slice(14)}
             </Typography>
-            <Typography fontWeight={500} fontSize={24}>
+            <Typography fontWeight={500} fontSize={matches ? 24 : 18}>
               {t("modal-text.text4")}{" "}
               <span style={{ color: "#FF698B" }}>{score}</span>
             </Typography>
@@ -57,7 +71,7 @@ const ModalFail = ({
               ""
             ) : (
               <Button
-                sx={{ marginLeft: 3 }}
+                sx={{ marginLeft: matches ? 3 : 1 }}
                 className={classes.buttonConfirm}
                 onClick={() => {
                   setOpenSnackbar(false);
@@ -88,6 +102,10 @@ const useStyles = makeStyles({
     background:
       "transparent linear-gradient(90deg, #3CBB8E 0%, #2DA373 100%) 0% 0% no-repeat padding-box",
     boxShadow: "0px 5px 10px #3CBB8E7A",
+    "@media (max-width: 600px)": {
+      width: 125,
+      fontSize: 11,
+    },
   },
   buttonConfirm2: {
     width: 184,
@@ -98,5 +116,9 @@ const useStyles = makeStyles({
     fontSize: 18,
     background: "#FFFFFF 0% 0% no-repeat padding-box",
     border: "2px solid #2DA373",
+    "@media (max-width: 600px)": {
+      width: 125,
+      fontSize: 11,
+    },
   },
 });

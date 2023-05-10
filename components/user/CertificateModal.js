@@ -11,6 +11,7 @@ import {
   Snackbar,
   TextField,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useRouter } from "next/router";
@@ -29,6 +30,7 @@ const CertificateModal = ({ question, openModal, setOpenModal }) => {
     msg: "",
     status: false,
   });
+  const matches = useMediaQuery("(min-width:600px)");
 
   useEffect(() => {}, [answerPayload]);
 
@@ -207,13 +209,13 @@ const CertificateModal = ({ question, openModal, setOpenModal }) => {
 
   return (
     <Dialog
-      open={openModal}
+      open={true}
       scroll={"body"}
       maxWidth={"md"}
       sx={{ "& .MuiPaper-root": { borderRadius: "16px" } }}
     >
       <Card>
-        <CardContent sx={{ paddingX: 22 }}>
+        <CardContent sx={{ paddingX: matches ? 22 : 3 }}>
           <Grid container justifyContent={"center"}>
             <CardMedia
               component="img"
@@ -291,6 +293,10 @@ const useStyles = makeStyles({
     fontSize: 20,
     fontWeight: 500,
     color: "#ffffff",
+    "@media (max-width: 600px)": {
+      width: "100%",
+      marginTop: "15px",
+    },
   },
   button_cancel: {
     width: 228,
@@ -304,6 +310,9 @@ const useStyles = makeStyles({
     color: "#2DA373",
     "&:hover": {
       background: "#FFFFFF 0% 0% no-repeat padding-box",
+    },
+    "@media (max-width: 600px)": {
+      width: "100%",
     },
   },
 });

@@ -7,6 +7,7 @@ import {
   Dialog,
   Grid,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useTranslations } from "next-intl";
@@ -24,16 +25,18 @@ const ModalSuccess = ({
   const classes = useStyles();
   const { query, push, pathname, reload } = useRouter();
   const t = useTranslations();
+  const matches = useMediaQuery("(min-width:600px)");
 
   function handleClick() {}
 
   return (
     <Dialog
       open={openModalSuccess}
+      // open={true}
       sx={{ "& .MuiPaper-root": { borderRadius: "16px" } }}
     >
       <Card>
-        <CardContent sx={{ paddingX: 8 }}>
+        <CardContent sx={{ paddingX: matches ? 8 : 3 }}>
           <Grid container justifyContent={"center"}>
             <CardMedia
               sx={{ width: 497 }}
@@ -43,17 +46,21 @@ const ModalSuccess = ({
           </Grid>
           <Grid mb={6} container justifyContent={"center"} textAlign={"center"}>
             {type === "homework" ? (
-              <Typography fontWeight={500} fontSize={36}>
+              <Typography fontWeight={500} fontSize={matches ? 36 : 20}>
                 {t("modal-text.text1")}
                 <br />
                 {t("modal-text.text2")}
               </Typography>
             ) : (
               <Fragment>
-                <Typography mb={1} fontWeight={500} fontSize={36}>
+                <Typography
+                  mb={1}
+                  fontWeight={500}
+                  fontSize={matches ? 36 : 20}
+                >
                   {t("modal-text.text3")}
                 </Typography>
-                <Typography fontWeight={500} fontSize={24}>
+                <Typography fontWeight={500} fontSize={matches ? 24 : 18}>
                   {t("modal-text.text4")}{" "}
                   <span style={{ color: "#3CBB8E" }}>{score}</span>
                 </Typography>
@@ -85,7 +92,7 @@ const ModalSuccess = ({
               </Button>
             ) : (
               <Button
-                sx={{ marginLeft: 3 }}
+                // sx={{ marginLeft: 3 }}
                 className={classes.buttonConfirm}
                 onClick={() => {
                   setOpenSnackbar(false);
