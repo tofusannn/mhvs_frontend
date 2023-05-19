@@ -54,6 +54,7 @@ const LessonLearn = ({ lesson, chapter, getLesson }) => {
           name = "post_test";
           menu = chapArray.post_test.id;
         }
+        getLesson("learning", query.lesson, chap, name, menu);
         break;
       case "video":
         if (chapArray.file.display) {
@@ -64,6 +65,15 @@ const LessonLearn = ({ lesson, chapter, getLesson }) => {
           chap = query.chapter;
           name = "post_test";
           menu = chapArray.post_test.id;
+        }
+        const data = await Lesson.postUserLessonState({
+          lesson_id: parseInt(query.lesson),
+          chapter_id: parseInt(query.chapter),
+          object_name: query.name,
+          object_id: parseInt(query.menu),
+        });
+        if (data.status) {
+          getLesson("learning", query.lesson, chap, name, menu);
         }
         break;
       case "file":
@@ -86,23 +96,15 @@ const LessonLearn = ({ lesson, chapter, getLesson }) => {
             name = "post_test";
             menu = chapArray.post_test.id;
           }
-          const data = await Lesson.postUserLessonState({
-            lesson_id: parseInt(query.lesson),
-            chapter_id: parseInt(query.chapter),
-            object_name: "chapter",
-            object_id: parseInt(query.chapter),
-          });
+          getLesson("learning", query.lesson, chap, name, menu);
+          // const data = await Lesson.postUserLessonState({
+          //   lesson_id: parseInt(query.lesson),
+          //   chapter_id: parseInt(query.chapter),
+          //   object_name: "chapter",
+          //   object_id: parseInt(query.chapter),
+          // });
         }
         break;
-    }
-    const data = await Lesson.postUserLessonState({
-      lesson_id: parseInt(query.lesson),
-      chapter_id: parseInt(query.chapter),
-      object_name: query.name,
-      object_id: parseInt(query.menu),
-    });
-    if (data.status) {
-      getLesson("learning", query.lesson, chap, name, menu);
     }
   }
 

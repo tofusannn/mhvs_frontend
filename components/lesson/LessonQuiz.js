@@ -219,13 +219,13 @@ const LessonQuiz = ({
       setOpenSnackbar(true);
       setPayloadSnackbar(data);
       if (data.status) {
-        await Lesson.postUserLessonState({
-          lesson_id: parseInt(query.lesson),
-          chapter_id: parseInt(query.chapter),
-          object_name: query.name,
-          object_id: objectId,
-        });
         if (data.result.estimate) {
+          await Lesson.postUserLessonState({
+            lesson_id: parseInt(query.lesson),
+            chapter_id: parseInt(query.chapter),
+            object_name: query.name,
+            object_id: objectId,
+          });
           setScore(`${data.result.total_score} / ${data.result.max_score}`);
           setButtonNext(true);
           setOpenModalSuccess(true);

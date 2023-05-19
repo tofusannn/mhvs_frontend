@@ -63,7 +63,10 @@ const ModalFail = ({
                   : classes.buttonConfirm2
               }
               sx={{ textTransform: "none" }}
-              onClick={() => setOpenModalFail(false)}
+              onClick={() => {
+                setOpenModalFail(false);
+                location.reload();
+              }}
             >
               <Coffee sx={{ marginRight: 1 }}></Coffee> {t("modal-text.text5")}
             </Button>
@@ -76,6 +79,7 @@ const ModalFail = ({
                 onClick={() => {
                   setOpenSnackbar(false);
                   setOpenModalFail(false);
+                  location.reload();
                 }}
               >
                 {t("modal-text.text7")} <Replay sx={{ marginLeft: 1 }}></Replay>
