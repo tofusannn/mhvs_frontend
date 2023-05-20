@@ -19,7 +19,7 @@ import { useEffect, useState } from "react";
 import certificate from "../../api/api_certificate";
 import { useTranslations } from "next-intl";
 
-const CertificateModal = ({ question, openModal, setOpenModal }) => {
+const CertificateModal = ({ question, openModal, setOpenModal, lesson }) => {
   const t = useTranslations();
   const classes = useStyles();
   const router = useRouter();
@@ -189,6 +189,7 @@ const CertificateModal = ({ question, openModal, setOpenModal }) => {
       const data = await certificate.postUserQuestCertificate({
         questionnaire_cer_id: question.id,
         answer: answerPayload,
+        lesson_id: lesson
       });
       setOpenSnackbar(true);
       setPayloadSnackbar(data);

@@ -45,6 +45,8 @@ const Lesson = ({
   const [question, setQuestion] = useState();
   const [openModal, setOpenModal] = useState(false);
   const [homework, setHomework] = useState({});
+  const [lessonId, setLessonId] = useState();
+
   const [linkPayload, setLinkPayload] = useState([
     { link: "" },
     { link: "" },
@@ -105,10 +107,11 @@ const Lesson = ({
     setLesson(data.result);
   }
 
-  async function getQuestion(id) {
+  async function getQuestion(id, lesson) {
     const data = await certificate.getQuestCertificate(id);
     setOpenModal(data.status);
     setQuestion(data.result);
+    setLessonId(lesson);
   }
 
   function pageSentHomework(e, title) {
@@ -606,7 +609,7 @@ const Lesson = ({
                                 }
                                 disabled={!e.status}
                                 onClick={() =>
-                                  getQuestion(e.questionnaire_cer_id)
+                                  getQuestion(e.questionnaire_cer_id, e.id)
                                 }
                               >
                                 {t("certificate")}
@@ -715,6 +718,7 @@ const Lesson = ({
         question={question}
         openModal={openModal}
         setOpenModal={setOpenModal}
+        lesson={lessonId}
       ></CertificateModal>
     </Fragment>
   );
