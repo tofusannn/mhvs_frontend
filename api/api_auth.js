@@ -34,6 +34,14 @@ const auth = {
       body: params,
     });
   },
+  async postLocation(params) {
+    const token = Cookies.get("token");
+    return await api.put({
+      path: "/location",
+      headers: { token: token },
+      body: params,
+    });
+  },
 };
 
 export default auth;

@@ -21,10 +21,39 @@ import Cookies from "js-cookie";
 import Count from "../api/api_count";
 import sponsorApi from "../api/api_sponsor";
 import Content from "../api/api_content";
+import axios from "axios";
+import auth from "../api/api_auth";
 const path = process.env.NEXT_PUBLIC_BASE_API;
 
 const Home = () => {
   const { locale } = useRouter();
+  const token = Cookies.get("token");
+  //creating IP state
+  const [ip, setIP] = useState("");
+
+  //creating function to load ip address from the API
+  const getData = async () => {
+    const res = await axios.get("https://geolocation-db.com/json/");
+    // console.log(res.data);
+    setIP(res.data.IPv4);
+    setLocationUser(res.data);
+  };
+
+  const setLocationUser = async (location) => {
+    const payload = {
+      lat: `${location.latitude}`,
+      long: `${location.longitude}`,
+    };
+    const data = await auth.postLocation(payload);
+    if (data.status) {
+      console.log("success");
+    }
+  };
+
+  useEffect(() => {
+    //passing getData method to the lifecycle method
+    token && getData();
+  }, [token]);
 
   return (
     <Fragment>
