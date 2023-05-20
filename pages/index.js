@@ -23,6 +23,7 @@ import sponsorApi from "../api/api_sponsor";
 import Content from "../api/api_content";
 import axios from "axios";
 import auth from "../api/api_auth";
+import DialogConsent from "../components/DialogConsent";
 const path = process.env.NEXT_PUBLIC_BASE_API;
 
 const Home = () => {
@@ -61,6 +62,7 @@ const Home = () => {
       <AboutUs locale={locale} />
       <Sponsor locale={locale} />
       <CountUser locale={locale} />
+      <DialogConsent></DialogConsent>
     </Fragment>
   );
 };
