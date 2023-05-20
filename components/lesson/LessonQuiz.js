@@ -508,6 +508,7 @@ const LessonQuiz = ({
     <Fragment>
       {chapter.length ? getDetails(query.name) : ""}
       <ModalSuccess
+        type={query.name}
         openModalSuccess={openModalSuccess}
         setOpenModalSuccess={setOpenModalSuccess}
         handleClickNext={handleClickNext}

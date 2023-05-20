@@ -57,6 +57,7 @@ const ModalSuccess = ({
                   mb={1}
                   fontWeight={500}
                   fontSize={matches ? 36 : 20}
+                  sx={{ display: (type = "pre_test" ? "none" : "") }}
                 >
                   {t("modal-text.text3")}
                 </Typography>

@@ -209,7 +209,7 @@ const CertificateModal = ({ question, openModal, setOpenModal }) => {
 
   return (
     <Dialog
-      open={true}
+      open={openModal}
       scroll={"body"}
       maxWidth={"md"}
       sx={{ "& .MuiPaper-root": { borderRadius: "16px" } }}
