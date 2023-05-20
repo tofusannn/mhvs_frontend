@@ -96,7 +96,6 @@ const LessonLearn = ({ lesson, chapter, getLesson }) => {
             name = "post_test";
             menu = chapArray.post_test.id;
           }
-          getLesson("learning", query.lesson, chap, name, menu);
           // const data = await Lesson.postUserLessonState({
           //   lesson_id: parseInt(query.lesson),
           //   chapter_id: parseInt(query.chapter),
@@ -104,6 +103,8 @@ const LessonLearn = ({ lesson, chapter, getLesson }) => {
           //   object_id: parseInt(query.chapter),
           // });
         }
+        getLesson("learning", query.lesson, chap, name, menu);
+
         break;
     }
   }

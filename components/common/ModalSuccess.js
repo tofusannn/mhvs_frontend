@@ -12,7 +12,7 @@ import {
 import { makeStyles } from "@mui/styles";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 
 const ModalSuccess = ({
   type,
@@ -28,6 +28,7 @@ const ModalSuccess = ({
   const matches = useMediaQuery("(min-width:600px)");
 
   function handleClick() {}
+  useEffect(() => {}, [type]);
 
   return (
     <Dialog
@@ -53,14 +54,26 @@ const ModalSuccess = ({
               </Typography>
             ) : (
               <Fragment>
-                <Typography
-                  mb={1}
-                  fontWeight={500}
-                  fontSize={matches ? 36 : 20}
-                  sx={{ display: (type = "pre_test" ? "none" : "") }}
-                >
-                  {t("modal-text.text3")}
-                </Typography>
+                {
+                  (type === "post_test" ? (
+                    <Typography
+                      mb={1}
+                      fontWeight={500}
+                      fontSize={matches ? 36 : 20}
+                    >
+                      {t("modal-text.text3")}
+                    </Typography>
+                  ) : (
+                    // <Typography
+                    //   mb={1}
+                    //   fontWeight={500}
+                    //   fontSize={matches ? 36 : 20}
+                    // >
+                    //   {t("modal-text.text3")}
+                    // </Typography>
+                    <></>
+                  ))
+                }
                 <Typography fontWeight={500} fontSize={matches ? 24 : 18}>
                   {t("modal-text.text4")}{" "}
                   <span style={{ color: "#3CBB8E" }}>{score}</span>
