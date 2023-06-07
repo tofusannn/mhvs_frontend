@@ -182,10 +182,10 @@ const Lesson = ({
           >
             <Typography textAlign={"start"}>
               {idx === 0
-                ? "เพื่อตัวเอง"
+                ? t("for-myself")
                 : idx === 1
-                ? "เพื่อสังคม"
-                : idx === 2 && "เพื่อ..."}
+                ? t("for-society")
+                : idx === 2 && t("for")}
             </Typography>
           </Grid>
           <TextField

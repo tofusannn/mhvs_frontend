@@ -8,16 +8,33 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import Cookies from "js-cookie";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 import { Fragment, useEffect, useState } from "react";
+import Lesson from "../../api/api_lesson";
 const path = process.env.NEXT_PUBLIC_BASE_API;
 
 const LessonPreview = ({ lesson, getLesson }) => {
   const classes = useStyles();
+  const token = Cookies.get("token");
   const { push, pathname, query } = useRouter();
   const t = useTranslations();
   const matches = useMediaQuery("(min-width:600px)");
+
+  async function registerLesson(id) {
+    if (token) {
+      const data = await Lesson.postUserLesson({ lesson_id: id });
+      if (data.status) {
+        getLesson("learning", id, "", "pre_test");
+      }
+    } else {
+      replace({
+        pathname: "/auth",
+        query: { action: "login", type: "phone" },
+      });
+    }
+  }
 
   return (
     <Fragment>
@@ -42,7 +59,7 @@ const LessonPreview = ({ lesson, getLesson }) => {
             <Grid xs={12} sm={2} py={matches ? 0 : 3}>
               <Button
                 className={classes.button_confirm}
-                onClick={() => getLesson("learning", lesson.id, "", "pre_test")}
+                onClick={() => registerLesson(lesson.id)}
               >
                 {t("register-free")}
               </Button>
