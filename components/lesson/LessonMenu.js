@@ -17,6 +17,7 @@ import { useRouter } from "next/router";
 import { Fragment } from "react";
 import Lesson from "../../api/api_lesson";
 import { useTranslations } from "next-intl";
+import Cookies from "js-cookie";
 
 const LessonMenu = ({ chapter, getLesson }) => {
   const classes = useStyles();
@@ -67,7 +68,7 @@ const LessonMenu = ({ chapter, getLesson }) => {
                 width: "100%",
                 height: "330px",
                 overflow: "scroll",
-                padding: "0px 10px"
+                padding: "0px 10px",
               }
         }
       >

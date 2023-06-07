@@ -10,6 +10,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import Cookies from "js-cookie";
 import { useTranslations } from "next-intl";
 
 const ModalFail = ({
@@ -39,7 +40,7 @@ const ModalFail = ({
               src="/image/modal_fail.png"
             ></CardMedia>
           </Grid>
-          <Grid mb={6} container justifyContent={"center"} textAlign={"center"}>
+          <Grid mb={6} textAlign={"center"}>
             <Typography
               mt={1}
               mb={1}

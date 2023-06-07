@@ -12,6 +12,7 @@ import Lesson from "../../api/api_lesson";
 import LessonMenu from "./LessonMenu";
 import LessonQuiz from "./LessonQuiz";
 import { useTranslations } from "next-intl";
+import Cookies from "js-cookie";
 
 const { Fragment, useState, useEffect } = require("react");
 
@@ -32,6 +33,7 @@ const LessonLearn = ({ lesson, chapter, getLesson }) => {
   }, [query]);
 
   async function handleClick() {
+    Cookies.set("count", "");
     let chap = 0;
     let name = "";
     let menu = 0;

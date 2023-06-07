@@ -19,6 +19,7 @@ import Question from "../../api/api_question";
 import ModalSuccess from "../common/ModalSuccess";
 import ModalFail from "../common/ModalFail";
 import { useTranslations } from "next-intl";
+import Cookies from "js-cookie";
 const path = process.env.NEXT_PUBLIC_BASE_API;
 
 const LessonQuiz = ({
@@ -47,7 +48,7 @@ const LessonQuiz = ({
   const [objectId, setObjectId] = useState();
   const t = useTranslations();
   const matches = useMediaQuery("(min-width:600px)");
-
+  const count = Cookies.get("count");
   useEffect(() => {
     confirm && handleClick();
   }, [confirm]);
@@ -219,7 +220,7 @@ const LessonQuiz = ({
       setOpenSnackbar(true);
       setPayloadSnackbar(data);
       if (data.status) {
-        if (data.result.estimate) {
+        if (count === "2") {
           await Lesson.postUserLessonState({
             lesson_id: parseInt(query.lesson),
             chapter_id: parseInt(query.chapter),
@@ -229,13 +230,44 @@ const LessonQuiz = ({
           setScore(`${data.result.total_score} / ${data.result.max_score}`);
           setButtonNext(true);
           setOpenModalSuccess(true);
+          await Lesson.postUserLessonState({
+            lesson_id: parseInt(query.lesson),
+            chapter_id: parseInt(query.chapter),
+            object_name: "chapter",
+            object_id: parseInt(query.chapter),
+          });
         } else {
-          setOpenModalFail(true);
-          setScore(`${data.result.total_score} / ${data.result.max_score}`);
+          if (data.result.estimate) {
+            await Lesson.postUserLessonState({
+              lesson_id: parseInt(query.lesson),
+              chapter_id: parseInt(query.chapter),
+              object_name: query.name,
+              object_id: objectId,
+            });
+            setScore(`${data.result.total_score} / ${data.result.max_score}`);
+            setButtonNext(true);
+            setOpenModalSuccess(true);
+          } else {
+            setOpenModalFail(true);
+            setScore(`${data.result.total_score} / ${data.result.max_score}`);
+            checkCount();
+          }
         }
       }
     }
     setValidate(true);
+  }
+
+  function checkCount() {
+    if (count) {
+      if (count === "1") {
+        Cookies.set("count", "2");
+      } else {
+        Cookies.set("count", "");
+      }
+    } else {
+      Cookies.set("count", "1");
+    }
   }
 
   function handleClose(event, reason) {
