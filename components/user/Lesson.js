@@ -251,47 +251,54 @@ const Lesson = ({
 
   async function handleConfirm() {
     let count = 0;
-    if (!filePayload.length) {
+    if (filePayload.length === 3) {
       linkPayload.forEach((e) => {
         if (e.link === "") {
           count += 1;
+        } else {
+          count -= 1;
         }
       });
-      if (count === 3) {
+      if (count < 0) {
+        const linkList = [];
+        linkPayload.forEach((e, idx) => {
+          if (e.link != "") {
+            linkList.push(e);
+          }
+        });
+        const hw = await lessonApi.getChapterHomework(parseInt(query.id));
+        const payload = {
+          lesson_id: hw.result.lesson_id,
+          chapter_id: hw.result.chapter_id,
+          chapter_homework_id: hw.result.id,
+          file: filePayload,
+          link: linkList,
+        };
+        const data = await Homework.postUserHomework(payload);
+        setOpenSnackbar(true);
+        setPayloadSnackbar(data);
+        if (data.status) {
+          await lessonApi.postUserLessonState({
+            lesson_id: hw.result.lesson_id,
+            chapter_id: hw.result.chapter_id,
+            object_name: "homework",
+            object_id: hw.result.id,
+          });
+          setOpenModalSuccess(true);
+        }
+      } else {
         setOpenSnackbar(true);
         setPayloadSnackbar({
-          msg: "Field not data",
+          msg: "กรอกข้อมูลไม่ครบ",
           status: false,
         });
-        return;
       }
-    }
-    const linkList = [];
-    linkPayload.forEach((e, idx) => {
-      if (e.link != "") {
-        linkList.push(e);
-      }
-    });
-
-    const hw = await lessonApi.getChapterHomework(parseInt(query.id));
-    const payload = {
-      lesson_id: hw.result.lesson_id,
-      chapter_id: hw.result.chapter_id,
-      chapter_homework_id: hw.result.id,
-      file: filePayload,
-      link: linkList,
-    };
-    const data = await Homework.postUserHomework(payload);
-    setOpenSnackbar(true);
-    setPayloadSnackbar(data);
-    if (data.status) {
-      await lessonApi.postUserLessonState({
-        lesson_id: hw.result.lesson_id,
-        chapter_id: hw.result.chapter_id,
-        object_name: "homework",
-        object_id: hw.result.id,
+    } else {
+      setOpenSnackbar(true);
+      setPayloadSnackbar({
+        msg: "กรอกข้อมูลไม่ครบ",
+        status: false,
       });
-      setOpenModalSuccess(true);
     }
   }
 

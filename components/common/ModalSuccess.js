@@ -95,7 +95,7 @@ const ModalSuccess = ({
                     pathname,
                     query: {
                       action: "lesson",
-                      type: "homework",
+                      type: "lesson",
                     },
                   });
                   reload();
