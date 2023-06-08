@@ -155,7 +155,7 @@ const Auth = () => {
       setOpenSnackbar(true);
       if (data.status) {
         await auth.login({ phone: registerPayload.phone });
-        push({ pathname: "/user", query: { action: "profile" } });
+        push({ pathname: "/lesson", query: { action: "list" } });
       }
     }
     if (name === "login") {
@@ -303,13 +303,13 @@ const Auth = () => {
           <Card
             className={
               query.action === "forgot-password" ||
-              query.action === "change-password"
+                query.action === "change-password"
                 ? classes.card_main_forgot
                 : classes.card_main
             }
           >
             {query.action === "forgot-password" ||
-            query.action === "change-password" ? (
+              query.action === "change-password" ? (
               <Grid
                 container
                 className={classes.card_title}
