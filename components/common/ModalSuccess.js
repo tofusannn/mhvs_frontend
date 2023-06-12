@@ -54,26 +54,24 @@ const ModalSuccess = ({
               </Typography>
             ) : (
               <Fragment>
-                {
-                  (type === "post_test" ? (
-                    <Typography
-                      mb={1}
-                      fontWeight={500}
-                      fontSize={matches ? 36 : 20}
-                    >
-                      {t("modal-text.text3")}
-                    </Typography>
-                  ) : (
-                    // <Typography
-                    //   mb={1}
-                    //   fontWeight={500}
-                    //   fontSize={matches ? 36 : 20}
-                    // >
-                    //   {t("modal-text.text3")}
-                    // </Typography>
-                    <></>
-                  ))
-                }
+                {type === "post_test" ? (
+                  <Typography
+                    mb={1}
+                    fontWeight={500}
+                    fontSize={matches ? 36 : 20}
+                  >
+                    {t("modal-text.text3")}
+                  </Typography>
+                ) : (
+                  // <Typography
+                  //   mb={1}
+                  //   fontWeight={500}
+                  //   fontSize={matches ? 36 : 20}
+                  // >
+                  //   {t("modal-text.text3")}
+                  // </Typography>
+                  <></>
+                )}
                 <Typography fontWeight={500} fontSize={matches ? 24 : 18}>
                   {t("modal-text.text4")}{" "}
                   <span style={{ color: "#3CBB8E" }}>{score}</span>
@@ -89,16 +87,16 @@ const ModalSuccess = ({
                     ? classes.buttonConfirm
                     : classes.buttonConfirm2
                 }
-                onClick={() => {
+                onClick={async () => {
                   setOpenModalSuccess(false);
-                  push({
+                  await push({
                     pathname,
                     query: {
                       action: "lesson",
                       type: "lesson",
                     },
                   });
-                  reload();
+                  location.reload();
                 }}
               >
                 <Coffee sx={{ marginRight: 1 }}></Coffee>

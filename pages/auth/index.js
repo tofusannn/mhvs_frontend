@@ -8,6 +8,7 @@ import {
   Divider,
   Grid,
   Link,
+  MenuItem,
   Snackbar,
   TextField,
   Typography,
@@ -21,6 +22,8 @@ const { Fragment } = require("react");
 import { useSelector, useDispatch } from "react-redux";
 import auth from "../../api/api_auth";
 import { login, register, forgotPassword } from "../../redux/authSlice";
+import Image from "next/image";
+import logo from "../../public/icon/Aorsortor_Logo Aorsotor.png";
 
 const register_payload = {
   phone: "",
@@ -28,7 +31,6 @@ const register_payload = {
   nationality: "",
   pre_name: "",
   first_name: "",
-  last_name: "",
 };
 
 const forgot_password_payload = {
@@ -36,10 +38,21 @@ const forgot_password_payload = {
   password: "",
 };
 
+const prenameItem = [
+  {
+    value: "mr",
+    label: "Mr.",
+  },
+  {
+    value: "mrs",
+    label: "Mrs.",
+  },
+];
+
 const Auth = () => {
   const classes = useStyles();
   const t = useTranslations();
-  const { push, query } = useRouter();
+  const { push, query, locale } = useRouter();
   const payload = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const [loginPhonePayload, setLoginPhonePayload] = useState("");
@@ -297,19 +310,25 @@ const Auth = () => {
     <Fragment>
       <Container sx={{ marginY: 5 }}>
         <Grid container justifyContent={"center"}>
-          <img src="/icon/logo-blue.svg"></img>
+          <Image
+            alt="logo"
+            src={logo}
+            width={"240px"}
+            height={"100%"}
+            objectFit="cover"
+          ></Image>
         </Grid>
         <Grid container my={3} justifyContent={"center"}>
           <Card
             className={
               query.action === "forgot-password" ||
-                query.action === "change-password"
+              query.action === "change-password"
                 ? classes.card_main_forgot
                 : classes.card_main
             }
           >
             {query.action === "forgot-password" ||
-              query.action === "change-password" ? (
+            query.action === "change-password" ? (
               <Grid
                 container
                 className={classes.card_title}
@@ -380,13 +399,20 @@ const Auth = () => {
                     <TextField
                       name="pre_name"
                       size="small"
+                      select
                       fullWidth
                       error={
                         checkButtonConfirm && registerPayload.pre_name === ""
                       }
                       value={registerPayload.pre_name}
                       onChange={changeField}
-                    ></TextField>
+                    >
+                      {prenameItem.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                          {option.label}
+                        </MenuItem>
+                      ))}
+                    </TextField>
                   </Grid>
                   <Typography>
                     {t("register-page.firstname")}{" "}
@@ -404,11 +430,11 @@ const Auth = () => {
                       onChange={changeField}
                     ></TextField>
                   </Grid>
-                  <Typography>
+                  {/* <Typography>
                     {t("register-page.lastname")}{" "}
                     <span style={{ color: "red" }}>*</span>
-                  </Typography>
-                  <Grid mt={1} mb={3} container>
+                  </Typography> */}
+                  {/* <Grid mt={1} mb={3} container>
                     <TextField
                       name="last_name"
                       size="small"
@@ -419,7 +445,7 @@ const Auth = () => {
                       value={registerPayload.last_name}
                       onChange={changeField}
                     ></TextField>
-                  </Grid>
+                  </Grid> */}
                   <Typography>
                     {t("phone")}
                     <span style={{ color: "red" }}>*</span>
@@ -439,7 +465,7 @@ const Auth = () => {
                   </Grid>
                   <Grid
                     xs={8}
-                    sm={6}
+                    sm={7}
                     mt={1}
                     mb={3}
                     item
@@ -452,6 +478,7 @@ const Auth = () => {
                     </Typography>
                     <Button
                       name="male"
+                      variant="contained"
                       className={
                         registerPayload.gender === "male"
                           ? classes.button_register_active
@@ -468,6 +495,7 @@ const Auth = () => {
                     </Button>
                     <Button
                       name="female"
+                      variant="contained"
                       className={
                         registerPayload.gender === "female"
                           ? classes.button_register_active
@@ -491,7 +519,12 @@ const Auth = () => {
                     alignItems={"center"}
                     justifyContent={"space-between"}
                   >
-                    <Grid item xs={12} sm={2} mb={matches ? 0 : 2}>
+                    <Grid
+                      item
+                      xs={12}
+                      sm={locale === "th" ? 2 : 12}
+                      mb={matches ? (locale === "th" ? 0 : 2) : 2}
+                    >
                       <Typography>
                         {t("nationality")}{" "}
                         <span style={{ color: "red" }}>*</span>
@@ -499,6 +532,7 @@ const Auth = () => {
                     </Grid>
                     <Button
                       name="thai"
+                      variant="contained"
                       className={
                         registerPayload.nationality === "thai"
                           ? classes.button_register_active
@@ -515,6 +549,7 @@ const Auth = () => {
                     </Button>
                     <Button
                       name="myanmar"
+                      variant="contained"
                       className={
                         registerPayload.nationality === "myanmar"
                           ? classes.button_register_active
@@ -531,6 +566,7 @@ const Auth = () => {
                     </Button>
                     <Button
                       name="laos"
+                      variant="contained"
                       className={
                         registerPayload.nationality === "laos"
                           ? classes.button_register_active
@@ -547,6 +583,7 @@ const Auth = () => {
                     </Button>
                     <Button
                       name="cambodia"
+                      variant="contained"
                       className={
                         registerPayload.nationality === "cambodia"
                           ? classes.button_register_active
@@ -758,21 +795,23 @@ const useStyles = makeStyles({
     color: "#2DA373",
     background: "#D8F8E4",
     boxShadow: "none",
+    border: "1px solid #2DA383",
     "&:hover": {
       color: "#2DA373",
       background: "#D8F8E4",
       boxShadow: "none",
+      border: "1px solid #2DA383",
     },
   },
   button_register_inactive: {
     fontWeight: 500,
     textTransform: "none",
     color: "#2DA373",
-    background: "#ffffff",
+    background: "#D8F8E4",
     boxShadow: "none",
     "&:hover": {
       color: "#2DA373",
-      background: "#ffffff",
+      background: "#D8F8E4",
       boxShadow: "none",
     },
   },

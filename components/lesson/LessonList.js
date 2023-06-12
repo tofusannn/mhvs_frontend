@@ -17,6 +17,9 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import Lesson from "../../api/api_lesson";
 import { useTranslations } from "next-intl";
+import ModalPopup from "../common/ModalPopup";
+import Image from "next/image";
+import popupImage from "../../public//image/popup-image/PopUp_png_Pop Up 01.png";
 
 const { Fragment, useEffect, useState } = require("react");
 
@@ -26,6 +29,8 @@ const LessonList = ({ getLesson }) => {
   const [lessonList, setLessonList] = useState([]);
   const t = useTranslations();
   const matches = useMediaQuery("(min-width:600px)");
+  const [open, setOpen] = useState(false);
+  const [id, setId] = useState("");
 
   const header_lesson = [
     `${t("lesson-page.lesson")}`,
@@ -46,7 +51,13 @@ const LessonList = ({ getLesson }) => {
     getLesson("preview", id, "", "");
   }
 
+  function openModal(params) {
+    setOpen(true);
+    setId(params);
+  }
+
   async function registerLesson(id) {
+    setOpen(false)
     const token = Cookies.get("token");
     if (token) {
       const data = await Lesson.postUserLesson({ lesson_id: id });
@@ -129,7 +140,11 @@ const LessonList = ({ getLesson }) => {
                       </TableCell>
                       <TableCell
                         align={"right"}
-                        sx={{ fontWeight: 300, fontSize: 14, color: "#121212" }}
+                        sx={{
+                          fontWeight: 300,
+                          fontSize: 14,
+                          color: "#121212",
+                        }}
                       >
                         <Button
                           sx={{ marginRight: 2 }}
@@ -140,7 +155,7 @@ const LessonList = ({ getLesson }) => {
                         </Button>
                         <Button
                           className={classes.button_active}
-                          onClick={() => registerLesson(e.id)}
+                          onClick={() => openModal(e.id)}
                         >
                           {t("lesson-page.enroll")}
                         </Button>
@@ -200,7 +215,7 @@ const LessonList = ({ getLesson }) => {
                           <Button
                             sx={{ width: "140px !important" }}
                             className={classes.button_active}
-                            onClick={() => registerLesson(e.id)}
+                            onClick={() => openModal(e.id)}
                           >
                             {t("lesson-page.enroll")}
                           </Button>
@@ -209,6 +224,20 @@ const LessonList = ({ getLesson }) => {
                     </TableRow>
                   )
                 )}
+                <ModalPopup
+                  open={open}
+                  setOpen={setOpen}
+                  textButton={"บทเรียนของคุณ"}
+                  funcButton={() => registerLesson(id)}
+                >
+                  <Image alt="img" src={popupImage} objectFit="cover"></Image>
+                  <Typography fontWeight={600}>
+                    1. เรียนครบทั้ง 8 บทเรียน <br />
+                    2. ทําแบบทดสอบผ่านเกณฑ์ 60% <br />
+                    3. ทํางานที่ได้รับมอบหมายทั้งหมด 3 ชิ้นงาน <br />
+                    4. กรอกข้อมูลและประเมินความพึงพอใจของท่านให้ครบ <br />
+                  </Typography>
+                </ModalPopup>
               </TableBody>
             </Table>
           </TableContainer>

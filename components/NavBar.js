@@ -22,6 +22,11 @@ import {
   ListItemIcon,
   Drawer,
   List,
+  Box,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogActions,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useTranslations } from "next-intl";
@@ -35,6 +40,9 @@ import { userProfile } from "../redux/authSlice";
 import Cookies from "js-cookie";
 import upload from "../api/api_upload";
 import Image from "next/image";
+import logo from "../public/image/aorsortor_online.png";
+import thFlag from "../public/icon/thailand.png";
+import mmFlag from "../public/icon/myanmar.png";
 const path = process.env.NEXT_PUBLIC_BASE_API;
 
 const NavBar = (props) => {
@@ -49,11 +57,17 @@ const NavBar = (props) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const [anchorElTrans, setAnchorElTrans] = useState(null);
-  const openTrans = Boolean(anchorElTrans);
+  const [openTrans, setOpenTrans] = useState(false);
   const [openDrawer, setOpenDrawer] = useState(false);
 
+  useEffect(() => {
+    if (pathname === "/") {
+      setOpenTrans(true);
+    }
+  }, []);
+
   const handleDrawerOpen = () => {
-    setOpenDrawer(true);
+    setOpenDrawer(!openDrawer);
   };
 
   const handleDrawerClose = () => {
@@ -90,6 +104,7 @@ const NavBar = (props) => {
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -105,7 +120,13 @@ const NavBar = (props) => {
     for (let i = 1; i <= count; i++) {
       if (token && i === 6) return rows;
       rows.push(
-        <Grid key={i} sx={{ paddingLeft: 5, margin: "15px 0px" }}>
+        <Box
+          key={i}
+          sx={{
+            paddingLeft: { xs: 3, sm: 0 },
+            margin: { xs: "30px 0px 0px 0px", sm: "0px 28px 0px 0px" },
+          }}
+        >
           <Link
             component="button"
             sx={{
@@ -120,7 +141,7 @@ const NavBar = (props) => {
           >
             {t(`navbar-menu.menu${i}.title`)}
           </Link>
-        </Grid>
+        </Box>
       );
     }
     return rows;
@@ -154,11 +175,11 @@ const NavBar = (props) => {
   }
 
   const handleClickTrans = (event) => {
-    setAnchorElTrans(event.currentTarget);
+    setOpenTrans(true);
   };
 
   const handleCloseTrans = () => {
-    setAnchorElTrans(null);
+    setOpenTrans(false);
   };
 
   async function logoutUser() {
@@ -172,196 +193,54 @@ const NavBar = (props) => {
         sx={{
           position: { xs: "fixed", sm: "static" },
           backgroundColor: "#0076FF",
-          height: { sm: 90, xs: "auto" },
+          height: { md: 90, xs: "auto" },
           zIndex: (theme) => theme.zIndex.drawer + 1,
         }}
       >
-        <Container
-          className={classes.container_main}
-          sx={{ display: { sm: "flex", xs: "none" } }}
-        >
-          <Toolbar sx={{ height: "100%" }} disableGutters>
-            <Grid
-              container
-              alignSelf={"center"}
+        <Toolbar sx={{ paddingRight: "10px" }} disableGutters>
+          <Box
+            sx={{ display: { xs: "none", sm: "flex" } }}
+            width={"100%"}
+            justifyContent={"space-between"}
+            alignItems={"center"}
+          >
+            <Image
+              alt="logo"
+              src={logo}
+              width={"150px"}
+              height={"90px"}
+              objectFit="cover"
+            ></Image>
+
+            {/* BTUserActions */}
+            <Box
+              display={"flex"}
               justifyContent={"space-between"}
-            >
-              <Grid item xs={locale === "th" ? 3 : 1}>
-                <img
-                  src="/image/aorsortor_online.png"
-                  width={locale === "th" ? "60%" : "150%"}
-                ></img>
-              </Grid>
-              <Grid
-                item
-                xs={locale === "th" ? 9 : 11}
-                container
-                columnSpacing={10}
-                alignItems={"center"}
-                textAlign={"center"}
-                justifyContent={"end"}
-              >
-                {loopMenuBar()}
-                {token ? (
-                  <Fragment>
-                    <Divider
-                      sx={{ marginLeft: 4, opacity: 0.16, height: 44 }}
-                      orientation="vertical"
-                      color="white"
-                    ></Divider>
-                    <IconButton sx={{ marginX: 3 }}>
-                      <NotificationsOutlined
-                        sx={{
-                          width: 36,
-                          height: 36,
-                          color: "#ffffff",
-                        }}
-                      ></NotificationsOutlined>
-                    </IconButton>
-                    <IconButton
-                      sx={{ padding: 0, border: "2px solid #ffffff" }}
-                      onClick={handleClick}
-                    >
-                      <Avatar
-                        sx={{ width: 36, height: 36 }}
-                        src={imageUser && `${path}${imageUser}`}
-                      ></Avatar>
-                    </IconButton>
-                  </Fragment>
-                ) : (
-                  <Grid sx={{ marginLeft: 4 }}>
-                    <Button
-                      className={classes.buttonRegister}
-                      variant="outlined"
-                      fullWidth
-                      size="small"
-                      onClick={handleClickRegister}
-                    >
-                      {t("register")}
-                    </Button>
-                  </Grid>
-                )}
-                <Grid sx={{ marginLeft: 4 }}>
-                  <Button
-                    className={classes.buttonTranslation}
-                    variant="outlined"
-                    size="small"
-                    onClick={handleClickTrans}
-                  >
-                    {getNameTranslate(locale)}
-                  </Button>
-                  <Menu
-                    sx={{ marginTop: 1 }}
-                    anchorEl={anchorElTrans}
-                    open={openTrans}
-                    onClose={handleCloseTrans}
-                    transformOrigin={{ horizontal: "center", vertical: "top" }}
-                    anchorOrigin={{ horizontal: "center", vertical: "bottom" }}
-                  >
-                    <MenuItem
-                      name="th"
-                      disabled={locale === "th"}
-                      onClick={() => translationClick("th")}
-                    >
-                      ภาษาไทย
-                    </MenuItem>
-                    <MenuItem
-                      name="mm"
-                      disabled={locale === "mm"}
-                      onClick={() => translationClick("mm")}
-                    >
-                      မြန်မာဘာသာ
-                    </MenuItem>
-                    {/* <MenuItem
-                    name="ls"
-                    disabled={locale === "ls"}
-                    onClick={() => translationClick("ls")}
-                  >
-                    ພາສາລາວ
-                  </MenuItem>
-                  <MenuItem
-                    name="cd"
-                    disabled={locale === "cd"}
-                    onClick={() => translationClick("cd")}
-                  >
-                    ភាសាខ្មែរ
-                  </MenuItem> */}
-                  </Menu>
-                </Grid>
-              </Grid>
-            </Grid>
-          </Toolbar>
-        </Container>
-        <Container sx={{ display: { sm: "none" } }}>
-          <Toolbar disableGutters>
-            <Grid
-              container
               alignItems={"center"}
-              justifyContent={"space-between"}
             >
-              <Grid item xs={5} sx={{ display: "flex", alignItems: " center" }}>
-                {/* Menu */}
-                <Grid item xs={3}>
+              {/* Menubar */}
+              {loopMenuBar()}
+              {token ? (
+                <Fragment>
+                  <Divider
+                    sx={{ opacity: 0.16, height: 44 }}
+                    orientation="vertical"
+                    color="white"
+                  ></Divider>
                   <IconButton
-                    color="inherit"
-                    onClick={handleDrawerOpen}
-                    edge="start"
+                    sx={{ padding: 0, border: "2px solid #ffffff", marginX: 3 }}
+                    onClick={handleClick}
                   >
-                    <MenuIcon />
+                    <Avatar
+                      sx={{ width: 36, height: 36 }}
+                      src={imageUser && `${path}${imageUser}`}
+                    ></Avatar>
                   </IconButton>
-                </Grid>
-                {/* LOGO */}
-                <Grid
-                  item
-                  xs={9}
-                  sx={{
-                    position: "sticky",
-                    height: 56,
-                  }}
-                >
-                  <Image
-                    objectFit="cover"
-                    src={"/image/aorsortor_online.png"}
-                    layout="fill"
-                    alt="logo"
-                  ></Image>
-                </Grid>
-              </Grid>
-              {/* Profile BT */}
-              <Grid>
-                {token ? (
-                  <>
-                    <IconButton>
-                      <NotificationsOutlined
-                        sx={{
-                          width: 18,
-                          height: 18,
-                          color: "#ffffff",
-                        }}
-                      ></NotificationsOutlined>
-                    </IconButton>
-                    <IconButton
-                      sx={{ padding: 0, border: "1px solid #ffffff" }}
-                      onClick={handleClick}
-                    >
-                      <Avatar
-                        sx={{ width: 18, height: 18 }}
-                        src={imageUser && `${path}${imageUser}`}
-                      ></Avatar>
-                    </IconButton>
-                  </>
-                ) : (
+                </Fragment>
+              ) : (
+                <Box>
                   <Button
-                    sx={{
-                      width: { xs: locale === "th" ? 90 : 120, sm: 200 },
-                      fontSize: 10,
-                      borderRadius: 20,
-                      textTransform: "none",
-                      fontWeight: 500,
-                      color: "#ffffff",
-                      background:
-                        "transparent linear-gradient(90deg, #3CBB8E 0%, #2DA373 100%) 0% 0% no-repeat padding-box",
-                    }}
+                    className={classes.buttonRegister}
                     variant="outlined"
                     fullWidth
                     size="small"
@@ -369,26 +248,86 @@ const NavBar = (props) => {
                   >
                     {t("register")}
                   </Button>
-                )}
-                <Button
-                  sx={{
-                    margin: "8px",
-                    fontSize: 10,
-                    width: 18,
-                    height: 18,
-                    minWidth: 10,
-                    minHeight: 10,
-                  }}
-                  className={classes.buttonTranslation}
-                  variant="outlined"
-                  onClick={handleClickTrans}
-                >
-                  {getNameTranslate(locale)}
-                </Button>
-              </Grid>
-            </Grid>
-          </Toolbar>
-        </Container>
+                </Box>
+              )}
+              {/* BTTranslate */}
+              <Button
+                className={classes.buttonTranslation}
+                variant="outlined"
+                onClick={handleClickTrans}
+              >
+                {getNameTranslate(locale)}
+              </Button>
+            </Box>
+          </Box>
+          <Box
+            sx={{ display: { xs: "flex", sm: "none" } }}
+            width={"100%"}
+            justifyContent={"space-between"}
+            alignItems={"center"}
+          >
+            <Box
+              sx={{ display: "flex" }}
+              justifyContent={"space-between"}
+              alignItems={"center"}
+            >
+              <IconButton
+                sx={{ margin: "0px 10px" }}
+                color="inherit"
+                onClick={handleDrawerOpen}
+                edge="start"
+              >
+                <MenuIcon />
+              </IconButton>
+              <Image
+                alt="logo"
+                src={logo}
+                width={"120px"}
+                height={"56px"}
+                objectFit="cover"
+              ></Image>
+            </Box>
+            <Box
+              sx={{ display: "flex" }}
+              justifyContent={"space-between"}
+              alignItems={"center"}
+            >
+              {token ? (
+                <Box mr={1}>
+                  <IconButton
+                    sx={{ padding: 0, border: "1px solid #ffffff" }}
+                    onClick={handleClick}
+                  >
+                    <Avatar
+                      sx={{ width: 24, height: 24 }}
+                      src={imageUser && `${path}${imageUser}`}
+                    ></Avatar>
+                  </IconButton>
+                </Box>
+              ) : (
+                <Box>
+                  <Button
+                    className={classes.buttonRegister}
+                    variant="outlined"
+                    fullWidth
+                    size="small"
+                    onClick={handleClickRegister}
+                  >
+                    {t("register")}
+                  </Button>
+                </Box>
+              )}
+              {/* BTTranslate */}
+              <Button
+                className={classes.buttonTranslation}
+                variant="outlined"
+                onClick={handleClickTrans}
+              >
+                {getNameTranslate(locale)}
+              </Button>
+            </Box>
+          </Box>
+        </Toolbar>
       </AppBar>
       {/* Profile */}
       <Menu
@@ -453,43 +392,74 @@ const NavBar = (props) => {
         </MenuItem>
       </Menu>
       {/* Translate */}
-      <Menu
-        sx={{ marginTop: 1 }}
-        anchorEl={anchorElTrans}
+      <Dialog
+        sx={{
+          "& .MuiPaper-root": {
+            maxWidth: "256px",
+          },
+        }}
+        fullWidth
         open={openTrans}
         onClose={handleCloseTrans}
-        transformOrigin={{ horizontal: "center", vertical: "top" }}
-        anchorOrigin={{ horizontal: "center", vertical: "bottom" }}
       >
-        <MenuItem
-          name="th"
-          disabled={locale === "th"}
-          onClick={() => translationClick("th")}
-        >
-          ภาษาไทย
-        </MenuItem>
-        <MenuItem
-          name="mm"
-          disabled={locale === "mm"}
-          onClick={() => translationClick("mm")}
-        >
-          မြန်မာဘာသာ
-        </MenuItem>
-        {/* <MenuItem
-      name="ls"
-      disabled={locale === "ls"}
-      onClick={() => translationClick("ls")}
-    >
-      ພາສາລາວ
-    </MenuItem>
-    <MenuItem
-      name="cd"
-      disabled={locale === "cd"}
-      onClick={() => translationClick("cd")}
-    >
-      ភាសាខ្មែរ
-    </MenuItem> */}
-      </Menu>
+        <DialogTitle textAlign={"center"}>
+          <Typography fontWeight={500} fontSize={20}>
+            เลือกภาษา
+          </Typography>
+        </DialogTitle>
+        <DialogContent>
+          <MenuItem
+            sx={{ paddingY: 1 }}
+            name="th"
+            disabled={locale === "th"}
+            onClick={() => translationClick("th")}
+          >
+            <Image
+              alt={"th"}
+              src={thFlag}
+              width={"40"}
+              height={"40"}
+              objectFit="cover"
+            ></Image>
+            <Typography sx={{ marginLeft: 3 }} fontWeight={500} fontSize={20}>
+              ภาษาไทย
+            </Typography>
+          </MenuItem>
+          <MenuItem
+            sx={{ paddingY: 1 }}
+            name="mm"
+            disabled={locale === "mm"}
+            onClick={() => translationClick("mm")}
+          >
+            <Image
+              alt={"mm"}
+              src={mmFlag}
+              width={"40"}
+              height={"40"}
+              objectFit="cover"
+            ></Image>
+            <Typography sx={{ marginLeft: 3 }} fontWeight={500} fontSize={20}>
+              မြန်မာ
+            </Typography>
+          </MenuItem>
+          <Button
+            sx={{
+              marginTop: 3,
+              height: 30,
+              borderRadius: 20,
+              textTransform: "none",
+              fontWeight: 500,
+              color: "#ffffff",
+              background:
+                "transparent linear-gradient(90deg, #3CBB8E 0%, #2DA373 100%) 0% 0% no-repeat padding-box",
+            }}
+            fullWidth
+            onClick={handleCloseTrans}
+          >
+            หน้าแรก
+          </Button>
+        </DialogContent>
+      </Dialog>
       {/* Menu */}
       <Drawer
         sx={{
@@ -511,24 +481,38 @@ export default NavBar;
 const useStyles = makeStyles((theme) => ({
   container_main: {
     height: "100%",
-    paddingLeft: 0,
+    padding: "0px",
   },
   buttonRegister: {
+    marginRight: "15px",
     width: 200,
+    height: 30,
     borderRadius: 20,
     textTransform: "none",
     fontWeight: 500,
     color: "#ffffff",
     background:
       "transparent linear-gradient(90deg, #3CBB8E 0%, #2DA373 100%) 0% 0% no-repeat padding-box",
+    "@media (max-width: 800px)": {
+      width: 90,
+      fontSize: 10,
+      marginRight: "10px",
+    },
   },
   buttonTranslation: {
     color: "#ffffff",
+    height: 28,
     borderRadius: 20,
     borderColor: "#ffffff",
     fontWeight: 500,
     "&:hover": {
       borderColor: "#ffffff",
+    },
+    "@media (max-width: 800px)": {
+      fontSize: 10,
+      height: 24,
+      minWidth: 10,
+      minHeight: 10,
     },
   },
 }));

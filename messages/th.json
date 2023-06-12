@@ -86,7 +86,7 @@
     },
     "footer2": {
       "title": "ติดต่อ",
-      "des": "โทร: 0 2354 9100-19 aorsortor.onlineth@gmail.com"
+      "des": "aorsortor.onlineth@gmail.com"
     },
     "footer3": {
       "title": "ติดตามข่าวสาร",
@@ -117,7 +117,7 @@
   "lesson-page": {
     "lesson-list": "บทเรียนทั้งหมด",
     "details": "ดูรายละเอียด",
-    "enroll": "ลงทะเบียนเรียน",
+    "enroll": "เข้าสู่บทเรียน",
     "lesson": "บทเรียน",
     "description": "รายละเอียด",
     "highlight": "จุดเด่น",
@@ -142,7 +142,7 @@
     "your-lesson": "บทเรียนของคุณ",
     "your-homework": "ภาคปฏิบัติของคุณ",
     "homework": "ภาคปฏิบัติ",
-    "lesson-enroll": "รายการบทเรียนที่คุณลงทะเบียนเรียน"
+    "lesson-enroll": "รายการบทเรียนที่คุณเข้าสู่บทเรียน"
   },
   "profile-page": {
     "information": "ข้อมูลของคุณ",
@@ -150,7 +150,7 @@
     "support-files": "สนับสนุนไฟล์ .PNG, .JPG",
     "file-size": "ไฟล์ขนาดไม่เกิน 2 mb",
     "personal-information": "ข้อมูลส่วนตัวของคุณ",
-    "sent-homework": "ส่งภาคปฏิบัติ",
+    "sent-homework": "ส่งงาน",
     "sent-success": "ส่งแล้ว",
     "doing": "กำลังทำ",
     "continue-studying": "เรียนต่อ",
@@ -160,7 +160,7 @@
   },
   "modal-text": {
     "text1": "สุดยอดไปเลย",
-    "text2": "คุณส่งภาคปฏิบัติสำเร็จแล้ว",
+    "text2": "คุณส่งงานสำเร็จแล้ว",
     "text3": "ยินดีด้วย คุณสอบผ่านแล้ว",
     "text4": "คุณได้คะแนน",
     "text5": "พักดื่มน้ำ",
@@ -176,7 +176,7 @@
   "learning-online": "บทเรียนออนไลน์",
   "submit": "ตกลง",
   "cancel": "ยกเลิก",
-  "register-free": "ลงทะเบียนเรียนฟรี",
+  "register-free": "เข้าสู่บทเรียน",
   "login": "เข้าสู่ระบบ",
   "register": "สมัครสมาชิก",
   "phone": "หมายเลขโทรศัพท์มือถือ",

@@ -18,7 +18,7 @@ const path = process.env.NEXT_PUBLIC_BASE_API;
 const LessonPreview = ({ lesson, getLesson }) => {
   const classes = useStyles();
   const token = Cookies.get("token");
-  const { push, pathname, query } = useRouter();
+  const { push, pathname, query, replace } = useRouter();
   const t = useTranslations();
   const matches = useMediaQuery("(min-width:600px)");
 

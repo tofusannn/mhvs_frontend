@@ -1,7 +1,8 @@
 import { NavigateNext } from "@mui/icons-material";
-import { Container, Grid, Typography, useMediaQuery } from "@mui/material";
+import { Box, Container, Grid, Typography, useMediaQuery } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { Fragment } from "react";
 
@@ -14,7 +15,7 @@ const Banner = ({ page, subPage }) => {
   return (
     <Grid className={classes.banner_main} container>
       <Container sx={{ display: matches ? "" : "none" }}>
-        <Grid sx={{ position: "absolute", top: 15 }} item>
+        <Grid sx={{ position: "absolute", top: 15, zIndex: 1 }} item>
           <Typography fontSize={16} display={"flex"} alignItems={"center"}>
             {t("banner-home")} <NavigateNext></NavigateNext>
             {subPage ? (
@@ -30,19 +31,26 @@ const Banner = ({ page, subPage }) => {
         </Grid>
       </Container>
       {locale === "mm" ? (
-        <img width="100%" src={`/image/th/AST_sub banner -01.png`}></img>
+        <Image
+          alt="banner"
+          layout="fill"
+          objectFit="cover"
+          src={`/image/th/AST_sub banner -01.png`}
+        ></Image>
       ) : (
         <>
           {parseInt(query.chapter) <= 9 && parseInt(query.chapter) >= 1 ? (
             <img
               width="100%"
-              src={`/image/${locale}/AST_sub banner -0${parseInt(
-                query.chapter
+              alt="banner"
+              src={`/image/${locale}/AST_module_Thai-0${parseInt(
+                query.chapter - 1
               )}.png`}
             ></img>
           ) : (
             <img
               width="100%"
+              alt="banner"
               src={`/image/${locale}/AST_sub banner -01.png`}
             ></img>
           )}
