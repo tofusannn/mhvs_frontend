@@ -20,6 +20,9 @@ import ModalSuccess from "../common/ModalSuccess";
 import ModalFail from "../common/ModalFail";
 import { useTranslations } from "next-intl";
 import Cookies from "js-cookie";
+import ModalPopup from "../common/ModalPopup";
+import Image from "next/image";
+import popupImage from "../../public/image/popup-image/PopUp_png_Pop Up 02.png";
 const path = process.env.NEXT_PUBLIC_BASE_API;
 
 const LessonQuiz = ({
@@ -46,6 +49,8 @@ const LessonQuiz = ({
   const [questPayload, setQuestPayload] = useState({ type: "", id: "" });
   const [score, setScore] = useState("");
   const [objectId, setObjectId] = useState();
+  const [open, setOpen] = useState(false);
+
   const t = useTranslations();
   const matches = useMediaQuery("(min-width:600px)");
   const count = Cookies.get("count");
@@ -500,7 +505,7 @@ const LessonQuiz = ({
         return (
           <Fragment>
             <Typography fontWeight={500} fontSize={28}>
-              {chap.homework.name}1
+              {chap.homework.name}
             </Typography>
             <Divider sx={{ marginY: 3 }}></Divider>
             <Fragment>
@@ -508,16 +513,7 @@ const LessonQuiz = ({
               <Button
                 className={classes.button_start}
                 variant="contained"
-                onClick={() =>
-                  push({
-                    pathname: "/user",
-                    query: {
-                      action: "lesson",
-                      type: "homework",
-                      lesson: query.lesson,
-                    },
-                  })
-                }
+                onClick={() => setOpen(true)}
               >
                 {t("profile-page.sent-homework")}{" "}
                 <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
@@ -539,6 +535,27 @@ const LessonQuiz = ({
   return (
     <Fragment>
       {chapter.length ? getDetails(query.name) : ""}
+      <ModalPopup
+        open={open}
+        setOpen={setOpen}
+        textButton={"ส่งงาน"}
+        funcButton={async () => {
+          setOpen(false);
+          push({
+            pathname: "/user",
+            query: {
+              action: "lesson",
+              type: "homework",
+              lesson: query.lesson,
+            },
+          });
+        }}
+      >
+        <Image alt="img" src={popupImage} objectFit="cover"></Image>
+        <Typography textAlign={"center"} fontWeight={600} fontSize={20}>
+          กรุณาแนบภาพให้ครบจํานวน 3 ภาพ
+        </Typography>
+      </ModalPopup>
       <ModalSuccess
         type={query.name}
         openModalSuccess={openModalSuccess}

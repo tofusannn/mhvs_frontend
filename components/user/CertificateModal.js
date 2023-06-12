@@ -18,6 +18,9 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import certificate from "../../api/api_certificate";
 import { useTranslations } from "next-intl";
+import popupImage from "../../public/image/popup-image/PopUp_png_Pop Up 04.png";
+import ModalPopup from "../common/ModalPopup";
+import Image from "next/image";
 
 const CertificateModal = ({ question, openModal, setOpenModal, lesson }) => {
   const t = useTranslations();
@@ -26,6 +29,7 @@ const CertificateModal = ({ question, openModal, setOpenModal, lesson }) => {
   const [answerPayload, setAnswerPayload] = useState([]);
   const [validate, setValidate] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [open, setOpen] = useState(false);
   const [payloadSnackbar, setPayloadSnackbar] = useState({
     msg: "",
     status: false,
@@ -189,13 +193,12 @@ const CertificateModal = ({ question, openModal, setOpenModal, lesson }) => {
       const data = await certificate.postUserQuestCertificate({
         questionnaire_cer_id: question.id,
         answer: answerPayload,
-        lesson_id: lesson
+        lesson_id: lesson,
       });
       setOpenSnackbar(true);
       setPayloadSnackbar(data);
       if (data.status) {
-        setOpenModal(false);
-        router.reload();
+        setOpen(true);
       }
     }
     setValidate(true);
@@ -220,7 +223,7 @@ const CertificateModal = ({ question, openModal, setOpenModal, lesson }) => {
           <Grid container justifyContent={"center"}>
             <CardMedia
               component="img"
-              src="/image/modal_success.png"
+              src="/image/popup-image/PopUp_png_Pop Up 04.png"
             ></CardMedia>
           </Grid>
           <Typography fontWeight={500} fontSize={36} textAlign={"center"}>
@@ -249,6 +252,29 @@ const CertificateModal = ({ question, openModal, setOpenModal, lesson }) => {
           </Grid>
         </CardContent>
       </Card>
+      <ModalPopup
+        open={open}
+        setOpen={setOpen}
+        textButton={"บทเรียนของคุณ"}
+        funcButton={async () => {
+          setOpen(false);
+          setOpenModal(false);
+          router.reload();
+        }}
+      >
+        <Image alt="img" src={popupImage} objectFit="cover"></Image>
+        <Typography textAlign={"center"} fontWeight={600} fontSize={20}>
+          กรุณารอผลการตรวจสอบหลังจากขอรับ
+          <br />
+          ใบประกาศนียบัตร 7 วัน
+          <br />
+          โดยท่านสามารถติดตามผลด้วยขน้ั ตอนง่าย ๆ ที่
+          <br />
+          {"บทเรียนของคุณ"}
+          <br />
+          หากเกินกําหนดเวลา กรุณาติดต่อผู้ดูแลระบบ
+        </Typography>
+      </ModalPopup>
       <Snackbar
         open={openSnackbar}
         autoHideDuration={3000}

@@ -18,12 +18,16 @@ import Menu from "../../components/user/Menu";
 import Profile from "../../components/user/Profile";
 import { userProfile } from "../../redux/authSlice";
 import { useTranslations } from "next-intl";
+import ModalPopup from "../../components/common/ModalPopup";
+import popupImage from "../../public/image/popup-image/PopUp_png_Pop Up 03.png";
+
+import Image from "next/image";
 
 const { Fragment, useState, useEffect } = require("react");
 
 const Home = () => {
   const classes = useStyles();
-  const { asPath, prefetch, push, reload, query } = useRouter();
+  const { asPath, prefetch, push, reload, query, pathname } = useRouter();
   const dispatch = useDispatch();
   const authPayload = useSelector((state) => state.auth);
   const [payload, setPayload] = useState();
@@ -36,6 +40,8 @@ const Home = () => {
     status: false,
   });
   const [trigger, setTrigger] = useState(0);
+  const [open, setOpen] = useState(false);
+
   const t = useTranslations();
 
   useEffect(() => {
@@ -161,11 +167,34 @@ const Home = () => {
           {payloadSnackbar.msg}
         </Alert>
       </Snackbar>
-      <ModalSuccess
+      <ModalPopup
+        open={openModalSuccess}
+        setOpen={setOpenModalSuccess}
+        textButton={"รับประกาศนียบัตร"}
+        funcButton={async () => {
+          setOpenModalSuccess(false);
+          await push({
+            pathname,
+            query: {
+              action: "lesson",
+              type: "lesson",
+            },
+          });
+          location.reload();
+        }}
+      >
+        <Image alt="img" src={popupImage} objectFit="cover"></Image>
+        <Typography textAlign={"center"} fontWeight={600} fontSize={20}>
+          ขอรับใบประกาศนียบัตรได้แล้วที่
+          <br />
+          {"บทเรียนของคุณ"}
+        </Typography>
+      </ModalPopup>
+      {/* <ModalSuccess
         type={"homework"}
         openModalSuccess={openModalSuccess}
         setOpenModalSuccess={setOpenModalSuccess}
-      ></ModalSuccess>
+      ></ModalSuccess> */}
     </Fragment>
   );
 };
