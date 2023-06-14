@@ -45,7 +45,7 @@ const prenameItem = [
   },
   {
     value: "mrs",
-    label: "Mrs.",
+    label: "Miss",
   },
 ];
 
@@ -465,7 +465,7 @@ const Auth = () => {
                   </Grid>
                   <Grid
                     xs={8}
-                    sm={7}
+                    sm={locale === 'mm' ? 7 : 6}
                     mt={1}
                     mb={3}
                     item

@@ -18,7 +18,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import certificate from "../../api/api_certificate";
 import { useTranslations } from "next-intl";
-import popupImage from "../../public/image/popup-image/PopUp_png_Pop Up 04.png";
+import popupImage from "../../public/image/popup-image/PopUp_png_Pop Up 03.png";
 import ModalPopup from "../common/ModalPopup";
 import Image from "next/image";
 

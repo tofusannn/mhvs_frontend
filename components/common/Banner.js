@@ -4,13 +4,27 @@ import { makeStyles } from "@mui/styles";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 
-const Banner = ({ page, subPage }) => {
+const Banner = ({ page, subPage, chapter }) => {
   const { query, locale } = useRouter();
   const classes = useStyles();
   const t = useTranslations();
   const matches = useMediaQuery("(min-width:600px)");
+  const [imageChap, setImageChap] = useState("");
+  useEffect(() => {
+    loopImage(chapter);
+  }, [chapter]);
+
+  function loopImage(params) {
+    params.forEach((e) => {
+      if (e.id.toString() === query.chapter) {
+        console.log(e.index.toString());
+        setImageChap(e.index.toString());
+        
+      }
+    });
+  }
 
   return (
     <Grid className={classes.banner_main} container>
@@ -39,13 +53,11 @@ const Banner = ({ page, subPage }) => {
         ></Image>
       ) : (
         <>
-          {parseInt(query.chapter) <= 9 && parseInt(query.chapter) >= 1 ? (
+          {parseInt(imageChap) <= 8 && parseInt(imageChap) >= 1 ? (
             <img
               width="100%"
               alt="banner"
-              src={`/image/${locale}/AST_module_Thai-0${parseInt(
-                query.chapter - 1
-              )}.png`}
+              src={`/image/${locale}/AST_module_Thai-0${imageChap}.png`}
             ></img>
           ) : (
             <img

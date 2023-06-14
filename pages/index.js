@@ -116,7 +116,7 @@ const AboutUs = ({ locale }) => {
   const [content, setContent] = useState();
   const [openModal, setOpenModal] = useState(false);
   const [youtube, setYoutube] = useState();
-  const matches = useMediaQuery("(min-width:1025px)");
+  const matches = useMediaQuery("(min-width:1324px)");
   const matches2 = useMediaQuery("(min-width:769px)");
 
   useEffect(() => {
@@ -182,7 +182,7 @@ const AboutUs = ({ locale }) => {
   return (
     <Container sx={{ marginTop: 4, marginBottom: 4 }}>
       <Grid container justifyContent={"space-between"}>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={3}>
           <Typography
             mb={1}
             sx={{ color: "#2DA373", fontSize: { xs: 20, md: 24 } }}
@@ -203,7 +203,7 @@ const AboutUs = ({ locale }) => {
             <img src="/icon/arrow-right-green.svg"></img>
           </Link>
         </Grid>
-        <Grid item xs={12} sm={8}>
+        <Grid item xs={12} sm={9}>
           <Carousel
             height={matches ? 450 : 400}
             autoPlay={false}
