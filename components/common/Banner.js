@@ -13,7 +13,9 @@ const Banner = ({ page, subPage, chapter }) => {
   const matches = useMediaQuery("(min-width:600px)");
   const [imageChap, setImageChap] = useState("");
   useEffect(() => {
-    loopImage(chapter);
+    if (chapter) {
+      loopImage(chapter);
+    }
   }, [chapter]);
 
   function loopImage(params) {
@@ -21,7 +23,6 @@ const Banner = ({ page, subPage, chapter }) => {
       if (e.id.toString() === query.chapter) {
         console.log(e.index.toString());
         setImageChap(e.index.toString());
-        
       }
     });
   }
