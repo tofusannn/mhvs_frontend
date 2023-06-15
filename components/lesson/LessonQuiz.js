@@ -237,6 +237,7 @@ const LessonQuiz = ({
           setScore(`${data.result.total_score} / ${data.result.max_score}`);
           setButtonNext(true);
           setOpenModalSuccess(true);
+
           await Lesson.postUserLessonState({
             lesson_id: parseInt(query.lesson),
             chapter_id: parseInt(query.chapter),
@@ -254,6 +255,14 @@ const LessonQuiz = ({
             setScore(`${data.result.total_score} / ${data.result.max_score}`);
             setButtonNext(true);
             setOpenModalSuccess(true);
+            if (query.name === 'post_test') {
+              await Lesson.postUserLessonState({
+                lesson_id: parseInt(query.lesson),
+                chapter_id: parseInt(query.chapter),
+                object_name: "chapter",
+                object_id: parseInt(query.chapter),
+              });
+            }
           } else {
             setOpenModalFail(true);
             setScore(`${data.result.total_score} / ${data.result.max_score}`);
