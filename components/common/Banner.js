@@ -21,7 +21,6 @@ const Banner = ({ page, subPage, chapter }) => {
   function loopImage(params) {
     params.forEach((e) => {
       if (e.id.toString() === query.chapter) {
-        console.log(e.index.toString());
         setImageChap(e.index.toString());
       }
     });

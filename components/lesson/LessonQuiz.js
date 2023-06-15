@@ -22,7 +22,8 @@ import { useTranslations } from "next-intl";
 import Cookies from "js-cookie";
 import ModalPopup from "../common/ModalPopup";
 import Image from "next/image";
-import popupImage from "../../public/image/popup-image/PopUp_png_Pop Up 02.png";
+import popupImage from "../../public/image/popup-image/PopUp_png_Pop Up 06.png";
+import popupImage2 from "../../public/image/popup-image/PopUp_png_Pop Up 02.png";
 const path = process.env.NEXT_PUBLIC_BASE_API;
 
 const LessonQuiz = ({
@@ -50,6 +51,7 @@ const LessonQuiz = ({
   const [score, setScore] = useState("");
   const [objectId, setObjectId] = useState();
   const [open, setOpen] = useState(false);
+  const [open2, setOpen2] = useState(false);
 
   const t = useTranslations();
   const matches = useMediaQuery("(min-width:600px)");
@@ -284,10 +286,16 @@ const LessonQuiz = ({
 
   function getDetails(name) {
     const chap = {};
+    const chapPrew = {};
     chapter.forEach((e) => {
       const b = parseInt(query.chapter);
       if (e.id === b) {
         chap = e;
+      }
+    });
+    chapter.forEach((e) => {
+      if (chap.index - 1 === e.index) {
+        chapPrew = e;
       }
     });
     switch (name) {
@@ -513,7 +521,13 @@ const LessonQuiz = ({
               <Button
                 className={classes.button_start}
                 variant="contained"
-                onClick={() => setOpen(true)}
+                onClick={() => {
+                  if (chapPrew.user_action) {
+                    setOpen2(true);
+                  } else {
+                    setOpen(true);
+                  }
+                }}
               >
                 {t("profile-page.sent-homework")}{" "}
                 <NavigateNext sx={{ marginLeft: 1 }}></NavigateNext>
@@ -538,6 +552,24 @@ const LessonQuiz = ({
       <ModalPopup
         open={open}
         setOpen={setOpen}
+        textButton={"บทเรียนของคุณ"}
+        funcButton={() => {
+          setOpen(false);
+        }}
+      >
+        <Image alt="img" src={popupImage} objectFit="cover"></Image>
+        <Typography textAlign={"center"} fontWeight={600} fontSize={20}>
+          นี่คือช่วงเวลาทองแห่งการเรียนรู้
+          <br />
+          ใช้เวลาอย่างคุ้มค่า
+          <br />
+          แล้วกลับมาส่งภาคปฏิบัติใหม่นะ
+        </Typography>
+      </ModalPopup>
+
+      <ModalPopup
+        open={open2}
+        setOpen={setOpen2}
         textButton={"ส่งงาน"}
         funcButton={async () => {
           setOpen(false);
@@ -551,7 +583,7 @@ const LessonQuiz = ({
           });
         }}
       >
-        <Image alt="img" src={popupImage} objectFit="cover"></Image>
+        <Image alt="img" src={popupImage2} objectFit="cover"></Image>
         <Typography textAlign={"center"} fontWeight={600} fontSize={20}>
           กรุณาแนบภาพให้ครบจํานวน 3 ภาพ
         </Typography>

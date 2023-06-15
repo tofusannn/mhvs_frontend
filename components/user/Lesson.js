@@ -33,6 +33,8 @@ import Cookies from "js-cookie";
 import ModalPopup from "../common/ModalPopup";
 import Image from "next/image";
 import popupImage from "../../public/image/popup-image/PopUp_png_Pop Up 06.png";
+import popupImage2 from "../../public/image/popup-image/PopUp_png_Pop Up 02.png";
+
 const path = process.env.NEXT_PUBLIC_BASE_API;
 
 const Lesson = ({
@@ -50,7 +52,9 @@ const Lesson = ({
   const [homework, setHomework] = useState({});
   const [lessonId, setLessonId] = useState();
   const [open, setOpen] = useState(false);
+  const [open2, setOpen2] = useState(false);
   const [sentHomework, setSentHomework] = useState();
+  const [lessonQuery, setLessonQuery] = useState([]);
 
   const [linkPayload, setLinkPayload] = useState([
     { link: "" },
@@ -120,7 +124,7 @@ const Lesson = ({
   }
 
   function pageSentHomework(e, title) {
-    setOpen(false)
+    setOpen2(false);
     push({
       pathname,
       query: {
@@ -343,8 +347,13 @@ const Lesson = ({
       });
   }
 
-  function openModalPopup(params) {
+  function openModalPopup(e) {
     setOpen(true);
+    setLessonQuery(e);
+  }
+
+  function openModalPopup2(params) {
+    setOpen2(true);
     setSentHomework(params);
   }
 
@@ -721,18 +730,22 @@ const Lesson = ({
                           }}
                         >
                           <Button
-                            disabled={e.status}
+                            disabled={lesson.length && lesson[idx].is_certificate}
                             className={
-                              e.status
+                              lesson.length && lesson[idx].is_certificate
                                 ? classes.button_disabled
                                 : classes.button_inactive
                             }
-                            onClick={() =>
-                              openModalPopup(
-                                e,
-                                `${t("profile-menu.homework")} ${idx + 1}`
-                              )
-                            }
+                            onClick={() => {
+                              if (e.status) {
+                                openModalPopup2(
+                                  e,
+                                  `${t("profile-menu.homework")} ${idx + 1}`
+                                );
+                              } else {
+                                openModalPopup(e);
+                              }
+                            }}
                           >
                             {t("profile-page.sent-homework")}
                           </Button>
@@ -748,7 +761,19 @@ const Lesson = ({
         open={open}
         setOpen={setOpen}
         textButton={"บทเรียนของคุณ"}
-        funcButton={() => pageSentHomework(sentHomework)}
+        funcButton={() => {
+          setOpen(false);
+          push({
+            pathname: "/lesson",
+            query: {
+              action: "learning",
+              lesson: lessonQuery.lesson_id,
+              chapter: lessonQuery.chapter_id,
+              name: "homework",
+              menu: lessonQuery.chapter_id,
+            },
+          });
+        }}
       >
         <Image alt="img" src={popupImage} objectFit="cover"></Image>
         <Typography textAlign={"center"} fontWeight={600} fontSize={20}>
@@ -757,6 +782,17 @@ const Lesson = ({
           ใช้เวลาอย่างคุ้มค่า
           <br />
           แล้วกลับมาส่งภาคปฏิบัติใหม่นะ
+        </Typography>
+      </ModalPopup>
+      <ModalPopup
+        open={open2}
+        setOpen={setOpen2}
+        textButton={"ส่งงาน"}
+        funcButton={() => pageSentHomework(sentHomework)}
+      >
+        <Image alt="img" src={popupImage2} objectFit="cover"></Image>
+        <Typography textAlign={"center"} fontWeight={600} fontSize={20}>
+          กรุณาแนบภาพให้ครบจํานวน 3 ภาพ
         </Typography>
       </ModalPopup>
       <CertificateModal
