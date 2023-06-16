@@ -54,6 +54,12 @@ const Banner = ({ page, subPage, chapter }) => {
             locale === "mm" ? "MM" : "Thai"
           }-0${imageChap}.png`}
         ></img>
+      ) : query.action === "preview" ? (
+        <img
+          width="100%"
+          alt="banner"
+          src={`/image/${locale}/preview.png`}
+        ></img>
       ) : (
         <img
           width="100%"

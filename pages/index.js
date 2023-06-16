@@ -91,7 +91,7 @@ const Banner = () => {
   }
 
   return (
-    <Grid sx={{ position: "relative", height: { xs: "25vh", sm: '55vh', md: "80vh" } }}>
+    <Grid sx={{ position: "relative", height: { xs: "25vh", sm: '55vh', md: "70vh", lg: '95vh' } }}>
       <Box sx={{ position: "absolute", width: "100%", zIndex: -1 }}>
         <Carousel
           height={matches ? "100vh" : "25vh"}
@@ -390,8 +390,8 @@ const useStyles = makeStyles({
   banner_text: {
     position: "absolute",
     zIndex: 0,
-    top: "calc(75vh - 25vh)",
-    left: "calc(35vh - 25vh)",
+    top: "calc(85vh - 25vh)",
+    left: "calc(37vh - 25vh)",
     // "@media (min-width: 2048px)": {
     //   top: 670,
     // },
