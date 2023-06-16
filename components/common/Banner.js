@@ -13,10 +13,12 @@ const Banner = ({ page, subPage, chapter }) => {
   const matches = useMediaQuery("(min-width:600px)");
   const [imageChap, setImageChap] = useState("");
   useEffect(() => {
-    if (chapter) {
+    if (chapter && query.action === "learning") {
       loopImage(chapter);
+    } else {
+      setImageChap("");
     }
-  }, [chapter]);
+  }, [chapter, query]);
 
   function loopImage(params) {
     params.forEach((e) => {
@@ -44,29 +46,20 @@ const Banner = ({ page, subPage, chapter }) => {
           </Typography>
         </Grid>
       </Container>
-      {locale === "mm" ? (
-        <Image
+      {parseInt(imageChap) <= 8 && parseInt(imageChap) >= 1 ? (
+        <img
+          width="100%"
           alt="banner"
-          layout="fill"
-          objectFit="cover"
-          src={`/image/th/AST_sub banner -01.png`}
-        ></Image>
+          src={`/image/${locale}/AST_module_${
+            locale === "mm" ? "MM" : "Thai"
+          }-0${imageChap}.png`}
+        ></img>
       ) : (
-        <>
-          {parseInt(imageChap) <= 8 && parseInt(imageChap) >= 1 ? (
-            <img
-              width="100%"
-              alt="banner"
-              src={`/image/${locale}/AST_module_Thai-0${imageChap}.png`}
-            ></img>
-          ) : (
-            <img
-              width="100%"
-              alt="banner"
-              src={`/image/${locale}/AST_sub banner -01.png`}
-            ></img>
-          )}
-        </>
+        <img
+          width="100%"
+          alt="banner"
+          src={`/image/${locale}/AST_sub banner -01.png`}
+        ></img>
       )}
     </Grid>
   );

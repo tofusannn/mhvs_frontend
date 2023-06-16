@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Card,
   CardContent,
@@ -90,10 +91,19 @@ const Banner = () => {
   }
 
   return (
-    <Grid sx={{ position: "relative", height: { xs: "25vh", sm: "90vh" } }}>
-      <Grid sx={{ position: "absolute", zIndex: -1 }}>
-        <img width="100%" src={`/image/${locale}/index.png`}></img>
-      </Grid>
+    <Grid sx={{ position: "relative", height: { xs: "25vh", sm: '55vh', md: "80vh" } }}>
+      <Box sx={{ position: "absolute", width: "100%", zIndex: -1 }}>
+        <Carousel
+          height={matches ? "100vh" : "25vh"}
+          autoPlay={true}
+          indicators={false}
+          cycleNavigation={true}
+          navButtonsAlwaysVisible={false}
+        >
+          <img width="100%" src={`/image/${locale}/index.png`}></img>
+          <img width="100%" src={`/image/${locale}/index2.png`}></img>
+        </Carousel>
+      </Box>
       {!token && (
         <Container>
           <Grid className={classes.banner_text}>
@@ -380,7 +390,8 @@ const useStyles = makeStyles({
   banner_text: {
     position: "absolute",
     zIndex: 0,
-    top: "calc(90vh - 25vh)",
+    top: "calc(75vh - 25vh)",
+    left: "calc(35vh - 25vh)",
     // "@media (min-width: 2048px)": {
     //   top: 670,
     // },
@@ -388,8 +399,20 @@ const useStyles = makeStyles({
       top: "calc(90vh - 45vh)",
       left: "calc(90vh - 82vh)",
     },
-    "@media (max-width: 600px)": {
-      top: "calc(25vh - 10vh)",
+    "@media (max-width: 850px)": {
+      top: "calc(80vh - 45vh)",
+      left: "calc(89vh - 82vh)",
+    },
+    "@media (max-width: 500px)": {
+      top: "calc(25vh - 7vh)",
+      left: "calc(25vh - 21vh)",
+    },
+    "@media (max-width: 400px)": {
+      top: "calc(25vh - 9vh)",
+      left: "calc(25vh - 22vh)",
+    },
+    "@media (max-width: 350px)": {
+      top: "calc(25vh - 11vh)",
       left: "calc(25vh - 22vh)",
     },
   },
