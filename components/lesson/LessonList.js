@@ -19,7 +19,7 @@ import Lesson from "../../api/api_lesson";
 import { useTranslations } from "next-intl";
 import ModalPopup from "../common/ModalPopup";
 import Image from "next/image";
-import popupImage from "../../public//image/popup-image/PopUp_png_Pop Up 01.png";
+import popupImage from "../../public/image/popup-image/PopUp_png_Pop Up 01.png";
 
 const { Fragment, useEffect, useState } = require("react");
 

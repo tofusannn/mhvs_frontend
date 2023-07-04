@@ -32,7 +32,7 @@ import { useTranslations } from "next-intl";
 import Cookies from "js-cookie";
 import ModalPopup from "../common/ModalPopup";
 import Image from "next/image";
-import popupImage from "../../public/image/popup-image/PopUp_png_Pop Up 06.png";
+import popupImage from "../../public/image/popup-image/PopUp_png_Pop Up 05.png";
 import popupImage2 from "../../public/image/popup-image/PopUp_png_Pop Up 02.png";
 
 const path = process.env.NEXT_PUBLIC_BASE_API;

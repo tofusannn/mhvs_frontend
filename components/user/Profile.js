@@ -195,6 +195,70 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
               <TextField
                 fullWidth
                 focused
+                name="pre_name"
+                size="small"
+                label={t("register-page.title")}
+                placeholder={t("placeholder")}
+                value={profilePayload.pre_name}
+                onChange={changeField}
+              ></TextField>
+              {/* <LocalizationProvider dateAdapter={AdapterMoment}>
+                <DatePicker
+                  inputFormat="yyyy-MM-DD"
+                  label={t("birthday")}
+                  disableFuture
+                  value={profilePayload.date_of_birth || null}
+                  onChange={(value) => {
+                    changeField({
+                      target: {
+                        name: "date_of_birth",
+                        value: moment(value).format("YYYY-MM-DD"),
+                      },
+                    });
+                  }}
+                  renderInput={(params) => (
+                    <TextField
+                      fullWidth
+                      focused
+                      name="date_of_birth"
+                      size="small"
+                      onKeyDown={(e) => e.preventDefault()}
+                      {...params}
+                    />
+                  )}
+                />
+              </LocalizationProvider> */}
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <TextField
+                fullWidth
+                focused
+                name="first_name"
+                size="small"
+                label={t("register-page.firstname")}
+                placeholder={t("placeholder")}
+                value={profilePayload.first_name}
+                onChange={changeField}
+              ></TextField>
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <TextField
+                fullWidth
+                focused
+                name="last_name"
+                size="small"
+                label={t("register-page.lastname")}
+                placeholder={t("placeholder")}
+                value={profilePayload.last_name}
+                onChange={changeField}
+              ></TextField>
+            </Grid>
+          </Grid>
+          <Grid mb={3} container spacing={3}>
+            <Grid item xs={12} sm={4}>
+              <TextField
+                fullWidth
+                focused
                 sx={{
                   "& .MuiSelect-select .notranslate::after": t("placeholder")
                     ? {
@@ -222,86 +286,6 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
               <TextField
                 fullWidth
                 focused
-                name="idcard"
-                size="small"
-                label={t("card-number")}
-                placeholder={t("placeholder")}
-                value={profilePayload.idcard}
-                onChange={changeField}
-              ></TextField>
-            </Grid>
-            <Grid item xs={12} sm={4}>
-              <TextField
-                fullWidth
-                focused
-                name="pre_name"
-                size="small"
-                label={t("register-page.title")}
-                placeholder={t("placeholder")}
-                value={profilePayload.pre_name}
-                onChange={changeField}
-              ></TextField>
-            </Grid>
-          </Grid>
-          <Grid mb={3} container spacing={3}>
-            <Grid item xs={12} sm={4}>
-              <TextField
-                fullWidth
-                focused
-                name="first_name"
-                size="small"
-                label={t("register-page.firstname")}
-                placeholder={t("placeholder")}
-                value={profilePayload.first_name}
-                onChange={changeField}
-              ></TextField>
-            </Grid>
-            <Grid item xs={12} sm={4}>
-              <TextField
-                fullWidth
-                focused
-                name="last_name"
-                size="small"
-                label={t("register-page.lastname")}
-                placeholder={t("placeholder")}
-                value={profilePayload.last_name}
-                onChange={changeField}
-              ></TextField>
-            </Grid>
-            <Grid item xs={12} sm={4}>
-              <LocalizationProvider dateAdapter={AdapterMoment}>
-                <DatePicker
-                  inputFormat="yyyy-MM-DD"
-                  label={t("birthday")}
-                  disableFuture
-                  value={profilePayload.date_of_birth || null}
-                  onChange={(value) => {
-                    changeField({
-                      target: {
-                        name: "date_of_birth",
-                        value: moment(value).format("YYYY-MM-DD"),
-                      },
-                    });
-                  }}
-                  renderInput={(params) => (
-                    <TextField
-                      fullWidth
-                      focused
-                      name="date_of_birth"
-                      size="small"
-                      onKeyDown={(e) => e.preventDefault()}
-                      {...params}
-                    />
-                  )}
-                />
-              </LocalizationProvider>
-            </Grid>
-          </Grid>
-          <Grid mb={3} container spacing={3}>
-            <Grid item xs={12} sm={4}>
-              <TextField
-                fullWidth
-                focused
                 sx={{
                   "& .MuiSelect-select .notranslate::after": t("placeholder")
                     ? {
@@ -324,6 +308,16 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
                   </MenuItem>
                 ))}
               </TextField>
+              {/* <TextField
+                fullWidth
+                focused
+                name="idcard"
+                size="small"
+                label={t("card-number")}
+                placeholder={t("placeholder")}
+                value={profilePayload.idcard}
+                onChange={changeField}
+              ></TextField> */}
             </Grid>
             <Grid item xs={12} sm={4}>
               <TextField
@@ -338,8 +332,12 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
                 onChange={changeField}
               ></TextField>
             </Grid>
+          </Grid>
+          <Grid mb={3} container spacing={3}>
+            <Grid item xs={12} sm={4}></Grid>
+            <Grid item xs={12} sm={4}></Grid>
             <Grid item xs={12} sm={4}>
-              <TextField
+              {/* <TextField
                 fullWidth
                 focused
                 name="email"
@@ -348,7 +346,7 @@ const Profile = ({ setPayload, setOpenSnackbar, setPayloadSnackbar }) => {
                 placeholder={t("placeholder")}
                 value={profilePayload.email}
                 onChange={changeField}
-              ></TextField>
+              ></TextField> */}
             </Grid>
           </Grid>
         </Grid>
