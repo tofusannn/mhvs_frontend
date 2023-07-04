@@ -255,7 +255,7 @@ const LessonQuiz = ({
             setScore(`${data.result.total_score} / ${data.result.max_score}`);
             setButtonNext(true);
             setOpenModalSuccess(true);
-            if (query.name === 'post_test') {
+            if (query.name === "post_test") {
               await Lesson.postUserLessonState({
                 lesson_id: parseInt(query.lesson),
                 chapter_id: parseInt(query.chapter),
@@ -561,25 +561,21 @@ const LessonQuiz = ({
       <ModalPopup
         open={open}
         setOpen={setOpen}
-        textButton={"บทเรียนของคุณ"}
+        textButton={t("popup-text.popup-lesson-continue.text-button")}
         funcButton={() => {
           setOpen(false);
         }}
       >
         <Image alt="img" src={popupImage} objectFit="cover"></Image>
-        <Typography textAlign={"center"} fontWeight={600} fontSize={20}>
-          นี่คือช่วงเวลาทองแห่งการเรียนรู้
-          <br />
-          ใช้เวลาอย่างคุ้มค่า
-          <br />
-          แล้วกลับมาส่งภาคปฏิบัติใหม่นะ
+        <Typography whiteSpace={'pre-line'} textAlign={"center"} fontWeight={600} fontSize={20}>
+          {t("popup-text.popup-lesson-continue.description")}
         </Typography>
       </ModalPopup>
 
       <ModalPopup
         open={open2}
         setOpen={setOpen2}
-        textButton={"ส่งงาน"}
+        textButton={t("popup-text.popup-homework.text-button")}
         funcButton={async () => {
           setOpen(false);
           push({
@@ -593,8 +589,8 @@ const LessonQuiz = ({
         }}
       >
         <Image alt="img" src={popupImage2} objectFit="cover"></Image>
-        <Typography textAlign={"center"} fontWeight={600} fontSize={20}>
-          กรุณาแนบภาพให้ครบจํานวน 3 ภาพ
+        <Typography whiteSpace={'pre-line'} textAlign={"center"} fontWeight={600} fontSize={20}>
+          {t("popup-text.popup-homework.description")}
         </Typography>
       </ModalPopup>
       <ModalSuccess

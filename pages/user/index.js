@@ -168,9 +168,9 @@ const Home = () => {
         </Alert>
       </Snackbar>
       <ModalPopup
-        open={openModalSuccess}
+        open={open}
         setOpen={setOpenModalSuccess}
-        textButton={"รับประกาศนียบัตร"}
+        textButton={t("popup-text.popup-download-certificate.text-button")}
         funcButton={async () => {
           setOpenModalSuccess(false);
           await push({
@@ -184,10 +184,13 @@ const Home = () => {
         }}
       >
         <Image alt="img" src={popupImage} objectFit="cover"></Image>
-        <Typography textAlign={"center"} fontWeight={600} fontSize={20}>
-          ขอรับใบประกาศนียบัตรได้แล้วที่
-          <br />
-          {"บทเรียนของคุณ"}
+        <Typography
+          whiteSpace={"pre-line"}
+          textAlign={"center"}
+          fontWeight={600}
+          fontSize={20}
+        >
+          {t("popup-text.popup-download-certificate.description")}
         </Typography>
       </ModalPopup>
       {/* <ModalSuccess

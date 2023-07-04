@@ -227,15 +227,12 @@ const LessonList = ({ getLesson }) => {
                 <ModalPopup
                   open={open}
                   setOpen={setOpen}
-                  textButton={"บทเรียนของคุณ"}
+                  textButton={t("popup-text.popup-lesson.text-button")}
                   funcButton={() => registerLesson(id)}
                 >
                   <Image alt="img" src={popupImage} objectFit="cover"></Image>
-                  <Typography fontWeight={600}>
-                    1. เรียนครบทั้ง 8 บทเรียน <br />
-                    2. ทําแบบทดสอบผ่านเกณฑ์ 60% <br />
-                    3. ทํางานที่ได้รับมอบหมายทั้งหมด 3 ชิ้นงาน <br />
-                    4. กรอกข้อมูลและประเมินความพึงพอใจของท่านให้ครบ <br />
+                  <Typography whiteSpace={'pre-line'} fontWeight={600}>
+                  {t("popup-text.popup-lesson.description")}
                   </Typography>
                 </ModalPopup>
               </TableBody>

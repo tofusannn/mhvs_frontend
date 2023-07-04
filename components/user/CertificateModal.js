@@ -255,7 +255,7 @@ const CertificateModal = ({ question, openModal, setOpenModal, lesson }) => {
       <ModalPopup
         open={open}
         setOpen={setOpen}
-        textButton={"บทเรียนของคุณ"}
+        textButton={t("popup-text.popup-certificate.text-button")}
         funcButton={async () => {
           setOpen(false);
           setOpenModal(false);
@@ -263,16 +263,8 @@ const CertificateModal = ({ question, openModal, setOpenModal, lesson }) => {
         }}
       >
         <Image alt="img" src={popupImage} objectFit="cover"></Image>
-        <Typography textAlign={"center"} fontWeight={600} fontSize={20}>
-          กรุณารอผลการตรวจสอบหลังจากขอรับ
-          <br />
-          ใบประกาศนียบัตร 7 วัน
-          <br />
-          โดยท่านสามารถติดตามผลด้วยขน้ั ตอนง่าย ๆ ที่
-          <br />
-          {"บทเรียนของคุณ"}
-          <br />
-          หากเกินกําหนดเวลา กรุณาติดต่อผู้ดูแลระบบ
+        <Typography whiteSpace={'pre-line'} textAlign={"center"} fontWeight={600} fontSize={20}>
+          {t("popup-text.popup-certificate.description")}
         </Typography>
       </ModalPopup>
       <Snackbar
