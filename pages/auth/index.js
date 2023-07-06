@@ -45,7 +45,7 @@ const prenameItem = [
   },
   {
     value: "mrs",
-    label: "Miss",
+    label: "Mrs.",
   },
 ];
 
