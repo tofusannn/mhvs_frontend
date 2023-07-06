@@ -168,7 +168,7 @@ const Home = () => {
         </Alert>
       </Snackbar>
       <ModalPopup
-        open={open}
+        open={openModalSuccess}
         setOpen={setOpenModalSuccess}
         textButton={t("popup-text.popup-download-certificate.text-button")}
         funcButton={async () => {
