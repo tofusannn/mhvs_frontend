@@ -642,16 +642,16 @@ const Lesson = ({
                             ) : (
                               <Button
                                 className={
-                                  e.status
+                                  !e.is_approve
                                     ? classes.button_inactive
                                     : classes.button_disabled
                                 }
-                                disabled={!e.status}
+                                disabled={e.is_approve}
                                 onClick={() =>
                                   getQuestion(e.questionnaire_cer_id, e.id)
                                 }
                               >
-                                {t("certificate")}
+                                {e.is_approve ? t("approve") : t("certificate")}
                               </Button>
                             )
                           ) : (
@@ -778,7 +778,12 @@ const Lesson = ({
         }}
       >
         <Image alt="img" src={popupImage} objectFit="cover"></Image>
-        <Typography whiteSpace={'pre-line'} textAlign={"center"} fontWeight={600} fontSize={20}>
+        <Typography
+          whiteSpace={"pre-line"}
+          textAlign={"center"}
+          fontWeight={600}
+          fontSize={20}
+        >
           {t("popup-text.popup-lesson-continue.description")}
         </Typography>
       </ModalPopup>
@@ -789,7 +794,12 @@ const Lesson = ({
         funcButton={() => pageSentHomework(sentHomework)}
       >
         <Image alt="img" src={popupImage2} objectFit="cover"></Image>
-        <Typography whiteSpace={'pre-line'} textAlign={"center"} fontWeight={600} fontSize={20}>
+        <Typography
+          whiteSpace={"pre-line"}
+          textAlign={"center"}
+          fontWeight={600}
+          fontSize={20}
+        >
           {t("popup-text.popup-homework.description")}
         </Typography>
       </ModalPopup>
