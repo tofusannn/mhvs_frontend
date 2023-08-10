@@ -43,6 +43,8 @@ import Image from "next/image";
 import logo from "../public/image/aorsortor_online.png";
 import thFlag from "../public/icon/thailand.png";
 import mmFlag from "../public/icon/myanmar.png";
+import cdFlag from "../public/icon/cambodia.png";
+import lsFlag from "../public/icon/laos.png";
 const path = process.env.NEXT_PUBLIC_BASE_API;
 
 const NavBar = (props) => {
@@ -440,6 +442,40 @@ const NavBar = (props) => {
             ></Image>
             <Typography sx={{ marginLeft: 3 }} fontWeight={500} fontSize={20}>
               မြန်မာ
+            </Typography>
+          </MenuItem>
+          <MenuItem
+            sx={{ paddingY: 1 }}
+            name="cd"
+            disabled={locale === "cd"}
+            onClick={() => translationClick("cd")}
+          >
+            <Image
+              alt={"cd"}
+              src={cdFlag}
+              width={"40"}
+              height={"40"}
+              objectFit="cover"
+            ></Image>
+            <Typography sx={{ marginLeft: 3 }} fontWeight={500} fontSize={20}>
+              ភាសាខ្មែរ
+            </Typography>
+          </MenuItem>
+          <MenuItem
+            sx={{ paddingY: 1 }}
+            name="ls"
+            disabled={locale === "ls"}
+            onClick={() => translationClick("ls")}
+          >
+            <Image
+              alt={"ls"}
+              src={lsFlag}
+              width={"40"}
+              height={"40"}
+              objectFit="cover"
+            ></Image>
+            <Typography sx={{ marginLeft: 3 }} fontWeight={500} fontSize={20}>
+              ພາສາລາວ
             </Typography>
           </MenuItem>
           <Button

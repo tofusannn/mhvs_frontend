@@ -1,201 +1,233 @@
 {
-    "navbar-menu": {
-      "menu1": {
-        "title": "ໜ້າແລກ",
-        "link": "/"
-      },
-      "menu2": {
-        "title": "ບົດຮຽນ",
-        "link": "/lesson?action=list"
-      },
-      "menu3": {
-        "title": "ກ່ຽວກັບເຮົາ",
-        "link": "/about_us"
-      },
-      "menu4": {
-        "title": "ຜູ້ສະໜັບສະໜູນ",
-        "link": "/sponsor"
-      },
-      "menu5": {
-        "title": "ຕິດຕໍ່ເຮົາ",
-        "link": "/contact"
-      },
-      "menu6": {
-        "title": "ເຂົ້າສູ່ລະບົບ",
-        "link": "/auth?action=login&type=phone"
-      }
+  "navbar-menu": {
+    "menu1": {
+      "title": "ໜ້າແລກ",
+      "link": "/"
     },
-    "banner-text": {
-      "banner1": "ขอเชิญเรียนออนไลน์ หลักสูตร (เร่งรัด)",
-      "banner2": "ฝึกอบรมอาสาสมัครสาธารณสุขต่างด้าว (อสต.)",
-      "banner3": "เรียนฟรี...รับเกียรติบัตร ต่อยอดสู่ความสําเร็จ"
+    "menu2": {
+      "title": "ບົດຮຽນ",
+      "link": "/lesson?action=list"
     },
-    "about-us-text": {
-      "about-us1": "Learning Platform",
-      "about-us2": "อสต. ออนไลน์",
-      "about-us3": "ເພື່ອພັດທະນາຄວາມຮູ້ ອສຕ.ໃຫ້ສາມາດນໍາໄປປັບໃຊ້ ແລະຊ່ວຍເຫລືອຄົນໃນຊຸມຊົນ",
-      "about-us-button": "ดูเพิ่มเติม"
+    "menu3": {
+      "title": "ກ່ຽວກັບເຮົາ",
+      "link": "/about_us"
     },
-    "about-us-card-text": {
-      "card1": {
-        "image": "/image/who.png",
-        "title": "สารผู้บริหาร อสต. ออนไลน์",
-        "link": "#"
-      },
-      "card2": {
-        "image": "/image/learning.png",
-        "title": "อสต. ออนไลน์ คืออะไร?",
-        "link": "#"
-      },
-      "card3": {
-        "image": "/image/homework.png",
-        "title": "คู่มือการใช้งาน อสต. ออนไลน์",
-        "link": "#"
-      },
-      "card4": {
-        "image": "/image/check_list.png",
-        "title": "เพิ่มแบบประเมิน website",
-        "link": "#"
-      }
+    "menu4": {
+      "title": "ຜູ້ສະໜັບສະໜູນ",
+      "link": "/sponsor"
     },
-    "sponsor-text": {
-      "title": "ຜູ້ສະຫນັບສະຫນຸນດີ",
-      "button": "ເບິ່ງທັງຫມົດ"
-    },
-    "count-user-text": {
-      "count-user1": {
-        "icon": "/icon/viewer.svg",
-        "title": "ຜູ້ເຂົ້າຊົມເວັບໄຊ້",
-        "count": "page_count"
-      },
-      "count-user2": {
-        "icon": "/icon/group_user.svg",
-        "title": "ຜູ້ເຂົ້າອົບຮົມ",
-        "count": "user_train"
-      },
-      "count-user3": {
-        "icon": "/icon/congratulation_user.svg",
-        "title": "ຜູ້ຜ່ານການອົບຮົມ",
-        "count": "user_train_success"
-      }
-    },
-    "footer-text": {
-      "footer1": {
-        "title": "ศูนย์การเรียนรู้ อสต ผ่านระบบออนไลน์",
-        "des": "420/6 ถนน ราชวิถี ราชเทวี กรุงเทพมหานคร ประเทศไทย"
-      },
-      "footer2": {
-        "title": "ຕິດຕໍ່",
-        "des": "aorsortor.onlineth@gmail.com"
-      },
-      "footer3": {
-        "title": "ຕິດຕາມຂ່າວສານ",
-        "des": ""
-      }
-    },
-    "about-text": {
-      "title": "ໂຄງການ",
-      "subtitle": "“ສົ່ງເສີມຄວາມຮູ້ທາງດ້ານສຸຂະພາບໃນຊຸມຊົນ”",
-      "description": ""
-    },
-    "contact-text": {
+    "menu5": {
       "title": "ຕິດຕໍ່ເຮົາ",
-      "subtitle": "ສູນການຮຽນຮູ້ຂອງກະຊວງສຶກສາທິການຜ່ານລະບົບອອນໄລນ໌",
-      "fullname": "ຊື່ - ນາມສະກຸນ",
-      "title-description": "ຫົວຂໍ້ຕິດຕໍ່",
-      "description": "ຂໍ້ຄວາມ",
-      "button": "ສົ່ງຂໍ້ຄວາມ"
+      "link": "/contact"
     },
-    "login-page": {
-      "login-for": "ເຂົ້າສູ່ລະບົບໂດຍ"
+    "menu6": {
+      "title": "ເຂົ້າສູ່ລະບົບ",
+      "link": "/auth?action=login&type=phone"
+    }
+  },
+  "banner-text": {
+    "banner1": "ขอเชิญเรียนออนไลน์ หลักสูตร (เร่งรัด)",
+    "banner2": "ฝึกอบรมอาสาสมัครสาธารณสุขต่างด้าว (อสต.)",
+    "banner3": "เรียนฟรี...รับเกียรติบัตร ต่อยอดสู่ความสําเร็จ"
+  },
+  "about-us-text": {
+    "about-us1": "Learning Platform",
+    "about-us2": "ອອນລາຍ",
+    "about-us3": "ເພື່ອພັດທະນາຄວາມຮູ້ ອສຕ.ໃຫ້ສາມາດນໍາໄປປັບໃຊ້ ແລະຊ່ວຍເຫລືອຄົນໃນຊຸມຊົນ",
+    "about-us-button": "ເບິ່ງເພີ່ມເຕີມ"
+  },
+  "about-us-card-text": {
+    "card1": {
+      "image": "/image/who.png",
+      "title": "สารผู้บริหาร อสต. ออนไลน์",
+      "link": "#"
     },
-    "register-page": {
-      "title": "ຄໍານໍາຫນ້າຊື່",
-      "firstname": "ຊື່",
-      "lastname": "ນາມສະກຸນ"
+    "card2": {
+      "image": "/image/learning.png",
+      "title": "อสต. ออนไลน์ คืออะไร?",
+      "link": "#"
     },
-    "lesson-page": {
-      "lesson-list": "ບົດຮຽນທັງໝົດ",
-      "details": "ເບິ່ງລາຍລະອຽດ",
-      "enroll": "ລົງທະບຽນ",
-      "lesson": "ບົດຮຽນ",
-      "description": "ລາຍລະອຽດ",
-      "highlight": "ຈຸດເດັ່ນ",
-      "studying": "ຮຽນ",
-      "graduated": "ຈົບການສຶກສາ",
-      "sent-answer": "ສົ່ງຄໍາຕອບ",
-      "next-chapter": "ບົດຕໍ່ໄປ",
-      "passed": "ເຈົ້າໄດ້ຜ່ານບົດຮຽນນີ້ແລ້ວ.",
-      "start": "ເລີ່ມເຂົ້າສູ່ບົດຮຽນ",
-      "homework-des": "ທ່ານສາມາດເບິ່ງບັນຫາອີກເທື່ອຫນຶ່ງ. ຫຼືສົ່ງວຽກບ້ານຢູ່ເມນູສະມາຊິກ"
+    "card3": {
+      "image": "/image/homework.png",
+      "title": "คู่มือการใช้งาน อสต. ออนไลน์",
+      "link": "#"
     },
-    "lesson-menu": {
-      "progress": "ຄວາມຄືບຫນ້າ",
-      "pre-test": "ອອກ​ກໍາ​ລັງ​ກາຍ​ກ່ອນ​ຫ້ອງ​ຮຽນ​",
-      "video": "ວິດີໂອ",
-      "file": "ເອກສານອ່ານເພີ່ມເຕີມ",
-      "post-test": "ການ​ທົດ​ສອບ​ຫຼັງ​ຈາກ​ຫ້ອງ​ຮຽນ​",
-      "homework": "ການບ້ານ"
+    "card4": {
+      "image": "/image/check_list.png",
+      "title": "เพิ่มแบบประเมิน website",
+      "link": "#"
+    }
+  },
+  "sponsor-text": {
+    "title": "ຜູ້ສະຫນັບສະຫນຸນດີ",
+    "button": "ເບິ່ງທັງຫມົດ"
+  },
+  "count-user-text": {
+    "count-user1": {
+      "icon": "/icon/viewer.svg",
+      "title": "ຜູ້ເຂົ້າຊົມເວັບໄຊ້",
+      "count": "page_count"
     },
-    "profile-menu": {
-      "welcome": "ຍິນດີຕ້ອນຮັບ",
-      "your-lesson": "ບົດຮຽນຂອງເຈົ້າ",
-      "your-homework": "ການບ້ານຂອງເຈົ້າ",
-      "homework": "ການບ້ານ",
-      "lesson-enroll": "ລາຍຊື່ບົດຮຽນທີ່ເຈົ້າລົງທະບຽນ"
+    "count-user2": {
+      "icon": "/icon/group_user.svg",
+      "title": "ຜູ້ເຂົ້າອົບຮົມ",
+      "count": "user_train"
     },
-    "profile-page": {
-      "information": "ຂໍ້ມູນຂອງເຈົ້າ",
-      "picture": "ຮູບຂອງເຈົ້າ",
-      "support-files": "ສະຫນັບສະຫນຸນຟາຍ",
-      "file-size": "ຟາຍຂາດ",
-      "personal-information": "ຂໍ້ມູນສ່ວນຕົວຂອງເຈົ້າ",
-      "sent-homework": "ສົ່ງການບ້ານ",
-      "sent-success": "ສົ່ງແລ້ວ",
-      "doing": "ກໍາລັງເຮັດ",
-      "continue-studying": "ສືບຕໍ່ສຶກສາ"
+    "count-user3": {
+      "icon": "/icon/congratulation_user.svg",
+      "title": "ຜູ້ຜ່ານການອົບຮົມ",
+      "count": "user_train_success"
+    }
+  },
+  "footer-text": {
+    "footer1": {
+      "title": "ສູນການຮຽນຮູ້ຂອງກະຊວງສຶກສາທິການຜ່ານລະບົບອອນໄລນ໌",
+      "des": "420/6 ຖະໜົນຣາຊະວິທິ, ຣາຊະເທວີ, ບາງກອກ, ປະເທດໄທ"
     },
-    "modal-text": {
-      "text1": "ສຸດຍອດ",
-      "text2": "ເຈົ້າສົ່ງການບ້ານສໍາເລັດແລ້ວ",
-      "text3": "ຍິນດີນໍາເຈົ້າ ສອບເສັງຜ່ານແລ້ວ",
-      "text4": "ເຈົ້າໄດ້ຄະແນນ",
-      "text5": "ພັກກິນນໍ້າ",
-      "text6": "ພະຍາຍາມອີກຫນ້ອຍຫນື່ງ ພວກເຮົາເປັນກໍາລັງໃຈໃຫ້",
-      "text7": "ພະຍາຍາມອີກຄັ້ງ"
+    "footer2": {
+      "title": "ຕິດຕໍ່",
+      "des": "aorsortor.onlineth@gmail.com"
     },
-    "banner-home": "ຫນ້າທໍາອິດ",
-    "learning-online": "ບົດຮຽນອອນລາຍ",
-    "submit": "ຕົກລົງ",
-    "cancel": "ຍົກເລີກ",
-    "register-free": "ລົງທະບຽນຮຽນຟີ",
-    "login": "ເຂົ້າສູ່ລະບົບ",
-    "register": "ສະຫມັກສະມາຊິກ",
-    "phone": "ຫມາຍເລກໂທລະສັບມືຖື",
-    "email": "ອີເມວ",
-    "password": "ລະຫັດຜ່ານ",
-    "save-data": "ບັນທຶກຂໍ້ມູນ",
-    "remember-password": "ຈື່ຂ້ອຍໄວ້ໃນລະບົບ",
-    "forgot-password": "ລືມລະຫັດຜ່ານ",
-    "reset-password": "ຣີເຊັດລະຫັດຜ່ານ",
-    "change-password": "ຕັ້ງລະຫັດຜ່ານໃຫມ່",
-    "gender": "ເພດ",
-    "male": "ຊາຍ",
-    "female": "ຍິງ",
-    "nationality": "ສັນຊາດ",
-    "thailand": "ໄທ",
-    "myanmar": "ມຽນມາ",
-    "laos": "ລາວ",
-    "cambodia": "ກຳປູເຈຍ",
-    "card-number": "ຫມາຍເລກຫນັງສືເດີນທາງ",
-    "birthday": "ວັນເກີດ",
-    "download": "ດາວໂຫຼດ",
-    "certificate": "ຂໍໃບຮັບຮອງ",
-    "upload-file": "ອັບໂຫລດຮູບ",
-    "attach-file": "ແນບຮູບ",
-    "attach-link": "ແນບລີ້ງ",
-    "file-list": "ລາຍການຮູບພາບ",
-    "status": "ສະຖານະ",
-    "list": "ລາຍງານ"
+    "footer3": {
+      "title": "ຕິດຕາມຂ່າວສານ",
+      "des": ""
+    }
+  },
+  "about-text": {
+    "title": "ໂຄງການ",
+    "subtitle": "“ສົ່ງເສີມຄວາມຮູ້ທາງດ້ານສຸຂະພາບໃນຊຸມຊົນ”",
+    "description": ""
+  },
+  "contact-text": {
+    "title": "ຕິດຕໍ່ເຮົາ",
+    "subtitle": "ສູນການຮຽນຮູ້ຂອງກະຊວງສຶກສາທິການຜ່ານລະບົບອອນໄລນ໌",
+    "fullname": "ຊື່ - ນາມສະກຸນ",
+    "title-description": "ຫົວຂໍ້ຕິດຕໍ່",
+    "description": "ຂໍ້ຄວາມ",
+    "button": "ສົ່ງຂໍ້ຄວາມ"
+  },
+  "login-page": {
+    "login-for": "ເຂົ້າສູ່ລະບົບໂດຍ"
+  },
+  "register-page": {
+    "title": "ຄໍານໍາຫນ້າຊື່",
+    "firstname": "ຊື່",
+    "lastname": "ນາມສະກຸນ"
+  },
+  "lesson-page": {
+    "lesson-list": "ບົດຮຽນທັງໝົດ",
+    "details": "ເບິ່ງລາຍລະອຽດ",
+    "enroll": "ລົງທະບຽນ",
+    "lesson": "ບົດຮຽນ",
+    "description": "ລາຍລະອຽດ",
+    "highlight": "ຈຸດເດັ່ນ",
+    "studying": "ຮຽນ",
+    "graduated": "ຈົບການສຶກສາ",
+    "sent-answer": "ສົ່ງຄໍາຕອບ",
+    "next-chapter": "ບົດຕໍ່ໄປ",
+    "passed": "ເຈົ້າໄດ້ຜ່ານບົດຮຽນນີ້ແລ້ວ.",
+    "start": "ເລີ່ມເຂົ້າສູ່ບົດຮຽນ",
+    "homework-des": "ທ່ານສາມາດເບິ່ງບັນຫາອີກເທື່ອຫນຶ່ງ. ຫຼືສົ່ງວຽກບ້ານຢູ່ເມນູສະມາຊິກ"
+  },
+  "lesson-menu": {
+    "progress": "ຄວາມຄືບຫນ້າ",
+    "pre-test": "ອອກ​ກໍາ​ລັງ​ກາຍ​ກ່ອນ​ຫ້ອງ​ຮຽນ​",
+    "video": "ວິດີໂອ",
+    "file": "ເອກສານອ່ານເພີ່ມເຕີມ",
+    "post-test": "ການ​ທົດ​ສອບ​ຫຼັງ​ຈາກ​ຫ້ອງ​ຮຽນ​",
+    "homework": "ການບ້ານ"
+  },
+  "profile-menu": {
+    "welcome": "ຍິນດີຕ້ອນຮັບ",
+    "your-lesson": "ບົດຮຽນຂອງເຈົ້າ",
+    "your-homework": "ການບ້ານຂອງເຈົ້າ",
+    "homework": "ການບ້ານ",
+    "lesson-enroll": "ລາຍຊື່ບົດຮຽນທີ່ເຈົ້າລົງທະບຽນ"
+  },
+  "profile-page": {
+    "information": "ຂໍ້ມູນຂອງເຈົ້າ",
+    "picture": "ຮູບຂອງເຈົ້າ",
+    "support-files": "ສະຫນັບສະຫນຸນຟາຍ",
+    "file-size": "ຟາຍຂາດ",
+    "personal-information": "ຂໍ້ມູນສ່ວນຕົວຂອງເຈົ້າ",
+    "sent-homework": "ສົ່ງການບ້ານ",
+    "sent-success": "ສົ່ງແລ້ວ",
+    "doing": "ກໍາລັງເຮັດ",
+    "continue-studying": "ສືບຕໍ່ສຶກສາ",
+    "for-myself": "ສໍາລັບຕົນເອງ",
+    "for-society": "ສໍາລັບຄອບຄົວ",
+    "for": "ສໍາລັບສັງຄົມ"
+  },
+  "modal-text": {
+    "text1": "ສຸດຍອດ",
+    "text2": "ເຈົ້າສົ່ງການບ້ານສໍາເລັດແລ້ວ",
+    "text3": "ຍິນດີນໍາເຈົ້າ ສອບເສັງຜ່ານແລ້ວ",
+    "text4": "ເຈົ້າໄດ້ຄະແນນ",
+    "text5": "ພັກກິນນໍ້າ",
+    "text6": "ພະຍາຍາມອີກຫນ້ອຍຫນື່ງ ພວກເຮົາເປັນກໍາລັງໃຈໃຫ້",
+    "text7": "ພະຍາຍາມອີກຄັ້ງ"
+  },
+  "certificate-page": {
+    "title": "ກະລຸນາໃຫ້ຂໍ້ມູນຄົບຖ້ວນ.",
+    "button": "ສົ່ງແບບສອບຖາມ"
+  },
+  "started": "ເລີ່ມ​ດຽວ​ນີ້",
+  "banner-home": "ຫນ້າທໍາອິດ",
+  "learning-online": "ບົດຮຽນອອນລາຍ",
+  "submit": "ຕົກລົງ",
+  "cancel": "ຍົກເລີກ",
+  "register-free": "ລົງທະບຽນຮຽນຟີ",
+  "login": "ເຂົ້າສູ່ລະບົບ",
+  "register": "ສະຫມັກສະມາຊິກ",
+  "phone": "ຫມາຍເລກໂທລະສັບມືຖື",
+  "email": "ອີເມວ",
+  "password": "ລະຫັດຜ່ານ",
+  "save-data": "ບັນທຶກຂໍ້ມູນ",
+  "remember-password": "ຈື່ຂ້ອຍໄວ້ໃນລະບົບ",
+  "forgot-password": "ລືມລະຫັດຜ່ານ",
+  "reset-password": "ຣີເຊັດລະຫັດຜ່ານ",
+  "change-password": "ຕັ້ງລະຫັດຜ່ານໃຫມ່",
+  "gender": "ເພດ",
+  "male": "ຊາຍ",
+  "female": "ຍິງ",
+  "nationality": "ສັນຊາດ",
+  "thailand": "ໄທ",
+  "myanmar": "ມຽນມາ",
+  "laos": "ລາວ",
+  "cambodia": "ກຳປູເຈຍ",
+  "card-number": "ຫມາຍເລກຫນັງສືເດີນທາງ",
+  "birthday": "ວັນເກີດ",
+  "download": "ດາວໂຫຼດ",
+  "certificate": "ຂໍໃບຮັບຮອງ",
+  "upload-file": "ອັບໂຫລດຮູບ",
+  "attach-file": "ແນບຮູບ",
+  "attach-link": "ແນບລີ້ງ",
+  "file-list": "ລາຍການຮູບພາບ",
+  "status": "ສະຖານະ",
+  "list": "ລາຍງານ",
+  "placeholder": "ກະລຸນາໃສ່",
+  "logout": "ອອກ​ຈາກ​ລະ​ບົບ",
+  "approve": "ລໍຖ້າຢູ່",
+  "popup-text": {
+    "popup-lesson": {
+      "text-button": "ບົດຮຽນຂອງເຈົ້າ",
+      "description": "1. ສຳເລັດທັງໝົດ 8 ບົດຮຽນ \n2. ເສັງຜ່ານໄດ້ຄະແນນ 60% \n3. ສຳເລັດທັງໝົດ 3 ໜ້າວຽກ \n4. ຕື່ມຂໍ້ມູນ ແລະປະເມີນຄວາມພໍໃຈຂອງທ່ານ \n"
+    },
+    "popup-lesson-continue": {
+      "text-button": "ບົດຮຽນຂອງເຈົ້າ",
+      "description": "ນີ້ແມ່ນເວລາທອງຂອງການຮຽນຮູ້.\nໃຊ້ເວລາຂອງເຈົ້າໃຫ້ດີ\nແລ້ວກັບມາຝຶກຊ້ອມ."
+    },
+    "popup-homework": {
+      "text-button": "ສົ່ງວຽກ",
+      "description": "ກະລຸນາແນບທັງໝົດ 3 ຮູບ."
+    },
+    "popup-certificate": {
+      "text-button": "ບົດຮຽນຂອງເຈົ້າ",
+      "description": "ກະລຸນາລໍຖ້າ 7 ມື້ສໍາລັບຜົນການຢັ້ງຢືນຫຼັງຈາກໄດ້ຮັບໃບຢັ້ງຢືນ.\nທ່ານສາມາດຕິດຕາມຂັ້ນຕອນງ່າຍໆໄດ້ທີ່\n\"ບົດຮຽນຂອງເຈົ້າ\"\nຖ້າມັນເກີນກຳນົດ. ກະລຸນາຕິດຕໍ່ຜູ້ເບິ່ງແຍງລະບົບ."
+    },
+    "popup-download-certificate": {
+      "text-button": "ໄດ້ຮັບປະລິນຍາ",
+      "description": "ທ່ານສາມາດໄດ້ຮັບໃບຢັ້ງຢືນຂອງທ່ານໃນປັດຈຸບັນຢູ່ທີ່\n\"ບົດຮຽນຂອງເຈົ້າ\""
+    }
   }
-  
+}
