@@ -492,7 +492,7 @@ const NavBar = (props) => {
             fullWidth
             onClick={handleCloseTrans}
           >
-            หน้าแรก
+            {t("first-page")}
           </Button>
         </DialogContent>
       </Dialog>

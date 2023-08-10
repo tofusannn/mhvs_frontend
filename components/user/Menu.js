@@ -27,7 +27,7 @@ const Menu = ({ payload, setChangeMenu }) => {
         {t("profile-menu.welcome")}!
       </Typography>
       <Typography fontWeight={500} fontSize={28}>
-        {payload && payload.pre_name} {payload && payload.first_name}{" "}
+        {payload && payload.pre_name === 'mr' ? 'Mr.' : 'Ms.'} {payload && payload.first_name}{" "}
         {payload && payload.last_name}
       </Typography>
       <Divider sx={{ marginY: 3 }}></Divider>
