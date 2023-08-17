@@ -28,6 +28,28 @@ const Banner = ({ page, subPage, chapter }) => {
     });
   }
 
+  function getLocal(locale) {
+    const LOCALE = "";
+    switch (locale) {
+      case "th":
+        LOCALE = "TH";
+        break;
+      case "mm":
+        LOCALE = "MM";
+        break;
+      case "ls":
+        LOCALE = "LA";
+        break;
+      case "cd":
+        LOCALE = "KH";
+        break;
+      default:
+        LOCALE = "TH";
+        break;
+    }
+    return LOCALE
+  }
+
   return (
     <Grid className={classes.banner_main} container>
       <Container sx={{ display: matches ? "" : "none" }}>
@@ -47,20 +69,24 @@ const Banner = ({ page, subPage, chapter }) => {
         </Grid>
       </Container>
       {parseInt(imageChap) <= 8 && parseInt(imageChap) >= 1 ? (
+        // eslint-disable-next-line @next/next/no-img-element
         <img
           width="100%"
           alt="banner"
-          src={`/image/${locale}/AST_module_${
-            locale === "mm" ? "MM" : "Thai"
-          }-0${imageChap}.png`}
+          // src={`/image/${locale}/AST_module_${
+          //   locale === "mm" ? "MM" : "Thai"
+          // }-0${imageChap}.png`}
+          src={`/image/${locale}/Module_${imageChap}_${getLocal(locale)}.png`}
         ></img>
       ) : query.action === "preview" ? (
+        // eslint-disable-next-line @next/next/no-img-element
         <img
           width="100%"
           alt="banner"
-          src={`/image/${locale}/preview.png`}
+          src={`/image/${locale}/Banner Benefit_${getLocal(locale)}.png`}
         ></img>
       ) : (
+        // eslint-disable-next-line @next/next/no-img-element
         <img
           width="100%"
           alt="banner"

@@ -90,8 +90,35 @@ const Banner = () => {
     }
   }
 
+  function getLocale(locale) {
+    let LOCALE = "";
+    switch (locale) {
+      case "th":
+        LOCALE = "TH";
+        break;
+      case "mm":
+        LOCALE = "MM";
+        break;
+      case "ls":
+        LOCALE = "LA";
+        break;
+      case "cd":
+        LOCALE = "KH";
+        break;
+      default:
+        LOCALE = "TH";
+        break;
+    }
+    return LOCALE;
+  }
+
   return (
-    <Grid sx={{ position: "relative", height: { xs: "25vh", sm: '55vh', md: "70vh", lg: '95vh' } }}>
+    <Grid
+      sx={{
+        position: "relative",
+        height: { xs: "25vh", sm: "55vh", md: "70vh", lg: "95vh" },
+      }}
+    >
       <Box sx={{ position: "absolute", width: "100%", zIndex: -1 }}>
         <Carousel
           height={matches ? "100vh" : "25vh"}
@@ -100,8 +127,14 @@ const Banner = () => {
           cycleNavigation={true}
           navButtonsAlwaysVisible={false}
         >
-          <img width="100%" src={`/image/${locale}/index.png`}></img>
-          <img width="100%" src={`/image/${locale}/index2.png`}></img>
+          <img
+            width="100%"
+            src={`/image/${locale}/Hero Banner_${getLocale(locale)} 01.png`}
+          ></img>
+          <img
+            width="100%"
+            src={`/image/${locale}/Hero Banner_${getLocale(locale)} 02.png`}
+          ></img>
         </Carousel>
       </Box>
       {!token && (
@@ -390,7 +423,7 @@ const useStyles = makeStyles({
   banner_text: {
     position: "absolute",
     zIndex: 0,
-    top: "calc(85vh - 25vh)",
+    top: "calc(85vh - 20vh)",
     left: "calc(37vh - 25vh)",
     // "@media (min-width: 2048px)": {
     //   top: 670,
