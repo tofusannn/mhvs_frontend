@@ -131,6 +131,7 @@ const Lesson = ({
       pathname,
       query: {
         ...query,
+        type: 'homework',
         lesson: e.lesson_id,
         chapter: e.chapter_id,
         id: e.chapter_homework_id,
@@ -701,7 +702,17 @@ const Lesson = ({
                             ) : (
                               <Button
                                 className={classes.button_active}
-                                onClick={() => pushLearning(e.id)}
+                                onClick={() =>
+                                  homeworkList.filter((i, idxx) => {
+                                    i.lesson_id === e.id;
+                                    openModalPopup2(
+                                      i,
+                                      `${t("profile-menu.homework")} ${
+                                        idxx + 1
+                                      }`
+                                    );
+                                  })
+                                }
                               >
                                 {t("profile-page.send-homework-again")}
                               </Button>
