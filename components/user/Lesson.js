@@ -2,6 +2,7 @@ import {
   AddCircle,
   CheckCircle,
   Delete,
+  Error,
   Visibility,
 } from "@mui/icons-material";
 import {
@@ -594,20 +595,37 @@ const Lesson = ({
                         <TableCell>
                           <Grid container alignItems={"center"}>
                             {e.status ? (
-                              <Fragment>
-                                <CheckCircle
-                                  sx={{ marginRight: 1, color: "#6ECE5C" }}
-                                ></CheckCircle>
-                                <Typography
-                                  sx={{
-                                    fontWeight: 300,
-                                    fontSize: 14,
-                                    color: "#121212",
-                                  }}
-                                >
-                                  {t("lesson-page.graduated")}
-                                </Typography>
-                              </Fragment>
+                              e.homework_is_check ? (
+                                <Fragment>
+                                  <CheckCircle
+                                    sx={{ marginRight: 1, color: "#6ECE5C" }}
+                                  ></CheckCircle>
+                                  <Typography
+                                    sx={{
+                                      fontWeight: 300,
+                                      fontSize: 14,
+                                      color: "#121212",
+                                    }}
+                                  >
+                                    {t("lesson-page.graduated")}
+                                  </Typography>
+                                </Fragment>
+                              ) : (
+                                <Fragment>
+                                  <Error
+                                    sx={{ marginRight: 1, color: "#fdd835" }}
+                                  ></Error>
+                                  <Typography
+                                    sx={{
+                                      fontWeight: 300,
+                                      fontSize: 14,
+                                      color: "#121212",
+                                    }}
+                                  >
+                                    {t("lesson-page.homework-dont-pass")}
+                                  </Typography>
+                                </Fragment>
+                              )
                             ) : (
                               <Fragment>
                                 <Typography
@@ -632,26 +650,44 @@ const Lesson = ({
                           }}
                         >
                           {e.status ? (
-                            e.is_certificate ? (
+                            e.homework_is_check ? (
+                              e.is_certificate ? (
+                                <Button
+                                  className={classes.button_active}
+                                  onClick={() => downloadCertificate(e.id)}
+                                >
+                                  {t("download")}
+                                </Button>
+                              ) : (
+                                <Button
+                                  className={
+                                    !e.is_approve
+                                      ? classes.button_inactive
+                                      : classes.button_disabled
+                                  }
+                                  disabled={e.is_approve}
+                                  onClick={() =>
+                                    getQuestion(e.questionnaire_cer_id, e.id)
+                                  }
+                                >
+                                  {e.is_approve
+                                    ? t("approve")
+                                    : t("certificate")}
+                                </Button>
+                              )
+                            ) : e.homework_is_check === null ? (
                               <Button
-                                className={classes.button_active}
-                                onClick={() => downloadCertificate(e.id)}
+                                className={classes.button_disabled}
+                                disabled={e.is_approve}
                               >
-                                {t("download")}
+                                {t("approve")}
                               </Button>
                             ) : (
                               <Button
-                                className={
-                                  !e.is_approve
-                                    ? classes.button_inactive
-                                    : classes.button_disabled
-                                }
-                                disabled={e.is_approve}
-                                onClick={() =>
-                                  getQuestion(e.questionnaire_cer_id, e.id)
-                                }
+                                className={classes.button_active}
+                                onClick={() => pushLearning(e.id)}
                               >
-                                {e.is_approve ? t("approve") : t("certificate")}
+                                {t("profile-page.send-homework-again")}
                               </Button>
                             )
                           ) : (

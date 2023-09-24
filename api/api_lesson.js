@@ -33,7 +33,10 @@ const Lesson = {
   },
   async getUserLessonList(lg) {
     const token = Cookies.get("token");
-    return await api.get({ path: `/user_lesson/${lg}`, headers: { token: token } });
+    return await api.get({
+      path: `/user_lesson/${lg}`,
+      headers: { token: token },
+    });
   },
   async getChapterHomework(id) {
     const token = Cookies.get("token");
