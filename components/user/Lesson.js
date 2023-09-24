@@ -1,4 +1,5 @@
 import {
+  AccessTime,
   AddCircle,
   CheckCircle,
   Delete,
@@ -608,6 +609,21 @@ const Lesson = ({
                                     }}
                                   >
                                     {t("lesson-page.graduated")}
+                                  </Typography>
+                                </Fragment>
+                              ) : e.homework_is_check === null ? (
+                                <Fragment>
+                                  <AccessTime
+                                    sx={{ marginRight: 1, color: "#CBCBCB" }}
+                                  ></AccessTime>
+                                  <Typography
+                                    sx={{
+                                      fontWeight: 300,
+                                      fontSize: 14,
+                                      color: "#121212",
+                                    }}
+                                  >
+                                    {t("approve")}
                                   </Typography>
                                 </Fragment>
                               ) : (
