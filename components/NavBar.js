@@ -1,4 +1,5 @@
 import {
+  Cancel,
   Logout,
   ManageAccounts,
   MenuBook,
@@ -27,6 +28,12 @@ import {
   DialogContent,
   DialogTitle,
   DialogActions,
+  Badge,
+  styled,
+  ListItemText,
+  Paper,
+  MenuList,
+  CardContent,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useTranslations } from "next-intl";
@@ -45,6 +52,7 @@ import thFlag from "../public/icon/thailand.png";
 import mmFlag from "../public/icon/myanmar.png";
 import cdFlag from "../public/icon/cambodia.png";
 import lsFlag from "../public/icon/laos.png";
+import Notification from "../api/api_noti";
 const path = process.env.NEXT_PUBLIC_BASE_API;
 
 const NavBar = (props) => {
@@ -58,9 +66,12 @@ const NavBar = (props) => {
   const [imageUser, setImageUser] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  const [anchorEl2, setAnchorEl2] = useState(null);
+  const open2 = Boolean(anchorEl2);
   const [anchorElTrans, setAnchorElTrans] = useState(null);
   const [openTrans, setOpenTrans] = useState(false);
   const [openDrawer, setOpenDrawer] = useState(false);
+  const [notification, setNotification] = useState([]);
 
   useEffect(() => {
     if (pathname === "/") {
@@ -81,6 +92,7 @@ const NavBar = (props) => {
     setToken(data ? data : authPayload ? authPayload.token : null);
     if (data) {
       getProfile(token);
+      getNotification();
     } else {
       if (pathname === "/user") {
         return push("/");
@@ -103,12 +115,39 @@ const NavBar = (props) => {
     dispatch(userProfile(data));
   }
 
+  async function getNotification() {
+    const data = await Notification.getNotification(locale);
+    if (data.status) {
+      setNotification(data.result);
+      if (data.result.length === 0) {
+        setAnchorEl2(null);
+      }
+    }
+  }
+
+  async function deleteNotification(id) {
+    const data = await Notification.putNotification(id);
+    if (data.status) {
+      getNotification();
+    }
+  }
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
+  const handleClick2 = (event) => {
+    if (notification.length) {
+      setAnchorEl2(event.currentTarget);
+    }
+  };
+
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleClose2 = () => {
+    setAnchorEl2(null);
   };
 
   function handleClickRegister() {
@@ -229,6 +268,15 @@ const NavBar = (props) => {
                     orientation="vertical"
                     color="white"
                   ></Divider>
+                  <IconButton sx={{ marginLeft: 3 }} onClick={handleClick2}>
+                    <Badge
+                      color="error"
+                      badgeContent={notification.length}
+                      overlap="circular"
+                    >
+                      <NotificationsOutlined sx={{ color: "#ffffff" }} />
+                    </Badge>
+                  </IconButton>
                   <IconButton
                     sx={{ padding: 0, border: "2px solid #ffffff", marginX: 3 }}
                     onClick={handleClick}
@@ -296,6 +344,15 @@ const NavBar = (props) => {
             >
               {token ? (
                 <Box mr={1}>
+                  <IconButton sx={{ marginRight: 1 }} onClick={handleClick2}>
+                    <Badge
+                      color="error"
+                      badgeContent={notification.length}
+                      overlap="circular"
+                    >
+                      <NotificationsOutlined sx={{ color: "#ffffff" }} />
+                    </Badge>
+                  </IconButton>
                   <IconButton
                     sx={{ padding: 0, border: "1px solid #ffffff" }}
                     onClick={handleClick}
@@ -331,6 +388,49 @@ const NavBar = (props) => {
           </Box>
         </Toolbar>
       </AppBar>
+      {/* Notification */}
+      <Menu
+        sx={{ marginTop: 1 }}
+        anchorEl={anchorEl2}
+        open={open2}
+        onClose={handleClose2}
+        // onClick={handleClose2}
+        transformOrigin={{
+          horizontal: "right",
+          vertical: "top",
+        }}
+        anchorOrigin={{
+          horizontal: "right",
+          vertical: "bottom",
+        }}
+      >
+        {notification.map((i, idx) => {
+          return (
+            <Grid
+              sx={{ paddingX: 2, paddingY: 1, minWidth: "288px", maxWidth: '100%' }}
+              container
+              alignItems={"center"}
+              justifyContent={"space-between"}
+              key={idx}
+            >
+              <Typography>{i.msg}</Typography>
+              <IconButton
+                sx={{
+                  alignItems: "end",
+                  padding: 0,
+                  fontSize: 16,
+                  width: 22,
+                  height: 22,
+                  color: "#9e9e9e",
+                }}
+                onClick={() => deleteNotification(i.id)}
+              >
+                x
+              </IconButton>
+            </Grid>
+          );
+        })}
+      </Menu>
       {/* Profile */}
       <Menu
         sx={{ marginTop: 1 }}
@@ -549,6 +649,9 @@ const useStyles = makeStyles((theme) => ({
       height: 24,
       minWidth: 10,
       minHeight: 10,
+    },
+    "@media (max-width: 350px)": {
+      display: "none",
     },
   },
 }));
