@@ -1,6 +1,16 @@
-import { Button, Dialog, DialogContent } from "@mui/material";
+import { Box, Button, Dialog, DialogContent, Link } from "@mui/material";
+import { useTranslations } from "next-intl";
 
-const ModalPopup = ({ open, setOpen, textButton, funcButton, children }) => {
+const ModalPopup = ({
+  open,
+  setOpen,
+  textButton,
+  funcButton,
+  children,
+  header,
+}) => {
+  const t = useTranslations();
+
   return (
     <Dialog maxWidth="xs" fullWidth open={open} onClose={() => setOpen(false)}>
       <DialogContent>
@@ -21,6 +31,18 @@ const ModalPopup = ({ open, setOpen, textButton, funcButton, children }) => {
         >
           {textButton}
         </Button>
+        {header === "certificate" ? (
+          <Box sx={{ marginTop: 2, justifyContent: "center", display: "flex" }}>
+            <Link
+              target="_blank"
+              href="https://www.facebook.com/aorsortor.online"
+            >
+              {t("facebook-link")}
+            </Link>
+          </Box>
+        ) : (
+          ""
+        )}
       </DialogContent>
     </Dialog>
   );

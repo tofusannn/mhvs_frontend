@@ -256,6 +256,7 @@ const CertificateModal = ({ question, openModal, setOpenModal, lesson }) => {
         open={open}
         setOpen={setOpen}
         textButton={t("popup-text.popup-certificate.text-button")}
+        header={'certificate'}
         funcButton={async () => {
           setOpen(false);
           setOpenModal(false);
@@ -263,7 +264,12 @@ const CertificateModal = ({ question, openModal, setOpenModal, lesson }) => {
         }}
       >
         <Image alt="img" src={popupImage} objectFit="cover"></Image>
-        <Typography whiteSpace={'pre-line'} textAlign={"center"} fontWeight={600} fontSize={20}>
+        <Typography
+          whiteSpace={"pre-line"}
+          textAlign={"center"}
+          fontWeight={600}
+          fontSize={20}
+        >
           {t("popup-text.popup-certificate.description")}
         </Typography>
       </ModalPopup>

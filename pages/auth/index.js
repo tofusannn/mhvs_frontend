@@ -691,7 +691,7 @@ const Auth = () => {
           severity={payload.status ? "success" : "error"}
           sx={{ width: 250 }}
         >
-          {payload.msg}
+          {payload.msg === 'phone duplicate' ? t('phone-duplicate') : payload.msg}
         </Alert>
       </Snackbar>
     </Fragment>
