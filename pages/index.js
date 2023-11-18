@@ -167,7 +167,7 @@ const AboutUs = ({ locale }) => {
   }, []);
 
   async function getContentList() {
-    const data = await Content.getContent();
+    const data = await Content.getContent(locale);
     setContent(data.result);
   }
 
