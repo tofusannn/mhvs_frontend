@@ -1,8 +1,8 @@
 import api from "./https_request";
 
 const Content = {
-  async getContent() {
-    return await api.get({ path: "/content" });
+  async getContent(locale) {
+    return await api.get({ path: `/content/${locale}` });
   },
 };
 
