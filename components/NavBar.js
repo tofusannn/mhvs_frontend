@@ -74,8 +74,10 @@ const NavBar = (props) => {
   const [notification, setNotification] = useState([]);
 
   useEffect(() => {
-    if (pathname === "/") {
+    const firstWeb = localStorage.getItem("first");
+    if (pathname === "/" && !firstWeb) {
       setOpenTrans(true);
+      localStorage.setItem("first", true);
     }
   }, []);
 
@@ -188,9 +190,10 @@ const NavBar = (props) => {
     return rows;
   }
 
-  function translationClick(name) {
+  async function translationClick(name) {
     handleCloseTrans();
-    push("/", "/", { locale: name });
+    await push("/", "/", { locale: name });
+    location.reload();
   }
 
   function getNameTranslate(locale) {
@@ -407,7 +410,12 @@ const NavBar = (props) => {
         {notification.map((i, idx) => {
           return (
             <Grid
-              sx={{ paddingX: 2, paddingY: 1, minWidth: "288px", maxWidth: '100%' }}
+              sx={{
+                paddingX: 2,
+                paddingY: 1,
+                minWidth: "288px",
+                maxWidth: "100%",
+              }}
               container
               alignItems={"center"}
               justifyContent={"space-between"}
