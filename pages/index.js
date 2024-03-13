@@ -25,6 +25,7 @@ import Content from "../api/api_content";
 import axios from "axios";
 import auth from "../api/api_auth";
 import DialogConsent from "../components/DialogConsent";
+import BannerService from "../api/api_banner";
 const path = process.env.NEXT_PUBLIC_BASE_API;
 
 const Home = () => {
@@ -75,11 +76,13 @@ const Banner = () => {
   const t = useTranslations();
   const { push, locale } = useRouter();
   const [token, setToken] = useState();
+  const [imageList, setImageList] = useState([]);
   const matches = useMediaQuery("(min-width:600px)");
 
   useEffect(() => {
     const token = Cookies.get("token");
     setToken(token);
+    getBanner(locale);
   }, [token]);
 
   function changePage() {
@@ -112,6 +115,13 @@ const Banner = () => {
     return LOCALE;
   }
 
+  async function getBanner(locale) {
+    let response = await BannerService.getBanner(locale).then((res) => res);
+    if ((response.msg = "success")) {
+      setImageList(response.result);
+    }
+  }
+
   return (
     <Grid
       sx={{
@@ -127,14 +137,9 @@ const Banner = () => {
           cycleNavigation={true}
           navButtonsAlwaysVisible={false}
         >
-          <img
-            width="100%"
-            src={`/image/${locale}/Hero Banner_${getLocale(locale)} 01.png`}
-          ></img>
-          <img
-            width="100%"
-            src={`/image/${locale}/Hero Banner_${getLocale(locale)} 02.png`}
-          ></img>
+          {imageList.map((i, idx) => (
+            <img key={idx} width="100%" src={`${path}${i.file_path}`}></img>
+          ))}
         </Carousel>
       </Box>
       {!token && (
