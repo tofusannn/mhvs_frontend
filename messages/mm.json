@@ -156,9 +156,9 @@
     "sent-success": "ပေးပို့ခဲ့သည်",
     "doing": "လုပ်နေတယ်",
     "continue-studying": "ဆက်လက်လေ့လာပါ",
-    "for-myself": "ငါ့အတွက်",
-    "for-society": "လူ့အဖွဲ့အစည်းအတွက်",
-    "for": "သို့..."
+    "for-myself": "ပုံ 1",
+    "for-society": "ပုံ 2",
+    "for": "ပုံ 3"
   },
   "modal-text": {
     "text1": "အရမ်းကောင်းတယ်။",

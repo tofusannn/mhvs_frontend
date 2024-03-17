@@ -156,9 +156,9 @@
     "sent-success": "ສົ່ງແລ້ວ",
     "doing": "ກໍາລັງເຮັດ",
     "continue-studying": "ສືບຕໍ່ສຶກສາ",
-    "for-myself": "ສໍາລັບຕົນເອງ",
-    "for-society": "ສໍາລັບຄອບຄົວ",
-    "for": "ສໍາລັບສັງຄົມ"
+    "for-myself": "ຮູບ 1",
+    "for-society": "ຮູບ 2",
+    "for": "ຮູບ 3"
   },
   "modal-text": {
     "text1": "ສຸດຍອດ",
