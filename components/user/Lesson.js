@@ -437,13 +437,21 @@ const Lesson = ({
                       >
                         {e.file_name === "" ? (
                           <>
-                            <TableCell>
+                            <TableCell width={"45%"}>
                               <Grid
                                 container
-                                columnGap={3}
+                                gap={2}
                                 justifyContent={"space-between"}
                               >
-                                <Typography>{idx + 1}.</Typography>
+                                {/* <Typography>{idx + 1}.</Typography> */}
+                                <Typography textAlign={"start"}>
+                                  {idx === 0
+                                    ? `1. ${t("profile-page.for-myself")}`
+                                    : idx === 1
+                                    ? `2. ${t("profile-page.for-society")}`
+                                    : idx === 2 &&
+                                      `3. ${t("profile-page.for")}`}
+                                </Typography>
                                 <Button
                                   className={classes.button_active}
                                   variant="contained"
@@ -459,15 +467,7 @@ const Lesson = ({
                                 </Button>
                               </Grid>
                             </TableCell>
-                            <TableCell>
-                              {/* <Typography textAlign={"start"}>
-                                {idx === 0
-                                  ? `1. ${t("profile-page.for-myself")}`
-                                  : idx === 1
-                                  ? `2. ${t("profile-page.for-society")}`
-                                  : idx === 2 && `3. ${t("profile-page.for")}`}
-                              </Typography> */}
-                            </TableCell>
+                            <TableCell></TableCell>
                             <TableCell></TableCell>
                           </>
                         ) : (
