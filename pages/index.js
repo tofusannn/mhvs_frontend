@@ -142,19 +142,17 @@ const Banner = () => {
           ))}
         </Carousel>
       </Box>
-      {!token && (
-        <Container>
-          <Grid className={classes.banner_text}>
-            <Button
-              className={classes.buttonRegister}
-              variant="contained"
-              onClick={() => changePage()}
-            >
-              {t("started")}
-            </Button>
-          </Grid>
-        </Container>
-      )}
+      <Container>
+        <Grid className={classes.banner_text}>
+          <Button
+            className={classes.buttonRegister}
+            variant="contained"
+            onClick={() => changePage()}
+          >
+            {t("started")}
+          </Button>
+        </Grid>
+      </Container>
     </Grid>
   );
 };
