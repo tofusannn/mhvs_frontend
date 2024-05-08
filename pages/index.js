@@ -36,22 +36,23 @@ const Home = () => {
 
   //creating function to load ip address from the API
   const getData = async () => {
-    const res = await axios.get("https://geolocation-db.com/json/");
-    // console.log(res.data);
-    setIP(res.data.IPv4);
-    setLocationUser(res.data);
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
   };
 
-  const setLocationUser = async (location) => {
+  async function showPosition(position) {
     const payload = {
-      lat: `${location.latitude}`,
-      long: `${location.longitude}`,
+      lat: `${position.coords.latitude}`,
+      long: `${position.coords.longitude}`,
     };
     const data = await auth.postLocation(payload);
     if (data.status) {
       console.log("success");
     }
-  };
+  }
 
   useEffect(() => {
     //passing getData method to the lifecycle method
