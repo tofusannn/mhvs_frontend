@@ -85,11 +85,16 @@ const Footer = (props) => {
               </Typography>
               <Link
                 sx={{ color: "#ffffff", fontSize: 16, marginRight: 3 }}
-                href="#"
+                href="privacy_policy"
+                target="_blank"
               >
                 Privacy Policy
               </Link>
-              <Link sx={{ color: "#ffffff", fontSize: 16 }} href="#">
+              <Link
+                sx={{ color: "#ffffff", fontSize: 16 }}
+                href="terms_of_use"
+                target="_blank"
+              >
                 Terms of Use
               </Link>
             </Grid>

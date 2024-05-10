@@ -399,43 +399,57 @@ const NavBar = (props) => {
         onClose={handleClose2}
         // onClick={handleClose2}
         transformOrigin={{
-          horizontal: "right",
+          horizontal: "center",
           vertical: "top",
         }}
         anchorOrigin={{
-          horizontal: "right",
+          horizontal: "center",
           vertical: "bottom",
         }}
       >
         {notification.map((i, idx) => {
           return (
-            <Grid
-              sx={{
-                paddingX: 2,
-                paddingY: 1,
-                minWidth: "288px",
-                maxWidth: "100%",
-              }}
-              container
-              alignItems={"center"}
-              justifyContent={"space-between"}
-              key={idx}
-            >
-              <Typography>{i.msg}</Typography>
-              <IconButton
+            <div style={{ padding: "12px 24px" }} key={idx}>
+              <Divider />
+              <Grid
                 sx={{
-                  alignItems: "end",
-                  padding: 0,
-                  fontSize: 16,
-                  width: 22,
-                  height: 22,
-                  color: "#9e9e9e",
+                  padding:
+                    idx + 1 === notification.length
+                      ? "16px 0px 16px 0px"
+                      : "16px 0px 0px 0px",
+                  width: "375px",
+                  wordBreak: "break-all",
                 }}
-                onClick={() => deleteNotification(i.id)}
+                container
+                alignItems={"center"}
+                justifyContent={"space-between"}
               >
-                x
-              </IconButton>
-            </Grid>
+                <Grid item xs={11}>
+                  <Typography>{i.msg}</Typography>
+                </Grid>
+
+                <Grid item>
+                  <IconButton
+                    sx={{
+                      alignItems: "end",
+                      padding: 0,
+                      fontSize: 16,
+                      width: 22,
+                      height: 22,
+                      color: "#9e9e9e",
+                    }}
+                    onClick={() => deleteNotification(i.id)}
+                  >
+                    x
+                  </IconButton>
+                </Grid>
+              </Grid>
+              <Divider
+                sx={{
+                  display: idx + 1 === notification.length ? "box" : "none",
+                }}
+              />
+            </div>
           );
         })}
       </Menu>
