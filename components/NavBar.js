@@ -393,7 +393,7 @@ const NavBar = (props) => {
       </AppBar>
       {/* Notification */}
       <Menu
-        sx={{ marginTop: 1 }}
+        sx={{ marginTop: { xs: 5, sm: 1 } }}
         anchorEl={anchorEl2}
         open={open2}
         onClose={handleClose2}
@@ -417,14 +417,14 @@ const NavBar = (props) => {
                     idx + 1 === notification.length
                       ? "16px 0px 16px 0px"
                       : "16px 0px 0px 0px",
-                  width: "375px",
+                  maxWidth: "375px",
                   wordBreak: "break-all",
                 }}
                 container
                 alignItems={"center"}
                 justifyContent={"space-between"}
               >
-                <Grid item xs={11}>
+                <Grid item xs={10} sm={11}>
                   <Typography>{i.msg}</Typography>
                 </Grid>
 
