@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useState, useEffect } from "react";
 import {
   AppBar,
   Button,
@@ -31,7 +31,28 @@ const Footer = (props) => {
   const classes = useStyles();
   const t = useTranslations();
   const matches = useMediaQuery("(min-width:600px)");
+  const [consentFile, setConsentFile] = useState("");
 
+  useEffect(() => {
+    getConsentFile(locale);
+  }, [locale]);
+
+  function getConsentFile(lg) {
+    switch (lg) {
+      case "th":
+        setConsentFile("pdf/consent_th.pdf");
+        break;
+      case "mm":
+        setConsentFile("pdf/consent_mm.pdf");
+        break;
+      case "ls":
+        setConsentFile("pdf/consent_ls.pdf");
+        break;
+      case "cd":
+        setConsentFile("pdf/consent_cd.pdf");
+        break;
+    }
+  }
   return (
     <Fragment>
       <div className={classes.footer_main}>
@@ -83,10 +104,18 @@ const Footer = (props) => {
               <Typography mb={1} fontWeight={500} fontSize={16} color="white">
                 ©2022 Aorsortor Online, All Rights Reserved.
               </Typography>
+
               <Link
-                sx={{ color: "#ffffff", fontSize: 16, marginRight: 3 }}
-                href="privacy_policy"
-                target="_blank"
+                sx={{
+                  color: "#ffffff",
+                  fontSize: 16,
+                  marginRight: 3,
+                  cursor: "pointer",
+                }}
+                onClick={() => {
+                  window.open(consentFile, "_blank", "fullscreen=yes");
+                  return false;
+                }}
               >
                 Privacy Policy
               </Link>

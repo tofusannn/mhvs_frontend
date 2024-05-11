@@ -64,7 +64,7 @@ function MyApp({ Component, pageProps }) {
               <NavBar locale={locale}></NavBar>
               <Toolbar sx={{ display: { sm: "none" } }} />
               <Component {...pageProps} />
-              <Footer></Footer>
+              <Footer locale={locale}></Footer>
             </Fragment>
           ) : (
             <Component {...pageProps} />
