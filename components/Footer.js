@@ -120,9 +120,14 @@ const Footer = (props) => {
                 Privacy Policy
               </Link>
               <Link
-                sx={{ color: "#ffffff", fontSize: 16 }}
-                href="terms_of_use"
-                target="_blank"
+                sx={{
+                  color: "#ffffff",
+                  fontSize: 16,
+                }}
+                onClick={() => {
+                  window.open(consentFile, "_blank", "fullscreen=yes");
+                  return false;
+                }}
               >
                 Terms of Use
               </Link>
