@@ -418,7 +418,8 @@ const NavBar = (props) => {
                       ? "16px 0px 16px 0px"
                       : "16px 0px 0px 0px",
                   maxWidth: "375px",
-                  wordBreak: "break-all",
+                  wordBreak: "keep-all",
+                  whiteSpace: "normal",
                 }}
                 container
                 alignItems={"center"}

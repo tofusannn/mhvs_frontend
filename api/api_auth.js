@@ -4,6 +4,9 @@ import Cookies from "js-cookie";
 const auth = {
   async login(params) {
     const data = await api.post({ path: "/login", headers: params });
+    if (!data) {
+      return;
+    }
     data.status && Cookies.set("token", data.result.token);
     return data;
   },

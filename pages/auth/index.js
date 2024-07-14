@@ -180,6 +180,11 @@ const Auth = () => {
       }
       setCheckButtonConfirm(true);
       const data = await auth.login({ phone: loginPhonePayload });
+      if (!data) {
+        dispatch(login({ msg: "Internal Error 500", status: false }));
+        setOpenSnackbar(true);
+        return;
+      }
       dispatch(login(data));
       setOpenSnackbar(true);
       data.status && push("/");
@@ -465,7 +470,7 @@ const Auth = () => {
                   </Grid>
                   <Grid
                     xs={8}
-                    sm={locale === 'mm' ? 7 : 6}
+                    sm={locale === "mm" ? 7 : 6}
                     mt={1}
                     mb={3}
                     item
@@ -691,7 +696,9 @@ const Auth = () => {
           severity={payload.status ? "success" : "error"}
           sx={{ width: 250 }}
         >
-          {payload.msg === 'phone duplicate' ? t('phone-duplicate') : payload.msg}
+          {payload.msg === "phone duplicate"
+            ? t("phone-duplicate")
+            : payload.msg}
         </Alert>
       </Snackbar>
     </Fragment>
