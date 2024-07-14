@@ -57,7 +57,7 @@ const LessonList = ({ getLesson }) => {
   }
 
   async function registerLesson(id) {
-    setOpen(false)
+    setOpen(false);
     const token = Cookies.get("token");
     if (token) {
       const data = await Lesson.postUserLesson({ lesson_id: id });
@@ -231,8 +231,8 @@ const LessonList = ({ getLesson }) => {
                   funcButton={() => registerLesson(id)}
                 >
                   <Image alt="img" src={popupImage} objectFit="cover"></Image>
-                  <Typography whiteSpace={'pre-line'} fontWeight={600}>
-                  {t("popup-text.popup-lesson.description")}
+                  <Typography whiteSpace={"pre-line"} fontWeight={600}>
+                    {t("popup-text.popup-lesson.description")}
                   </Typography>
                 </ModalPopup>
               </TableBody>
@@ -248,7 +248,7 @@ export default LessonList;
 
 const useStyles = makeStyles({
   button_active: {
-    width: 150,
+    minWidth: 150,
     height: 28,
     fontWeight: 500,
     fontSize: 14,
@@ -260,7 +260,7 @@ const useStyles = makeStyles({
     textTransform: "none",
   },
   button_disabled: {
-    width: 150,
+    minWidth: 150,
     height: 28,
     fontWeight: 500,
     fontSize: 14,
@@ -270,7 +270,7 @@ const useStyles = makeStyles({
     borderRadius: 100,
   },
   button_details: {
-    width: 150,
+    minWidth: 150,
     height: 28,
     fontWeight: 500,
     fontSize: 14,

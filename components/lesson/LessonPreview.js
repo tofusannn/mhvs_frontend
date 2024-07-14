@@ -51,12 +51,12 @@ const LessonPreview = ({ lesson, getLesson }) => {
                 {t("learning-online")} :
               </Typography>
             </Grid>
-            <Grid xs={12} sm={7} pt={matches ? 0 : 3}>
+            <Grid xs={12} sm={6} pt={matches ? 0 : 3}>
               <Typography fontWeight={500} fontSize={matches ? 32 : 20}>
                 <span style={{ color: "#0076FF" }}>{lesson.lesson_name}</span>
               </Typography>
             </Grid>
-            <Grid xs={12} sm={2} py={matches ? 0 : 3}>
+            <Grid xs={12} sm={3} py={matches ? 0 : 3}>
               <Button
                 className={classes.button_confirm}
                 onClick={() => registerLesson(lesson.id)}
@@ -81,7 +81,7 @@ const LessonPreview = ({ lesson, getLesson }) => {
             }}
             container
           >
-            <Grid xs={12} sm={3} pr={3} item>
+            <Grid xs={12} sm={4} pr={3} item>
               <Typography fontWeight={500} fontSize={28}>
                 {t("lesson-page.highlight")}
               </Typography>
@@ -109,7 +109,7 @@ const LessonPreview = ({ lesson, getLesson }) => {
                   );
                 })}
             </Grid>
-            <Grid xs={12} sm={9} item>
+            <Grid xs={12} sm={8} item>
               <Typography fontWeight={500} fontSize={28}>
                 {t("lesson-page.description")}
               </Typography>

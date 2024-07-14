@@ -887,7 +887,7 @@ export default Lesson;
 
 const useStyles = makeStyles({
   button_active: {
-    width: 150,
+    minWidth: 150,
     height: 28,
     fontWeight: 500,
     fontSize: 14,
@@ -899,7 +899,7 @@ const useStyles = makeStyles({
     textTransform: "none",
   },
   button_inactive: {
-    width: 150,
+    minWidth: 150,
     height: 28,
     fontWeight: 500,
     fontSize: 14,
