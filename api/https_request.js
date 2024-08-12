@@ -1,5 +1,5 @@
 var axios = require("axios");
-const url = "https://api.aorsortor.online/v1";
+const url = "https://api.aorsortoronline.org/v1";
 
 const api = {
   async post({ path, headers, body }) {

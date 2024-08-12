@@ -331,7 +331,7 @@ const Lesson = ({
   const token = Cookies.get("token");
   async function downloadCertificate(id) {
     // const data = await certificate.getCertificate(id);
-    fetch(`https://api.aorsortor.online/v1/certificate/${id}`, {
+    fetch(`https://api.aorsortoronline.org/v1/certificate/${id}`, {
       method: "GET",
       headers: { token: token },
     })
