@@ -34,6 +34,7 @@ import {
   Paper,
   MenuList,
   CardContent,
+  Stack,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useTranslations } from "next-intl";
@@ -47,7 +48,7 @@ import { userProfile } from "../redux/authSlice";
 import Cookies from "js-cookie";
 import upload from "../api/api_upload";
 import Image from "next/image";
-import logo from "../public/image/aorsortor_online.png";
+import logo from "../public/logo/logo_white.png";
 import thFlag from "../public/icon/thailand.png";
 import mmFlag from "../public/icon/myanmar.png";
 import cdFlag from "../public/icon/cambodia.png";
@@ -166,14 +167,14 @@ const NavBar = (props) => {
         <Box
           key={i}
           sx={{
-            paddingLeft: { xs: 3, sm: 0 },
-            margin: { xs: "30px 0px 0px 0px", sm: "0px 28px 0px 0px" },
+            paddingLeft: { xs: 3, md: 0 },
+            margin: { xs: "30px 0px 0px 0px", md: "0px 28px 0px 0px" },
           }}
         >
           <Link
             component="button"
             sx={{
-              color: { xs: "#000000", sm: "#ffffff" },
+              color: { xs: "#000000", md: "#ffffff" },
               fontSize: 16,
               textDecoration: "none",
             }}
@@ -235,160 +236,105 @@ const NavBar = (props) => {
     <>
       <AppBar
         sx={{
-          position: { xs: "fixed", sm: "static" },
+          position: { xs: "fixed", md: "static" },
           backgroundColor: "#0076FF",
           height: { md: 90, xs: "auto" },
           zIndex: (theme) => theme.zIndex.drawer + 1,
         }}
       >
-        <Toolbar sx={{ paddingRight: "10px" }} disableGutters>
-          <Box
-            sx={{ display: { xs: "none", sm: "flex" } }}
-            width={"100%"}
+        <Toolbar disableGutters sx={{ height: "100%", paddingX: 5 }}>
+          <Grid
+            container
             justifyContent={"space-between"}
             alignItems={"center"}
           >
-            <Image
-              alt="logo"
-              src={logo}
-              width={"150px"}
-              height={"90px"}
-              objectFit="cover"
-            ></Image>
-
-            {/* BTUserActions */}
-            <Box
-              display={"flex"}
-              justifyContent={"space-between"}
-              alignItems={"center"}
-            >
-              {/* Menubar */}
-              {loopMenuBar()}
-              {token ? (
-                <Fragment>
-                  <Divider
-                    sx={{ opacity: 0.16, height: 44 }}
-                    orientation="vertical"
-                    color="white"
-                  ></Divider>
-                  <IconButton sx={{ marginLeft: 3 }} onClick={handleClick2}>
-                    <Badge
-                      color="error"
-                      badgeContent={notification.length}
-                      overlap="circular"
-                    >
-                      <NotificationsOutlined sx={{ color: "#ffffff" }} />
-                    </Badge>
-                  </IconButton>
-                  <IconButton
-                    sx={{ padding: 0, border: "2px solid #ffffff", marginX: 3 }}
-                    onClick={handleClick}
-                  >
-                    <Avatar
-                      sx={{ width: 36, height: 36 }}
-                      src={imageUser && `${path}${imageUser}`}
-                    ></Avatar>
-                  </IconButton>
-                </Fragment>
-              ) : (
-                <Box>
-                  <Button
-                    className={classes.buttonRegister}
-                    variant="outlined"
-                    fullWidth
-                    size="small"
-                    onClick={handleClickRegister}
-                  >
-                    {t("register")}
-                  </Button>
-                </Box>
-              )}
-              {/* BTTranslate */}
-              <Button
-                className={classes.buttonTranslation}
-                variant="outlined"
-                onClick={handleClickTrans}
-              >
-                {getNameTranslate(locale)}
-              </Button>
-            </Box>
-          </Box>
-          <Box
-            sx={{ display: { xs: "flex", sm: "none" } }}
-            width={"100%"}
-            justifyContent={"space-between"}
-            alignItems={"center"}
-          >
-            <Box
-              sx={{ display: "flex" }}
-              justifyContent={"space-between"}
-              alignItems={"center"}
+            <Grid
+              display={{ xs: "flex", md: "none" }}
+              justifyContent={"center"}
+              item
+              xs={1}
             >
               <IconButton
-                sx={{ margin: "0px 10px" }}
                 color="inherit"
                 onClick={handleDrawerOpen}
                 edge="start"
               >
                 <MenuIcon />
               </IconButton>
-              <Image
-                alt="logo"
-                src={logo}
-                width={"120px"}
-                height={"56px"}
-                objectFit="cover"
-              ></Image>
-            </Box>
-            <Box
-              sx={{ display: "flex" }}
-              justifyContent={"space-between"}
-              alignItems={"center"}
+            </Grid>
+            <Grid
+              position={"relative"}
+              item
+              xs={3}
+              sm={2}
+              md={1}
+              alignSelf={"center"}
+              pt={1}
             >
-              {token ? (
-                <Box mr={1}>
-                  <IconButton sx={{ marginRight: 1 }} onClick={handleClick2}>
-                    <Badge
-                      color="error"
-                      badgeContent={notification.length}
-                      overlap="circular"
-                    >
-                      <NotificationsOutlined sx={{ color: "#ffffff" }} />
-                    </Badge>
-                  </IconButton>
-                  <IconButton
-                    sx={{ padding: 0, border: "1px solid #ffffff" }}
-                    onClick={handleClick}
-                  >
-                    <Avatar
-                      sx={{ width: 24, height: 24 }}
-                      src={imageUser && `${path}${imageUser}`}
-                    ></Avatar>
-                  </IconButton>
-                </Box>
-              ) : (
-                <Box>
-                  <Button
-                    className={classes.buttonRegister}
-                    variant="outlined"
-                    fullWidth
-                    size="small"
-                    onClick={handleClickRegister}
-                  >
-                    {t("register")}
-                  </Button>
-                </Box>
-              )}
-              {/* BTTranslate */}
-              <Button
-                className={classes.buttonTranslation}
-                variant="outlined"
-                onClick={handleClickTrans}
+              <Image alt="logo" src={logo} fill objectFit="cover"></Image>
+            </Grid>
+            <Grid item xs sm={1} md>
+              <Stack
+                direction={"row"}
+                justifyContent={"end"}
+                alignItems={"center"}
               >
-                {getNameTranslate(locale)}
-              </Button>
-            </Box>
-          </Box>
+                <Stack direction={"row"} display={{ xs: "none", md: "flex" }}>
+                  {loopMenuBar()}
+                </Stack>
+                {token ? (
+                  <Fragment>
+                    <Divider
+                      sx={{ opacity: 0.16, height: 44 }}
+                      orientation="vertical"
+                      color="white"
+                    ></Divider>
+                    <IconButton sx={{ marginLeft: 3 }} onClick={handleClick2}>
+                      <Badge
+                        color="error"
+                        badgeContent={notification.length}
+                        overlap="circular"
+                      >
+                        <NotificationsOutlined sx={{ color: "#ffffff" }} />
+                      </Badge>
+                    </IconButton>
+                    <IconButton
+                      sx={{
+                        padding: 0,
+                        border: "2px solid #ffffff",
+                        marginX: 3,
+                      }}
+                      onClick={handleClick}
+                    >
+                      <Avatar
+                        sx={{ width: 36, height: 36 }}
+                        src={imageUser && `${path}${imageUser}`}
+                      ></Avatar>
+                    </IconButton>
+                  </Fragment>
+                ) : (
+                  <Box>
+                    <Button
+                      className={classes.buttonRegister}
+                      variant="outlined"
+                      fullWidth
+                      size="small"
+                      onClick={handleClickRegister}
+                    >
+                      {t("register")}
+                    </Button>
+                  </Box>
+                )}
+                <Button
+                  className={classes.buttonTranslation}
+                  variant="outlined"
+                  onClick={handleClickTrans}
+                >
+                  {getNameTranslate(locale)}
+                </Button>
+              </Stack>
+            </Grid>
+          </Grid>
         </Toolbar>
       </AppBar>
       {/* Notification */}

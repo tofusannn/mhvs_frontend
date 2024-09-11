@@ -23,7 +23,7 @@ import { useSelector, useDispatch } from "react-redux";
 import auth from "../../api/api_auth";
 import { login, register, forgotPassword } from "../../redux/authSlice";
 import Image from "next/image";
-import logo from "../../public/icon/Aorsortor_Logo Aorsotor.png";
+import logo from "../../public/logo/logo_color.png";
 
 const register_payload = {
   phone: "",
@@ -315,13 +315,9 @@ const Auth = () => {
     <Fragment>
       <Container sx={{ marginY: 5 }}>
         <Grid container justifyContent={"center"}>
-          <Image
-            alt="logo"
-            src={logo}
-            width={"240px"}
-            height={"100%"}
-            objectFit="cover"
-          ></Image>
+          <Grid item xs={3}>
+            <Image alt="logo" src={logo} fill="true"></Image>
+          </Grid>
         </Grid>
         <Grid container my={3} justifyContent={"center"}>
           <Card
